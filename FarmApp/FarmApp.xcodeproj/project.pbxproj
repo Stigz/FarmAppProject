@@ -14,6 +14,7 @@
 		E10DE85D1C69A06D00DAC725 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10DE85B1C69A06D00DAC725 /* LaunchScreen.storyboard */; };
 		E10DE8681C69A06D00DAC725 /* FarmAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DE8671C69A06D00DAC725 /* FarmAppTests.swift */; };
 		E10DE8731C69A06D00DAC725 /* FarmAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DE8721C69A06D00DAC725 /* FarmAppUITests.swift */; };
+		E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5BD261C6B0785009E575A /* LibraryAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E10DE86E1C69A06D00DAC725 /* FarmAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarmAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10DE8721C69A06D00DAC725 /* FarmAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmAppUITests.swift; sourceTree = "<group>"; };
 		E10DE8741C69A06D00DAC725 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1D5BD261C6B0785009E575A /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,11 @@
 		E10DE8511C69A06D00DAC725 /* FarmApp */ = {
 			isa = PBXGroup;
 			children = (
+				E1D5BD251C6AF086009E575A /* API */,
+				E1D5BD241C6AEFEC009E575A /* Controllers */,
+				E1D5BD231C6AEFE3009E575A /* Models */,
+				E1D5BD221C6AEFC4009E575A /* Views */,
 				E10DE8521C69A06D00DAC725 /* AppDelegate.swift */,
-				E10DE8541C69A06D00DAC725 /* ViewController.swift */,
 				E10DE8561C69A06D00DAC725 /* Main.storyboard */,
 				E10DE8591C69A06D00DAC725 /* Assets.xcassets */,
 				E10DE85B1C69A06D00DAC725 /* LaunchScreen.storyboard */,
@@ -123,6 +128,36 @@
 				E10DE8741C69A06D00DAC725 /* Info.plist */,
 			);
 			path = FarmAppUITests;
+			sourceTree = "<group>";
+		};
+		E1D5BD221C6AEFC4009E575A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E1D5BD231C6AEFE3009E575A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		E1D5BD241C6AEFEC009E575A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E10DE8541C69A06D00DAC725 /* ViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E1D5BD251C6AF086009E575A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E1D5BD261C6B0785009E575A /* LibraryAPI.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10DE8551C69A06D00DAC725 /* ViewController.swift in Sources */,
+				E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */,
 				E10DE8531C69A06D00DAC725 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +518,7 @@
 				E10DE8791C69A06D00DAC725 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E10DE87A1C69A06D00DAC725 /* Build configuration list for PBXNativeTarget "FarmAppTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +527,7 @@
 				E10DE87C1C69A06D00DAC725 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E10DE87D1C69A06D00DAC725 /* Build configuration list for PBXNativeTarget "FarmAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +536,7 @@
 				E10DE87F1C69A06D00DAC725 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
