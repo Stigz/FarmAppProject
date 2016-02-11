@@ -10,7 +10,10 @@ import Foundation
 
 class LibraryAPI: NSObject {
     
+    private let persistencyManager : PersistencyManager
+    
     override init() {
+        persistencyManager = PersistencyManager()
         super.init()
     }
     
@@ -28,8 +31,8 @@ class LibraryAPI: NSObject {
         return Singleton.instance
     }
     
-    func getBeds() -> [String]{
-        return ["1","2","3","4","5"]
+    func getSects() -> [Section]{
+        return persistencyManager.getSects()
     }
 
 }

@@ -10,19 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //Table of beds
-    @IBOutlet weak var bedTable: UITableView!
-    //Number of beds in garden
-    var numBeds = 5
+    //Table of sections
+    @IBOutlet weak var sectionTable: UITableView!
+    //Number of sections in garden
+    var numSects = 5
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Set default bed number
-        numBeds = LibraryAPI.sharedInstance.getBeds().count
+        numSects = LibraryAPI.sharedInstance.getSects().count
         
         //Register table for cell class
-        self.bedTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.sectionTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,13 +36,13 @@ class ViewController: UIViewController {
 //Table View Extensions -- for bed table
 extension ViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numBeds
+        return numSects
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.bedTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        let cell:UITableViewCell = self.sectionTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         
-        cell.textLabel?.text = LibraryAPI.sharedInstance.getBeds()[indexPath.row]
+        cell.textLabel?.text = "Section \(LibraryAPI.sharedInstance.getSects()[indexPath.row].id)"
         
         return cell
     }

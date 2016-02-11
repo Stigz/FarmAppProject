@@ -19,25 +19,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X2X-yh-8Tb">
-                                <rect key="frame" x="54" y="43" width="492" height="513"/>
+                                <rect key="frame" x="54" y="122" width="492" height="434"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="It6-ij-MaK"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="vLa-1W-8S2"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Crop Sections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaj-yK-MGN">
+                                <rect key="frame" x="215" y="54" width="171" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="X2X-yh-8Tb" secondAttribute="trailing" constant="34" id="29Z-Xu-3JX"/>
-                            <constraint firstItem="X2X-yh-8Tb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="23" id="Dwc-de-dIi"/>
+                            <constraint firstItem="jaj-yK-MGN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="34" id="4GT-nI-tqO"/>
+                            <constraint firstItem="jaj-yK-MGN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N2T-xH-gn7"/>
                             <constraint firstItem="X2X-yh-8Tb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P0O-Kf-hF5"/>
-                            <constraint firstItem="X2X-yh-8Tb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dVi-JF-3Za"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="X2X-yh-8Tb" secondAttribute="bottom" constant="44" id="ajo-lb-np8"/>
+                            <constraint firstItem="X2X-yh-8Tb" firstAttribute="top" secondItem="jaj-yK-MGN" secondAttribute="bottom" constant="47" id="bOU-cI-Xl5"/>
                             <constraint firstItem="X2X-yh-8Tb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="34" id="lWT-Cw-0e7"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bedTable" destination="X2X-yh-8Tb" id="FuN-hD-ebQ"/>
+                        <outlet property="sectionTable" destination="X2X-yh-8Tb" id="Il5-hB-Ut5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
