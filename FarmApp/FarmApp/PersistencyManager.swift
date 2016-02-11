@@ -26,6 +26,7 @@ class PersistencyManager: NSObject {
         sections = [sect1,sect2,sect3]
     }
     
+    //Return section list
     func getSects() -> [Section]{
         return sections
         

@@ -46,11 +46,41 @@
                     </view>
                     <connections>
                         <outlet property="sectionTable" destination="X2X-yh-8Tb" id="Il5-hB-Ut5"/>
+                        <segue destination="Pjn-00-Q4F" kind="show" identifier="sectClicked" id="UzM-gj-GDS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245" y="337"/>
+            <point key="canvasLocation" x="96" y="288"/>
+        </scene>
+        <!--Beds View Controller-->
+        <scene sceneID="LkE-Mv-Cha">
+            <objects>
+                <viewController id="Pjn-00-Q4F" customClass="BedsViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Xx-Mg-fBJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="3PB-rP-Exr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h1j-TN-BfJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfT-GW-TDv">
+                                <rect key="frame" x="264" y="212" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="testLabel" destination="CfT-GW-TDv" id="fQg-0o-6Hh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Q0-SC-6gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="599" y="470"/>
         </scene>
     </scenes>
 </document>

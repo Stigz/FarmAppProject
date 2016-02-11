@@ -31,6 +31,8 @@ class LibraryAPI: NSObject {
         return Singleton.instance
     }
     
+    
+    //Ask persistency manager for sections
     func getSects() -> [Section]{
         return persistencyManager.getSects()
     }
