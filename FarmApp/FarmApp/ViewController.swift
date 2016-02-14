@@ -45,6 +45,7 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "sectClicked"){
             let bvc = segue.destinationViewController as! BedsViewController
+            bvc.sectNum = currentSect.id
             bvc.setInfo(currentSect)
         }
     }

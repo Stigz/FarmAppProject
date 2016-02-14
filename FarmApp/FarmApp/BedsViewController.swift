@@ -17,7 +17,7 @@ class BedsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.testLabel.text = "\(sectNum)"
+        self.testLabel.text = "Section \(sectNum)"
         // Do any additional setup after loading the view.
     }
 
