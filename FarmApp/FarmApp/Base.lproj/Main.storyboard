@@ -65,23 +65,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfT-GW-TDv">
-                                <rect key="frame" x="191" y="34" width="218" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XlM-Xl-L8k">
-                                <rect key="frame" x="246" y="550" width="108" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XlM-Xl-L8k">
+                                <rect key="frame" x="283" y="550" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="backButtonClicked" destination="Pjn-00-Q4F" eventType="touchUpInside" id="Khe-p8-468"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OCc-sj-9np">
+                                <rect key="frame" x="54" y="92" width="492" height="435"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Pjn-00-Q4F" id="uRF-pt-Z98"/>
+                                    <outlet property="delegate" destination="Pjn-00-Q4F" id="dem-Vm-tVL"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfT-GW-TDv">
+                                <rect key="frame" x="279" y="43" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XlM-Xl-L8k" firstAttribute="centerX" secondItem="h1j-TN-BfJ" secondAttribute="centerX" id="3d8-ef-QmF"/>
+                            <constraint firstItem="CfT-GW-TDv" firstAttribute="top" secondItem="0Xx-Mg-fBJ" secondAttribute="bottom" constant="23" id="D5V-ey-hFl"/>
+                            <constraint firstItem="CfT-GW-TDv" firstAttribute="centerX" secondItem="h1j-TN-BfJ" secondAttribute="centerX" id="D7P-KP-TxY"/>
+                            <constraint firstItem="OCc-sj-9np" firstAttribute="top" secondItem="CfT-GW-TDv" secondAttribute="bottom" constant="29" id="GaC-lP-WUH"/>
+                            <constraint firstItem="3PB-rP-Exr" firstAttribute="top" secondItem="XlM-Xl-L8k" secondAttribute="bottom" constant="20" id="GcC-1a-CMp"/>
+                            <constraint firstItem="OCc-sj-9np" firstAttribute="leading" secondItem="h1j-TN-BfJ" secondAttribute="leadingMargin" constant="34" id="gRz-Yp-sxA"/>
+                            <constraint firstItem="OCc-sj-9np" firstAttribute="centerX" secondItem="h1j-TN-BfJ" secondAttribute="centerX" id="gWg-hG-Mdt"/>
+                            <constraint firstItem="XlM-Xl-L8k" firstAttribute="top" secondItem="OCc-sj-9np" secondAttribute="bottom" constant="23" id="sJf-MV-Ern"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OCc-sj-9np" secondAttribute="trailing" constant="34" id="shh-xW-pgJ"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="bedTable" destination="OCc-sj-9np" id="udF-r8-o0S"/>
                         <outlet property="testLabel" destination="CfT-GW-TDv" id="fQg-0o-6Hh"/>
                     </connections>
                 </viewController>

@@ -12,7 +12,9 @@ class BedsViewController: UIViewController {
     
     var sectNum : Int = 0
     var beds : [String] = []
+    var numBeds : Int = 3
 
+    @IBOutlet weak var bedTable: UITableView!
     @IBOutlet weak var testLabel: UILabel!
     
     override func viewDidLoad() {
@@ -20,7 +22,9 @@ class BedsViewController: UIViewController {
         
         //Set section label
         self.testLabel.text = "Section \(sectNum)"
-        // Do any additional setup after loading the view.
+        
+        //Register table for cell class
+        self.bedTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "bedCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,4 +48,26 @@ class BedsViewController: UIViewController {
     }
     */
 
+}
+
+//TO-DO: Set up table extensions
+//Table View Extensions -- for bed table
+extension BedsViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numBeds
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = self.bedTable.dequeueReusableCellWithIdentifier("bedCell")! as UITableViewCell
+        cell.textLabel?.text = "TEST"
+        
+        return cell
+    }
+}
+
+//Upon section click, show the bed list
+extension BedsViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //TO-DO: Hanfle Bed Click
+    }
 }

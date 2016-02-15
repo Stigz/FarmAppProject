@@ -50,7 +50,7 @@ class ViewController: UIViewController {
 
 }
 
-//Table View Extensions -- for bed table
+//Table View Extensions -- for section table
 extension ViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numSects
@@ -58,7 +58,6 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.sectionTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        
         cell.textLabel?.text = "Section \(sections[indexPath.row].id)"
         
         return cell
