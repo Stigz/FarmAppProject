@@ -38,15 +38,12 @@ class ViewController: UIViewController {
     }
     
     
-    //Used to set info for the bed screen
-    //NOTE: right  now it does nothing -- info for
-    //beds controller is set in init. Will this
-    //work if you go back and click another sect?
+    //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //IF the user segues to a bed list, pass section info
         if (segue.identifier == "sectClicked"){
             let bvc = segue.destinationViewController as! BedsViewController
             bvc.sectNum = currentSect.id
-            bvc.setInfo(currentSect)
         }
     }
 
@@ -71,7 +68,7 @@ extension ViewController: UITableViewDataSource {
 //Upon section click, show the bed list
 extension ViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //NOTE: Only for the prepare for segue
+        //To prepare for segue, set up current section
         currentSect = sections[indexPath.row]
         performSegueWithIdentifier("sectClicked", sender: self)
     }

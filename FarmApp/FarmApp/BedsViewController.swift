@@ -17,6 +17,8 @@ class BedsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set section label
         self.testLabel.text = "Section \(sectNum)"
         // Do any additional setup after loading the view.
     }
@@ -26,15 +28,11 @@ class BedsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //NOTE: On first sect click, cannot set label text,
-    //as label has not yet been initialized -- will
-    //this hold for clicking on another section? If so,
-    //just set info in didLoad() -- if not, set info
-    //here on subsequent clicks
-    func setInfo(sect : Section){
-        
-    }
     
+    //Go back to section list
+    @IBAction func backButtonClicked() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
