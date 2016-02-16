@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Section: NSObject {
+class Section: NSObject, NSCoding {
     
     var id : Int!
     var beds : [Bed]!
@@ -20,6 +20,21 @@ class Section: NSObject {
         self.id = id
         self.beds = beds
         self.numBeds = numBeds
+    }
+    
+    //Decode object from memory -- for archiving (saving) albums
+    required init(coder decoder: NSCoder) {
+        super.init()
+        self.id = decoder.decodeObjectForKey("sect_id") as! Int
+        self.beds = decoder.decodeObjectForKey("sect_bedList") as! [Bed]
+        self.numBeds = decoder.decodeObjectForKey("sect_numBeds") as! Int
+    }
+    
+    //Encode object to memory -- for archiving
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(id, forKey: "sect_id")
+        aCoder.encodeObject(beds, forKey: "sect_bedList")
+        aCoder.encodeObject(numBeds, forKey: "sect_numBeds")
     }
     
     //Description of section

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Bed: NSObject {
+class Bed: NSObject, NSCoding{
     
     var id : Int!
     var currentCrop : String!
@@ -22,6 +22,23 @@ class Bed: NSObject {
         self.currentCrop = currentCrop
         self.numCropsInHistory = numCropsInHistory
         self.cropHistory = cropHistory
+    }
+    
+    //Decode object from memory -- for archiving (saving) albums
+    required init(coder decoder: NSCoder) {
+        super.init()
+        self.id = decoder.decodeObjectForKey("bed_id") as! Int
+        self.currentCrop = decoder.decodeObjectForKey("bed_currCrop") as! String
+        self.numCropsInHistory = decoder.decodeObjectForKey("bed_numCrops") as! Int
+        self.cropHistory = decoder.decodeObjectForKey("bed_cropHist") as! [String]
+    }
+    
+    //Encode object to memory -- for archiving
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(id, forKey: "bed_id")
+        aCoder.encodeObject(currentCrop, forKey: "bed_currCrop")
+        aCoder.encodeObject(numCropsInHistory, forKey: "bed_numCrops")
+        aCoder.encodeObject(cropHistory, forKey: "bed_cropHist")
     }
     
     //Description of section
