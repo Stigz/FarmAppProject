@@ -66,7 +66,7 @@ class BedsViewController: UIViewController {
         if (segue.identifier == "bedClicked"){
             let bvc = segue.destinationViewController as! BedViewController
             //TO-DO: pass info to bed view
-            bvc.currentCrop = currentBed.currentCrop
+            bvc.setInfo(sectNum, currentCrop: currentBed.currentCrop, bedNum: currentBed.id)
         }
     }
 
