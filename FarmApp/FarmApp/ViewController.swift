@@ -30,6 +30,9 @@ class ViewController: UIViewController {
         //Register table for cell class
         self.sectionTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+        // This will remove extra separators from tableview
+        self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,22 +41,19 @@ class ViewController: UIViewController {
     }
     
     
-    //Used to set info for the bed screen
-    //NOTE: right  now it does nothing -- info for
-    //beds controller is set in init. Will this
-    //work if you go back and click another sect?
+    //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //IF the user segues to a bed list, pass section info
         if (segue.identifier == "sectClicked"){
             let bvc = segue.destinationViewController as! BedsViewController
-            bvc.sectNum = currentSect.id
-            bvc.setInfo(currentSect)
+            bvc.setInfo(currentSect.id, beds: currentSect.beds, numBeds: currentSect.numBeds)
         }
     }
 
 
 }
 
-//Table View Extensions -- for bed table
+//Table View Extensions -- for section table
 extension ViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numSects
@@ -61,7 +61,6 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.sectionTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        
         cell.textLabel?.text = "Section \(sections[indexPath.row].id)"
         
         return cell
@@ -71,9 +70,11 @@ extension ViewController: UITableViewDataSource {
 //Upon section click, show the bed list
 extension ViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //NOTE: Only for the prepare for segue
+        //To prepare for segue, set up current section
         currentSect = sections[indexPath.row]
         performSegueWithIdentifier("sectClicked", sender: self)
+        //Unhighlight the selected section, in case user goes back
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }
 
