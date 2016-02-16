@@ -13,10 +13,10 @@ class Bed: NSObject, NSCoding{
     var id : Int!
     var currentCrop : String!
     var numCropsInHistory : Int!
-    var cropHistory : [String]!
+    var cropHistory : CropHistory!
     
     //Default init method
-    init(id: Int, currentCrop : String, numCropsInHistory : Int, cropHistory : [String]){
+    init(id: Int, currentCrop : String, numCropsInHistory : Int, cropHistory : CropHistory){
         super.init()
         self.id = id
         self.currentCrop = currentCrop
@@ -30,7 +30,7 @@ class Bed: NSObject, NSCoding{
         self.id = decoder.decodeObjectForKey("bed_id") as! Int
         self.currentCrop = decoder.decodeObjectForKey("bed_currCrop") as! String
         self.numCropsInHistory = decoder.decodeObjectForKey("bed_numCrops") as! Int
-        self.cropHistory = decoder.decodeObjectForKey("bed_cropHist") as! [String]
+        self.cropHistory = decoder.decodeObjectForKey("bed_cropHist") as! CropHistory
     }
     
     //Encode object to memory -- for archiving
