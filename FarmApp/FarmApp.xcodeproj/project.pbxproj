@@ -18,6 +18,7 @@
 		E15ED59E1C6C3DBA005D3A48 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */; };
 		E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */; };
 		E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5BD261C6B0785009E575A /* LibraryAPI.swift */; };
+		E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedsViewController.swift; sourceTree = "<group>"; };
 		E1D5BD261C6B0785009E575A /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
+		E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				E15ED59B1C6C3BBA005D3A48 /* Section.swift */,
+				E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				E15ED59E1C6C3DBA005D3A48 /* PersistencyManager.swift in Sources */,
 				E10DE8551C69A06D00DAC725 /* ViewController.swift in Sources */,
 				E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */,
+				E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */,
 				E15ED59C1C6C3BBA005D3A48 /* Section.swift in Sources */,
 				E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */,
 				E10DE8531C69A06D00DAC725 /* AppDelegate.swift in Sources */,

@@ -25,6 +25,9 @@ class BedsViewController: UIViewController {
         
         //Register table for cell class
         self.bedTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "bedCell")
+        
+        // This will remove extra separators from tableview
+        self.bedTable.tableFooterView = UIView(frame: CGRectZero)
     }
 
     override func didReceiveMemoryWarning() {

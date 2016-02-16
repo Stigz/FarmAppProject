@@ -30,6 +30,9 @@ class ViewController: UIViewController {
         //Register table for cell class
         self.sectionTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+        // This will remove extra separators from tableview
+        self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
+        
     }
 
     override func didReceiveMemoryWarning() {
