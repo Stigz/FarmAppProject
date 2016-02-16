@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "sectClicked"){
             let bvc = segue.destinationViewController as! BedsViewController
-            bvc.sectNum = currentSect.id
+            bvc.setInfo(currentSect.id, beds: currentSect.beds, numBeds: currentSect.numBeds)
         }
     }
 
@@ -70,6 +70,8 @@ extension ViewController: UITableViewDelegate {
         //To prepare for segue, set up current section
         currentSect = sections[indexPath.row]
         performSegueWithIdentifier("sectClicked", sender: self)
+        //Unhighlight the selected section, in case user goes back
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }
 

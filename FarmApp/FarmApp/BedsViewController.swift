@@ -12,7 +12,7 @@ class BedsViewController: UIViewController {
     
     var sectNum : Int = 0
     var beds : [String] = []
-    var numBeds : Int = 3
+    var numBeds : Int = 0
 
     @IBOutlet weak var bedTable: UITableView!
     @IBOutlet weak var testLabel: UILabel!
@@ -30,6 +30,13 @@ class BedsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //Sets up the info passed from section controller
+    func setInfo(sectNum: Int, beds : [String], numBeds : Int){
+        self.sectNum = sectNum
+        self.beds = beds
+        self.numBeds = numBeds
     }
     
     
@@ -59,7 +66,7 @@ extension BedsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.bedTable.dequeueReusableCellWithIdentifier("bedCell")! as UITableViewCell
-        cell.textLabel?.text = "TEST"
+        cell.textLabel?.text = beds[indexPath.row]
         
         return cell
     }
