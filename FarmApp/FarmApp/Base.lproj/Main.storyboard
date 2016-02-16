@@ -103,11 +103,30 @@
                     <connections>
                         <outlet property="bedTable" destination="OCc-sj-9np" id="udF-r8-o0S"/>
                         <outlet property="testLabel" destination="CfT-GW-TDv" id="fQg-0o-6Hh"/>
+                        <segue destination="se7-i0-ZrY" kind="show" identifier="bedClicked" id="TjS-TX-GId"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Q0-SC-6gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="599" y="470"/>
+        </scene>
+        <!--Bed View Controller-->
+        <scene sceneID="R4q-sT-2yz">
+            <objects>
+                <viewController id="se7-i0-ZrY" customClass="BedViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LMk-Vh-z2h"/>
+                        <viewControllerLayoutGuide type="bottom" id="fPK-i8-TWR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9CU-Ad-cnM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lrJ-Lr-OHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="178"/>
         </scene>
     </scenes>
 </document>

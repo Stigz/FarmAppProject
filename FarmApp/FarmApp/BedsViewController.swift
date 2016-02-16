@@ -13,6 +13,8 @@ class BedsViewController: UIViewController {
     var sectNum : Int = 0
     var beds : [Bed] = []
     var numBeds : Int = 0
+    
+    var currentBed : Bed!
 
     @IBOutlet weak var bedTable: UITableView!
     @IBOutlet weak var testLabel: UILabel!
@@ -57,10 +59,20 @@ class BedsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //For different segues away from this screen
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //IF the user segues to a bed list, pass section info
+        if (segue.identifier == "bedClicked"){
+            let bvc = segue.destinationViewController as! BedViewController
+            //TO-DO: pass info to bed view
+            bvc.currentCrop = currentBed.currentCrop
+        }
+    }
 
 }
 
-//TO-DO: Set up table extensions
+
 //Table View Extensions -- for bed table
 extension BedsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,6 +90,10 @@ extension BedsViewController: UITableViewDataSource {
 //Upon section click, show the bed list
 extension BedsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //TO-DO: Hanfle Bed Click
+        //To prepare for segue, set up current section
+        currentBed = beds[indexPath.row]
+        performSegueWithIdentifier("bedClicked", sender: self)
+        //Unhighlight the selected section, in case user goes back
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }
