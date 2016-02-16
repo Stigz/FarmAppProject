@@ -121,8 +121,41 @@
                     <view key="view" contentMode="scaleToFill" id="9CU-Ad-cnM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rr6-ep-hDo">
+                                <rect key="frame" x="279" y="38" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfo-Wc-B2e">
+                                <rect key="frame" x="279" y="92" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3d-AW-6kb">
+                                <rect key="frame" x="283" y="540" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="close" destination="se7-i0-ZrY" eventType="touchUpInside" id="P0C-zT-j52"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E3d-AW-6kb" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="GXw-Xf-Pk3"/>
+                            <constraint firstItem="sfo-Wc-B2e" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="KcU-Fi-srl"/>
+                            <constraint firstItem="sfo-Wc-B2e" firstAttribute="top" secondItem="rr6-ep-hDo" secondAttribute="bottom" constant="33" id="N2k-pf-pTE"/>
+                            <constraint firstItem="fPK-i8-TWR" firstAttribute="top" secondItem="E3d-AW-6kb" secondAttribute="bottom" constant="30" id="sy4-36-TCe"/>
+                            <constraint firstItem="rr6-ep-hDo" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="xOS-ze-WoY"/>
+                            <constraint firstItem="rr6-ep-hDo" firstAttribute="top" secondItem="LMk-Vh-z2h" secondAttribute="bottom" constant="18" id="yw5-s1-n0H"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currentCropLabel" destination="sfo-Wc-B2e" id="Rg8-m5-0vq"/>
+                        <outlet property="topTitleLabel" destination="rr6-ep-hDo" id="Fyt-m4-a9P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrJ-Lr-OHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
