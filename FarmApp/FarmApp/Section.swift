@@ -11,11 +11,11 @@ import UIKit
 class Section: NSObject {
     
     var id : Int!
-    var beds : [String]!
+    var beds : [Bed]!
     var numBeds : Int!
     
     //Default init method 
-    init(id: Int, beds : [String], numBeds : Int){
+    init(id: Int, beds : [Bed], numBeds : Int){
         super.init()
         self.id = id
         self.beds = beds

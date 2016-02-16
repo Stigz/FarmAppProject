@@ -11,7 +11,7 @@ import UIKit
 class BedsViewController: UIViewController {
     
     var sectNum : Int = 0
-    var beds : [String] = []
+    var beds : [Bed] = []
     var numBeds : Int = 0
 
     @IBOutlet weak var bedTable: UITableView!
@@ -36,7 +36,7 @@ class BedsViewController: UIViewController {
     }
     
     //Sets up the info passed from section controller
-    func setInfo(sectNum: Int, beds : [String], numBeds : Int){
+    func setInfo(sectNum: Int, beds : [Bed], numBeds : Int){
         self.sectNum = sectNum
         self.beds = beds
         self.numBeds = numBeds
@@ -69,7 +69,7 @@ extension BedsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.bedTable.dequeueReusableCellWithIdentifier("bedCell")! as UITableViewCell
-        cell.textLabel?.text = beds[indexPath.row]
+        cell.textLabel?.text = "Bed \(beds[indexPath.row].id)"
         
         return cell
     }
