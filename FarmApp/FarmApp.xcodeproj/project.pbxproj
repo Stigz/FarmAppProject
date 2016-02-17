@@ -48,9 +48,9 @@
 /* Begin PBXFileReference section */
 		B8FB878A1C7398C50002299F /* Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
 		B8FB878C1C739AC40002299F /* CropHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropHistory.swift; sourceTree = "<group>"; };
-		B8FB878E1C74F50F0002299F /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = ../Date.swift; sourceTree = "<group>"; };
-		B8FB87901C74F6770002299F /* Variety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Variety.swift; path = ../Variety.swift; sourceTree = "<group>"; };
-		B8FB87921C74F7880002299F /* BedHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BedHistory.swift; path = ../BedHistory.swift; sourceTree = "<group>"; };
+		B8FB878E1C74F50F0002299F /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = FarmApp/Date.swift; sourceTree = SOURCE_ROOT; };
+		B8FB87901C74F6770002299F /* Variety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Variety.swift; path = FarmApp/Variety.swift; sourceTree = SOURCE_ROOT; };
+		B8FB87921C74F7880002299F /* BedHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedHistory.swift; sourceTree = "<group>"; };
 		E10DE84F1C69A06D00DAC725 /* FarmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10DE8521C69A06D00DAC725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E10DE8541C69A06D00DAC725 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
