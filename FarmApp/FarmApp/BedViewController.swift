@@ -76,11 +76,18 @@ extension BedViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.cropHistoryTable.dequeueReusableCellWithIdentifier("cropCell")! as UITableViewCell
+        var cell:UITableViewCell = self.cropHistoryTable.dequeueReusableCellWithIdentifier("cropCell")! as UITableViewCell
+        //Allow for subtitles to cell
+        cell = UITableViewCell(style: UITableViewCellStyle.Subtitle,
+            reuseIdentifier: "cropCell")
+        //Save current crop
         let crop = cropList[indexPath.row]
-        //allow for multiple lines of text
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = "\(crop.variety) \n"
+        cell.textLabel!.text = "\(crop.variety)"
+        //Allow for multikle lines of text
+        cell.detailTextLabel!.numberOfLines = 0
+        //Set subtitle
+        cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(8)
+        cell.detailTextLabel!.text = "Planted: \(crop.datePlanted) \nHarvested: \(crop.dateHarvested)"
         
         return cell
     }
