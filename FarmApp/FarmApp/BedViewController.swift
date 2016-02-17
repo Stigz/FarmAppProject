@@ -18,6 +18,9 @@ class BedViewController: UIViewController {
     var bedNum : Int = 0
     var sectNum : Int = 0
     var bed : Bed!
+    var cropHistory : CropHistory!
+    var numCropsInHistory : Int = 0
+    var cropList : [Crop]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,9 @@ class BedViewController: UIViewController {
         self.bed = bed
         self.currentCrop = bed.currentCrop
         self.bedNum = bed.id
+        self.cropHistory = bed.cropHistory
+        self.numCropsInHistory = bed.cropHistory.numCrops
+        self.cropList = bed.cropHistory.crops
     }
     
     @IBAction func close() {
@@ -66,12 +72,15 @@ class BedViewController: UIViewController {
 //Table View Extensions -- for bed table
 extension BedViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return numCropsInHistory
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.cropHistoryTable.dequeueReusableCellWithIdentifier("cropCell")! as UITableViewCell
-        cell.textLabel?.text = "Bed"
+        let crop = cropList[indexPath.row]
+        //allow for multiple lines of text
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = "\(crop.variety)"
         
         return cell
     }
