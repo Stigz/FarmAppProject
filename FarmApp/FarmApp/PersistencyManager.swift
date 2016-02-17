@@ -20,10 +20,17 @@ class PersistencyManager: NSObject {
     
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
-        let bed1 = Bed(id: 1, currentCrop: "Corn", numCropsInHistory: 1, cropHistory: CropHistory(numCrops: 0,crops: []))
-        let bed2 = Bed(id: 2, currentCrop: "Wheat", numCropsInHistory: 2, cropHistory: CropHistory(numCrops: 0,crops: []))
-        let bed3 = Bed(id: 3, currentCrop: "Garlic", numCropsInHistory: 3, cropHistory: CropHistory(numCrops: 0,crops: []))
-        let bed4 = Bed(id: 4, currentCrop: "Barley", numCropsInHistory: 4, cropHistory: CropHistory(numCrops: 0,crops: []))
+        //Make temp crops
+        let crop1 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test"],variety: "Wheat")
+        let crop2 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test2"],variety: "Corn")
+        let crop3 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test3"],variety: "Barley")
+        let crop4 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test4"],variety: "Garlic")
+        //Make temp beds
+        let bed1 = Bed(id: 1, currentCrop: crop2, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
+        let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop1,crop2]))
+        let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]))
+        let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop3]))
+        //Make temp sects
         let sect1 = Section(id: 1,beds: [bed1],numBeds: 1)
         let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2)
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)

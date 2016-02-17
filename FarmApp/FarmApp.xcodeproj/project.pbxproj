@@ -16,6 +16,7 @@
 		E10DE85D1C69A06D00DAC725 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10DE85B1C69A06D00DAC725 /* LaunchScreen.storyboard */; };
 		E10DE8681C69A06D00DAC725 /* FarmAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DE8671C69A06D00DAC725 /* FarmAppTests.swift */; };
 		E10DE8731C69A06D00DAC725 /* FarmAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DE8721C69A06D00DAC725 /* FarmAppUITests.swift */; };
+		E116D5E71C742CA30031D9BD /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E116D5E61C742CA30031D9BD /* CropViewController.swift */; };
 		E15ED59C1C6C3BBA005D3A48 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59B1C6C3BBA005D3A48 /* Section.swift */; };
 		E15ED59E1C6C3DBA005D3A48 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */; };
 		E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */; };
@@ -57,6 +58,7 @@
 		E10DE86E1C69A06D00DAC725 /* FarmAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarmAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10DE8721C69A06D00DAC725 /* FarmAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmAppUITests.swift; sourceTree = "<group>"; };
 		E10DE8741C69A06D00DAC725 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E116D5E61C742CA30031D9BD /* CropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
 		E15ED59B1C6C3BBA005D3A48 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedsViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				E10DE8541C69A06D00DAC725 /* ViewController.swift */,
 				E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */,
 				E1E5BEBC1C72AC7D007B8E82 /* BedViewController.swift */,
+				E116D5E61C742CA30031D9BD /* CropViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				E15ED59C1C6C3BBA005D3A48 /* Section.swift in Sources */,
 				E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */,
 				E10DE8531C69A06D00DAC725 /* AppDelegate.swift in Sources */,
+				E116D5E71C742CA30031D9BD /* CropViewController.swift in Sources */,
 				B8FB878B1C7398C50002299F /* Crop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

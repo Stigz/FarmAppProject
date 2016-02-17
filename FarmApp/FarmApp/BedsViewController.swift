@@ -65,8 +65,7 @@ class BedsViewController: UIViewController {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "bedClicked"){
             let bvc = segue.destinationViewController as! BedViewController
-            //TO-DO: pass info to bed view
-            bvc.setInfo(sectNum, currentCrop: currentBed.currentCrop, bedNum: currentBed.id)
+            bvc.setInfo(sectNum, bed: currentBed)
         }
     }
 
