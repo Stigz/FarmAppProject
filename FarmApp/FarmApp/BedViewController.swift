@@ -14,13 +14,14 @@ class BedViewController: UIViewController {
     @IBOutlet weak var currentCropLabel: UILabel!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
-    var currentCrop : String = ""
+    var plantedCrop : Crop!
     var bedNum : Int = 0
     var sectNum : Int = 0
     var bed : Bed!
     var cropHistory : CropHistory!
     var numCropsInHistory : Int = 0
     var cropList : [Crop]!
+    var clickedCrop : Crop!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class BedViewController: UIViewController {
         //Set up title label
         topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
         //Set up current crop label
-        currentCropLabel.text = "Current Crop: \(currentCrop)"
+        currentCropLabel.text = "Current Crop: \(plantedCrop.variety)"
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
@@ -46,7 +47,7 @@ class BedViewController: UIViewController {
     func setInfo(sectNum : Int, bed : Bed){
         self.sectNum = sectNum
         self.bed = bed
-        self.currentCrop = bed.currentCrop
+        self.plantedCrop = bed.currentCrop
         self.bedNum = bed.id
         self.cropHistory = bed.cropHistory
         self.numCropsInHistory = bed.cropHistory.numCrops
@@ -56,16 +57,15 @@ class BedViewController: UIViewController {
     @IBAction func close() {
         dismissViewControllerAnimated(true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    //For different segues away from this screen
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //IF the user segues to a bed list, pass section info
+        if (segue.identifier == "cropClicked"){
+            let cvc = segue.destinationViewController as! CropViewController
+            cvc.setInfo()
+        }
     }
-    */
 
 }
 
@@ -97,8 +97,8 @@ extension BedViewController: UITableViewDataSource {
 extension BedViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //To prepare for segue, set up current section
-        //SET CROP HERE
-        //THEN DO SEGUE
+        clickedCrop = cropList[indexPath.row]
+        performSegueWithIdentifier("cropClicked", sender: self)
         //Unhighlight the selected section, in case user goes back
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
