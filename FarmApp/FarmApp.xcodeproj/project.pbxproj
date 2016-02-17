@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		B8FB878B1C7398C50002299F /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB878A1C7398C50002299F /* Crop.swift */; };
 		B8FB878D1C739AC40002299F /* CropHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB878C1C739AC40002299F /* CropHistory.swift */; };
+		B8FB878F1C74F50F0002299F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB878E1C74F50F0002299F /* Date.swift */; };
+		B8FB87911C74F6770002299F /* Variety.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB87901C74F6770002299F /* Variety.swift */; };
+		B8FB87931C74F7880002299F /* BedHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB87921C74F7880002299F /* BedHistory.swift */; };
 		E10DE8531C69A06D00DAC725 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DE8521C69A06D00DAC725 /* AppDelegate.swift */; };
 		E10DE8551C69A06D00DAC725 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DE8541C69A06D00DAC725 /* ViewController.swift */; };
 		E10DE8581C69A06D00DAC725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10DE8561C69A06D00DAC725 /* Main.storyboard */; };
@@ -45,6 +48,9 @@
 /* Begin PBXFileReference section */
 		B8FB878A1C7398C50002299F /* Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
 		B8FB878C1C739AC40002299F /* CropHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropHistory.swift; sourceTree = "<group>"; };
+		B8FB878E1C74F50F0002299F /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = ../Date.swift; sourceTree = "<group>"; };
+		B8FB87901C74F6770002299F /* Variety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Variety.swift; path = ../Variety.swift; sourceTree = "<group>"; };
+		B8FB87921C74F7880002299F /* BedHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BedHistory.swift; path = ../BedHistory.swift; sourceTree = "<group>"; };
 		E10DE84F1C69A06D00DAC725 /* FarmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10DE8521C69A06D00DAC725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E10DE8541C69A06D00DAC725 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +166,9 @@
 				E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */,
 				B8FB878A1C7398C50002299F /* Crop.swift */,
 				B8FB878C1C739AC40002299F /* CropHistory.swift */,
+				B8FB878E1C74F50F0002299F /* Date.swift */,
+				B8FB87901C74F6770002299F /* Variety.swift */,
+				B8FB87921C74F7880002299F /* BedHistory.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -319,11 +328,14 @@
 				E10DE8551C69A06D00DAC725 /* ViewController.swift in Sources */,
 				E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */,
 				E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */,
+				B8FB87931C74F7880002299F /* BedHistory.swift in Sources */,
 				B8FB878D1C739AC40002299F /* CropHistory.swift in Sources */,
 				E1E5BEBD1C72AC7D007B8E82 /* BedViewController.swift in Sources */,
 				E15ED59C1C6C3BBA005D3A48 /* Section.swift in Sources */,
+				B8FB878F1C74F50F0002299F /* Date.swift in Sources */,
 				E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */,
 				E10DE8531C69A06D00DAC725 /* AppDelegate.swift in Sources */,
+				B8FB87911C74F6770002299F /* Variety.swift in Sources */,
 				E116D5E71C742CA30031D9BD /* CropViewController.swift in Sources */,
 				B8FB878B1C7398C50002299F /* Crop.swift in Sources */,
 			);
