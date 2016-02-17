@@ -12,14 +12,14 @@ import UIKit
 class Crop: NSObject, NSCoding{
    
     
-    var datePlanted: NSDate!
-    var dateHarvested: NSDate!
+    var datePlanted: String!
+    var dateHarvested: String!
     
     var notes : [String]!
     var variety: String!
     
     //do we want a crop to have to be initialized with an image?
-    init(datePlanted: NSDate, dateHarvested: NSDate, notes : [String], variety : String){
+    init(datePlanted: String, dateHarvested: String, notes : [String], variety : String){
         super.init()
         self.datePlanted = datePlanted
         self.dateHarvested = dateHarvested
@@ -29,8 +29,8 @@ class Crop: NSObject, NSCoding{
     
     required init(coder decoder: NSCoder) {
         super.init()
-        self.datePlanted = decoder.decodeObjectForKey("crop_dPlanted") as! NSDate
-        self.dateHarvested = decoder.decodeObjectForKey("crop_dHarvested") as! NSDate
+        self.datePlanted = decoder.decodeObjectForKey("crop_dPlanted") as! String
+        self.dateHarvested = decoder.decodeObjectForKey("crop_dHarvested") as! String
         self.notes = decoder.decodeObjectForKey("crop_notes") as! [String]
         self.variety = decoder.decodeObjectForKey("crop_variety") as! String
     }

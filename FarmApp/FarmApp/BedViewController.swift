@@ -80,7 +80,7 @@ extension BedViewController: UITableViewDataSource {
         let crop = cropList[indexPath.row]
         //allow for multiple lines of text
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = "\(crop.variety)"
+        cell.textLabel?.text = "\(crop.variety) \n"
         
         return cell
     }

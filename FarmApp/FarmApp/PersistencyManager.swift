@@ -21,10 +21,10 @@ class PersistencyManager: NSObject {
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
         //Make temp crops
-        let crop1 = Crop(datePlanted: NSDate(),dateHarvested: NSDate(),notes: ["test"],variety: "Wheat")
-        let crop2 = Crop(datePlanted: NSDate(),dateHarvested: NSDate(),notes: ["test2"],variety: "Corn")
-        let crop3 = Crop(datePlanted: NSDate(),dateHarvested: NSDate(),notes: ["test3"],variety: "Barley")
-        let crop4 = Crop(datePlanted: NSDate(),dateHarvested: NSDate(),notes: ["test4"],variety: "Garlic")
+        let crop1 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test"],variety: "Wheat")
+        let crop2 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test2"],variety: "Corn")
+        let crop3 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test3"],variety: "Barley")
+        let crop4 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test4"],variety: "Garlic")
         //Make temp beds
         let bed1 = Bed(id: 1, currentCrop: "Corn", cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: "Wheat", cropHistory: CropHistory(numCrops: 2,crops: [crop1,crop2]))
