@@ -45,7 +45,7 @@ class variety: NSObject, NSCoding{
         bedHistory.add(date, bed: bed)
     }
     
-    func initBedHistorty(date: Date, bed: Bed){
+    func initBedHistory(date: Date, bed: Bed){
         bedHistory = BedHistory(date: date, bed: bed)
     }
     
