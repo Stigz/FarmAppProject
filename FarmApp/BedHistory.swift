@@ -16,8 +16,8 @@ class BedHistory: NSObject, NSCoding {
     
     init(date: Date, bed: Bed){
         super.init()
-       dates.append(date)
-       beds.append(bed)
+       dates = [date]
+       beds = [bed]
         
     }
     required init(coder decoder: NSCoder) {
@@ -40,8 +40,8 @@ class BedHistory: NSObject, NSCoding {
     
     func print() -> String{
         var retStr = ""
-        for i in 1...dates.count {
-            retStr += "\(dates[i].printSlash())" + " Bed: " + beds[i].printID() + "\n"
+        for i in 0...(dates.count - 1) {
+            retStr += "\(dates[i].printSlash())" + " Bed: " + beds[i].getID() + "\n"
         }
         return retStr
     }

@@ -43,7 +43,7 @@ class Bed: NSObject, NSCoding{
         "Current Crop: \(currentCrop)"
     }
     
-    func printID() -> String{
+    func getID() -> String{
         return "\(id)"
     }
 
