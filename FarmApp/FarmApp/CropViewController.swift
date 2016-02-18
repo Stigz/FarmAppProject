@@ -25,6 +25,11 @@ class CropViewController: UIViewController {
         
     }
     
+    //Close the current screen -- back button clicked
+    @IBAction func close() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation

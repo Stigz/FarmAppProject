@@ -11,7 +11,7 @@ import UIKit
 class BedViewController: UIViewController {
 
     @IBOutlet weak var topTitleLabel: UILabel!
-    @IBOutlet weak var currentCropLabel: UILabel!
+    @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
     var plantedCrop : Crop!
@@ -29,7 +29,7 @@ class BedViewController: UIViewController {
         //Set up title label
         topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
         //Set up current crop label
-        currentCropLabel.text = "Current Crop: \(plantedCrop.variety.name)"
+        currentCropLabel.setTitle("Current Crop: \(plantedCrop.variety.name)", forState: .Normal)
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
@@ -44,6 +44,7 @@ class BedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //Set info passed from bed list
     func setInfo(sectNum : Int, bed : Bed){
         self.sectNum = sectNum
         self.bed = bed
@@ -54,9 +55,18 @@ class BedViewController: UIViewController {
         self.cropList = bed.cropHistory.crops
     }
     
+    //Close the current screen -- back button clicked
     @IBAction func close() {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    //Handle when the current crop is clicked
+    //and transition to crop screen
+    @IBAction func currentCropClicked() {
+        clickedCrop = plantedCrop
+        performSegueWithIdentifier("cropClicked", sender: self)
+    }
+    
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

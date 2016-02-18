@@ -128,12 +128,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfo-Wc-B2e">
-                                <rect key="frame" x="279" y="89" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3d-AW-6kb">
                                 <rect key="frame" x="283" y="540" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
@@ -142,40 +136,50 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crop History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8R-Dp-cAA">
-                                <rect key="frame" x="247" y="131" width="108" height="23"/>
+                                <rect key="frame" x="246" y="134" width="108" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Ap-sZ-b9z">
-                                <rect key="frame" x="54" y="200" width="492" height="305"/>
+                                <rect key="frame" x="54" y="202" width="492" height="303"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="se7-i0-ZrY" id="5Uu-Gm-H1f"/>
                                     <outlet property="delegate" destination="se7-i0-ZrY" id="tTy-BR-5AW"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFd-nf-AYH">
+                                <rect key="frame" x="275" y="81" width="51" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="currentCropClicked" destination="se7-i0-ZrY" eventType="touchUpInside" id="Kxc-TW-uZc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Q8R-Dp-cAA" firstAttribute="top" secondItem="NFd-nf-AYH" secondAttribute="bottom" constant="20" id="5Gp-B3-4cb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Ap-sZ-b9z" secondAttribute="trailing" constant="34" id="FoE-yq-qpX"/>
                             <constraint firstItem="Q8R-Dp-cAA" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="H7l-Y6-hcf"/>
                             <constraint firstItem="3Ap-sZ-b9z" firstAttribute="leading" secondItem="9CU-Ad-cnM" secondAttribute="leadingMargin" constant="34" id="IKU-GP-3vl"/>
-                            <constraint firstItem="sfo-Wc-B2e" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="LmM-Cx-s4g"/>
                             <constraint firstItem="rr6-ep-hDo" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="Ss4-Wq-Af0"/>
                             <constraint firstItem="3Ap-sZ-b9z" firstAttribute="top" secondItem="Q8R-Dp-cAA" secondAttribute="bottom" constant="45" id="U8q-C3-A4o"/>
+                            <constraint firstItem="NFd-nf-AYH" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="UIg-nK-Wuj"/>
                             <constraint firstItem="rr6-ep-hDo" firstAttribute="top" secondItem="LMk-Vh-z2h" secondAttribute="bottom" constant="19" id="adC-DM-rVa"/>
-                            <constraint firstItem="sfo-Wc-B2e" firstAttribute="top" secondItem="rr6-ep-hDo" secondAttribute="bottom" constant="27" id="cSo-kN-OeD"/>
                             <constraint firstItem="E3d-AW-6kb" firstAttribute="top" secondItem="3Ap-sZ-b9z" secondAttribute="bottom" constant="35" id="dpE-q1-ma7"/>
                             <constraint firstItem="3Ap-sZ-b9z" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="fkv-JB-uvl"/>
                             <constraint firstItem="E3d-AW-6kb" firstAttribute="centerX" secondItem="9CU-Ad-cnM" secondAttribute="centerX" id="osf-Te-Dcv"/>
-                            <constraint firstItem="Q8R-Dp-cAA" firstAttribute="top" secondItem="sfo-Wc-B2e" secondAttribute="bottom" constant="22" id="tJi-fX-xuQ"/>
                             <constraint firstItem="fPK-i8-TWR" firstAttribute="top" secondItem="E3d-AW-6kb" secondAttribute="bottom" constant="30" id="vwk-6T-5ET"/>
+                            <constraint firstItem="NFd-nf-AYH" firstAttribute="top" secondItem="rr6-ep-hDo" secondAttribute="bottom" constant="19" id="wSn-Pu-7ta"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cropHistoryTable" destination="3Ap-sZ-b9z" id="akw-Iy-52h"/>
-                        <outlet property="currentCropLabel" destination="sfo-Wc-B2e" id="Rg8-m5-0vq"/>
+                        <outlet property="currentCropLabel" destination="NFd-nf-AYH" id="Idp-Cu-Lwd"/>
                         <outlet property="topTitleLabel" destination="rr6-ep-hDo" id="Fyt-m4-a9P"/>
                         <segue destination="5JW-LR-MqB" kind="show" identifier="cropClicked" id="KMM-nP-hDk"/>
                     </connections>
@@ -195,6 +199,15 @@
                     <view key="view" contentMode="scaleToFill" id="EOY-fH-SW7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ5-ah-P7w">
+                                <rect key="frame" x="283" y="529" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="close" destination="5JW-LR-MqB" eventType="touchUpInside" id="RBc-vr-jAK"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
