@@ -21,10 +21,10 @@ class PersistencyManager: NSObject {
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
         //Make temp crops
-        let crop1 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test"],variety: "Wheat")
-        let crop2 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test2"],variety: "Corn")
-        let crop3 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test3"],variety: "Barley")
-        let crop4 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test4"],variety: "Garlic")
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test"],variety: "Wheat")
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test2"],variety: "Corn")
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test3"],variety: "Barley")
+        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test4"],variety: "Garlic")
         //Make temp beds
         let bed1 = Bed(id: 1, currentCrop: crop2, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop1,crop2]))

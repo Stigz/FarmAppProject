@@ -83,11 +83,9 @@ extension BedViewController: UITableViewDataSource {
         //Save current crop
         let crop = cropList[indexPath.row]
         cell.textLabel!.text = "\(crop.variety)"
-        //Allow for multikle lines of text
-        cell.detailTextLabel!.numberOfLines = 0
         //Set subtitle
-        cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(8)
-        cell.detailTextLabel!.text = "Planted: \(crop.datePlanted) \nHarvested: \(crop.dateHarvested)"
+        cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(10)
+        cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.dateHarvested.printSlash())"
         
         return cell
     }
