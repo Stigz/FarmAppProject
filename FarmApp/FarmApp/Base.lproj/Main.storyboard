@@ -200,16 +200,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ5-ah-P7w">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ5-ah-P7w">
                                 <rect key="frame" x="283" y="529" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="close" destination="5JW-LR-MqB" eventType="touchUpInside" id="RBc-vr-jAK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntq-zr-nx5">
+                                <rect key="frame" x="276" y="41" width="49" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yel-ox-gIc">
+                                <rect key="frame" x="282" y="63" width="37" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ntq-zr-nx5" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="DlY-gz-u2b"/>
+                            <constraint firstItem="Ntq-zr-nx5" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="21" id="HA3-T9-y4d"/>
+                            <constraint firstItem="yel-ox-gIc" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="IX3-eh-gN5"/>
+                            <constraint firstItem="W8a-6r-YLB" firstAttribute="top" secondItem="RQ5-ah-P7w" secondAttribute="bottom" constant="41" id="Qgt-vo-hSE"/>
+                            <constraint firstItem="yel-ox-gIc" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="43" id="WAc-XG-3dF"/>
+                            <constraint firstItem="RQ5-ah-P7w" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="mIN-CC-6y0"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cropBedLabel" destination="yel-ox-gIc" id="GGe-Gr-gPw"/>
+                        <outlet property="cropNameLabel" destination="Ntq-zr-nx5" id="hyy-GR-Nj3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OQ-3p-HJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

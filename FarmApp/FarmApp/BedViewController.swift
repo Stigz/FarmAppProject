@@ -73,7 +73,7 @@ class BedViewController: UIViewController {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
-            cvc.setInfo()
+            cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum)
         }
     }
 
