@@ -7,46 +7,41 @@
 //
 
 import Foundation
-class variety: NSObject, NSCoding{
+class Variety: NSObject, NSCoding{
     
     var name : String!
-    var harvestDate : Date!
-    var plantingDate : Date!
+    var bestSeasons : [String]!
+    var notes : [String]!
     var bedHistory : BedHistory!
     
     //Default init method
-    init(name: String, harvestDate : Date, plantingDate : Date){
+    init(name: String, bestSeasons : [String], notes : [String], bedHistory: BedHistory){
         super.init()
         self.name = name
-        self.harvestDate = harvestDate
-        self.plantingDate = plantingDate
+        self.bestSeasons = bestSeasons
+        self.notes = notes
+        self.bedHistory = bedHistory
     }
     
     //Decode object from memory -- for archiving (saving) albums
     required init(coder decoder: NSCoder) {
         super.init()
         self.name = decoder.decodeObjectForKey("variety_name") as! String
-        self.harvestDate = decoder.decodeObjectForKey("variety_harvestDate") as! Date
-        self.plantingDate = decoder.decodeObjectForKey("variety_plantingDate") as! Date
+        self.bestSeasons = decoder.decodeObjectForKey("variety_seasons") as! [String]
+        self.notes = decoder.decodeObjectForKey("variety_notes") as! [String]
+        self.bedHistory = decoder.decodeObjectForKey("variety_bedHistory") as! BedHistory
     }
     
     //Encode object to memory -- for archiving
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(name, forKey: "variety_name")
-        aCoder.encodeObject(harvestDate, forKey: "variety_harvestDate")
-        aCoder.encodeObject(plantingDate, forKey: "variety_plantingDate")
+        aCoder.encodeObject(bestSeasons, forKey: "variety_seasons")
+        aCoder.encodeObject(notes, forKey: "variety_notes")
+        aCoder.encodeObject(bedHistory, forKey: "variety_bedHistory")
     }
     
     func printBedHistory() -> String{
         return bedHistory.print()
-    }
-    //add bedHistory
-    func addBedHistory(date: Date, bed: Bed){
-        bedHistory.add(date, bed: bed)
-    }
-    
-    func initBedHistory(date: Date, bed: Bed){
-        bedHistory = BedHistory(date: date, bed: bed)
     }
     
 }

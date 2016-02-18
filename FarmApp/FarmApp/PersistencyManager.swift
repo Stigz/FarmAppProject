@@ -20,11 +20,16 @@ class PersistencyManager: NSObject {
     
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
+        //Make temp varieties
+        let variety1 = Variety(name: "Wheat", bestSeasons: [], notes: [], bedHistory: BedHistory())
+        let variety2 = Variety(name: "Corn", bestSeasons: [], notes: [], bedHistory: BedHistory())
+        let variety3 = Variety(name: "Barley", bestSeasons: [], notes: [], bedHistory: BedHistory())
+        let variety4 = Variety(name: "Garlic", bestSeasons: [], notes: [], bedHistory: BedHistory())
         //Make temp crops
-        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test"],variety: "Wheat")
-        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test2"],variety: "Corn")
-        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test3"],variety: "Barley")
-        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test4"],variety: "Garlic")
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test"],variety: variety1)
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test2"],variety: variety2)
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test3"],variety: variety3)
+        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test4"],variety: variety4)
         //Make temp beds
         let bed1 = Bed(id: 1, currentCrop: crop2, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop1,crop2]))

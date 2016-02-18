@@ -20,6 +20,11 @@ class BedHistory: NSObject, NSCoding {
        beds = [bed]
         
     }
+    override init(){
+        super.init()
+        dates = []
+        beds = []
+    }
     required init(coder decoder: NSCoder) {
         super.init()
         self.dates = decoder.decodeObjectForKey("BH_dates") as! [Date]
@@ -31,11 +36,6 @@ class BedHistory: NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(dates, forKey: "BH_dates")
         aCoder.encodeObject(beds, forKey: "BH_beds")
-    }
-    
-    func add(date: Date, bed: Bed){
-        dates.append(date)
-        beds.append(bed)
     }
     
     func print() -> String{

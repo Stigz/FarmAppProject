@@ -29,7 +29,7 @@ class BedViewController: UIViewController {
         //Set up title label
         topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
         //Set up current crop label
-        currentCropLabel.text = "Current Crop: \(plantedCrop.variety)"
+        currentCropLabel.text = "Current Crop: \(plantedCrop.variety.name)"
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
@@ -82,7 +82,7 @@ extension BedViewController: UITableViewDataSource {
             reuseIdentifier: "cropCell")
         //Save current crop
         let crop = cropList[indexPath.row]
-        cell.textLabel!.text = "\(crop.variety)"
+        cell.textLabel!.text = "\(crop.variety.name)"
         //Set subtitle
         cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(10)
         cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.dateHarvested.printSlash())"

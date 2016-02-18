@@ -33,10 +33,5 @@ class CropHistory: NSObject, NSCoding {
         aCoder.encodeObject(crops, forKey: "CropHistory_crops")
         
     }
-    
-    func addCrop(newCrop: Crop){
-        numCrops = (numCrops + 1)
-        crops.append(newCrop)
-    }
 
 }
