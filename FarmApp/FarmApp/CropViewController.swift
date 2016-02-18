@@ -10,9 +10,18 @@ import UIKit
 
 class CropViewController: UIViewController {
 
+
+    @IBOutlet weak var cropBedLabel: UILabel!
+    @IBOutlet weak var cropNameLabel: UILabel!
+    
+    var crop : Crop!
+    var bedNum : Int = 0
+    var sectNum : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        cropNameLabel.text = crop.variety.name
+        cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
         // Do any additional setup after loading the view.
     }
 
@@ -21,8 +30,15 @@ class CropViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setInfo(){
-        
+    func setInfo(crop : Crop, bedNum : Int, sectNum : Int){
+        self.crop = crop
+        self.bedNum = bedNum
+        self.sectNum = sectNum
+    }
+    
+    //Close the current screen -- back button clicked
+    @IBAction func close() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 
