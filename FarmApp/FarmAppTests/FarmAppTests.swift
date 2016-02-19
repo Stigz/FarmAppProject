@@ -39,8 +39,9 @@ class FarmAppTests: XCTestCase {
         
     }
     func testBedHistoryPrint(){
+        let variety1 = Variety(name: "Wheat", bestSeasons: [], notes: [], bedHistory: BedHistory())
         let date1 = Date(year: 2014, month: 3, day: 4)
-        let crop1 = Crop(datePlanted: "2016-01-01",dateHarvested: "2016-01-01",notes: ["test"],variety: "Wheat")
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test"],variety: variety1)
         let cropHistory1 = CropHistory(numCrops: 1, crops: [crop1])
         let bed1 = Bed(id: 1, currentCrop: crop1, cropHistory: cropHistory1)
         
