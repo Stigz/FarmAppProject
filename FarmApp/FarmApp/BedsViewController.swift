@@ -58,6 +58,7 @@ class BedsViewController: UIViewController {
             let bvc = segue.destinationViewController as! BedViewController
             bvc.setInfo(sectNum, bed: currentBed)
         }
+    
     }
 
 }

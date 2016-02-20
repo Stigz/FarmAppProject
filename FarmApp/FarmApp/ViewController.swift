@@ -41,6 +41,12 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func toCropList(){
+        performSegueWithIdentifier("toCropList", sender: self)
+        
+    }
+    
+    
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         //IF the user segues to a bed list, pass section info
@@ -48,7 +54,13 @@ class ViewController: UIViewController {
             let bvc = segue.destinationViewController as! BedsViewController
             bvc.setInfo(currentSect.id, beds: currentSect.beds, numBeds: currentSect.numBeds)
         }
+        if(segue.identifier == "toCropList"){
+            segue.destinationViewController as! CropListViewController
+            
+        }
+
     }
+
 
 
 }
@@ -62,7 +74,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.sectionTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         cell.textLabel?.text = "Section \(sections[indexPath.row].id)"
-        
+      
         return cell
     }
 }

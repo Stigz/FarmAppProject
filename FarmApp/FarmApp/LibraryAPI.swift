@@ -36,5 +36,9 @@ class LibraryAPI: NSObject {
     func getSects() -> [Section]{
         return persistencyManager.getSects()
     }
+    
+    func getPlants() -> [Plant]{
+        return persistencyManager.getPlants()
+    }
 
 }

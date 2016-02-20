@@ -11,6 +11,8 @@ import UIKit
 class PersistencyManager: NSObject {
     
     private var sections = [Section]()
+    private var plants = [Plant]()
+
     
     override init() {
         super.init()
@@ -21,10 +23,19 @@ class PersistencyManager: NSObject {
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
         //Make temp varieties
-        let variety1 = Variety(name: "Wheat", bestSeasons: [], notes: [], bedHistory: BedHistory())
-        let variety2 = Variety(name: "Corn", bestSeasons: [], notes: [], bedHistory: BedHistory())
-        let variety3 = Variety(name: "Barley", bestSeasons: [], notes: [], bedHistory: BedHistory())
-        let variety4 = Variety(name: "Garlic", bestSeasons: [], notes: [], bedHistory: BedHistory())
+        let plant1 = Plant(name: "Wheat",  bestSeasons: [], notes: [], varieties: [])
+        let plant2 = Plant(name: "Corn",  bestSeasons: [], notes: [], varieties: [])
+        let plant3 = Plant(name: "Barley",  bestSeasons: [], notes: [], varieties: [])
+        let plant4 = Plant(name: "Garlic",  bestSeasons: [], notes: [], varieties: [])
+        
+        let variety1 = Variety(name: "Einkorn", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
+        let variety2 = Variety(name: "Seneca Horizon", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
+        let variety3 = Variety(name: "Barley Variety", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
+        let variety4 = Variety(name: "Softneck Garlic", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+        plant1.varieties.append(variety1)
+        plant2.varieties.append(variety2)
+        plant3.varieties.append(variety3)
+        plant4.varieties.append(variety4)
         //Make temp crops
         let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test"],variety: variety1)
         let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test2"],variety: variety2)
@@ -41,6 +52,7 @@ class PersistencyManager: NSObject {
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
         sections = [sect1,sect2,sect3,sect4]
+        plants = [plant1,plant2,plant3,plant4]
     }
     
     //Return section list
@@ -48,5 +60,10 @@ class PersistencyManager: NSObject {
         return sections
         
     }
+    
+    func getPlants() -> [Plant]{
+        return plants
+    }
+    
 
 }
