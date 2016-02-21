@@ -20,7 +20,7 @@ class CropViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cropNameLabel.text = crop.variety.name
+        cropNameLabel.text = crop.plant.name
         cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
         // Do any additional setup after loading the view.
     }
