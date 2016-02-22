@@ -26,10 +26,10 @@ class PersistencyManager: NSObject {
         let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
         let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
         //Make temp varieties
-        let variety1 = Variety(name: "Wheat", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
+        /*let variety1 = Variety(name: "Wheat", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
         let variety2 = Variety(name: "Corn", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
         let variety3 = Variety(name: "Barley", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
-        let variety4 = Variety(name: "Garlic", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+        let variety4 = Variety(name: "Garlic", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)*/
         //Make temp crops
         let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test"],plant: plant1)
         let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test2"],plant:

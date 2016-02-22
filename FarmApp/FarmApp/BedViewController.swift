@@ -63,8 +63,7 @@ class BedViewController: UIViewController {
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        clickedCrop = plantedCrop
-        performSegueWithIdentifier("cropClicked", sender: self)
+        performSegueWithIdentifier("currentCropClicked", sender: self)
     }
     
     
@@ -73,7 +72,10 @@ class BedViewController: UIViewController {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
-            cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum)
+            cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: false)
+        }else if (segue.identifier == "currentCropClicked"){
+            let cvc = segue.destinationViewController as! CropViewController
+            cvc.setInfo(plantedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
         }
     }
 

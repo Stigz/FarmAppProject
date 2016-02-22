@@ -13,16 +13,29 @@ class CropViewController: UIViewController {
 
     @IBOutlet weak var cropBedLabel: UILabel!
     @IBOutlet weak var cropNameLabel: UILabel!
+    @IBOutlet weak var plantedLabel: UILabel!
+    @IBOutlet weak var harvestedButton: UIButton!
     
     var crop : Crop!
     var bedNum : Int = 0
     var sectNum : Int = 0
+    var isPlanted : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Set up labels
         cropNameLabel.text = crop.plant.name
         cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
-        // Do any additional setup after loading the view.
+        plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
+        //If planted, add harvest button
+        if (isPlanted){
+            harvestedButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            harvestedButton.setTitle("Harvest now!", forState: .Normal)
+        }else{ // If not planted, show harvest date
+            harvestedButton.setTitle("Harvested: \(crop.dateHarvested.printSlash())", forState: .Normal)
+            //to disallow clicking on the date
+            harvestedButton.userInteractionEnabled = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,26 +43,17 @@ class CropViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setInfo(crop : Crop, bedNum : Int, sectNum : Int){
+    //For setting info passed from Bed controller
+    func setInfo(crop : Crop, bedNum : Int, sectNum : Int, isPlanted: Bool){
         self.crop = crop
         self.bedNum = bedNum
         self.sectNum = sectNum
+        self.isPlanted = isPlanted
     }
     
     //Close the current screen -- back button clicked
     @IBAction func close() {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
