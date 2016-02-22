@@ -232,6 +232,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="harvest" destination="5JW-LR-MqB" eventType="touchUpInside" id="maq-NY-N4X"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmT-Wk-PEi">
                                 <rect key="frame" x="279" y="102" width="42" height="21"/>
@@ -252,18 +255,55 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j2Z-iR-Nmr">
+                                <rect key="frame" x="212" y="172" width="42" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rxF-il-h9o">
+                                <rect key="frame" x="261" y="171" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XpH-3D-WjY">
+                                <rect key="frame" x="315" y="172" width="58" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1x7-M8-w43">
+                                <rect key="frame" x="163" y="175" width="41" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZH-1d-BN9">
+                                <rect key="frame" x="379" y="172" width="58" height="30"/>
+                                <state key="normal" title="Harvest!"/>
+                                <connections>
+                                    <action selector="addHarvestDate" destination="5JW-LR-MqB" eventType="touchUpInside" id="nt8-um-edp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="1LJ-Bv-fbj" firstAttribute="top" secondItem="jrv-c1-kkr" secondAttribute="bottom" constant="43" id="0ur-aM-Z3Y"/>
+                            <constraint firstItem="j2Z-iR-Nmr" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="152" id="37a-Xb-0FH"/>
                             <constraint firstItem="oLl-ZP-Vu1" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="7go-Un-Tnr"/>
+                            <constraint firstItem="j2Z-iR-Nmr" firstAttribute="leading" secondItem="1x7-M8-w43" secondAttribute="trailing" constant="8" id="8pm-ue-SDv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1LJ-Bv-fbj" secondAttribute="trailing" constant="34" id="C1f-3d-MJQ"/>
+                            <constraint firstItem="rxF-il-h9o" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" constant="-16" id="Cae-vx-tzG"/>
                             <constraint firstItem="Ntq-zr-nx5" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="DlY-gz-u2b"/>
+                            <constraint firstItem="j2Z-iR-Nmr" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" constant="-67" id="FgH-n6-M21"/>
                             <constraint firstItem="Ntq-zr-nx5" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="21" id="HA3-T9-y4d"/>
                             <constraint firstItem="yel-ox-gIc" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="IX3-eh-gN5"/>
+                            <constraint firstItem="rxF-il-h9o" firstAttribute="leading" secondItem="j2Z-iR-Nmr" secondAttribute="trailing" constant="8" id="Ibo-GS-i9C"/>
                             <constraint firstItem="Fwr-vD-KfJ" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="207" id="KkZ-6J-onb"/>
+                            <constraint firstItem="1x7-M8-w43" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="155" id="N6X-BV-QwS"/>
+                            <constraint firstItem="XpH-3D-WjY" firstAttribute="top" secondItem="oLl-ZP-Vu1" secondAttribute="bottom" constant="4" id="OdN-4x-zyi"/>
+                            <constraint firstItem="rxF-il-h9o" firstAttribute="top" secondItem="oLl-ZP-Vu1" secondAttribute="bottom" constant="4" id="PYb-l1-eeQ"/>
                             <constraint firstItem="W8a-6r-YLB" firstAttribute="top" secondItem="RQ5-ah-P7w" secondAttribute="bottom" constant="41" id="Qgt-vo-hSE"/>
+                            <constraint firstItem="nZH-1d-BN9" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" constant="108" id="QuQ-GU-bem"/>
                             <constraint firstItem="yel-ox-gIc" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="43" id="WAc-XG-3dF"/>
                             <constraint firstItem="1LJ-Bv-fbj" firstAttribute="leading" secondItem="EOY-fH-SW7" secondAttribute="leadingMargin" constant="34" id="Xvo-P5-Aeo"/>
                             <constraint firstItem="oLl-ZP-Vu1" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="127" id="Zlu-uT-BTT"/>
@@ -271,15 +311,26 @@
                             <constraint firstItem="rmT-Wk-PEi" firstAttribute="top" secondItem="yel-ox-gIc" secondAttribute="bottom" constant="21" id="f19-Tq-1P7"/>
                             <constraint firstItem="RQ5-ah-P7w" firstAttribute="top" secondItem="1LJ-Bv-fbj" secondAttribute="bottom" constant="13" id="fAN-V9-fOW"/>
                             <constraint firstItem="1LJ-Bv-fbj" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="hX8-c4-ZyW"/>
+                            <constraint firstItem="nZH-1d-BN9" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="152" id="jSo-ht-yeC"/>
+                            <constraint firstItem="1x7-M8-w43" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" constant="-116.5" id="l2W-87-8Nn"/>
                             <constraint firstItem="1LJ-Bv-fbj" firstAttribute="leading" secondItem="Fwr-vD-KfJ" secondAttribute="leading" id="m9W-NR-hph"/>
                             <constraint firstItem="RQ5-ah-P7w" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="mIN-CC-6y0"/>
+                            <constraint firstItem="nZH-1d-BN9" firstAttribute="leading" secondItem="XpH-3D-WjY" secondAttribute="trailing" constant="6" id="nTv-He-hQo"/>
+                            <constraint firstItem="XpH-3D-WjY" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" constant="44" id="oHD-Qb-Qv3"/>
                             <constraint firstItem="jrv-c1-kkr" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="odq-rM-9bG"/>
                             <constraint firstItem="jrv-c1-kkr" firstAttribute="top" secondItem="oLl-ZP-Vu1" secondAttribute="bottom" constant="2" id="uED-og-3S2"/>
+                            <constraint firstItem="XpH-3D-WjY" firstAttribute="leading" secondItem="rxF-il-h9o" secondAttribute="trailing" constant="8" id="yNW-l2-Tnm"/>
+                            <constraint firstItem="oLl-ZP-Vu1" firstAttribute="leading" secondItem="1x7-M8-w43" secondAttribute="leading" constant="116" id="yqa-eL-oZV"/>
                             <constraint firstItem="rmT-Wk-PEi" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="zf0-nC-bk7"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="8pm-ue-SDv"/>
+                                <exclude reference="Ibo-GS-i9C"/>
+                                <exclude reference="yqa-eL-oZV"/>
                                 <exclude reference="odq-rM-9bG"/>
+                                <exclude reference="yNW-l2-Tnm"/>
+                                <exclude reference="nTv-He-hQo"/>
                             </mask>
                         </variation>
                         <connections>
@@ -289,10 +340,15 @@
                     <connections>
                         <outlet property="cropBedLabel" destination="yel-ox-gIc" id="GGe-Gr-gPw"/>
                         <outlet property="cropNameLabel" destination="Ntq-zr-nx5" id="hyy-GR-Nj3"/>
+                        <outlet property="dayInput" destination="j2Z-iR-Nmr" id="5Ku-hs-KJK"/>
+                        <outlet property="enterDateLabel" destination="1x7-M8-w43" id="iCP-QV-ZV3"/>
+                        <outlet property="harvestButton" destination="nZH-1d-BN9" id="RDy-X1-ipP"/>
                         <outlet property="harvestedButton" destination="jrv-c1-kkr" id="eYh-Lm-Fz4"/>
+                        <outlet property="monthInput" destination="rxF-il-h9o" id="jfH-tM-6Gt"/>
                         <outlet property="notesField" destination="1LJ-Bv-fbj" id="njp-5g-2ag"/>
                         <outlet property="plantedLabel" destination="oLl-ZP-Vu1" id="U4e-ck-Ydj"/>
                         <outlet property="varietyLabel" destination="rmT-Wk-PEi" id="ihc-IL-UyH"/>
+                        <outlet property="yearInput" destination="XpH-3D-WjY" id="Z8j-NQ-pTW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OQ-3p-HJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
