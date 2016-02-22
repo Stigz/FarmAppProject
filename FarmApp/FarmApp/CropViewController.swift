@@ -24,7 +24,7 @@ class CropViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set up labels
-        cropNameLabel.text = crop.plant.name
+        cropNameLabel.text = crop.variety.plant.name
         cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
         plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
         //If planted, add harvest button
