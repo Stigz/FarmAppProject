@@ -14,7 +14,7 @@ class BedViewController: UIViewController {
     @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
-    var plantedCrop : Crop!
+    var plantedCrop : Crop?
     var bedNum : Int = 0
     var sectNum : Int = 0
     var bed : Bed!
@@ -29,7 +29,11 @@ class BedViewController: UIViewController {
         //Set up title label
         topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
         //Set up current crop label
-        currentCropLabel.setTitle("Current Crop: \(plantedCrop.variety.plant.name)", forState: .Normal)
+        if((plantedCrop) != nil){
+            currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
+        }else{
+            currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+        }
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
@@ -48,6 +52,11 @@ class BedViewController: UIViewController {
     func setInfo(sectNum : Int, bed : Bed){
         self.sectNum = sectNum
         self.bed = bed
+        calculateInfo(bed)
+    }
+    
+    //Used to calculate information, based on bed
+    func calculateInfo(bed: Bed){
         self.plantedCrop = bed.currentCrop
         self.bedNum = bed.id
         self.cropHistory = bed.cropHistory
@@ -63,20 +72,44 @@ class BedViewController: UIViewController {
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        performSegueWithIdentifier("currentCropClicked", sender: self)
+        if((plantedCrop) != nil){
+            performSegueWithIdentifier("currentCropClicked", sender: self)
+        }else{
+            performSegueWithIdentifier("addCropFromBedList", sender: self)
+        }
     }
     
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        //IF the user segues to a bed list, pass section info
+        //If a crop is clicked, segue to crop screen
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
             cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: false)
-        }else if (segue.identifier == "currentCropClicked"){
+        }else if (segue.identifier == "currentCropClicked"){ //If current crop clicked, segue to crop screen
             let cvc = segue.destinationViewController as! CropViewController
-            cvc.setInfo(plantedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
+            cvc.setInfo(plantedCrop!,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
+        }else if (segue.identifier == "addCropFromBedlist"){ //If no current crop, add a new crop
+            let acvc = segue.destinationViewController as! AddCropViewController
+            acvc.setInfo(sectNum,bedNum: bedNum, unwind: false)
         }
+    }
+    
+    //Called once the crop view unwinds back to this one
+    //(When a crop is harvested)
+    @IBAction func unwindToBedController(segue: UIStoryboardSegue){
+        self.cropHistoryTable.reloadData()
+    }
+    
+    //Called when crop view unwinds -- reloads bed info
+    //(called from crop view)
+    func reloadInfo(crop: Crop){
+        self.bed.cropHistory.crops.insert(crop, atIndex: 0)
+        self.bed.cropHistory.numCrops!++
+        self.bed.currentCrop = nil
+        self.calculateInfo(self.bed)
+        //Set up current crop label
+        currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
     }
 
 }

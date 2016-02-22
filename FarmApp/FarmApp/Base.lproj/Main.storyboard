@@ -110,6 +110,50 @@
             </objects>
             <point key="canvasLocation" x="599" y="470"/>
         </scene>
+        <!--Add Crop View Controller-->
+        <scene sceneID="1h2-JQ-71I">
+            <objects>
+                <viewController id="LyK-qA-WyN" customClass="AddCropViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6T3-B4-tmH"/>
+                        <viewControllerLayoutGuide type="bottom" id="aCo-6z-epj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Gn-4q-eTg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNu-PE-K62">
+                                <rect key="frame" x="276" y="529" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancel" destination="LyK-qA-WyN" eventType="touchUpInside" id="jdd-ae-W8A"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpK-Bi-YRw">
+                                <rect key="frame" x="276" y="43" width="49" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bpK-Bi-YRw" firstAttribute="top" secondItem="6T3-B4-tmH" secondAttribute="bottom" constant="23" id="2Fk-fc-cmP"/>
+                            <constraint firstItem="wNu-PE-K62" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="Bol-iB-5sC"/>
+                            <constraint firstItem="aCo-6z-epj" firstAttribute="top" secondItem="wNu-PE-K62" secondAttribute="bottom" constant="41" id="YKx-rX-ieA"/>
+                            <constraint firstItem="bpK-Bi-YRw" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="lfl-8o-gd8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="bpK-Bi-YRw" id="4cf-ww-hRB"/>
+                        <segue destination="K7A-hA-QL9" kind="unwind" identifier="unwindAddCropToCrop" unwindAction="unwindToCropController:" id="Jwd-kG-aRp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qtx-tI-kiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="K7A-hA-QL9" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1950" y="-26"/>
+        </scene>
         <!--Bed View Controller-->
         <scene sceneID="R4q-sT-2yz">
             <objects>
@@ -183,6 +227,7 @@
                         <outlet property="topTitleLabel" destination="rr6-ep-hDo" id="Fyt-m4-a9P"/>
                         <segue destination="5JW-LR-MqB" kind="show" identifier="cropClicked" id="KMM-nP-hDk"/>
                         <segue destination="5JW-LR-MqB" kind="show" identifier="currentCropClicked" id="Qn0-KA-LUf"/>
+                        <segue destination="LyK-qA-WyN" kind="show" identifier="addCropFromBedList" id="Zu2-xL-ckd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrJ-Lr-OHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,9 +394,12 @@
                         <outlet property="plantedLabel" destination="oLl-ZP-Vu1" id="U4e-ck-Ydj"/>
                         <outlet property="varietyLabel" destination="rmT-Wk-PEi" id="ihc-IL-UyH"/>
                         <outlet property="yearInput" destination="XpH-3D-WjY" id="Z8j-NQ-pTW"/>
+                        <segue destination="XFB-do-zxm" kind="unwind" identifier="unwindCropToBed" unwindAction="unwindToBedController:" id="2jM-2H-Gkt"/>
+                        <segue destination="LyK-qA-WyN" kind="show" identifier="addCropFromCrop" id="rLw-zT-Kmg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OQ-3p-HJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XFB-do-zxm" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="pUi-Xt-n8Y">
                     <connections>
                         <action selector="dismissKeyboard" destination="5JW-LR-MqB" id="VuU-OP-L0j"/>
@@ -362,6 +410,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="rLw-zT-Kmg"/>
         <segue reference="Qn0-KA-LUf"/>
     </inferredMetricsTieBreakers>
 </document>
