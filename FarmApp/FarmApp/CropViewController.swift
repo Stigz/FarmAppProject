@@ -85,10 +85,16 @@ class CropViewController: UIViewController {
         if let day : Int? = Int(dayInput.text!){
             if let month : Int? = Int(monthInput.text!){
                 if let year : Int? = Int(yearInput.text!){
+                    //Add new harvest date
                     let newHarvest = Date(year: year!, month: month!, day: day!)
                     crop.dateHarvested = newHarvest
+                    //Ask user if they would like to add a new crop
+                    let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
                     //TO-DO: Set up a way for this to alert the bed that it no longer has this
-                    //crop planted
+                    //crop planted (in the handler)
                     showHarvestDate()
                 }
             }
