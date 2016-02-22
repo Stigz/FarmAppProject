@@ -91,15 +91,29 @@ class CropViewController: UIViewController {
                     //Ask user if they would like to add a new crop
                     let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: nil))
-                    alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: updateBedList))
                     self.presentViewController(alertController, animated: true, completion: nil)
                     //TO-DO: Set up a way for this to alert the bed that it no longer has this
                     //crop planted (in the handler)
-                    showHarvestDate()
+                    //showHarvestDate()
                 }
             }
         }
         
+    }
+    
+    //If the user harvests, but does not add a new crop
+    func updateBedList(action: UIAlertAction){
+        performSegueWithIdentifier("unwindCropToBed", sender: self)
+    }
+    
+    //For different segues away from this screen
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //IF the user segues to a bed list, pass section info
+        if (segue.identifier == "unwindCropToBed"){
+            let bvc = segue.destinationViewController as! BedViewController
+            bvc.reloadInfo(crop)
+        }
     }
     
     //To show new harvest date

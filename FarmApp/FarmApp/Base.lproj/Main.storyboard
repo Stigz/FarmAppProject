@@ -349,9 +349,11 @@
                         <outlet property="plantedLabel" destination="oLl-ZP-Vu1" id="U4e-ck-Ydj"/>
                         <outlet property="varietyLabel" destination="rmT-Wk-PEi" id="ihc-IL-UyH"/>
                         <outlet property="yearInput" destination="XpH-3D-WjY" id="Z8j-NQ-pTW"/>
+                        <segue destination="XFB-do-zxm" kind="unwind" identifier="unwindCropToBed" unwindAction="unwindToBedController:" id="2jM-2H-Gkt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OQ-3p-HJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XFB-do-zxm" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="pUi-Xt-n8Y">
                     <connections>
                         <action selector="dismissKeyboard" destination="5JW-LR-MqB" id="VuU-OP-L0j"/>
