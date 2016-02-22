@@ -13,8 +13,10 @@ class CropViewController: UIViewController {
 
     @IBOutlet weak var cropBedLabel: UILabel!
     @IBOutlet weak var cropNameLabel: UILabel!
+    @IBOutlet weak var varietyLabel: UILabel!
     @IBOutlet weak var plantedLabel: UILabel!
     @IBOutlet weak var harvestedButton: UIButton!
+    @IBOutlet weak var notesField: UITextView!
     
     var crop : Crop!
     var bedNum : Int = 0
@@ -27,6 +29,10 @@ class CropViewController: UIViewController {
         cropNameLabel.text = crop.variety.plant.name
         cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
         plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
+        varietyLabel.text = "Variety: \(crop.variety.name)"
+        //Setup notes
+        
+        notesField.text = crop.notes
         //If planted, add harvest button
         if (isPlanted){
             harvestedButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
@@ -54,6 +60,11 @@ class CropViewController: UIViewController {
     //Close the current screen -- back button clicked
     @IBAction func close() {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //So that tapping on the view dismisses the keyboard
+    @IBAction func dismissKeyboard(){
+        notesField.resignFirstResponder()
     }
 
 }

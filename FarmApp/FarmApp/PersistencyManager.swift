@@ -36,10 +36,10 @@ class PersistencyManager: NSObject {
         plant3.varieties.append(variety3)
         plant4.varieties.append(variety4)
         //Make temp crops
-        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test"],variety: variety1)
-        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test2"],variety: variety2)
-        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test3"],variety: variety3)
-        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: ["test4"],variety: variety4)
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test",variety: variety1)
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test2",variety: variety2)
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test3",variety: variety3)
+        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test4",variety: variety4)
         //Make temp beds
         let bed1 = Bed(id: 1, currentCrop: crop2, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop1,crop2]))
