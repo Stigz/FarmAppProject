@@ -72,19 +72,26 @@ class BedViewController: UIViewController {
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        performSegueWithIdentifier("currentCropClicked", sender: self)
+        if((plantedCrop) != nil){
+            performSegueWithIdentifier("currentCropClicked", sender: self)
+        }else{
+            performSegueWithIdentifier("addCropFromBedList", sender: self)
+        }
     }
     
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        //IF the user segues to a bed list, pass section info
+        //If a crop is clicked, segue to crop screen
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
             cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: false)
-        }else if (segue.identifier == "currentCropClicked"){
+        }else if (segue.identifier == "currentCropClicked"){ //If current crop clicked, segue to crop screen
             let cvc = segue.destinationViewController as! CropViewController
             cvc.setInfo(plantedCrop!,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
+        }else if (segue.identifier == "addCropFromBedlist"){ //If no current crop, add a new crop
+            let acvc = segue.destinationViewController as! AddCropViewController
+            acvc.setInfo(sectNum,bedNum: bedNum, unwind: false)
         }
     }
     
@@ -95,6 +102,7 @@ class BedViewController: UIViewController {
     }
     
     //Called when crop view unwinds -- reloads bed info
+    //(called from crop view)
     func reloadInfo(crop: Crop){
         self.bed.cropHistory.crops.insert(crop, atIndex: 0)
         self.bed.cropHistory.numCrops!++
