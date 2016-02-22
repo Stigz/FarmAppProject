@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8CB4A5F1C78CDA10051A22A /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB4A5E1C78CDA10051A22A /* Plant.swift */; };
 		B8FB878B1C7398C50002299F /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB878A1C7398C50002299F /* Crop.swift */; };
 		B8FB878D1C739AC40002299F /* CropHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB878C1C739AC40002299F /* CropHistory.swift */; };
 		B8FB878F1C74F50F0002299F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB878E1C74F50F0002299F /* Date.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B8CB4A5E1C78CDA10051A22A /* Plant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		B8FB878A1C7398C50002299F /* Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
 		B8FB878C1C739AC40002299F /* CropHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropHistory.swift; sourceTree = "<group>"; };
 		B8FB878E1C74F50F0002299F /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = FarmApp/Date.swift; sourceTree = SOURCE_ROOT; };
@@ -168,6 +170,7 @@
 				B8FB878C1C739AC40002299F /* CropHistory.swift */,
 				B8FB878E1C74F50F0002299F /* Date.swift */,
 				B8FB87901C74F6770002299F /* Variety.swift */,
+				B8CB4A5E1C78CDA10051A22A /* Plant.swift */,
 				B8FB87921C74F7880002299F /* BedHistory.swift */,
 			);
 			name = Models;
@@ -331,6 +334,7 @@
 				B8FB87931C74F7880002299F /* BedHistory.swift in Sources */,
 				B8FB878D1C739AC40002299F /* CropHistory.swift in Sources */,
 				E1E5BEBD1C72AC7D007B8E82 /* BedViewController.swift in Sources */,
+				B8CB4A5F1C78CDA10051A22A /* Plant.swift in Sources */,
 				E15ED59C1C6C3BBA005D3A48 /* Section.swift in Sources */,
 				B8FB878F1C74F50F0002299F /* Date.swift in Sources */,
 				E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */,
