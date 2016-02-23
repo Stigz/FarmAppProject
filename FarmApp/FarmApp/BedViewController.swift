@@ -61,6 +61,7 @@ class BedViewController: UIViewController {
     
     //Used to calculate information, based on bed
     func calculateInfo(){
+        //First, get bed from API
         self.bed = LibraryAPI.sharedInstance.getBed(sectNum, bedNum: bedNum)
         self.plantedCrop = bed.currentCrop
         self.bedNum = bed.id
@@ -101,20 +102,14 @@ class BedViewController: UIViewController {
     }
     
     
-    //Reloads bed info, called when
-    //a crop is harvested
-    func reloadInfoForHarvest(){
-        self.calculateInfo()
-        //Set up current crop label
-        currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
-        self.cropHistoryTable.reloadData()
-    }
-    
     //Called when a notification for a crop harvest
     //is receicived. Reload info for the harvest,
     //and reload table data
     func harvestCrop(notification: NSNotification){
-        reloadInfoForHarvest()
+        self.calculateInfo()
+        //Set up current crop label
+        currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+        self.cropHistoryTable.reloadData()
     }
 
 }
