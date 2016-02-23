@@ -11,6 +11,7 @@ import UIKit
 class PersistencyManager: NSObject {
     
     private var sections = [Section]()
+    private var allPossiblePlants = [Plant]()
     
     override init() {
         super.init()
@@ -35,6 +36,7 @@ class PersistencyManager: NSObject {
         plant2.varieties.append(variety2)
         plant3.varieties.append(variety3)
         plant4.varieties.append(variety4)
+        allPossiblePlants = [plant1,plant2,plant3,plant4]
         //Make temp crops
         let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test",variety: variety1)
         let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test2",variety: variety2)
@@ -58,6 +60,11 @@ class PersistencyManager: NSObject {
     func getSects() -> [Section]{
         return sections
         
+    }
+    
+    //Return list of all plants
+    func getAllPossiblePlants() -> [Plant]{
+        return allPossiblePlants
     }
 
 }

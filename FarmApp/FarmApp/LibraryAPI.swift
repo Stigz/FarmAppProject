@@ -36,5 +36,10 @@ class LibraryAPI: NSObject {
     func getSects() -> [Section]{
         return persistencyManager.getSects()
     }
+    
+    //Ask persistency manager for a list of all plants
+    func getAllPossiblePlants() -> [Plant]{
+        return persistencyManager.getAllPossiblePlants()
+    }
 
 }
