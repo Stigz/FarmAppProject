@@ -91,7 +91,7 @@ class CropViewController: UIViewController {
                     //Ask user if they would like to add a new crop
                     let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: addNewCrop))
-                    alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: updateBedList))
+                    alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: cropHarvested))
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
             }
@@ -100,34 +100,49 @@ class CropViewController: UIViewController {
     }
     
     //If the user harvests, and wants to add a new crop,
-    //Transition to new crop screen
+    //Transition to new crop screen. Also, notify bed view
+    //that a crop was harvested, and update the crop view
+    //to reflect the change (in case the user cancels adding
+    //a new crop)
     func addNewCrop(action: UIAlertAction){
+        //Notify bed of harvest
+        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self, userInfo: ["crop":crop])
+        //Segue to adding new crop
         performSegueWithIdentifier("addCropFromCrop", sender: self)
+        //Update current screen to reflect harvest
+        updateViewForHarvest()
+
+    }
+    
+    //Updates the vuiew when a crop is harvested
+    func updateViewForHarvest(){
+        harvestedButton.hidden = false
+        enterDateLabel.hidden = true
+        dayInput.hidden = true
+        monthInput.hidden = true
+        yearInput.hidden = true
+        harvestButton.hidden = true
+        harvestedButton.setTitle("Harvested: \(crop.dateHarvested.printSlash())", forState: .Normal)
+        harvestedButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        harvestedButton.userInteractionEnabled = false
     }
     
     //If the user harvests, but does not add a new crop
-    //unwind back to bed list and update
-    func updateBedList(action: UIAlertAction){
-        performSegueWithIdentifier("unwindCropToBed", sender: self)
+    //notify bed of harvest, and then show the reflected change
+    func cropHarvested(action: UIAlertAction){
+        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self, userInfo: ["crop":crop])
+        updateViewForHarvest()
     }
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         //IF the user segues back to bed list, pass it new crop info
-        if (segue.identifier == "unwindCropToBed"){
-            let bvc = segue.destinationViewController as! BedViewController
-            bvc.reloadInfo(crop)
-        }else if (segue.identifier == "addCropFromCrop"){ //If user wants to add new crop
+        if (segue.identifier == "addCropFromCrop"){ //If user wants to add new crop
             let acvc = segue.destinationViewController as! AddCropViewController
-            acvc.setInfo(sectNum, bedNum: bedNum, unwind: true)
+            acvc.setInfo(sectNum, bedNum: bedNum)
         }
     }
     
-    //Called once the add crop view unwinds
-    //(When a the cancel button is hit)
-    @IBAction func unwindToCropController(segue: UIStoryboardSegue){
-        updateBedList(UIAlertAction())
-    }
     
     //So that tapping on the view dismisses the keyboard
     @IBAction func dismissKeyboard(){

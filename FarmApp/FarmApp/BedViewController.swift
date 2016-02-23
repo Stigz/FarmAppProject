@@ -40,11 +40,15 @@ class BedViewController: UIViewController {
         
         // This will remove extra separators from tableview
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
+        
+        //Setup notification observer for crop harvest 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"harvestCrop:", name: "CropHarvestedNotification", object: nil)
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         // Dispose of any resources that can be recreated.
     }
     
@@ -91,25 +95,30 @@ class BedViewController: UIViewController {
             cvc.setInfo(plantedCrop!,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
         }else if (segue.identifier == "addCropFromBedlist"){ //If no current crop, add a new crop
             let acvc = segue.destinationViewController as! AddCropViewController
-            acvc.setInfo(sectNum,bedNum: bedNum, unwind: false)
+            acvc.setInfo(sectNum,bedNum: bedNum)
         }
     }
     
-    //Called once the crop view unwinds back to this one
-    //(When a crop is harvested)
-    @IBAction func unwindToBedController(segue: UIStoryboardSegue){
-        self.cropHistoryTable.reloadData()
-    }
     
-    //Called when crop view unwinds -- reloads bed info
-    //(called from crop view)
-    func reloadInfo(crop: Crop){
+    //Reloads bed info, called when
+    //a crop is harvested
+    func reloadInfoForHarvest(crop: Crop){
         self.bed.cropHistory.crops.insert(crop, atIndex: 0)
         self.bed.cropHistory.numCrops!++
         self.bed.currentCrop = nil
         self.calculateInfo(self.bed)
         //Set up current crop label
         currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+    }
+    
+    //Called when a notification for a crop harvest
+    //is receicived. Reload info for the harvest,
+    //and reload table data
+    func harvestCrop(notification: NSNotification){
+        let userInfo = notification.userInfo as! [String : AnyObject]
+        let harvestedCrop = userInfo["crop"] as! Crop
+        reloadInfoForHarvest(harvestedCrop)
+        self.cropHistoryTable.reloadData()
     }
 
 }
