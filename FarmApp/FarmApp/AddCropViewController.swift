@@ -11,14 +11,18 @@ import UIKit
 class AddCropViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cropInputField: UITextField!
     
     var sectNum : Int = 0
     var bedNum : Int = 0
+    var cropOptions : [Plant]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Setup title
         titleLabel.text = "Add crop to section \(sectNum), bed \(bedNum)"
-        // Do any additional setup after loading the view.
+        //Get options of crops to add
+        cropOptions = LibraryAPI.sharedInstance.getAllPossiblePlants()
     }
 
     override func didReceiveMemoryWarning() {

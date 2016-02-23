@@ -88,6 +88,8 @@ class CropViewController: UIViewController {
                     //Add new harvest date
                     let newHarvest = Date(year: year!, month: month!, day: day!)
                     crop.dateHarvested = newHarvest
+                    //Harvest crop
+                    LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
                     //Ask user if they would like to add a new crop
                     let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: addNewCrop))
@@ -106,7 +108,7 @@ class CropViewController: UIViewController {
     //a new crop)
     func addNewCrop(action: UIAlertAction){
         //Notify bed of harvest
-        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self, userInfo: ["crop":crop])
+        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self, userInfo: nil)
         //Segue to adding new crop
         performSegueWithIdentifier("addCropFromCrop", sender: self)
         //Update current screen to reflect harvest
