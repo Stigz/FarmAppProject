@@ -25,6 +25,10 @@ class BedsViewController: UIViewController {
         //Set section label
         self.testLabel.text = "Section \(sectNum)"
         
+        //Get bed list from API
+        self.beds = LibraryAPI.sharedInstance.getBedsForSect(sectNum)
+        self.numBeds = self.beds.count
+        
         //Register table for cell class
         self.bedTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "bedCell")
         
@@ -38,10 +42,8 @@ class BedsViewController: UIViewController {
     }
     
     //Sets up the info passed from section controller
-    func setInfo(sectNum: Int, beds : [Bed], numBeds : Int){
+    func setInfo(sectNum: Int){
         self.sectNum = sectNum
-        self.beds = beds
-        self.numBeds = numBeds
     }
     
     
@@ -56,7 +58,7 @@ class BedsViewController: UIViewController {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "bedClicked"){
             let bvc = segue.destinationViewController as! BedViewController
-            bvc.setInfo(sectNum, bed: currentBed)
+            bvc.setInfo(sectNum, bedNum: currentBed.id)
         }
     }
 

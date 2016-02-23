@@ -53,14 +53,15 @@ class BedViewController: UIViewController {
     }
     
     //Set info passed from bed list
-    func setInfo(sectNum : Int, bed : Bed){
+    func setInfo(sectNum : Int, bedNum : Int){
         self.sectNum = sectNum
-        self.bed = bed
-        calculateInfo(bed)
+        self.bedNum = bedNum
+        calculateInfo()
     }
     
     //Used to calculate information, based on bed
-    func calculateInfo(bed: Bed){
+    func calculateInfo(){
+        self.bed = LibraryAPI.sharedInstance.getBed(sectNum, bedNum: bedNum)
         self.plantedCrop = bed.currentCrop
         self.bedNum = bed.id
         self.cropHistory = bed.cropHistory
@@ -102,23 +103,18 @@ class BedViewController: UIViewController {
     
     //Reloads bed info, called when
     //a crop is harvested
-    func reloadInfoForHarvest(crop: Crop){
-        self.bed.cropHistory.crops.insert(crop, atIndex: 0)
-        self.bed.cropHistory.numCrops!++
-        self.bed.currentCrop = nil
-        self.calculateInfo(self.bed)
+    func reloadInfoForHarvest(){
+        self.calculateInfo()
         //Set up current crop label
         currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+        self.cropHistoryTable.reloadData()
     }
     
     //Called when a notification for a crop harvest
     //is receicived. Reload info for the harvest,
     //and reload table data
     func harvestCrop(notification: NSNotification){
-        let userInfo = notification.userInfo as! [String : AnyObject]
-        let harvestedCrop = userInfo["crop"] as! Crop
-        reloadInfoForHarvest(harvestedCrop)
-        self.cropHistoryTable.reloadData()
+        reloadInfoForHarvest()
     }
 
 }
