@@ -95,8 +95,9 @@ class BedViewController: UIViewController {
         }else if (segue.identifier == "currentCropClicked"){ //If current crop clicked, segue to crop screen
             let cvc = segue.destinationViewController as! CropViewController
             cvc.setInfo(plantedCrop!,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
-        }else if (segue.identifier == "addCropFromBedlist"){ //If no current crop, add a new crop
+        }else if (segue.identifier == "addCropFromBedList"){ //If no current crop, add a new crop
             let acvc = segue.destinationViewController as! AddCropViewController
+            print("test")
             acvc.setInfo(sectNum,bedNum: bedNum)
         }
     }

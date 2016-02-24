@@ -44,7 +44,7 @@ class PersistencyManager: NSObject {
         let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test4",variety: variety4)
         let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test5",variety: variety4)
         //Make temp beds
-        let bed1 = Bed(id: 1, currentCrop: crop2, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
+        let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]))
         let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]))
         let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]))

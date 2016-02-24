@@ -15,7 +15,7 @@ class Bed: NSObject, NSCoding{
     var cropHistory : CropHistory!
     
     //Default init method
-    init(id: Int, currentCrop : Crop, cropHistory : CropHistory){
+    init(id: Int, currentCrop : Crop?, cropHistory : CropHistory){
         super.init()
         self.id = id
         self.currentCrop = currentCrop
