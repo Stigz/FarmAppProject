@@ -29,7 +29,7 @@ class BedViewController: UIViewController {
         //Set up title label
         topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
         //Set up current crop label
-        currentCropLabel.setTitle("Current Crop: \(plantedCrop.variety.name)", forState: .Normal)
+        currentCropLabel.setTitle("Current Crop: \(plantedCrop.variety.plant.name)", forState: .Normal)
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
@@ -63,8 +63,7 @@ class BedViewController: UIViewController {
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        clickedCrop = plantedCrop
-        performSegueWithIdentifier("cropClicked", sender: self)
+        performSegueWithIdentifier("currentCropClicked", sender: self)
     }
     
     
@@ -73,7 +72,10 @@ class BedViewController: UIViewController {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
-            cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum)
+            cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: false)
+        }else if (segue.identifier == "currentCropClicked"){
+            let cvc = segue.destinationViewController as! CropViewController
+            cvc.setInfo(plantedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
         }
     }
 
@@ -92,7 +94,7 @@ extension BedViewController: UITableViewDataSource {
             reuseIdentifier: "cropCell")
         //Save current crop
         let crop = cropList[indexPath.row]
-        cell.textLabel!.text = "\(crop.variety.name)"
+        cell.textLabel!.text = "\(crop.variety.plant.name)"
         //Set subtitle
         cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(10)
         cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.dateHarvested.printSlash())"

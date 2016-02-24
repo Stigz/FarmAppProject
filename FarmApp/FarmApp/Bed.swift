@@ -11,7 +11,7 @@ import UIKit
 class Bed: NSObject, NSCoding{
     
     var id : Int!
-    var currentCrop : Crop!
+    var currentCrop : Crop?
     var cropHistory : CropHistory!
     
     //Default init method
@@ -26,7 +26,7 @@ class Bed: NSObject, NSCoding{
     required init(coder decoder: NSCoder) {
         super.init()
         self.id = decoder.decodeObjectForKey("bed_id") as! Int
-        self.currentCrop = decoder.decodeObjectForKey("bed_currCrop") as! Crop
+        self.currentCrop = decoder.decodeObjectForKey("bed_currCrop") as? Crop
         self.cropHistory = decoder.decodeObjectForKey("bed_cropHist") as! CropHistory
     }
     
