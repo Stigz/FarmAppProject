@@ -13,6 +13,9 @@ class AddCropViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cropInputField: UITextField!
     @IBOutlet weak var varietyInputField: UITextField!
+    @IBOutlet weak var dayInputField: UITextField!
+    @IBOutlet weak var monthInputField: UITextField!
+    @IBOutlet weak var yearInputField: UITextField!
     
     var sectNum : Int = 0
     var bedNum : Int = 0
