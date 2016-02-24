@@ -146,20 +146,37 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Variety" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nf0-qp-RbH">
+                                <rect key="frame" x="54" y="197" width="106" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v0M-8c-Xfb">
+                                <rect key="frame" x="54" y="226" width="492" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bpK-Bi-YRw" firstAttribute="top" secondItem="6T3-B4-tmH" secondAttribute="bottom" constant="23" id="2Fk-fc-cmP"/>
+                            <constraint firstItem="nf0-qp-RbH" firstAttribute="leading" secondItem="NAh-hc-zK4" secondAttribute="leading" id="3GM-Je-HEo"/>
+                            <constraint firstItem="v0M-8c-Xfb" firstAttribute="top" secondItem="nf0-qp-RbH" secondAttribute="bottom" constant="8" id="5YF-jW-3QT"/>
+                            <constraint firstItem="v0M-8c-Xfb" firstAttribute="leading" secondItem="0Gn-4q-eTg" secondAttribute="leadingMargin" constant="34" id="8MS-R6-1Rm"/>
                             <constraint firstItem="wNu-PE-K62" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="Bol-iB-5sC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="v0M-8c-Xfb" secondAttribute="trailing" constant="34" id="CGn-Ip-kqs"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="top" secondItem="bpK-Bi-YRw" secondAttribute="bottom" constant="75" id="VG5-lk-1CF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NAh-hc-zK4" secondAttribute="trailing" constant="34" id="WcP-vx-e7o"/>
                             <constraint firstItem="aCo-6z-epj" firstAttribute="top" secondItem="wNu-PE-K62" secondAttribute="bottom" constant="41" id="YKx-rX-ieA"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="leading" secondItem="0Gn-4q-eTg" secondAttribute="leadingMargin" constant="34" id="a12-iL-9lG"/>
+                            <constraint firstItem="nf0-qp-RbH" firstAttribute="top" secondItem="NAh-hc-zK4" secondAttribute="bottom" constant="25" id="j1J-UA-LY9"/>
                             <constraint firstItem="bpK-Bi-YRw" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="lfl-8o-gd8"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="ngC-cg-4XI"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="leading" secondItem="jOY-yX-vkk" secondAttribute="leading" id="pO5-Dc-fqU"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="top" secondItem="jOY-yX-vkk" secondAttribute="bottom" constant="8" id="sZx-BG-5ax"/>
+                            <constraint firstItem="v0M-8c-Xfb" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="vzH-7Z-Mlo"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="aWN-ZN-W3Q" appends="YES" id="iID-qc-brX"/>
@@ -168,6 +185,7 @@
                     <connections>
                         <outlet property="cropInputField" destination="NAh-hc-zK4" id="QCg-a2-fMv"/>
                         <outlet property="titleLabel" destination="bpK-Bi-YRw" id="4cf-ww-hRB"/>
+                        <outlet property="varietyInputField" destination="v0M-8c-Xfb" id="NkI-aF-4Rn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qtx-tI-kiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
