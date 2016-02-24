@@ -27,24 +27,14 @@ class PersistencyManager: NSObject {
         let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
         let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
         let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
-        //Make temp varieties
-<<<<<<< HEAD
-        let plant1 = Plant(name: "Wheat",  bestSeasons: [], notes: [], varieties: [])
-        let plant2 = Plant(name: "Corn",  bestSeasons: [], notes: [], varieties: [])
-        let plant3 = Plant(name: "Barley",  bestSeasons: [], notes: [], varieties: [])
-        let plant4 = Plant(name: "Garlic",  bestSeasons: [], notes: [], varieties: [])
-        
-        let variety1 = Variety(name: "Einkorn", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
-        let variety2 = Variety(name: "Seneca Horizon", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
-        let variety3 = Variety(name: "Barley Variety", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
-        let variety4 = Variety(name: "Softneck Garlic", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
-=======
+
         let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
         let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
         let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
         let variety4 = Variety(name: "Vampire Repellant", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+       
         //Setup plant varieties
->>>>>>> origin/md-feature
+
         plant1.varieties.append(variety1)
         plant2.varieties.append(variety2)
         plant3.varieties.append(variety3)

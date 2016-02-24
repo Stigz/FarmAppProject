@@ -34,6 +34,7 @@ class PlantViewController: UIViewController {
     var varieties : [Variety] = []
     //NOTE: Only for the prepare for segue
     var plant : Plant!
+    var currentVariety: Variety!
     
    
 
@@ -63,6 +64,15 @@ class PlantViewController: UIViewController {
         
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //IF the user segues to a bed list, pass section info
+        if (segue.identifier == "varietyClicked"){
+            let vvc = segue.destinationViewController as! VarietyViewController
+            vvc.setInfo(currentVariety)
+        }
+        
+        
+    }
     
     //Close the current screen -- back button clicked
     @IBAction func close() {
@@ -85,6 +95,17 @@ extension PlantViewController: UITableViewDataSource {
         return cell
     }
 }
+
+extension PlantViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //To prepare for segue, set up current section
+        currentVariety = varieties[indexPath.row]
+        performSegueWithIdentifier("varietyClicked", sender: self)
+        //Unhighlight the selected section, in case user goes back
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+}
+
 
 
 

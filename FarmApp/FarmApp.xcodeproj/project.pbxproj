@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B83B6AAE1C7E72BF00EA59D9 /* VarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83B6AAD1C7E72BF00EA59D9 /* VarietyViewController.swift */; };
 		B88E06E41C78DA9D0026CF69 /* CropListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88E06E31C78DA9D0026CF69 /* CropListViewController.swift */; };
 		B88E06E61C78EA6A0026CF69 /* PlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88E06E51C78EA6A0026CF69 /* PlantViewController.swift */; };
 		B8CB4A5F1C78CDA10051A22A /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB4A5E1C78CDA10051A22A /* Plant.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B83B6AAD1C7E72BF00EA59D9 /* VarietyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyViewController.swift; sourceTree = "<group>"; };
 		B88E06E31C78DA9D0026CF69 /* CropListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropListViewController.swift; sourceTree = "<group>"; };
 		B88E06E51C78EA6A0026CF69 /* PlantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantViewController.swift; sourceTree = "<group>"; };
 		B8CB4A5E1C78CDA10051A22A /* Plant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				E116D5E61C742CA30031D9BD /* CropViewController.swift */,
 				B88E06E31C78DA9D0026CF69 /* CropListViewController.swift */,
 				B88E06E51C78EA6A0026CF69 /* PlantViewController.swift */,
+				B83B6AAD1C7E72BF00EA59D9 /* VarietyViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */,
 				B8FB87931C74F7880002299F /* BedHistory.swift in Sources */,
 				B8FB878D1C739AC40002299F /* CropHistory.swift in Sources */,
+				B83B6AAE1C7E72BF00EA59D9 /* VarietyViewController.swift in Sources */,
 				B88E06E41C78DA9D0026CF69 /* CropListViewController.swift in Sources */,
 				E1E5BEBD1C72AC7D007B8E82 /* BedViewController.swift in Sources */,
 				B8CB4A5F1C78CDA10051A22A /* Plant.swift in Sources */,
