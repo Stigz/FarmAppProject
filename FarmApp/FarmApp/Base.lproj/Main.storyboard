@@ -148,6 +148,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bpK-Bi-YRw" firstAttribute="top" secondItem="6T3-B4-tmH" secondAttribute="bottom" constant="23" id="2Fk-fc-cmP"/>
                             <constraint firstItem="wNu-PE-K62" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="Bol-iB-5sC"/>
@@ -160,6 +161,9 @@
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="leading" secondItem="jOY-yX-vkk" secondAttribute="leading" id="pO5-Dc-fqU"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="top" secondItem="jOY-yX-vkk" secondAttribute="bottom" constant="8" id="sZx-BG-5ax"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="aWN-ZN-W3Q" appends="YES" id="iID-qc-brX"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="cropInputField" destination="NAh-hc-zK4" id="QCg-a2-fMv"/>
@@ -167,6 +171,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qtx-tI-kiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="aWN-ZN-W3Q">
+                    <connections>
+                        <action selector="dismissPickers" destination="LyK-qA-WyN" id="pLd-P5-aQA"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1950" y="-26"/>
         </scene>
