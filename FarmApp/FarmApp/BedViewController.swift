@@ -14,7 +14,7 @@ class BedViewController: UIViewController {
     @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
-    var plantedCrop : Crop!
+    var plantedCrop : Crop?
     var bedNum : Int = 0
     var sectNum : Int = 0
     var bed : Bed!
@@ -29,25 +29,40 @@ class BedViewController: UIViewController {
         //Set up title label
         topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
         //Set up current crop label
-        currentCropLabel.setTitle("Current Crop: \(plantedCrop.variety.plant.name)", forState: .Normal)
+        if((plantedCrop) != nil){
+            currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
+        }else{
+            currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+        }
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
         
         // This will remove extra separators from tableview
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
+        
+        //Setup notification observer for crop harvest 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"harvestCrop:", name: "CropHarvestedNotification", object: nil)
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         // Dispose of any resources that can be recreated.
     }
     
     //Set info passed from bed list
-    func setInfo(sectNum : Int, bed : Bed){
+    func setInfo(sectNum : Int, bedNum : Int){
         self.sectNum = sectNum
-        self.bed = bed
+        self.bedNum = bedNum
+        calculateInfo()
+    }
+    
+    //Used to calculate information, based on bed
+    func calculateInfo(){
+        //First, get bed from API
+        self.bed = LibraryAPI.sharedInstance.getBed(sectNum, bedNum: bedNum)
         self.plantedCrop = bed.currentCrop
         self.bedNum = bed.id
         self.cropHistory = bed.cropHistory
@@ -63,20 +78,39 @@ class BedViewController: UIViewController {
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        performSegueWithIdentifier("currentCropClicked", sender: self)
+        if((plantedCrop) != nil){
+            performSegueWithIdentifier("currentCropClicked", sender: self)
+        }else{
+            performSegueWithIdentifier("addCropFromBedList", sender: self)
+        }
     }
     
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        //IF the user segues to a bed list, pass section info
+        //If a crop is clicked, segue to crop screen
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
             cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: false)
-        }else if (segue.identifier == "currentCropClicked"){
+        }else if (segue.identifier == "currentCropClicked"){ //If current crop clicked, segue to crop screen
             let cvc = segue.destinationViewController as! CropViewController
-            cvc.setInfo(plantedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
+            cvc.setInfo(plantedCrop!,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
+        }else if (segue.identifier == "addCropFromBedList"){ //If no current crop, add a new crop
+            let acvc = segue.destinationViewController as! AddCropViewController
+            print("test")
+            acvc.setInfo(sectNum,bedNum: bedNum)
         }
+    }
+    
+    
+    //Called when a notification for a crop harvest
+    //is receicived. Reload info for the harvest,
+    //and reload table data
+    func harvestCrop(notification: NSNotification){
+        self.calculateInfo()
+        //Set up current crop label
+        currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+        self.cropHistoryTable.reloadData()
     }
 
 }
