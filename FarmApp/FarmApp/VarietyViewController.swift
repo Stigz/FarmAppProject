@@ -31,7 +31,7 @@ class VarietyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = "Variety \(variety.name)"
+        titleLabel.text = "Variety: \(variety.name)"
         plantLabel.text = "This is a variety of \(variety.plant.name)"
         //seasonsLabel.text = "The best time to plant \(variety.name) is \(variety.bestSeasons[0])"
         //notesLabel.text = variety.notes

@@ -36,6 +36,26 @@ class LibraryAPI: NSObject {
     func getSects() -> [Section]{
         return persistencyManager.getSects()
     }
+    
+    //Ask persistency manager for a list of all plants
+    func getAllPossiblePlants() -> [Plant]{
+        return persistencyManager.getAllPossiblePlants()
+    }
+    
+    //Ask persistency manager for a bed list of a sect
+    func getBedsForSect(sectNum: Int) -> [Bed]{
+            return persistencyManager.getBedsForSect(sectNum)
+    }
+    
+    //Ask persistency manager for a given bed
+    func getBed(sectNum: Int, bedNum: Int) -> Bed{
+        return persistencyManager.getBed(sectNum, bedNum: bedNum)
+    }
+    
+    //Ask persistency manager to harvest crop
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+        persistencyManager.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested)
+    }
 
     func getPlants() -> [Plant]{
         return persistencyManager.getPlants()

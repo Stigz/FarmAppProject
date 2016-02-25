@@ -12,10 +12,12 @@ class PersistencyManager: NSObject {
     
     private var sections = [Section]()
 
+
     private var plants = [Plant]()
 
 
     private var allPossiblePlants = [Plant]()
+
 
     
     override init() {
@@ -69,11 +71,12 @@ class PersistencyManager: NSObject {
         return sections
         
     }
-    
+
     func getPlants() -> [Plant]{
         return plants
     }
  
+
     //Harvest a crop in a given bed
     func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
