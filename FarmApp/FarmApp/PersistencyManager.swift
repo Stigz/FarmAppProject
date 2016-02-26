@@ -11,6 +11,10 @@ import UIKit
 class PersistencyManager: NSObject {
     
     private var sections = [Section]()
+
+    private var plants = [Plant]()
+
+
     private var allPossiblePlants = [Plant]()
     
     override init() {
@@ -26,12 +30,14 @@ class PersistencyManager: NSObject {
         let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
         let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
         let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
-        //Make temp varieties
+
         let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
         let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
         let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
         let variety4 = Variety(name: "Vampire Repellant", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+       
         //Setup plant varieties
+
         plant1.varieties.append(variety1)
         plant2.varieties.append(variety2)
         plant3.varieties.append(variety3)
@@ -54,6 +60,7 @@ class PersistencyManager: NSObject {
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
         sections = [sect1,sect2,sect3,sect4]
+        plants = [plant1,plant2,plant3,plant4]
     }
     
     //Return section list
@@ -62,6 +69,10 @@ class PersistencyManager: NSObject {
         
     }
     
+    func getPlants() -> [Plant]{
+        return plants
+    }
+
     //Harvest a crop in a given bed
     func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
