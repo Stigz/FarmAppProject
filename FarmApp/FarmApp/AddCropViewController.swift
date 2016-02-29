@@ -16,6 +16,7 @@ class AddCropViewController: UIViewController {
     @IBOutlet weak var dayInputField: UITextField!
     @IBOutlet weak var monthInputField: UITextField!
     @IBOutlet weak var yearInputField: UITextField!
+    @IBOutlet weak var notesField: UITextView!
     
     var sectNum : Int = 0
     var bedNum : Int = 0
@@ -30,6 +31,8 @@ class AddCropViewController: UIViewController {
         super.viewDidLoad()
         //Setup title
         titleLabel.text = "Add crop to section \(sectNum), bed \(bedNum)"
+        //Defauly notes are blank
+        notesField.text = ""
         //Get options of crops to add
         cropOptions = LibraryAPI.sharedInstance.getAllPossiblePlants()
         currentPlant = nil
@@ -63,9 +66,16 @@ class AddCropViewController: UIViewController {
     }
     
     //Dismisses the pickers -- fires from tap event
-    @IBAction func dismissPickers(){
+    @IBAction func dismissResponders(){
         cropInputField.resignFirstResponder()
         varietyInputField.resignFirstResponder()
+        dayInputField.resignFirstResponder()
+        monthInputField.resignFirstResponder()
+        yearInputField.resignFirstResponder()
+        notesField.resignFirstResponder()
+    }
+    @IBAction func addCrop() {
+        let newCrop : Crop = Crop()
     }
     
 }

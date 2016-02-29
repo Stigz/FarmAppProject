@@ -46,7 +46,7 @@ class CropViewController: UIViewController {
             harvestedButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
             harvestedButton.setTitle("Harvest now!", forState: .Normal)
         }else{ // If not planted, show harvest date
-            harvestedButton.setTitle("Harvested: \(crop.dateHarvested.printSlash())", forState: .Normal)
+            harvestedButton.setTitle("Harvested: \(crop.finalHarvest!.printSlash())", forState: .Normal)
             //to disallow clicking on the date
             harvestedButton.userInteractionEnabled = false
         }
@@ -87,7 +87,7 @@ class CropViewController: UIViewController {
                 if let year : Int? = Int(yearInput.text!){
                     //Add new harvest date
                     let newHarvest = Date(year: year!, month: month!, day: day!)
-                    crop.dateHarvested = newHarvest
+                    crop.finalHarvest = newHarvest
                     //Harvest crop
                     LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
                     //Ask user if they would like to add a new crop
@@ -124,7 +124,7 @@ class CropViewController: UIViewController {
         monthInput.hidden = true
         yearInput.hidden = true
         harvestButton.hidden = true
-        harvestedButton.setTitle("Harvested: \(crop.dateHarvested.printSlash())", forState: .Normal)
+        harvestedButton.setTitle("Harvested: \(crop.finalHarvest!.printSlash())", forState: .Normal)
         harvestedButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         harvestedButton.userInteractionEnabled = false
     }

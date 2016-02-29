@@ -131,7 +131,7 @@ extension BedViewController: UITableViewDataSource {
         cell.textLabel!.text = "\(crop.variety.plant.name)"
         //Set subtitle
         cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(10)
-        cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.dateHarvested.printSlash())"
+        cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.finalHarvest!.printSlash())"
         
         return cell
     }
