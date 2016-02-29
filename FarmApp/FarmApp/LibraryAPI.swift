@@ -57,4 +57,8 @@ class LibraryAPI: NSObject {
         persistencyManager.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested)
     }
 
+    func getPlants() -> [Plant]{
+        return persistencyManager.getPlants()
+    }
+
 }

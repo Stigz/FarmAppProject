@@ -60,6 +60,7 @@ class BedsViewController: UIViewController {
             let bvc = segue.destinationViewController as! BedViewController
             bvc.setInfo(sectNum, bedNum: currentBed.id)
         }
+    
     }
 
 }
