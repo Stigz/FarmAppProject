@@ -108,7 +108,7 @@ class CropViewController: UIViewController {
     //a new crop)
     func addNewCrop(action: UIAlertAction){
         //Notify bed of harvest
-        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self, userInfo: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self)
         //Segue to adding new crop
         performSegueWithIdentifier("addCropFromCrop", sender: self)
         //Update current screen to reflect harvest
@@ -132,7 +132,7 @@ class CropViewController: UIViewController {
     //If the user harvests, but does not add a new crop
     //notify bed of harvest, and then show the reflected change
     func cropHarvested(action: UIAlertAction){
-        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self, userInfo: ["crop":crop])
+        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self)
         updateViewForHarvest()
     }
     

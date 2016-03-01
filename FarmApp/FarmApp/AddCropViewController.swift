@@ -27,6 +27,8 @@ class AddCropViewController: UIViewController {
     let cropPickerView = UIPickerView()
     let varietyPickerView = UIPickerView()
     
+    let defaultVariety : String = "No variety selected"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Setup title
@@ -74,10 +76,44 @@ class AddCropViewController: UIViewController {
         yearInputField.resignFirstResponder()
         notesField.resignFirstResponder()
     }
-    @IBAction func addCrop() {
-        let newCrop : Crop = Crop()
+    
+    //Checks to see if a given field is empty,
+    //used when adding a crop
+    func checkField(field : String?) -> Bool{
+        if (field == nil || field == "" || field == defaultVariety){
+            //Alert the user of the empty field
+            let alertController = UIAlertController(title: "Missing Information!", message: "Please make sure that you have filled in all required (*) fields!", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return false
+        }else{
+            return true
+        }
     }
     
+    //Check to see if all required fields
+    //have been pupulated
+    func checkFieldsFull() -> Bool{
+        let fields = [cropInputField.text,varietyInputField.text,dayInputField.text,monthInputField.text,yearInputField.text]
+        for field in fields {
+            print(field)
+            if (!checkField(field)){
+                return false
+            }
+        }
+        return true
+    }
+    
+    //Called when the "add" button is hit
+    @IBAction func addCrop() {
+        if checkFieldsFull(){
+            let addDate = Date(year: Int(yearInputField.text!)!, month: Int(monthInputField.text!)!, day: Int(dayInputField.text!)!)
+            let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: currentVariety!, finalHarvest: nil)
+            LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
+            NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self)
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
 }
 
 //Extensions for picker view
@@ -130,7 +166,7 @@ extension AddCropViewController: UIPickerViewDelegate{
             cropInputField.text = cropOptions[row].name
             currentPlant = cropOptions[row]
             varietyPickerView.reloadAllComponents()
-            varietyInputField.text = "No Variety Selected"
+            varietyInputField.text = defaultVariety
             return
         }else if(pickerView.isEqual(varietyPickerView)){
             //if variety picker is being used

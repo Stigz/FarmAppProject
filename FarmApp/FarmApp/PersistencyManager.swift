@@ -12,8 +12,6 @@ class PersistencyManager: NSObject {
     
     private var sections = [Section]()
 
-    private var plants = [Plant]()
-
 
     private var allPossiblePlants = [Plant]()
     
@@ -60,17 +58,12 @@ class PersistencyManager: NSObject {
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
         sections = [sect1,sect2,sect3,sect4]
-        plants = [plant1,plant2,plant3,plant4]
     }
     
     //Return section list
     func getSects() -> [Section]{
         return sections
         
-    }
-    
-    func getPlants() -> [Plant]{
-        return plants
     }
 
     //Harvest a crop in a given bed
@@ -96,5 +89,10 @@ class PersistencyManager: NSObject {
     func getAllPossiblePlants() -> [Plant]{
         return allPossiblePlants
     }
-
+    
+    //Adds a crop to the specified bed
+    func addCrop(crop : Crop, bedNum : Int, sectNum : Int){
+        let bed = getBed(sectNum, bedNum: bedNum)
+        bed.currentCrop = crop
+    }
 }

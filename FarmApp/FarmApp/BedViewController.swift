@@ -109,7 +109,11 @@ class BedViewController: UIViewController {
     func harvestCrop(notification: NSNotification){
         self.calculateInfo()
         //Set up current crop label
-        currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+        if((plantedCrop) != nil){
+            currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
+        }else{
+            currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+        }
         self.cropHistoryTable.reloadData()
     }
 
