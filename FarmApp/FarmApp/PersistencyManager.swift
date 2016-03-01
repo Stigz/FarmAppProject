@@ -12,8 +12,6 @@ class PersistencyManager: NSObject {
     
     private var sections = [Section]()
 
-    private var plants = [Plant]()
-
 
     private var allPossiblePlants = [Plant]()
     
@@ -44,11 +42,11 @@ class PersistencyManager: NSObject {
         plant4.varieties.append(variety4)
         allPossiblePlants = [plant1,plant2,plant3,plant4]
         //Make temp crops
-        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test",variety: variety1)
-        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test2",variety: variety2)
-        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test3",variety: variety3)
-        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test4",variety: variety4)
-        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),dateHarvested: Date(year: 2016,month: 1,day: 1),notes: "test5",variety: variety4)
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1))
         //Make temp beds
         let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]))
@@ -60,7 +58,6 @@ class PersistencyManager: NSObject {
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
         sections = [sect1,sect2,sect3,sect4]
-        plants = [plant1,plant2,plant3,plant4]
     }
     
     //Return section list
@@ -68,15 +65,11 @@ class PersistencyManager: NSObject {
         return sections
         
     }
-    
-    func getPlants() -> [Plant]{
-        return plants
-    }
 
     //Harvest a crop in a given bed
     func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
-        harvestBed.currentCrop!.dateHarvested = dateHarvested
+        harvestBed.currentCrop!.finalHarvest = dateHarvested
         harvestBed.cropHistory.crops.insert(harvestBed.currentCrop!, atIndex: 0)
         harvestBed.cropHistory.numCrops!++
         harvestBed.currentCrop = nil
@@ -96,5 +89,10 @@ class PersistencyManager: NSObject {
     func getAllPossiblePlants() -> [Plant]{
         return allPossiblePlants
     }
-
+    
+    //Adds a crop to the specified bed
+    func addCrop(crop : Crop, bedNum : Int, sectNum : Int){
+        let bed = getBed(sectNum, bedNum: bedNum)
+        bed.currentCrop = crop
+    }
 }

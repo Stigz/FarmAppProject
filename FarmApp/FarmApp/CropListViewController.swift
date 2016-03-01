@@ -25,7 +25,7 @@ class CropListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        plants = LibraryAPI.sharedInstance.getPlants()
+        plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         numPlants = plants.count
         
         //Register table for cell class
