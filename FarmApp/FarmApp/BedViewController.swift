@@ -97,7 +97,6 @@ class BedViewController: UIViewController {
             cvc.setInfo(bedNum, sectNum: sectNum, isPlanted: true, index: 0)
         }else if (segue.identifier == "addCropFromBedList"){ //If no current crop, add a new crop
             let acvc = segue.destinationViewController as! AddCropViewController
-            print("test")
             acvc.setInfo(sectNum,bedNum: bedNum)
         }
     }
