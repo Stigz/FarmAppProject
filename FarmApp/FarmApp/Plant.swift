@@ -15,6 +15,7 @@ class Plant: NSObject, NSCoding{
     var bestSeasons : [String]!
     var notes : [String]!
     var varieties : [Variety]!
+    var plant_weight : Int!
     
     //Default init method
     init(name: String, bestSeasons : [String], notes : [String], varieties: [Variety]){
@@ -32,6 +33,7 @@ class Plant: NSObject, NSCoding{
         self.bestSeasons = decoder.decodeObjectForKey("plant_seasons") as! [String]
         self.notes = decoder.decodeObjectForKey("plant_notes") as! [String]
         self.varieties = decoder.decodeObjectForKey("plant_varieties") as! [Variety]
+        self.plant_weight = decoder.decodeObjectForKey("plant_weight") as! Int
     }
     
     //Encode object to memory -- for archiving
@@ -40,6 +42,8 @@ class Plant: NSObject, NSCoding{
         aCoder.encodeObject(bestSeasons, forKey: "plant_seasons")
         aCoder.encodeObject(notes, forKey: "plant_notes")
         aCoder.encodeObject(varieties, forKey: "plant_varieties")
+        aCoder.encodeObject(plant_weight, forKey: "plant_weight")
+
     }
     
  
