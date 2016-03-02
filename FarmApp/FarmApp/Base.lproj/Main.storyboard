@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Seasons:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iY2-GU-8Za">
-                                <rect key="frame" x="263" y="103" width="70" height="21"/>
+                                <rect key="frame" x="263" y="126" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -50,12 +50,6 @@
                                     <outlet property="delegate" destination="HQX-8x-BtM" id="App-LM-Gj2"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bed History:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hw-bZ-X6W">
-                                <rect key="frame" x="251" y="132" width="94" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yO-3w-GXz">
                                 <rect key="frame" x="283" y="531" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
@@ -63,6 +57,18 @@
                                     <action selector="close" destination="HQX-8x-BtM" eventType="touchUpInside" id="d8s-3Z-BZA"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QY-kZ-45d">
+                                <rect key="frame" x="273" y="103" width="54" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bed History:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hw-bZ-X6W">
+                                <rect key="frame" x="253" y="149" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -71,6 +77,7 @@
                             <constraint firstItem="8gY-GA-3fP" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="FLb-Co-fbq"/>
                             <constraint firstItem="iY2-GU-8Za" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="GG8-wY-egI"/>
                             <constraint firstItem="kH5-Lv-OcF" firstAttribute="top" secondItem="5yO-3w-GXz" secondAttribute="bottom" constant="42" id="UAq-3S-kbS"/>
+                            <constraint firstItem="3QY-kZ-45d" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="UbA-nB-jbT"/>
                             <constraint firstItem="Q8c-7B-bx6" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="WtD-zv-9jL"/>
                             <constraint firstItem="F1V-fX-rXG" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="cak-HG-IfF"/>
                             <constraint firstItem="9hw-bZ-X6W" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="dC1-uS-IjK"/>
@@ -82,6 +89,7 @@
                         <outlet property="seasonsLabel" destination="iY2-GU-8Za" id="xN4-eE-rN4"/>
                         <outlet property="titleLabel" destination="8gY-GA-3fP" id="a4c-bP-dSk"/>
                         <outlet property="varietyTable" destination="Q8c-7B-bx6" id="sGb-3H-cep"/>
+                        <outlet property="weightLabel" destination="3QY-kZ-45d" id="aIp-mH-6Iy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UX-At-73U" userLabel="First Responder" sceneMemberID="firstResponder"/>

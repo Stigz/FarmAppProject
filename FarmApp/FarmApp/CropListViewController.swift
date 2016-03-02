@@ -66,8 +66,12 @@ extension CropListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.plantTable.dequeueReusableCellWithIdentifier("plantCell")! as UITableViewCell
-        cell.textLabel?.text = "\(plants[indexPath.row].name)"
-        
+        if(plants[indexPath.row].plant_weight != nil){
+        cell.textLabel?.text = "\(plants[indexPath.row].name):    \(plants[indexPath.row].plant_weight)Lbs "
+        }
+        else{
+            cell.textLabel?.text = "\(plants[indexPath.row].name)"
+        }
         
         return cell
     }
