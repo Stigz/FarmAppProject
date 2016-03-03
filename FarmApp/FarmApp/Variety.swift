@@ -13,6 +13,7 @@ class Variety: NSObject, NSCoding{
     var bestSeasons : [String]!
     var notes : [String]!
     var bedHistory : BedHistory!
+    var varietyWeight : Int!
     
     //Default init method
     init(name: String, bestSeasons : [String], notes : [String], bedHistory: BedHistory, plant: Plant){
@@ -31,7 +32,8 @@ class Variety: NSObject, NSCoding{
         self.bestSeasons = decoder.decodeObjectForKey("variety_seasons") as! [String]
         self.notes = decoder.decodeObjectForKey("variety_notes") as! [String]
         self.bedHistory = decoder.decodeObjectForKey("variety_bedHistory") as! BedHistory
-          self.plant = decoder.decodeObjectForKey("variety_plant") as! Plant
+        self.plant = decoder.decodeObjectForKey("variety_plant") as! Plant
+        self.varietyWeight = decoder.decodeObjectForKey("variety_weight") as! Int
     }
     
     //Encode object to memory -- for archiving
@@ -41,6 +43,7 @@ class Variety: NSObject, NSCoding{
         aCoder.encodeObject(notes, forKey: "variety_notes")
         aCoder.encodeObject(bedHistory, forKey: "variety_bedHistory")
         aCoder.encodeObject(plant, forKey: "variety_plant")
+        aCoder.encodeObject(varietyWeight, forKey: "variety_weight")
     }
     
     func printBedHistory() -> String{

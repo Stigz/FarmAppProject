@@ -25,6 +25,7 @@ class VarietyViewController: UIViewController {
     @IBOutlet weak var seasonsLabel: UILabel!
     @IBOutlet weak var plantLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
+     @IBOutlet weak var weightLabel: UILabel!
     //Table for the bed history
     @IBOutlet weak var varietyTable: UITableView!
     
@@ -41,6 +42,13 @@ class VarietyViewController: UIViewController {
         // This will remove extra separators from tableview
         self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view.
+        
+        if(variety.varietyWeight != nil){
+            weightLabel.text = "You have harvested \(variety.varietyWeight)Lbs of this"
+        }
+        else{
+            weightLabel.text = "You haven't harvested any of \(variety.name) \(variety.plant.name)"
+        }
 
     }
     

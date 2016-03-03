@@ -28,12 +28,17 @@ class PersistencyManager: NSObject {
         let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
         let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
         let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
+        
+        plant1.plant_weight = 50
+        plant3.plant_weight = 60
 
         let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
         let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
         let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
         let variety4 = Variety(name: "Vampire Repellant", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
        
+        variety1.varietyWeight = 50
+        variety1.varietyWeight = 40
         //Setup plant varieties
 
         plant1.varieties.append(variety1)
@@ -110,5 +115,15 @@ class PersistencyManager: NSObject {
     func addCrop(crop : Crop, bedNum : Int, sectNum : Int){
         let bed = getBed(sectNum, bedNum: bedNum)
         bed.currentCrop = crop
+    }
+    
+    func getTotalWeight() -> Int{
+        var totalWeight = 0
+        for i in 1...sections.count{
+            if(sections[i].sectionWeight != nil){
+            totalWeight +=  sections[i].sectionWeight
+            }
+        }
+        return totalWeight
     }
 }
