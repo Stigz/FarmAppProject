@@ -9,7 +9,8 @@
 import UIKit
 
 class AddCropViewController: UIViewController {
-
+    
+    //UI Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cropInputField: UITextField!
     @IBOutlet weak var varietyInputField: UITextField!
@@ -18,25 +19,34 @@ class AddCropViewController: UIViewController {
     @IBOutlet weak var yearInputField: UITextField!
     @IBOutlet weak var notesField: UITextView!
     
+    //Controller Instance Variables
     var sectNum : Int = 0
     var bedNum : Int = 0
     var cropOptions : [Plant]!
     var currentPlant : Plant?
     var currentVariety : Variety?
+    var requiredFields : [UITextField] = []
     
+    //Static Variables
+    let defaultVariety : String = "No variety selected"
+    
+    
+    //Picker Views
     let cropPickerView = UIPickerView()
     let varietyPickerView = UIPickerView()
     
-    let defaultVariety : String = "No variety selected"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Setup title
         titleLabel.text = "Add crop to section \(sectNum), bed \(bedNum)"
-        //Defauly notes are blank
+        //Default notes are blank
         notesField.text = ""
         //Get options of crops to add
         cropOptions = LibraryAPI.sharedInstance.getAllPossiblePlants()
+        //Declare which fields are required
+        requiredFields = [cropInputField,varietyInputField,dayInputField,monthInputField,yearInputField]
+        //Setup plants and pickers
         currentPlant = nil
         currentVariety = nil
         setupPickers()
@@ -47,8 +57,8 @@ class AddCropViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //Create a picker view, and set it as input view for
-    //text field
+    //Create picker views and set as inputViews for
+    // text fields
     func setupPickers(){
         cropPickerView.delegate = self
         cropInputField.inputView = cropPickerView
@@ -62,12 +72,12 @@ class AddCropViewController: UIViewController {
         self.bedNum = bedNum
     }
     
-    //When cancel button is hit
+    //When cancel button is hit, dismiss page
     @IBAction func cancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    //Dismisses the pickers -- fires from tap event
+    //Dismisses keyboard/pickers -- fires from tap event
     @IBAction func dismissResponders(){
         cropInputField.resignFirstResponder()
         varietyInputField.resignFirstResponder()
@@ -92,12 +102,10 @@ class AddCropViewController: UIViewController {
     }
     
     //Check to see if all required fields
-    //have been pupulated
+    //have been populated
     func checkFieldsFull() -> Bool{
-        let fields = [cropInputField.text,varietyInputField.text,dayInputField.text,monthInputField.text,yearInputField.text]
-        for field in fields {
-            print(field)
-            if (!checkField(field)){
+        for field in requiredFields {
+            if (!checkField(field.text)){
                 return false
             }
         }
@@ -107,9 +115,13 @@ class AddCropViewController: UIViewController {
     //Called when the "add" button is hit
     @IBAction func addCrop() {
         if checkFieldsFull(){
+            //Get date from fields
             let addDate = Date(year: Int(yearInputField.text!)!, month: Int(monthInputField.text!)!, day: Int(dayInputField.text!)!)
+            //Get crop from fields
             let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: currentVariety!, finalHarvest: nil)
+            //Add crop to API
             LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
+            //Notify BedController of a modification crop, and dismiss view
             NSNotificationCenter.defaultCenter().postNotificationName("CropModifiedNotification", object: self)
             dismissViewControllerAnimated(true, completion: nil)
         }
