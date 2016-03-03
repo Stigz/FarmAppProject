@@ -42,6 +42,7 @@ class LibraryAPI: NSObject {
         return persistencyManager.getPlants()
     }
 
+
     //Ask persistency manager for a list of all plants
     func getAllPossiblePlants() -> [Plant]{
         return persistencyManager.getAllPossiblePlants()
@@ -63,7 +64,11 @@ class LibraryAPI: NSObject {
     }
 
     
- 
+    
+    //Ask persistency manager to add crop
+    func addCrop(crop : Crop, bedNum : Int, sectNum : Int){
+        persistencyManager.addCrop(crop, bedNum: bedNum, sectNum: sectNum)
+    }
 
 
 }

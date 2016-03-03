@@ -25,7 +25,7 @@ class CropListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        plants = LibraryAPI.sharedInstance.getPlants()
+        plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         numPlants = plants.count
         
         //Register table for cell class
@@ -66,8 +66,12 @@ extension CropListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.plantTable.dequeueReusableCellWithIdentifier("plantCell")! as UITableViewCell
-        cell.textLabel?.text = "\(plants[indexPath.row].name)"
-        
+        if(plants[indexPath.row].plant_weight != nil){
+        cell.textLabel?.text = "\(plants[indexPath.row].name):    \(plants[indexPath.row].plant_weight)Lbs "
+        }
+        else{
+            cell.textLabel?.text = "\(plants[indexPath.row].name)"
+        }
         
         return cell
     }

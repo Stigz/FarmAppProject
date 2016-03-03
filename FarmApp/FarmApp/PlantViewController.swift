@@ -89,7 +89,12 @@ extension PlantViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.varietyTable.dequeueReusableCellWithIdentifier("plantCell")! as UITableViewCell
-        cell.textLabel?.text = "\(varieties[indexPath.row].name)"
+        if(varieties[indexPath.row].varietyWeight != nil){
+            cell.textLabel?.text = "\(varieties[indexPath.row].name):    \(varieties[indexPath.row].varietyWeight)Lbs "
+        }
+        else{
+            cell.textLabel?.text = "\(varieties[indexPath.row].name)"
+        }
         
         
         return cell
