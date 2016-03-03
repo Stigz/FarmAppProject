@@ -42,7 +42,7 @@ class BedViewController: UIViewController {
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
         
         //Setup notification observer for crop harvest 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"harvestCrop:", name: "CropHarvestedNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"modifyCrop:", name: "CropModifiedNotification", object: nil)
 
     }
 
@@ -105,7 +105,7 @@ class BedViewController: UIViewController {
     //Called when a notification for a crop harvest
     //is receicived. Reload info for the harvest,
     //and reload table data
-    func harvestCrop(notification: NSNotification){
+    func modifyCrop(notification: NSNotification){
         self.calculateInfo()
         //Set up current crop label
         if((plantedCrop) != nil){

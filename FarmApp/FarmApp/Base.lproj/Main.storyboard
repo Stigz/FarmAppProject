@@ -677,6 +677,9 @@
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukk-0T-cyM">
                                 <rect key="frame" x="381" y="185" width="90" height="30"/>
                                 <state key="normal" title="Final Harvest"/>
+                                <connections>
+                                    <action selector="finalHarvest" destination="5JW-LR-MqB" eventType="touchUpInside" id="Afb-H6-GId"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Harvest History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eE9-Mo-EhS">
                                 <rect key="frame" x="54" y="344" width="119" height="21"/>

@@ -79,6 +79,7 @@ class CropViewController: UIViewController {
     
     //Close the current screen -- back button clicked
     @IBAction func close() {
+        NSNotificationCenter.defaultCenter().postNotificationName("CropModifiedNotification", object: self)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -112,7 +113,8 @@ class CropViewController: UIViewController {
                     //Add new harvest date
                     let newHarvest = Date(year: year!, month: month!, day: day!)
                     //Harvest crop
-                    LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
+                    LibraryAPI.sharedInstance.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
+                    self.crop = LibraryAPI.sharedInstance.getCropFromHistory(sectNum, bedNum: bedNum, index: 0)
                     //Ask user if they would like to add a new crop
                     let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: addNewCrop))
@@ -129,17 +131,29 @@ class CropViewController: UIViewController {
     //to reflect the change (in case the user cancels adding
     //a new crop)
     func addNewCrop(action: UIAlertAction){
-        //Notify bed of harvest
-        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self)
         //Segue to adding new crop
         performSegueWithIdentifier("addCropFromCrop", sender: self)
-        //Update current screen to reflect harvest
-        updateViewForHarvest(true)
+        cropHarvested(action)
 
     }
     
     //Updates the vuiew when a crop is harvested
     func updateViewForHarvest(initialView : Bool){
+        if (isPlanted){
+            harvestedButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            harvestedButton.setTitle("Harvest now!", forState: .Normal)
+        }else{ // If not planted, show harvest date
+            harvestedButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            harvestedButton.setTitle("Harvested: \(crop.finalHarvest!.printSlash())", forState: .Normal)
+            //to disallow clicking on the date
+            harvestedButton.userInteractionEnabled = false
+        }
+        if (initialView){
+            dayInput.text = ""
+            monthInput.text = ""
+            yearInput.text = ""
+            cropHistoryTable.reloadData()
+        }
         harvestedButton.hidden = !initialView
         enterDateLabel.hidden = initialView
         dayInput.hidden = initialView
@@ -147,18 +161,12 @@ class CropViewController: UIViewController {
         yearInput.hidden = initialView
         harvestButton.hidden = initialView
         finalHarvestButton.hidden = initialView
-        if (initialView){
-            dayInput.text = ""
-            monthInput.text = ""
-            yearInput.text = ""
-            cropHistoryTable.reloadData()
-        }
     }
     
     //If the user harvests, but does not add a new crop
     //notify bed of harvest, and then show the reflected change
     func cropHarvested(action: UIAlertAction){
-        NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self)
+        isPlanted = false
         updateViewForHarvest(true)
     }
     
