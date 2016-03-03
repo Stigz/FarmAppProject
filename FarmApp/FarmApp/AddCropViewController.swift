@@ -110,7 +110,7 @@ class AddCropViewController: UIViewController {
             let addDate = Date(year: Int(yearInputField.text!)!, month: Int(monthInputField.text!)!, day: Int(dayInputField.text!)!)
             let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: currentVariety!, finalHarvest: nil)
             LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
-            NSNotificationCenter.defaultCenter().postNotificationName("CropHarvestedNotification", object: self)
+            NSNotificationCenter.defaultCenter().postNotificationName("CropModifiedNotification", object: self)
             dismissViewControllerAnimated(true, completion: nil)
         }
     }

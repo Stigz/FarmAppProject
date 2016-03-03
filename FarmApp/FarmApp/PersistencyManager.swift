@@ -65,14 +65,30 @@ class PersistencyManager: NSObject {
         return sections
         
     }
-
-    //Harvest a crop in a given bed
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+    
+    //Returns current crop for a bed
+    func getCurrentCropForBed(sectNum : Int, bedNum : Int) -> Crop?{
+        return getBed(sectNum, bedNum: bedNum).currentCrop
+    }
+    
+    //Returns crop at a history index
+    func getCropFromHistory(sectNum: Int, bedNum : Int, index : Int) -> Crop{
+        return getBed(sectNum, bedNum: bedNum).cropHistory.crops[index]
+    }
+    
+    //Harvest a crop for the final time
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.finalHarvest = dateHarvested
         harvestBed.cropHistory.crops.insert(harvestBed.currentCrop!, atIndex: 0)
         harvestBed.cropHistory.numCrops!++
         harvestBed.currentCrop = nil
+    }
+
+    //Harvest a crop in a given bed
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+        let harvestBed = getBed(sectNum, bedNum: bedNum)
+        harvestBed.currentCrop!.datesHarvested.append(dateHarvested)
     }
     
     //Return list of beds for a section

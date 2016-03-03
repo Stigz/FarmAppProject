@@ -37,6 +37,16 @@ class LibraryAPI: NSObject {
         return persistencyManager.getSects()
     }
     
+    //Ask persistency manager for a crop
+    func getCurrentCropForBed(sectNum : Int, bedNum : Int) -> Crop?{
+        return persistencyManager.getCurrentCropForBed(sectNum, bedNum: bedNum)
+    }
+    
+    //Ask persistency manager for a crop from a history
+    func getCropFromHistory(sectNum: Int, bedNum : Int, index : Int) -> Crop{
+        return persistencyManager.getCropFromHistory(sectNum, bedNum: bedNum, index: index)
+    }
+    
     //Ask persistency manager for a list of all plants
     func getAllPossiblePlants() -> [Plant]{
         return persistencyManager.getAllPossiblePlants()
@@ -50,6 +60,11 @@ class LibraryAPI: NSObject {
     //Ask persistency manager for a given bed
     func getBed(sectNum: Int, bedNum: Int) -> Bed{
         return persistencyManager.getBed(sectNum, bedNum: bedNum)
+    }
+    
+    //Ask persistency manager to do final harvest
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+        persistencyManager.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested)
     }
     
     //Ask persistency manager to harvest crop
