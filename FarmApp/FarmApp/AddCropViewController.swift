@@ -22,18 +22,11 @@ class AddCropViewController: UIViewController {
     //Controller Instance Variables
     var sectNum : Int = 0
     var bedNum : Int = 0
-    var cropOptions : [Plant]!
-    var currentPlant : Plant?
-    var currentVariety : Variety?
     var requiredFields : [UITextField] = []
+    var PickerViews : AddCropPickers!
     
     //Static Variables
     let defaultVariety : String = "No variety selected"
-    
-    
-    //Picker Views
-    let cropPickerView = UIPickerView()
-    let varietyPickerView = UIPickerView()
     
     
     override func viewDidLoad() {
@@ -42,28 +35,15 @@ class AddCropViewController: UIViewController {
         titleLabel.text = "Add crop to section \(sectNum), bed \(bedNum)"
         //Default notes are blank
         notesField.text = ""
-        //Get options of crops to add
-        cropOptions = LibraryAPI.sharedInstance.getAllPossiblePlants()
         //Declare which fields are required
         requiredFields = [cropInputField,varietyInputField,dayInputField,monthInputField,yearInputField]
-        //Setup plants and pickers
-        currentPlant = nil
-        currentVariety = nil
-        setupPickers()
+        //Setup pickers
+        PickerViews = AddCropPickers(frame: CGRect(x: 0, y: 0, width: 0, height: 0), cropInputField: cropInputField, varietyInputView: varietyInputField)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    //Create picker views and set as inputViews for
-    // text fields
-    func setupPickers(){
-        cropPickerView.delegate = self
-        cropInputField.inputView = cropPickerView
-        varietyPickerView.delegate = self
-        varietyInputField.inputView = varietyPickerView
     }
     
     //Set info for controller
@@ -118,79 +98,12 @@ class AddCropViewController: UIViewController {
             //Get date from fields
             let addDate = Date(year: Int(yearInputField.text!)!, month: Int(monthInputField.text!)!, day: Int(dayInputField.text!)!)
             //Get crop from fields
-            let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: currentVariety!, finalHarvest: nil)
+            let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil)
             //Add crop to API
             LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
             //Notify BedController of a modification crop, and dismiss view
             NSNotificationCenter.defaultCenter().postNotificationName("CropModifiedNotification", object: self)
             dismissViewControllerAnimated(true, completion: nil)
-        }
-    }
-}
-
-//Extensions for picker view
-extension AddCropViewController: UIPickerViewDataSource{
-    //Only one component (the main list to pick from)
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    //The number of rows to pick from is the number of crop options
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //If crop picker is being used, return number of crops
-        if(pickerView.isEqual(cropPickerView)){
-            return cropOptions.count
-        }else if(pickerView.isEqual(varietyPickerView)){
-            //if variety picker is being used
-            if((currentPlant) != nil){
-                //if a plant is selected, return number of varieties
-                return currentPlant!.varieties.count
-            }else{
-                //If no plant is selected, just sho "no crop selected"
-                return 1
-            }
-        }
-        return 0
-    }
-}
-
-extension AddCropViewController: UIPickerViewDelegate{
-    //The title of each picker row
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        //If crop picker is being used, return crop name
-        if(pickerView.isEqual(cropPickerView)){
-            return cropOptions[row].name
-        }else if(pickerView.isEqual(varietyPickerView)){
-            //if variety picker is being used
-            if((currentPlant) != nil){
-                //if a plant is selected, return variety name
-                return currentPlant!.varieties[row].name
-            }else{
-                //If no plant is selected, just sho "no crop selected"
-                return "No crop selected"
-            }
-        }
-        return "Error."
-    }
-    //When a row is selected,
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //If crop picker is being used, select crop and update variety picker
-        if(pickerView.isEqual(cropPickerView)){
-            cropInputField.text = cropOptions[row].name
-            currentPlant = cropOptions[row]
-            varietyPickerView.reloadAllComponents()
-            varietyInputField.text = defaultVariety
-            return
-        }else if(pickerView.isEqual(varietyPickerView)){
-            //if variety picker is being used
-            if((currentPlant) != nil){
-                //if a plant is selected, set selected variety
-                varietyInputField.text = currentPlant!.varieties[row].name
-                currentVariety = currentPlant!.varieties[row]
-                return
-            }else{
-                //If no plant is selected, do nothing
-                return
-            }
         }
     }
 }
