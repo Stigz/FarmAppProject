@@ -21,7 +21,7 @@ class BedViewController: UIViewController {
     var cropHistory : CropHistory!
     var numCropsInHistory : Int = 0
     var cropList : [Crop]!
-    var clickedCrop : Crop!
+    var clickedCropIndex : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class BedViewController: UIViewController {
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
         
         //Setup notification observer for crop harvest 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"harvestCrop:", name: "CropHarvestedNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"modifyCrop:", name: "CropModifiedNotification", object: nil)
 
     }
 
@@ -91,13 +91,12 @@ class BedViewController: UIViewController {
         //If a crop is clicked, segue to crop screen
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
-            cvc.setInfo(clickedCrop,bedNum: bedNum, sectNum: sectNum, isPlanted: false)
+            cvc.setInfo(bedNum, sectNum: sectNum, isPlanted: false, index: clickedCropIndex)
         }else if (segue.identifier == "currentCropClicked"){ //If current crop clicked, segue to crop screen
             let cvc = segue.destinationViewController as! CropViewController
-            cvc.setInfo(plantedCrop!,bedNum: bedNum, sectNum: sectNum, isPlanted: true)
+            cvc.setInfo(bedNum, sectNum: sectNum, isPlanted: true, index: 0)
         }else if (segue.identifier == "addCropFromBedList"){ //If no current crop, add a new crop
             let acvc = segue.destinationViewController as! AddCropViewController
-            print("test")
             acvc.setInfo(sectNum,bedNum: bedNum)
         }
     }
@@ -106,7 +105,7 @@ class BedViewController: UIViewController {
     //Called when a notification for a crop harvest
     //is receicived. Reload info for the harvest,
     //and reload table data
-    func harvestCrop(notification: NSNotification){
+    func modifyCrop(notification: NSNotification){
         self.calculateInfo()
         //Set up current crop label
         if((plantedCrop) != nil){
@@ -145,7 +144,7 @@ extension BedViewController: UITableViewDataSource {
 extension BedViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //To prepare for segue, set up current section
-        clickedCrop = cropList[indexPath.row]
+        clickedCropIndex = indexPath.row
         performSegueWithIdentifier("cropClicked", sender: self)
         //Unhighlight the selected section, in case user goes back
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
