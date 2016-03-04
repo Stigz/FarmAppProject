@@ -36,27 +36,23 @@ class LibraryAPI: NSObject {
     func getSects() -> [Section]{
         return persistencyManager.getSects()
     }
-<<<<<<< HEAD
 
 
     func getPlants() -> [Plant]{
         return persistencyManager.getPlants()
     }
 
-
-=======
-    
     //Ask persistency manager for a crop
     func getCurrentCropForBed(sectNum : Int, bedNum : Int) -> Crop?{
         return persistencyManager.getCurrentCropForBed(sectNum, bedNum: bedNum)
     }
     
+
     //Ask persistency manager for a crop from a history
     func getCropFromHistory(sectNum: Int, bedNum : Int, index : Int) -> Crop{
         return persistencyManager.getCropFromHistory(sectNum, bedNum: bedNum, index: index)
     }
-    
->>>>>>> master
+
     //Ask persistency manager for a list of all plants
     func getAllPossiblePlants() -> [Plant]{
         return persistencyManager.getAllPossiblePlants()
