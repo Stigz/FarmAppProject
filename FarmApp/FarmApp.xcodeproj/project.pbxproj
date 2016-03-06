@@ -167,7 +167,6 @@
 		E1D5BD221C6AEFC4009E575A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -198,6 +197,7 @@
 				B88E06E51C78EA6A0026CF69 /* PlantViewController.swift */,
 				B83B6AAD1C7E72BF00EA59D9 /* VarietyViewController.swift */,
 				E15AEA531C7B94E900FB601E /* AddCropViewController.swift */,
+				E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
