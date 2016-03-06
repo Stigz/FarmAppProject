@@ -9,11 +9,13 @@
 import UIKit
 
 class BedViewController: UIViewController {
-
+    
+    //UI Outlets
     @IBOutlet weak var topTitleLabel: UILabel!
     @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
+    //Controller Instance Variables
     var plantedCrop : Crop?
     var bedNum : Int = 0
     var sectNum : Int = 0
@@ -26,14 +28,9 @@ class BedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Set up title label
+        //Set up labels
         topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
-        //Set up current crop label
-        if((plantedCrop) != nil){
-            currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
-        }else{
-            currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
-        }
+        updateCropLabel()
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
@@ -41,7 +38,7 @@ class BedViewController: UIViewController {
         // This will remove extra separators from tableview
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
         
-        //Setup notification observer for crop harvest 
+        //Setup notification observer for crop modification
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"modifyCrop:", name: "CropModifiedNotification", object: nil)
 
     }
@@ -63,6 +60,7 @@ class BedViewController: UIViewController {
     func calculateInfo(){
         //First, get bed from API
         self.bed = LibraryAPI.sharedInstance.getBed(sectNum, bedNum: bedNum)
+        //Then calculate info based on bed
         self.plantedCrop = bed.currentCrop
         self.bedNum = bed.id
         self.cropHistory = bed.cropHistory
@@ -101,18 +99,22 @@ class BedViewController: UIViewController {
         }
     }
     
-    
-    //Called when a notification for a crop harvest
-    //is receicived. Reload info for the harvest,
-    //and reload table data
-    func modifyCrop(notification: NSNotification){
-        self.calculateInfo()
-        //Set up current crop label
+    //Update crop label, based on current crop
+    func updateCropLabel(){
         if((plantedCrop) != nil){
             currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
         }else{
             currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
         }
+    }
+    
+    
+    //Called when a notification for a crop modification
+    //is receicived. Reload info for the crop,
+    //and reload table data
+    func modifyCrop(notification: NSNotification){
+        self.calculateInfo()
+        updateCropLabel()
         self.cropHistoryTable.reloadData()
     }
 
