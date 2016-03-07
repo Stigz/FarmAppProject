@@ -11,6 +11,7 @@ import UIKit
 class BedViewController: UIViewController {
     
     //UI Outlets
+    @IBOutlet weak var newCropButton: UIButton!
     @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
@@ -68,19 +69,15 @@ class BedViewController: UIViewController {
         self.cropList = bed.cropHistory.crops
     }
     
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        if((plantedCrop) != nil){
-            performSegueWithIdentifier("currentCropClicked", sender: self)
-        }else{
-            performSegueWithIdentifier("addCropFromBedList", sender: self)
-        }
+        performSegueWithIdentifier("currentCropClicked", sender: self)
+    }
+    
+    //Handle when + button is clicked, transition to new crop screen
+    @IBAction func addNewCrop(){
+        performSegueWithIdentifier("addCropFromBedList", sender: self)
     }
     
     
@@ -105,8 +102,10 @@ class BedViewController: UIViewController {
     func updateCropLabel(){
         if((plantedCrop) != nil){
             currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
+            newCropButton.hidden = true
         }else{
             currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+            newCropButton.hidden = false
         }
     }
     
@@ -135,7 +134,8 @@ extension BedViewController: UITableViewDataSource {
         //Set subtitle
         cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(10)
         cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.finalHarvest!.printSlash())"
-        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
 }
