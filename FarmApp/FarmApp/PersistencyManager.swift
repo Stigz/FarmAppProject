@@ -34,7 +34,7 @@ class PersistencyManager: NSObject {
         
         plant1.plant_weight = 50
         plant3.plant_weight = 60
-
+   
         let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
         let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
         let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
