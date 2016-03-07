@@ -76,5 +76,16 @@ class LibraryAPI: NSObject {
     func addCrop(crop : Crop, bedNum : Int, sectNum : Int){
         persistencyManager.addCrop(crop, bedNum: bedNum, sectNum: sectNum)
     }
+    
+    //Ask Manager to update the notes for the current crop in a bed
+    func updateNotesForCurrentCrop(sectNum: Int, bedNum : Int, notes: String){
+        persistencyManager.updateNotesForCurrentCrop(sectNum, bedNum: bedNum, notes: notes)
+    }
+    
+    //Ask manager to update the notes for a crop in a history
+    func updateNotesForCropInHistory(sectNum: Int, bedNum : Int, index: Int, notes: String){
+        persistencyManager.updateNotesForCropInHistory(sectNum, bedNum: bedNum, index: index, notes: notes)
+    }
+
 
 }

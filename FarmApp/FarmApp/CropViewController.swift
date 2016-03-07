@@ -33,6 +33,7 @@ class CropViewController: UIViewController {
     var bedNum : Int = 0
     var sectNum : Int = 0
     var isPlanted : Bool = false
+    var historyIndex : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,7 @@ class CropViewController: UIViewController {
         self.bedNum = bedNum
         self.sectNum = sectNum
         self.isPlanted = isPlanted
+        self.historyIndex = index
         //Grab crop from API
         if(isPlanted){
             self.crop = LibraryAPI.sharedInstance.getCurrentCropForBed(sectNum, bedNum: bedNum)
@@ -75,7 +77,6 @@ class CropViewController: UIViewController {
     
     //Close the current screen -- back button clicked
     @IBAction func close() {
-        NSNotificationCenter.defaultCenter().postNotificationName("CropModifiedNotification", object: self)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -199,8 +200,14 @@ class CropViewController: UIViewController {
     
     
     //So that tapping on the view dismisses the keyboard
+    //And updates notes
     @IBAction func dismissKeyboard(){
         notesField.resignFirstResponder()
+        if isPlanted{
+            LibraryAPI.sharedInstance.updateNotesForCurrentCrop(sectNum, bedNum: bedNum, notes: notesField.text)
+        }else{
+            LibraryAPI.sharedInstance.updateNotesForCropInHistory(sectNum, bedNum: bedNum, index: historyIndex, notes: notesField.text)
+        }
     }
 
 }

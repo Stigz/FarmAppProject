@@ -122,8 +122,6 @@ class AddCropViewController: UIViewController {
                 let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil)
                 //Add crop to API
                 LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
-                //Notify BedController of a modification crop, and dismiss view
-                NSNotificationCenter.defaultCenter().postNotificationName("CropModifiedNotification", object: self)
                 dismissViewControllerAnimated(true, completion: nil)
             }
         }

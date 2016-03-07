@@ -37,15 +37,11 @@ class BedViewController: UIViewController {
         
         // This will remove extra separators from tableview
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
-        
-        //Setup notification observer for crop modification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"modifyCrop:", name: "CropModifiedNotification", object: nil)
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
         // Dispose of any resources that can be recreated.
     }
     
@@ -108,11 +104,7 @@ class BedViewController: UIViewController {
         }
     }
     
-    
-    //Called when a notification for a crop modification
-    //is receicived. Reload info for the crop,
-    //and reload table data
-    func modifyCrop(notification: NSNotification){
+    override func viewWillAppear(animated: Bool) {
         self.calculateInfo()
         updateCropLabel()
         self.cropHistoryTable.reloadData()
