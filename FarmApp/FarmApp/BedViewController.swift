@@ -9,11 +9,13 @@
 import UIKit
 
 class BedViewController: UIViewController {
-
-    @IBOutlet weak var topTitleLabel: UILabel!
+    
+    //UI Outlets
+    @IBOutlet weak var newCropButton: UIButton!
     @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
+    //Controller Instance Variables
     var plantedCrop : Crop?
     var bedNum : Int = 0
     var sectNum : Int = 0
@@ -26,29 +28,25 @@ class BedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Set up title label
-        topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
-        //Set up current crop label
-        if((plantedCrop) != nil){
-            currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
-        }else{
-            currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
-        }
+        
+        //Set up labels
+        self.navigationItem.title = "Bed \(bedNum)"
+        updateCropLabel()
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cropCell")
         
         // This will remove extra separators from tableview
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
-        
-        //Setup notification observer for crop harvest 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"modifyCrop:", name: "CropModifiedNotification", object: nil)
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.navigationItem.title = "Bed \(bedNum)"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
         // Dispose of any resources that can be recreated.
     }
     
@@ -63,6 +61,7 @@ class BedViewController: UIViewController {
     func calculateInfo(){
         //First, get bed from API
         self.bed = LibraryAPI.sharedInstance.getBed(sectNum, bedNum: bedNum)
+        //Then calculate info based on bed
         self.plantedCrop = bed.currentCrop
         self.bedNum = bed.id
         self.cropHistory = bed.cropHistory
@@ -70,24 +69,22 @@ class BedViewController: UIViewController {
         self.cropList = bed.cropHistory.crops
     }
     
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        if((plantedCrop) != nil){
-            performSegueWithIdentifier("currentCropClicked", sender: self)
-        }else{
-            performSegueWithIdentifier("addCropFromBedList", sender: self)
-        }
+        performSegueWithIdentifier("currentCropClicked", sender: self)
+    }
+    
+    //Handle when + button is clicked, transition to new crop screen
+    @IBAction func addNewCrop(){
+        performSegueWithIdentifier("addCropFromBedList", sender: self)
     }
     
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //Set navigation title, so next screen has more informative back button
+        self.navigationItem.title = "Section \(sectNum), Bed \(bedNum)"
         //If a crop is clicked, segue to crop screen
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
@@ -101,18 +98,20 @@ class BedViewController: UIViewController {
         }
     }
     
-    
-    //Called when a notification for a crop harvest
-    //is receicived. Reload info for the harvest,
-    //and reload table data
-    func modifyCrop(notification: NSNotification){
-        self.calculateInfo()
-        //Set up current crop label
+    //Update crop label, based on current crop
+    func updateCropLabel(){
         if((plantedCrop) != nil){
             currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
+            newCropButton.hidden = true
         }else{
             currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+            newCropButton.hidden = false
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.calculateInfo()
+        updateCropLabel()
         self.cropHistoryTable.reloadData()
     }
 
@@ -135,7 +134,8 @@ extension BedViewController: UITableViewDataSource {
         //Set subtitle
         cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(10)
         cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.finalHarvest!.printSlash())"
-        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
 }

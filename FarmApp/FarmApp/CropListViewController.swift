@@ -27,6 +27,7 @@ class CropListViewController: UIViewController {
         super.viewDidLoad()
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         numPlants = plants.count
+        self.navigationItem.title = "Crop List" 
         
         //Register table for cell class
         self.plantTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
@@ -50,12 +51,7 @@ class CropListViewController: UIViewController {
         
     }
 
-    
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+
 }
 //Table View Extensions -- for section table
 extension CropListViewController: UITableViewDataSource {

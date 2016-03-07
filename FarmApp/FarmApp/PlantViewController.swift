@@ -24,7 +24,7 @@ class PlantViewController: UIViewController {
     //Table of sections
     @IBOutlet weak var varietyTable: UITableView!
     //Title label
-    @IBOutlet weak var titleLabel: UILabel!
+ 
     //seasons label
     @IBOutlet weak var seasonsLabel: UILabel!
 
@@ -41,6 +41,7 @@ class PlantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = plant.name
         
         //Register table for cell class
        self.varietyTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
@@ -48,7 +49,7 @@ class PlantViewController: UIViewController {
         // This will remove extra separators from tableview
        self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view.
-        titleLabel.text = "\(plant.name)"
+        
     }
     
     override func didReceiveMemoryWarning() {

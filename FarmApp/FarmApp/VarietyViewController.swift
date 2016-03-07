@@ -20,8 +20,7 @@ import UIKit
 class VarietyViewController: UIViewController {
     var variety: Variety!
     
-    //Title label
-    @IBOutlet weak var titleLabel: UILabel!
+
     @IBOutlet weak var seasonsLabel: UILabel!
     @IBOutlet weak var plantLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
@@ -32,8 +31,8 @@ class VarietyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = "Variety: \(variety.name)"
-        plantLabel.text = "This is a variety of \(variety.plant.name)"
+        self.navigationItem.title = "Variety: \(variety.name)"
+        
         //seasonsLabel.text = "The best time to plant \(variety.name) is \(variety.bestSeasons[0])"
         //notesLabel.text = variety.notes
         //Register table for cell class
@@ -63,11 +62,7 @@ class VarietyViewController: UIViewController {
         self.variety = variety
     }
     
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+  
 }
 //Table View Extensions -- for bedhistory table
 
