@@ -11,7 +11,6 @@ import UIKit
 class BedViewController: UIViewController {
     
     //UI Outlets
-    @IBOutlet weak var topTitleLabel: UILabel!
     @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
@@ -28,8 +27,9 @@ class BedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //Set up labels
-        topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
+        self.navigationItem.title = "Bed \(bedNum)"
         updateCropLabel()
         
         //Register table for cell class
@@ -38,6 +38,10 @@ class BedViewController: UIViewController {
         // This will remove extra separators from tableview
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.navigationItem.title = "Bed \(bedNum)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,6 +86,8 @@ class BedViewController: UIViewController {
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //Set navigation title, so next screen has more informative back button
+        self.navigationItem.title = "Section \(sectNum), Bed \(bedNum)"
         //If a crop is clicked, segue to crop screen
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController

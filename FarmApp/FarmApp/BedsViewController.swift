@@ -17,13 +17,12 @@ class BedsViewController: UIViewController {
     var currentBed : Bed!
 
     @IBOutlet weak var bedTable: UITableView!
-    @IBOutlet weak var testLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Set section label
-        self.testLabel.text = "Section \(sectNum)"
+        self.navigationItem.title = "Section \(sectNum)"
         
         //Get bed list from API
         self.beds = LibraryAPI.sharedInstance.getBedsForSect(sectNum)
@@ -44,12 +43,6 @@ class BedsViewController: UIViewController {
     //Sets up the info passed from section controller
     func setInfo(sectNum: Int){
         self.sectNum = sectNum
-    }
-    
-    
-    //Go back to section list
-    @IBAction func backButtonClicked() {
-        dismissViewControllerAnimated(true, completion: nil)
     }
 
     
