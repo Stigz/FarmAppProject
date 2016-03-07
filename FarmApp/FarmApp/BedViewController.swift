@@ -11,7 +11,7 @@ import UIKit
 class BedViewController: UIViewController {
     
     //UI Outlets
-    @IBOutlet weak var topTitleLabel: UILabel!
+    @IBOutlet weak var newCropButton: UIButton!
     @IBOutlet weak var currentCropLabel: UIButton!
     @IBOutlet weak var cropHistoryTable: UITableView!
     
@@ -28,8 +28,9 @@ class BedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //Set up labels
-        topTitleLabel.text = "Section \(sectNum), Bed \(bedNum)"
+        self.navigationItem.title = "Bed \(bedNum)"
         updateCropLabel()
         
         //Register table for cell class
@@ -38,6 +39,10 @@ class BedViewController: UIViewController {
         // This will remove extra separators from tableview
         self.cropHistoryTable.tableFooterView = UIView(frame: CGRectZero)
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.navigationItem.title = "Bed \(bedNum)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,24 +69,22 @@ class BedViewController: UIViewController {
         self.cropList = bed.cropHistory.crops
     }
     
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     //Handle when the current crop is clicked
     //and transition to crop screen
     @IBAction func currentCropClicked() {
-        if((plantedCrop) != nil){
-            performSegueWithIdentifier("currentCropClicked", sender: self)
-        }else{
-            performSegueWithIdentifier("addCropFromBedList", sender: self)
-        }
+        performSegueWithIdentifier("currentCropClicked", sender: self)
+    }
+    
+    //Handle when + button is clicked, transition to new crop screen
+    @IBAction func addNewCrop(){
+        performSegueWithIdentifier("addCropFromBedList", sender: self)
     }
     
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //Set navigation title, so next screen has more informative back button
+        self.navigationItem.title = "Section \(sectNum), Bed \(bedNum)"
         //If a crop is clicked, segue to crop screen
         if (segue.identifier == "cropClicked"){
             let cvc = segue.destinationViewController as! CropViewController
@@ -99,8 +102,10 @@ class BedViewController: UIViewController {
     func updateCropLabel(){
         if((plantedCrop) != nil){
             currentCropLabel.setTitle("Current Crop: \(plantedCrop!.variety.plant.name)", forState: .Normal)
+            newCropButton.hidden = true
         }else{
             currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+            newCropButton.hidden = false
         }
     }
     
@@ -129,7 +134,8 @@ extension BedViewController: UITableViewDataSource {
         //Set subtitle
         cell.detailTextLabel!.font = cell.detailTextLabel!.font.fontWithSize(10)
         cell.detailTextLabel!.text = "\(crop.datePlanted.printSlash()) to \(crop.finalHarvest!.printSlash())"
-        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
 }

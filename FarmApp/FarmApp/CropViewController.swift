@@ -12,7 +12,6 @@ class CropViewController: UIViewController {
 
     //UI Outlets
     @IBOutlet weak var cropBedLabel: UILabel!
-    @IBOutlet weak var cropNameLabel: UILabel!
     @IBOutlet weak var varietyLabel: UILabel!
     @IBOutlet weak var plantedLabel: UILabel!
     @IBOutlet weak var harvestedButton: UIButton!
@@ -38,7 +37,7 @@ class CropViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set up labels
-        cropNameLabel.text = crop.variety.plant.name
+        self.navigationItem.title = crop.variety.plant.name
         cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
         plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
         varietyLabel.text = "Variety: \(crop.variety.name)"
@@ -73,11 +72,6 @@ class CropViewController: UIViewController {
         }else{
             self.crop = LibraryAPI.sharedInstance.getCropFromHistory(sectNum, bedNum: bedNum, index: index)
         }
-    }
-    
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     //Update view if user wants to "harvest now!"

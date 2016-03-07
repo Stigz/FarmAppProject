@@ -32,6 +32,7 @@ class AddCropViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Setup title
+        self.navigationItem.title = "Add Crop"
         titleLabel.text = "Add crop to section \(sectNum), bed \(bedNum)"
         //Default notes are blank
         notesField.text = ""
@@ -50,11 +51,6 @@ class AddCropViewController: UIViewController {
     func setInfo(sectNum: Int, bedNum : Int){
         self.sectNum = sectNum
         self.bedNum = bedNum
-    }
-    
-    //When cancel button is hit, dismiss page
-    @IBAction func cancel() {
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     //Dismisses keyboard/pickers -- fires from tap event
@@ -122,7 +118,7 @@ class AddCropViewController: UIViewController {
                 let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil)
                 //Add crop to API
                 LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
-                dismissViewControllerAnimated(true, completion: nil)
+                self.navigationController?.popViewControllerAnimated(true)
             }
         }
     }
