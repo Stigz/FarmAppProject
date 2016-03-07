@@ -38,6 +38,18 @@ class Date: NSObject, NSCoding{
         aCoder.encodeObject(year, forKey: "year")
     }
     
+    //Decide whether date is valid
+    func isValid() -> Bool{
+        if (day > 0) && (day <= 31) {
+            if month > 0 && month <= 12{
+                if year < 3000{
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     //Description of section
      func print() -> String{
         return "Year: \(year)" +

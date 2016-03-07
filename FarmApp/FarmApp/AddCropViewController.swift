@@ -92,18 +92,38 @@ class AddCropViewController: UIViewController {
         return true
     }
     
+    //Gathers and checks the dates from the input fields
+    //Called when a crop is added (and dates are input)
+    func gatherDatesFromFields() -> Date?{
+        if let day = Int(dayInputField.text!){
+            if let month = Int(monthInputField.text!){
+                if let year = Int(yearInputField.text!){
+                    let theDate = Date(year: year, month: month, day: day)
+                    if theDate.isValid(){
+                        return theDate
+                    }
+                }
+            }
+        }
+        //If unsuccessful in gathering date, inform user
+        let alertController = UIAlertController(title: "Error!", message: "You have entered an invalid date! Please enter it in the form DD-MM-YYYY.", preferredStyle: UIAlertControllerStyle.Alert)
+        //Allow dismissing the alert
+        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        return nil
+    }
+    
     //Called when the "add" button is hit
     @IBAction func addCrop() {
         if checkFieldsFull(){
             //Get date from fields
-            let addDate = Date(year: Int(yearInputField.text!)!, month: Int(monthInputField.text!)!, day: Int(dayInputField.text!)!)
-            //Get crop from fields
-            let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil)
-            //Add crop to API
-            LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
-            //Notify BedController of a modification crop, and dismiss view
-            NSNotificationCenter.defaultCenter().postNotificationName("CropModifiedNotification", object: self)
-            dismissViewControllerAnimated(true, completion: nil)
+            if let addDate = gatherDatesFromFields(){
+                //Get crop from fields
+                let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil)
+                //Add crop to API
+                LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
+                dismissViewControllerAnimated(true, completion: nil)
+            }
         }
     }
 }

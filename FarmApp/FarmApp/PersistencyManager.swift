@@ -117,6 +117,16 @@ class PersistencyManager: NSObject {
         bed.currentCrop = crop
     }
     
+    //Updates the notes for the current crop in a bed
+    func updateNotesForCurrentCrop(sectNum: Int, bedNum : Int, notes: String){
+        getCurrentCropForBed(sectNum, bedNum: bedNum)!.notes=notes
+    }
+    
+    //Updates the notes for a crop in a history
+    func updateNotesForCropInHistory(sectNum: Int, bedNum : Int, index: Int, notes: String){
+        getCropFromHistory(sectNum, bedNum: bedNum, index: index).notes=notes
+    }
+    
     func getTotalWeight() -> Int{
         var totalWeight = 0
         for i in 1...sections.count{
