@@ -11,7 +11,6 @@ import UIKit
 class CropViewController: UIViewController {
 
     //UI Outlets
-    @IBOutlet weak var cropBedLabel: UILabel!
     @IBOutlet weak var varietyLabel: UILabel!
     @IBOutlet weak var plantedLabel: UILabel!
     @IBOutlet weak var harvestedButton: UIButton!
@@ -38,7 +37,6 @@ class CropViewController: UIViewController {
         super.viewDidLoad()
         //Set up labels
         self.navigationItem.title = crop.variety.plant.name
-        cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
         plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
         varietyLabel.text = "Variety: \(crop.variety.name)"
         
