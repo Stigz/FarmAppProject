@@ -17,13 +17,16 @@ class BedsViewController: UIViewController {
     var currentBed : Bed!
 
     @IBOutlet weak var bedTable: UITableView!
-    @IBOutlet weak var testLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Set section label
-        self.testLabel.text = "Section \(sectNum)"
+        self.navigationItem.title = "Section \(sectNum)"
+        
+        //Get bed list from API
+        self.beds = LibraryAPI.sharedInstance.getBedsForSect(sectNum)
+        self.numBeds = self.beds.count
         
         //Register table for cell class
         self.bedTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "bedCell")
@@ -38,16 +41,8 @@ class BedsViewController: UIViewController {
     }
     
     //Sets up the info passed from section controller
-    func setInfo(sectNum: Int, beds : [Bed], numBeds : Int){
+    func setInfo(sectNum: Int){
         self.sectNum = sectNum
-        self.beds = beds
-        self.numBeds = numBeds
-    }
-    
-    
-    //Go back to section list
-    @IBAction func backButtonClicked() {
-        dismissViewControllerAnimated(true, completion: nil)
     }
 
     
@@ -56,8 +51,9 @@ class BedsViewController: UIViewController {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "bedClicked"){
             let bvc = segue.destinationViewController as! BedViewController
-            bvc.setInfo(sectNum, bed: currentBed)
+            bvc.setInfo(sectNum, bedNum: currentBed.id)
         }
+    
     }
 
 }
@@ -72,7 +68,8 @@ extension BedsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.bedTable.dequeueReusableCellWithIdentifier("bedCell")! as UITableViewCell
         cell.textLabel?.text = "Bed \(beds[indexPath.row].id)"
-        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
 }

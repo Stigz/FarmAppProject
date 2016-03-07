@@ -11,11 +11,12 @@ import UIKit
 class Bed: NSObject, NSCoding{
     
     var id : Int!
-    var currentCrop : Crop!
+    var currentCrop : Crop?
     var cropHistory : CropHistory!
+    var bedWeight : Int!
     
     //Default init method
-    init(id: Int, currentCrop : Crop, cropHistory : CropHistory){
+    init(id: Int, currentCrop : Crop?, cropHistory : CropHistory){
         super.init()
         self.id = id
         self.currentCrop = currentCrop
@@ -26,8 +27,9 @@ class Bed: NSObject, NSCoding{
     required init(coder decoder: NSCoder) {
         super.init()
         self.id = decoder.decodeObjectForKey("bed_id") as! Int
-        self.currentCrop = decoder.decodeObjectForKey("bed_currCrop") as! Crop
+        self.currentCrop = decoder.decodeObjectForKey("bed_currCrop") as? Crop
         self.cropHistory = decoder.decodeObjectForKey("bed_cropHist") as! CropHistory
+        self.bedWeight = decoder.decodeObjectForKey("bed_weight") as! Int
     }
     
     //Encode object to memory -- for archiving
@@ -35,6 +37,7 @@ class Bed: NSObject, NSCoding{
         aCoder.encodeObject(id, forKey: "bed_id")
         aCoder.encodeObject(currentCrop, forKey: "bed_currCrop")
         aCoder.encodeObject(cropHistory, forKey: "bed_cropHist")
+        aCoder.encodeObject(bedWeight, forKey: "bed_weight")
     }
     
     //Description of section

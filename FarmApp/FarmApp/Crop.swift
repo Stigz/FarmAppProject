@@ -13,40 +13,51 @@ class Crop: NSObject, NSCoding{
    
     
     var datePlanted: Date!
-    var dateHarvested: Date!
+    var datesHarvested: [Date]!
+    var finalHarvest : Date?
     
-    var notes : [String]!
+    var notes : String?
     var variety: Variety!
     
+    var harvestWeights : [Int]!
+    var totalWeight : Int!
+    
     //do we want a crop to have to be initialized with an image?
-    init(datePlanted: Date, dateHarvested: Date, notes : [String], variety : Variety){
+    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?){
         super.init()
         self.datePlanted = datePlanted
-        self.dateHarvested = dateHarvested
+        self.datesHarvested = datesHarvested
         self.notes = notes
         self.variety = variety
+        self.finalHarvest = finalHarvest
     }
     
     required init(coder decoder: NSCoder) {
         super.init()
         self.datePlanted = decoder.decodeObjectForKey("crop_dPlanted") as! Date
-        self.dateHarvested = decoder.decodeObjectForKey("crop_dHarvested") as! Date
-        self.notes = decoder.decodeObjectForKey("crop_notes") as! [String]
-        self.variety = decoder.decodeObjectForKey("crop_variety") as! Variety
+        self.datesHarvested = decoder.decodeObjectForKey("crop_dHarvested") as! [Date]
+        self.notes = decoder.decodeObjectForKey("crop_notes") as? String
+        self.variety = decoder.decodeObjectForKey("crop_Variety") as! Variety
+        self.finalHarvest = decoder.decodeObjectForKey("crop_fHarvest") as? Date
+        self.harvestWeights = decoder.decodeObjectForKey("crop_harvestWeights") as! [Int]
+        self.totalWeight = decoder.decodeObjectForKey("crop_totalWeight") as! Int
     }
     
     //Encode object to memory -- for archiving
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(datePlanted, forKey: "bed_dPlanted")
-        aCoder.encodeObject(dateHarvested, forKey: "crop_dHarvested")
+        aCoder.encodeObject(datesHarvested, forKey: "crop_dHarvested")
         aCoder.encodeObject(notes, forKey: "crop_notes")
-        aCoder.encodeObject(variety, forKey: "crop_variety")
+        aCoder.encodeObject(variety, forKey: "crop_Variety")
+        aCoder.encodeObject(harvestWeights, forKey: "crop_harvestWeights")
+        aCoder.encodeObject(totalWeight, forKey: "crop_totalWeight")
+        aCoder.encodeObject(finalHarvest, forKey: "crop_fHarvest")
     }
     
     override var description : String{
         return "Date planted: \(datePlanted)," +
-            "Date Harvested: \(dateHarvested)," +
-        "Variety: \(variety)"
+            "Date Harvested: \(finalHarvest)," +
+        "Variety: \(variety.name)"
     }
 
     
