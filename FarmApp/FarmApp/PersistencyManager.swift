@@ -59,6 +59,7 @@ class PersistencyManager: NSObject {
         let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]))
         //Make temp sects
         let sect1 = Section(id: 1,beds: [bed1],numBeds: 1)
+        
         let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2)
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
