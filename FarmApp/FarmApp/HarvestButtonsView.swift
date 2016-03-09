@@ -46,6 +46,10 @@ import UIKit
         
         // Make the view stretch with containing view
         view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        
+        //Clear inputs
+        clearInputs()
+        
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         addSubview(view)
     }
@@ -59,18 +63,35 @@ import UIKit
         return view
     }
     
-    func getDateInputs() -> [String?]{
-        return [dayInputField.text,monthInputField.text,yearInputField.text]
+    func getDayInput() -> String?{
+        return dayInputField.text
     }
+    
+    func getMonthInput() -> String?{
+        return monthInputField.text
+    }
+    
+    func getYearInput() -> String?{
+        return yearInputField.text
+    }
+    
+    func clearInputs(){
+        dayInputField.text = ""
+        monthInputField.text = ""
+        yearInputField.text = ""
+    }
+    
     @IBAction func harvestButtonClicked() {
         if let delegate = delegate{
             delegate.harvestButtonClicked(self)
         }
+        clearInputs()
     }
     @IBAction func finalHarvestButtonClicked() {
         if let delegate = delegate{
             delegate.finalHarvestButtonClicked(self)
         }
+        clearInputs()
     }
 
 }
