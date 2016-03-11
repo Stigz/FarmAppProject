@@ -9,7 +9,7 @@
 import UIKit
 
 
-class CropListViewController: UIViewController {
+class CropListViewController: UIViewController,  UISearchResultsUpdating {
     
     //Table of sections
     @IBOutlet weak var plantTable: UITableView!
@@ -20,13 +20,15 @@ class CropListViewController: UIViewController {
     var plants : [Plant] = []
     //NOTE: Only for the prepare for segue
     var currentPlant : Plant!
+    let searchController = UISearchController(searchResultsController: nil)
     
-    
+    var filteredPlants = [Plant]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         numPlants = plants.count
+        self.navigationItem.title = "Crop List" 
         
         //Register table for cell class
         self.plantTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
@@ -34,6 +36,27 @@ class CropListViewController: UIViewController {
         // This will remove extra separators from tableview
        self.plantTable.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view.
+        
+        //lets class know when things are typed
+       configureSearchController()
+
+        
+    }
+    
+    func configureSearchController(){
+        //notify the class when someone types
+        searchController.searchResultsUpdater = self
+        
+        //get rid of annoying backgroud when searching
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+       
+        //adds search controller to the top of the table
+        plantTable.tableHeaderView = searchController.searchBar
+        
+        searchController.searchBar.sizeToFit()
+        searchController.hidesNavigationBarDuringPresentation = false
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,30 +72,50 @@ class CropListViewController: UIViewController {
        
         
     }
-
     
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
-    
+
+
+func filterContentForSearchText(searchText: String, scope: String = "All") {
+    filteredPlants = plants.filter { plant in
+        return plant.name.lowercaseString.containsString(searchText.lowercaseString)
+    }
+
+    plantTable.reloadData()
 }
+
+}
+
+
 //Table View Extensions -- for section table
 extension CropListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredPlants.count
+        }
         return plants.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.plantTable.dequeueReusableCellWithIdentifier("plantCell")! as UITableViewCell
-        if(plants[indexPath.row].plant_weight != nil){
-        cell.textLabel?.text = "\(plants[indexPath.row].name):    \(plants[indexPath.row].plant_weight)Lbs "
+        if(searchController.active && searchController.searchBar.text != "" ){
+            if(filteredPlants[indexPath.row].plant_weight != nil){
+            cell.textLabel?.text = "\(filteredPlants[indexPath.row].name):    \(filteredPlants[indexPath.row].plant_weight)Lbs "
+            }else{
+                cell.textLabel?.text = "\(filteredPlants[indexPath.row].name)"
+            }
+            
         }
         else{
+            if(plants[indexPath.row].plant_weight != nil){
+                cell.textLabel?.text = "\(plants[indexPath.row].name):    \(plants[indexPath.row].plant_weight)Lbs "
+            }else{
             cell.textLabel?.text = "\(plants[indexPath.row].name)"
+            }
         }
-        
         return cell
     }
 }
@@ -81,7 +124,12 @@ extension CropListViewController: UITableViewDataSource {
 extension CropListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //To prepare for segue, set up current section
-        currentPlant = plants[indexPath.row]
+        if searchController.active && searchController.searchBar.text != "" {
+           currentPlant = filteredPlants[indexPath.row]
+        }
+        else{
+            currentPlant = plants[indexPath.row]
+        }
         performSegueWithIdentifier("plantClicked", sender: self)
         //Unhighlight the selected section, in case user goes back
         tableView.deselectRowAtIndexPath(indexPath, animated: false)

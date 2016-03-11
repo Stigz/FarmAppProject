@@ -12,8 +12,11 @@ class PersistencyManager: NSObject {
     
     private var sections = [Section]()
 
-
+    private var plants = [Plant]()
     private var allPossiblePlants = [Plant]()
+
+
+
     
     override init() {
         super.init()
@@ -31,7 +34,7 @@ class PersistencyManager: NSObject {
         
         plant1.plant_weight = 50
         plant3.plant_weight = 60
-
+   
         let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
         let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
         let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
@@ -110,7 +113,17 @@ class PersistencyManager: NSObject {
     func getAllPossiblePlants() -> [Plant]{
         return allPossiblePlants
     }
+
+
+    func getPlants() -> [Plant]{
+        return plants
+    }
+ 
+
     
+ 
+
+
     //Adds a crop to the specified bed
     func addCrop(crop : Crop, bedNum : Int, sectNum : Int){
         let bed = getBed(sectNum, bedNum: bedNum)

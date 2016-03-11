@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Seasons:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iY2-GU-8Za">
-                                <rect key="frame" x="263" y="126" width="70" height="21"/>
+                                <rect key="frame" x="265" y="198" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -32,14 +32,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Variety: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gY-GA-3fP">
-                                <rect key="frame" x="257" y="37" width="86" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q8c-7B-bx6">
-                                <rect key="frame" x="79" y="170" width="441" height="307"/>
+                                <rect key="frame" x="79" y="286" width="441" height="191"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="HQX-8x-BtM" id="hdc-35-EGw"/>
@@ -47,13 +41,13 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QY-kZ-45d">
-                                <rect key="frame" x="273" y="103" width="54" height="21"/>
+                                <rect key="frame" x="273" y="137" width="54" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bed History:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hw-bZ-X6W">
-                                <rect key="frame" x="253" y="149" width="94" height="21"/>
+                                <rect key="frame" x="253" y="257" width="94" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -61,7 +55,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8gY-GA-3fP" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="FLb-Co-fbq"/>
                             <constraint firstItem="iY2-GU-8Za" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="GG8-wY-egI"/>
                             <constraint firstItem="3QY-kZ-45d" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="UbA-nB-jbT"/>
                             <constraint firstItem="Q8c-7B-bx6" firstAttribute="centerX" secondItem="uVP-rC-gxU" secondAttribute="centerX" id="WtD-zv-9jL"/>
@@ -72,14 +65,13 @@
                     <connections>
                         <outlet property="notesLabel" destination="F1V-fX-rXG" id="StH-09-kxW"/>
                         <outlet property="seasonsLabel" destination="iY2-GU-8Za" id="xN4-eE-rN4"/>
-                        <outlet property="titleLabel" destination="8gY-GA-3fP" id="a4c-bP-dSk"/>
                         <outlet property="varietyTable" destination="Q8c-7B-bx6" id="sGb-3H-cep"/>
                         <outlet property="weightLabel" destination="3QY-kZ-45d" id="aIp-mH-6Iy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UX-At-73U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2210" y="410"/>
+            <point key="canvasLocation" x="-2372" y="333"/>
         </scene>
         <!--Plant View Controller-->
         <scene sceneID="7ca-NB-LXX">
@@ -131,7 +123,6 @@
                     </view>
                     <connections>
                         <outlet property="seasonsLabel" destination="zhZ-FV-tKB" id="mfP-1P-lWy"/>
-                        <outlet property="titleLabel" destination="HHw-29-7ku" id="shC-yr-Qgd"/>
                         <outlet property="varietyTable" destination="Src-Zh-CA2" id="FAe-gE-c0R"/>
                         <segue destination="HQX-8x-BtM" kind="show" identifier="varietyClicked" id="myU-S4-uxw"/>
                     </connections>
@@ -160,7 +151,7 @@
                                     <outlet property="delegate" destination="96I-1v-SuK" id="pDC-2a-PWM"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Crop List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M9-z4-f8X">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Crop List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M9-z4-f8X">
                                 <rect key="frame" x="266" y="37" width="69" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -172,18 +163,28 @@
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="trailing" secondItem="0zT-H4-V7b" secondAttribute="trailingMargin" id="9nL-sd-wmJ"/>
                             <constraint firstItem="5M9-z4-f8X" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="LdJ-dN-bZz"/>
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="leading" secondItem="0zT-H4-V7b" secondAttribute="leadingMargin" id="VLb-Cw-cot"/>
-                            <constraint firstItem="0i0-oA-pHv" firstAttribute="top" secondItem="5M9-z4-f8X" secondAttribute="bottom" constant="36" id="Ylo-2h-KSo"/>
+                            <constraint firstItem="0i0-oA-pHv" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="YbJ-aE-6fv"/>
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="a6B-Vm-BiQ"/>
+                            <constraint firstItem="0i0-oA-pHv" firstAttribute="top" secondItem="oga-pS-ffp" secondAttribute="bottom" id="du6-DW-gXB"/>
+                            <constraint firstItem="0i0-oA-pHv" firstAttribute="top" secondItem="oga-pS-ffp" secondAttribute="bottom" constant="8" id="jeb-ON-MOJ"/>
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="tAX-IM-j9c"/>
-                            <constraint firstItem="5M9-z4-f8X" firstAttribute="top" secondItem="oga-pS-ffp" secondAttribute="bottom" constant="17" id="wV1-Eu-unq"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="plantTable" destination="0i0-oA-pHv" id="w3K-h3-KW5"/>
+                        <outlet property="searchDisplayController" destination="LE4-dd-xZA" id="bJ0-aV-gXE"/>
                         <segue destination="dkh-L5-GVZ" kind="show" identifier="plantClicked" id="M4l-pg-7bE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQG-aB-fpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="LE4-dd-xZA">
+                    <connections>
+                        <outlet property="delegate" destination="96I-1v-SuK" id="O5Z-FL-RMG"/>
+                        <outlet property="searchContentsController" destination="96I-1v-SuK" id="MBs-QN-iAh"/>
+                        <outlet property="searchResultsDataSource" destination="96I-1v-SuK" id="ZN9-UJ-RWt"/>
+                        <outlet property="searchResultsDelegate" destination="96I-1v-SuK" id="fyU-B4-VEF"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-895" y="410"/>
         </scene>
