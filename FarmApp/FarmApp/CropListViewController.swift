@@ -55,6 +55,7 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
         plantTable.tableHeaderView = searchController.searchBar
         
         searchController.searchBar.sizeToFit()
+        searchController.hidesNavigationBarDuringPresentation = false
 
     }
     
