@@ -15,6 +15,7 @@ class LibraryAPI: NSObject {
     override init() {
         persistencyManager = PersistencyManager()
         super.init()
+        
     }
     
     //Create class variable as computed type
