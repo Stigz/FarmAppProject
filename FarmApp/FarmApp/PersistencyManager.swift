@@ -11,6 +11,7 @@ import UIKit
 class PersistencyManager: NSObject {
     
     private var sections = [Section]()
+    private var database = DatabaseManager().saveToDatabase()
 
 
     private var allPossiblePlants = [Plant]()
@@ -64,6 +65,10 @@ class PersistencyManager: NSObject {
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
         sections = [sect1,sect2,sect3,sect4]
+    }
+
+    func commitToDatabase() {
+        return database
     }
     
     //Return section list

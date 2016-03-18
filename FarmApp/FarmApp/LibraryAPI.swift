@@ -11,11 +11,12 @@ import Foundation
 class LibraryAPI: NSObject {
     
     private let persistencyManager : PersistencyManager
+    private let databaseManager: DatabaseManager
     
     override init() {
         persistencyManager = PersistencyManager()
+        databaseManager = DatabaseManager()
         super.init()
-        
     }
     
     //Create class variable as computed type
@@ -32,6 +33,9 @@ class LibraryAPI: NSObject {
         return Singleton.instance
     }
     
+   // func commitToDatabase(){
+   //     return PersistencyManager().commitToDatabase()
+    //}
     
     //Ask persistency manager for sections
     func getSects() -> [Section]{

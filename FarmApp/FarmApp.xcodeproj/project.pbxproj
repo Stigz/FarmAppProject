@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		149FEC9B946229F8CBB5326C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754C3DCF85538078201EF3B8 /* Pods.framework */; };
 		B83B6AAE1C7E72BF00EA59D9 /* VarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83B6AAD1C7E72BF00EA59D9 /* VarietyViewController.swift */; };
 		B88E06E41C78DA9D0026CF69 /* CropListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88E06E31C78DA9D0026CF69 /* CropListViewController.swift */; };
 		B88E06E61C78EA6A0026CF69 /* PlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88E06E51C78EA6A0026CF69 /* PlantViewController.swift */; };
@@ -32,6 +33,7 @@
 		E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5BD261C6B0785009E575A /* LibraryAPI.swift */; };
 		E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */; };
 		E1E5BEBD1C72AC7D007B8E82 /* BedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5BEBC1C72AC7D007B8E82 /* BedViewController.swift */; };
+		F509E1E61C9C57250013D97D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F509E1E51C9C57250013D97D /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2073D9804B43E34BC224D87B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3AA19BEE7FF62FCB9EEB45E6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		754C3DCF85538078201EF3B8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83B6AAD1C7E72BF00EA59D9 /* VarietyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyViewController.swift; sourceTree = "<group>"; };
 		B88E06E31C78DA9D0026CF69 /* CropListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropListViewController.swift; sourceTree = "<group>"; };
 		B88E06E51C78EA6A0026CF69 /* PlantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 		E1D5BD261C6B0785009E575A /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
 		E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bed.swift; sourceTree = "<group>"; };
 		E1E5BEBC1C72AC7D007B8E82 /* BedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedViewController.swift; sourceTree = "<group>"; };
+		F509E1E51C9C57250013D97D /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149FEC9B946229F8CBB5326C /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +117,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B1294B57C772271F7D98797 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3AA19BEE7FF62FCB9EEB45E6 /* Pods.debug.xcconfig */,
+				2073D9804B43E34BC224D87B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		610BC3E4EE46A8C11C9135FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				754C3DCF85538078201EF3B8 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E10DE8461C69A06D00DAC725 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +141,8 @@
 				E10DE8661C69A06D00DAC725 /* FarmAppTests */,
 				E10DE8711C69A06D00DAC725 /* FarmAppUITests */,
 				E10DE8501C69A06D00DAC725 /* Products */,
+				0B1294B57C772271F7D98797 /* Pods */,
+				610BC3E4EE46A8C11C9135FE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,6 +233,7 @@
 			children = (
 				E1D5BD261C6B0785009E575A /* LibraryAPI.swift */,
 				E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */,
+				F509E1E51C9C57250013D97D /* DatabaseManager.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -218,9 +245,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E10DE8771C69A06D00DAC725 /* Build configuration list for PBXNativeTarget "FarmApp" */;
 			buildPhases = (
+				44428F6D7E32B8E373A5F837 /* Check Pods Manifest.lock */,
 				E10DE84B1C69A06D00DAC725 /* Sources */,
 				E10DE84C1C69A06D00DAC725 /* Frameworks */,
 				E10DE84D1C69A06D00DAC725 /* Resources */,
+				B1CB862A450CF6B5ED509D02 /* Embed Pods Frameworks */,
+				D42CF15696DE7AAD7DF6C3FE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -337,6 +367,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		44428F6D7E32B8E373A5F837 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B1CB862A450CF6B5ED509D02 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D42CF15696DE7AAD7DF6C3FE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E10DE84B1C69A06D00DAC725 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -362,6 +440,7 @@
 				B8FB87911C74F6770002299F /* Variety.swift in Sources */,
 				E116D5E71C742CA30031D9BD /* CropViewController.swift in Sources */,
 				B8FB878B1C7398C50002299F /* Crop.swift in Sources */,
+				F509E1E61C9C57250013D97D /* DatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +578,7 @@
 		};
 		E10DE8781C69A06D00DAC725 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AA19BEE7FF62FCB9EEB45E6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FarmApp/Info.plist;
@@ -510,6 +590,7 @@
 		};
 		E10DE8791C69A06D00DAC725 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2073D9804B43E34BC224D87B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FarmApp/Info.plist;
