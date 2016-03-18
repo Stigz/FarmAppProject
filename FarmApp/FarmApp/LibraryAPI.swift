@@ -33,9 +33,9 @@ class LibraryAPI: NSObject {
         return Singleton.instance
     }
     
-   // func commitToDatabase(){
-   //     return PersistencyManager().commitToDatabase()
-    //}
+   func commitToDatabase(){
+      return persistencyManager.commitToDatabase()
+    }
     
     //Ask persistency manager for sections
     func getSects() -> [Section]{

@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         // This will remove extra separators from tableview
         self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
         
-       //LibraryAPI.sharedInstance.commitToDatabase()
+        LibraryAPI.sharedInstance.commitToDatabase()
         
     }
 

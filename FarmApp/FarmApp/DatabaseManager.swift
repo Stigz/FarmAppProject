@@ -16,9 +16,11 @@ class DatabaseManager: NSObject {
     
     func saveToDatabase () {
         let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
-        var testValue = String(LibraryAPI.sharedInstance.getBedsForSect(1))
-        print(testValue)
-        ref.setValue(testValue)
+        let beds = LibraryAPI.sharedInstance.getBedsForSect(1)
+        let sects = LibraryAPI.sharedInstance.getSects()
+        print(beds)
+        print(sects)
+        ref.childByAutoId()
     }
     
     
