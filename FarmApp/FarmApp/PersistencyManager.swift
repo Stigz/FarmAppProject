@@ -128,6 +128,21 @@ class PersistencyManager: NSObject {
         getCropFromHistory(sectNum, bedNum: bedNum, index: index).notes=notes
     }
     
+    //Return list of all plants currently planted in the farm
+    func getCurrentPlants() -> [Plant]{
+        var thePlants : [Plant] = []
+        for sect in getSects() {
+            for bed in sect.beds {
+                if let theCrop = bed.currentCrop{
+                    if !thePlants.contains(theCrop.variety.plant) {
+                        thePlants.append(theCrop.variety.plant)
+                    }
+                }
+            }
+        }
+        return thePlants
+    }
+    
     func getTotalWeight() -> Int{
         var totalWeight = 0
         for i in 1...sections.count{

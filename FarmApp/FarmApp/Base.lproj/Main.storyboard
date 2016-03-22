@@ -177,23 +177,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0i0-oA-pHv">
-                                <rect key="frame" x="54" y="94" width="492" height="486"/>
+                                <rect key="frame" x="54" y="94" width="492" height="441"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="96I-1v-SuK" id="j5H-p2-Mst"/>
                                     <outlet property="delegate" destination="96I-1v-SuK" id="pDC-2a-PWM"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVL-s3-Ci0">
+                                <rect key="frame" x="277" y="550" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="currentlyPlantedButtonPressed" destination="96I-1v-SuK" eventType="touchUpInside" id="YWI-vo-tOh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="0i0-oA-pHv" secondAttribute="trailing" constant="34" id="34C-zT-WXI"/>
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="leading" secondItem="0zT-H4-V7b" secondAttribute="leadingMargin" constant="34" id="8Za-5Z-PBg"/>
-                            <constraint firstItem="4oa-Nq-fdG" firstAttribute="top" secondItem="0i0-oA-pHv" secondAttribute="bottom" constant="20" id="KIM-af-yfH"/>
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="top" secondItem="oga-pS-ffp" secondAttribute="bottom" constant="30" id="Qb3-S6-iZt"/>
+                            <constraint firstItem="eVL-s3-Ci0" firstAttribute="top" secondItem="0i0-oA-pHv" secondAttribute="bottom" constant="15" id="YeL-KO-WrK"/>
+                            <constraint firstItem="4oa-Nq-fdG" firstAttribute="top" secondItem="eVL-s3-Ci0" secondAttribute="bottom" constant="20" id="tQf-ss-O4v"/>
+                            <constraint firstItem="eVL-s3-Ci0" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="vhs-Sv-JKL"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentlyPlantedButton" destination="eVL-s3-Ci0" id="0cu-Et-BVY"/>
                         <outlet property="plantTable" destination="0i0-oA-pHv" id="w3K-h3-KW5"/>
                         <segue destination="dkh-L5-GVZ" kind="show" identifier="plantClicked" id="M4l-pg-7bE"/>
                     </connections>
