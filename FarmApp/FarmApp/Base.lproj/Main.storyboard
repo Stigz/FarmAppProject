@@ -167,7 +167,7 @@
         <!--Crop List View Controller-->
         <scene sceneID="lU1-s9-cRP">
             <objects>
-                <viewController id="96I-1v-SuK" customClass="CropListViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="96I-1v-SuK" customClass="CropListViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oga-pS-ffp"/>
                         <viewControllerLayoutGuide type="bottom" id="4oa-Nq-fdG"/>
@@ -176,40 +176,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nb-mq-fMg">
-                                <rect key="frame" x="283" y="550" width="34" height="30"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="close" destination="96I-1v-SuK" eventType="touchUpInside" id="HXl-Z1-swo"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0i0-oA-pHv">
-                                <rect key="frame" x="20" y="94" width="560" height="415"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0i0-oA-pHv">
+                                <rect key="frame" x="54" y="94" width="492" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="96I-1v-SuK" id="j5H-p2-Mst"/>
                                     <outlet property="delegate" destination="96I-1v-SuK" id="pDC-2a-PWM"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Crop List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M9-z4-f8X">
-                                <rect key="frame" x="266" y="37" width="69" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9Nb-mq-fMg" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="9kW-MJ-Vi1"/>
-                            <constraint firstItem="0i0-oA-pHv" firstAttribute="trailing" secondItem="0zT-H4-V7b" secondAttribute="trailingMargin" id="9nL-sd-wmJ"/>
-                            <constraint firstItem="5M9-z4-f8X" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="LdJ-dN-bZz"/>
-                            <constraint firstItem="9Nb-mq-fMg" firstAttribute="top" secondItem="0i0-oA-pHv" secondAttribute="bottom" constant="41" id="Ooh-Vd-MUE"/>
-                            <constraint firstItem="4oa-Nq-fdG" firstAttribute="top" secondItem="9Nb-mq-fMg" secondAttribute="bottom" constant="20" id="V2y-ir-R4I"/>
-                            <constraint firstItem="0i0-oA-pHv" firstAttribute="leading" secondItem="0zT-H4-V7b" secondAttribute="leadingMargin" id="VLb-Cw-cot"/>
-                            <constraint firstItem="0i0-oA-pHv" firstAttribute="top" secondItem="5M9-z4-f8X" secondAttribute="bottom" constant="36" id="Ylo-2h-KSo"/>
-                            <constraint firstItem="0i0-oA-pHv" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="a6B-Vm-BiQ"/>
-                            <constraint firstItem="0i0-oA-pHv" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="tAX-IM-j9c"/>
-                            <constraint firstItem="5M9-z4-f8X" firstAttribute="top" secondItem="oga-pS-ffp" secondAttribute="bottom" constant="17" id="wV1-Eu-unq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0i0-oA-pHv" secondAttribute="trailing" constant="34" id="34C-zT-WXI"/>
+                            <constraint firstItem="0i0-oA-pHv" firstAttribute="leading" secondItem="0zT-H4-V7b" secondAttribute="leadingMargin" constant="34" id="8Za-5Z-PBg"/>
+                            <constraint firstItem="4oa-Nq-fdG" firstAttribute="top" secondItem="0i0-oA-pHv" secondAttribute="bottom" constant="20" id="KIM-af-yfH"/>
+                            <constraint firstItem="0i0-oA-pHv" firstAttribute="top" secondItem="oga-pS-ffp" secondAttribute="bottom" constant="30" id="Qb3-S6-iZt"/>
                         </constraints>
                     </view>
                     <connections>

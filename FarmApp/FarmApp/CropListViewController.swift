@@ -28,6 +28,9 @@ class CropListViewController: UIViewController {
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         numPlants = plants.count
         
+        //Set section label
+        self.navigationItem.title = "All crops"
+        
         //Register table for cell class
         self.plantTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
         
@@ -51,11 +54,6 @@ class CropListViewController: UIViewController {
     }
 
     
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
 }
 //Table View Extensions -- for section table
 extension CropListViewController: UITableViewDataSource {
@@ -72,6 +70,9 @@ extension CropListViewController: UITableViewDataSource {
         else{
             cell.textLabel?.text = "\(plants[indexPath.row].name)"
         }
+        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell
     }
