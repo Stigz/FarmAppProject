@@ -24,21 +24,21 @@ class PersistencyManager: NSObject {
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
         //Make temp plants
-        let plant1 = Plant(name: "Wheat",bestSeasons: [],notes: [],varieties: [])
-        let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
-        let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
-        let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
+        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: [],varieties: [])
+        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: [],varieties: [])
+        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: [],varieties: [])
+        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: [],varieties: [])
         
         plant1.plant_weight = 50
         plant3.plant_weight = 60
 
-        let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
-        let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
-        let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
-        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: [], bedHistory: BedHistory(), plant: plant1)
+        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: [], bedHistory: BedHistory(), plant: plant2)
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: [], bedHistory: BedHistory(), plant: plant3)
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: [], bedHistory: BedHistory(), plant: plant4)
        
         variety1.varietyWeight = 50
-        variety1.varietyWeight = 40
+        variety3.varietyWeight = 60
         //Setup plant varieties
 
         plant1.varieties.append(variety1)
@@ -58,11 +58,11 @@ class PersistencyManager: NSObject {
         let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]))
         let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]))
         //Make temp sects
-        let sect1 = Section(id: 1,beds: [bed1],numBeds: 1)
+        let sect1 = Section(id: 1,beds: [bed1],numBeds: 1, sectionWeight: 0)
         
-        let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2)
-        let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
-        let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
+        let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2, sectionWeight: 0)
+        let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
+        let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
         sections = [sect1,sect2,sect3,sect4]
     }
     
@@ -143,8 +143,8 @@ class PersistencyManager: NSObject {
         return thePlants
     }
     
-    func getTotalWeight() -> Int{
-        var totalWeight = 0
+    func getTotalWeight() -> Float{
+        var totalWeight : Float = 0
         for i in 1...sections.count{
             if(sections[i].sectionWeight != nil){
             totalWeight +=  sections[i].sectionWeight

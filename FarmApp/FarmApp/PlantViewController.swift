@@ -16,17 +16,12 @@ import UIKit
 //  Copyright © 2016 Patrick Little. All rights reserved.
 //
 
-import UIKit
-
 
 class PlantViewController: UIViewController {
     
+    @IBOutlet weak var seasonsLabel: UILabel!
     //Table of sections
     @IBOutlet weak var varietyTable: UITableView!
-    //Title label
-    @IBOutlet weak var titleLabel: UILabel!
-    //seasons label
-    @IBOutlet weak var seasonsLabel: UILabel!
 
     //Number of varieties in garden
     var numVarieties = 0
@@ -41,14 +36,25 @@ class PlantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "\(plant.name)"
+        
+        if plant.bestSeasons.isEmpty {
+            seasonsLabel.text = "No seasons entered"
+        }else{
+            seasonsLabel.text = ""
+            for season in plant.bestSeasons {
+                seasonsLabel.text = "\(seasonsLabel.text!)\(season), "
+            }
+        }
+        seasonsLabel.text = seasonsLabel.text!.substringToIndex(seasonsLabel.text!.endIndex.advancedBy(-2))
+        
         
         //Register table for cell class
        self.varietyTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
         
         // This will remove extra separators from tableview
        self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
-        // Do any additional setup after loading the view.
-        titleLabel.text = "\(plant.name)"
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,11 +78,6 @@ class PlantViewController: UIViewController {
         }
         
         
-    }
-    
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
