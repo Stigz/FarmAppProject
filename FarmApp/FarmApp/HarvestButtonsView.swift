@@ -18,13 +18,15 @@ import UIKit
 
 @IBDesignable class HarvestButtonsView: UIView {
     
+    //UI Outlets
     @IBOutlet weak var weightInputField: UITextField!
     @IBOutlet weak var dayInputField: UITextField!
     @IBOutlet weak var monthInputField: UITextField!
     @IBOutlet weak var yearInputField: UITextField!
+    
     // Our custom view from the XIB file
     var view: UIView!
-    
+    //Class delegate
     weak var delegate: HarvestViewDelegate?
 
     //REquired coder init
@@ -39,7 +41,11 @@ import UIKit
         xibSetup()
     }
     
+    //Setup view from HarvestView.xib file
+    //NOTE: HarvestView.xib "file owner" custom class
+    //must be set to this file
     func xibSetup() {
+        //First, gather the nib
         view = loadViewFromNib()
         
         // use bounds not frame or it'll be offset
@@ -55,6 +61,7 @@ import UIKit
         addSubview(view)
     }
     
+    //Gather the view from the nib
     func loadViewFromNib() -> UIView {
         
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -64,22 +71,22 @@ import UIKit
         return view
     }
     
+    //The following methods retrieve the user input
+    // from the various fields
     func getDayInput() -> String?{
         return dayInputField.text
     }
-    
     func getMonthInput() -> String?{
         return monthInputField.text
     }
-    
     func getYearInput() -> String?{
         return yearInputField.text
     }
-    
     func getWeightInput() -> String?{
         return weightInputField.text
     }
     
+    //Clears user input from the fields
     func clearInputs(){
         dayInputField.text = ""
         monthInputField.text = ""
@@ -87,6 +94,7 @@ import UIKit
         weightInputField.text = ""
     }
     
+    //When buttons are clicked, ask delegate to respond
     @IBAction func harvestButtonClicked() {
         if let delegate = delegate{
             delegate.harvestButtonClicked(self)
