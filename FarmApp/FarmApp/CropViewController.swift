@@ -9,6 +9,11 @@
 import UIKit
 
 class CropViewController: UIViewController {
+    
+ /* ----------------------------
+  * Saved variables
+  * ----------------------------
+  */
 
     //UI Outlets
     @IBOutlet weak var harvestButtonView: HarvestButtonsView!
@@ -26,6 +31,11 @@ class CropViewController: UIViewController {
     var isPlanted : Bool = false
     var historyIndex : Int = 0
     
+ /* ---------------------------------------------
+  * Initialization and de-initialization
+  * ---------------------------------------------
+  */
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set up labels
@@ -38,7 +48,7 @@ class CropViewController: UIViewController {
         
         //update harvest button
         harvestButtonView.delegate = self
-        updateHarvestButtonView()
+        updateHarvestButtonText()
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "harvestCell")
@@ -66,8 +76,13 @@ class CropViewController: UIViewController {
         }
     }
     
-    //Update view if user wants to "harvest now!"
-    @IBAction func harvest() {
+ /* ---------------------------------------------
+  * Harvesting functions
+  * ---------------------------------------------
+  */
+    
+    //Shows the input fields, when user wants to harvest
+    @IBAction func harvestNowButtonClicked() {
         updateViewForHarvest(false)
     }
     
@@ -101,8 +116,28 @@ class CropViewController: UIViewController {
 
     }
     
-    //Updates the view for the harvest button
-    func updateHarvestButtonView(){
+    //If the user harvests, then show the reflected change
+    func cropHarvested(action: UIAlertAction){
+        isPlanted = false
+        updateViewForHarvest(true)
+    }
+    
+    //Updates the vuiew when a crop is harvested
+    func updateViewForHarvest(initialView : Bool){
+        updateHarvestButtonText()
+        if (initialView){
+            //Reload table, in case crop has been harvested
+            cropHistoryTable.reloadData()
+        }
+        //Harvest button is initially not hidden
+        //Buttons view is initially hidden
+        harvestedButton.hidden = !initialView
+        harvestButtonView.hidden = initialView
+    }
+    
+    
+    //Updates text of the harvest button
+    func updateHarvestButtonText(){
         //If planted, allow for user to harvest
         if (isPlanted){
             harvestedButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
@@ -115,25 +150,10 @@ class CropViewController: UIViewController {
         }
     }
     
-    //Updates the vuiew when a crop is harvested
-    func updateViewForHarvest(initialView : Bool){
-        updateHarvestButtonView()
-        if (initialView){
-            //Reload table, in case crop has been harvested
-            cropHistoryTable.reloadData()
-        }
-        //Harvest button is initially noy hidden
-        //Buttons view is initially hidden
-        harvestedButton.hidden = !initialView
-        harvestButtonView.hidden = initialView
-    }
-    
-    //If the user harvests, but does not add a new crop
-    //notify bed of harvest, and then show the reflected change
-    func cropHarvested(action: UIAlertAction){
-        isPlanted = false
-        updateViewForHarvest(true)
-    }
+ /* ---------------------------------------------
+  * Miscellaneous Functions
+  * ---------------------------------------------
+  */
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -157,8 +177,10 @@ class CropViewController: UIViewController {
     }
 
 }
-
-//Table View Extensions -- for harvest history table
+ /* ---------------------------------------------
+  * Table View Extensions -- for harvest history table
+  * ---------------------------------------------
+  */
 extension CropViewController: UITableViewDataSource {
     //Number of harvest dates
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -183,6 +205,11 @@ extension CropViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }
+
+ /*------------------------------------------------------------
+  * Harvest Buttons View Extension -- for harvest input view
+  *------------------------------------------------------------
+  */
 
 extension CropViewController: HarvestViewDelegate{
     func harvestButtonClicked(view : HarvestButtonsView){
