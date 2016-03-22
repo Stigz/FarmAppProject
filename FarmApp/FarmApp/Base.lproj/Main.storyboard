@@ -78,6 +78,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Q8c-7B-bx6" firstAttribute="leading" secondItem="iY2-GU-8Za" secondAttribute="leading" id="88i-f9-Wy8"/>
                             <constraint firstItem="Sbs-Zf-9SQ" firstAttribute="top" secondItem="D19-Is-se2" secondAttribute="bottom" constant="26" id="8L6-JQ-UMi"/>
@@ -103,16 +104,24 @@
                             <constraint firstItem="339-QO-IGa" firstAttribute="top" secondItem="F1V-fX-rXG" secondAttribute="bottom" constant="1" id="yEr-iW-EQj"/>
                             <constraint firstItem="Q8c-7B-bx6" firstAttribute="top" secondItem="9hw-bZ-X6W" secondAttribute="bottom" constant="8" id="zBS-qW-rh4"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="yxE-RH-ED2" appends="YES" id="mad-h3-LVk"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="notesLabel" destination="F1V-fX-rXG" id="StH-09-kxW"/>
+                        <outlet property="notesField" destination="339-QO-IGa" id="Rob-YE-eGo"/>
                         <outlet property="plantLabel" destination="Sbs-Zf-9SQ" id="NsO-YY-ICR"/>
-                        <outlet property="seasonsLabel" destination="iY2-GU-8Za" id="xN4-eE-rN4"/>
+                        <outlet property="seasonsLabel" destination="cib-qj-2Hn" id="1x5-R3-5r2"/>
                         <outlet property="varietyTable" destination="Q8c-7B-bx6" id="sGb-3H-cep"/>
                         <outlet property="weightLabel" destination="3QY-kZ-45d" id="aIp-mH-6Iy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UX-At-73U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="yxE-RH-ED2">
+                    <connections>
+                        <action selector="dismissKeyboard" destination="HQX-8x-BtM" id="K24-aX-Ehw"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2210" y="410"/>
         </scene>

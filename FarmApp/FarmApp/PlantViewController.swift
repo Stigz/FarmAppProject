@@ -97,7 +97,8 @@ extension PlantViewController: UITableViewDataSource {
         else{
             cell.textLabel?.text = "\(varieties[indexPath.row].name)"
         }
-        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell
     }
