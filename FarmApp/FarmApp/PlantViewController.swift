@@ -38,6 +38,7 @@ class PlantViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "\(plant.name)"
         
+        //Setup seasons label
         if plant.bestSeasons.isEmpty {
             seasonsLabel.text = "No seasons entered"
         }else{
