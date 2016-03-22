@@ -87,6 +87,11 @@ class LibraryAPI: NSObject {
     func updateNotesForCropInHistory(sectNum: Int, bedNum : Int, index: Int, notes: String){
         persistencyManager.updateNotesForCropInHistory(sectNum, bedNum: bedNum, index: index, notes: notes)
     }
+    
+    //Ask manager for list of all currently planted plants
+    func getCurrentPlants() -> [Plant]{
+        return persistencyManager.getCurrentPlants()
+    }
 
 
 }
