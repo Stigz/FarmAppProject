@@ -18,6 +18,7 @@ import UIKit
 
 @IBDesignable class HarvestButtonsView: UIView {
     
+    @IBOutlet weak var weightInputField: UITextField!
     @IBOutlet weak var dayInputField: UITextField!
     @IBOutlet weak var monthInputField: UITextField!
     @IBOutlet weak var yearInputField: UITextField!
@@ -75,10 +76,15 @@ import UIKit
         return yearInputField.text
     }
     
+    func getWeightInput() -> String?{
+        return weightInputField.text
+    }
+    
     func clearInputs(){
         dayInputField.text = ""
         monthInputField.text = ""
         yearInputField.text = ""
+        weightInputField.text = ""
     }
     
     @IBAction func harvestButtonClicked() {
