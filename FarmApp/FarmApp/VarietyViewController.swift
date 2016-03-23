@@ -46,7 +46,7 @@ class VarietyViewController: UIViewController {
             weightLabel.text = "You have harvested \(variety.varietyWeight)Lbs of this"
         }
         else{
-            weightLabel.text = "You haven't harvested any of \(variety.name) \(variety.plant.name)"
+            weightLabel.text = "You haven't harvested any \(variety.name) \(variety.plant.name)"
         }
 
     }

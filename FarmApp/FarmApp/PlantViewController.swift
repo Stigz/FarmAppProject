@@ -19,7 +19,7 @@ import UIKit
 import UIKit
 
 
-class PlantViewController: UIViewController {
+class PlantViewController: UIViewController, UISearchResultsUpdating {
     
     //Table of sections
     @IBOutlet weak var varietyTable: UITableView!
@@ -27,11 +27,15 @@ class PlantViewController: UIViewController {
  
     //seasons label
     @IBOutlet weak var seasonsLabel: UILabel!
+    
+    //creating the search controller
+    let searchController = UISearchController(searchResultsController: nil)
 
     //Number of varieties in garden
     var numVarieties = 0
     //variety list
     var varieties : [Variety] = []
+    var filteredVarieties = [Variety]()
     //NOTE: Only for the prepare for segue
     var plant : Plant!
     var currentVariety: Variety!
@@ -50,12 +54,45 @@ class PlantViewController: UIViewController {
        self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view.
         
+        configureSearchController()
+        
+    }
+    
+    
+    func configureSearchController(){
+        //notify the class when someone types
+        searchController.searchResultsUpdater = self
+        
+        //get rid of annoying backgroud when searching
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        
+        //adds search controller to the top of the table
+        varietyTable.tableHeaderView = searchController.searchBar
+        
+        searchController.searchBar.sizeToFit()
+        searchController.hidesNavigationBarDuringPresentation = false
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredVarieties = varieties.filter { plant in
+            return plant.name.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        varietyTable.reloadData()
+    }
+
     
  
     func setInfo(plant: Plant){
@@ -85,16 +122,30 @@ class PlantViewController: UIViewController {
 extension PlantViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchController.active && searchController.searchBar.text != "" ){
+            return filteredVarieties.count
+        }else{
         return varieties.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.varietyTable.dequeueReusableCellWithIdentifier("plantCell")! as UITableViewCell
-        if(varieties[indexPath.row].varietyWeight != nil){
-            cell.textLabel?.text = "\(varieties[indexPath.row].name):    \(varieties[indexPath.row].varietyWeight)Lbs "
-        }
-        else{
-            cell.textLabel?.text = "\(varieties[indexPath.row].name)"
+        if(searchController.active && searchController.searchBar.text != "" ){
+            if(filteredVarieties[indexPath.row].varietyWeight != nil){
+            cell.textLabel?.text = "\(filteredVarieties[indexPath.row].name):    \(filteredVarieties[indexPath.row].varietyWeight)Lbs "
+           
+            }
+            else{
+                cell.textLabel?.text = "\(filteredVarieties[indexPath.row].name)"
+            }
+        }else{
+            if(varieties[indexPath.row].varietyWeight != nil){
+                cell.textLabel?.text = "\(varieties[indexPath.row].name):    \(varieties[indexPath.row].varietyWeight)Lbs "
+            }
+            else{
+                cell.textLabel?.text = "\(varieties[indexPath.row].name)"
+            }
         }
         
         

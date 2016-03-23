@@ -20,6 +20,7 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     var plants : [Plant] = []
     //NOTE: Only for the prepare for segue
     var currentPlant : Plant!
+    //creating the search controller
     let searchController = UISearchController(searchResultsController: nil)
     
     var filteredPlants = [Plant]()
