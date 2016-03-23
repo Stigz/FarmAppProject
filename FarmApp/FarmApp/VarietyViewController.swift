@@ -18,64 +18,63 @@ import UIKit
 
 
 class VarietyViewController: UIViewController {
-    var variety: Variety!
     
+    //UI Outlets
+    @IBOutlet weak var hiddenField: UITextField!
     @IBOutlet weak var notesField: UITextView!
-    //Title label
     @IBOutlet weak var seasonsLabel: UILabel!
     @IBOutlet weak var plantLabel: UILabel!
-     @IBOutlet weak var weightLabel: UILabel!
-    //Table for the bed history
+    @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var varietyTable: UITableView!
+    
+    //Controller instance variables
+    var variety: Variety!
+    var seasonsPicker : AddSeasonsPicker!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Initialize title
         self.navigationItem.title = "\(variety.name)"
-        plantLabel.text = "Variety of \(variety.plant.name)"
+
         //Register table for cell class
         self.varietyTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "bedCell")
-        
         // This will remove extra separators from tableview
         self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
-        // Do any additional setup after loading the view.
         
-        if(variety.varietyWeight != nil){
-            weightLabel.text = "You have harvested \(variety.varietyWeight)lbs total"
-        }
-        else{
-            weightLabel.text = "You haven't harvested any \(variety.name) \(variety.plant.name)"
-        }
         
+        //Initialize labels
+        weightLabel.text = "(Total harvested: \(variety.varietyWeight)lbs)"
+        plantLabel.text = "Variety of \(variety.plant.name)"
         notesField.text = variety.notes
         
-        //Setup seasons label
-        if variety.bestSeasons.isEmpty {
-            seasonsLabel.text = "No seasons entered"
-        }else{
-            seasonsLabel.text = ""
-            for season in variety.bestSeasons {
-                seasonsLabel.text = "\(seasonsLabel.text!)\(season), "
-            }
-        }
-        seasonsLabel.text = seasonsLabel.text!.substringToIndex(seasonsLabel.text!.endIndex.advancedBy(-2))
 
+        
+        //Initialize seasons picker
+        seasonsPicker = AddSeasonsPicker(frame: CGRect(x: 50, y: 50, width: 200, height: 200), seasonsLabel: seasonsLabel, seasonsChosen: variety.bestSeasons, hiddenField: hiddenField)
+        seasonsPicker.calculateSeasonsText()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-          }
     
+    //Sets info passed from plant controller
     func setInfo(variety: Variety){
         self.variety = variety
     }
     
+    //Dismisses notes keyboard, and saves the new notes
     @IBAction func dismissKeyboard() {
         notesField.resignFirstResponder()
         LibraryAPI.sharedInstance.updateNotesForVariety(variety.plant.name, variety: variety.name, notes: notesField.text)
+    }
+    
+    //Called when add season button is pressed
+    //Show the picker
+    @IBAction func addSeason() {
+        seasonsPicker.showPicker()
     }
     
 }
@@ -83,10 +82,12 @@ class VarietyViewController: UIViewController {
 
 extension VarietyViewController: UITableViewDataSource {
     
+    //Return number of beds in history
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return variety.bedHistory.count
     }
     
+    //Format cell to show bed date and number
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.varietyTable.dequeueReusableCellWithIdentifier("bedCell")! as UITableViewCell
         cell.textLabel?.text = "Planted in Bed \(variety.bedHistory[indexPath.row].data.1.id) on \(variety.bedHistory[indexPath.row].data.0.printSlash())"

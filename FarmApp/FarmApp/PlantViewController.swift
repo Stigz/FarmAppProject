@@ -19,15 +19,13 @@ import UIKit
 
 class PlantViewController: UIViewController {
     
+    //UI Outlets
     @IBOutlet weak var seasonsLabel: UILabel!
-    //Table of sections
     @IBOutlet weak var varietyTable: UITableView!
 
-    //Number of varieties in garden
+    //Controller instance variables
     var numVarieties = 0
-    //variety list
     var varieties : [Variety] = []
-    //NOTE: Only for the prepare for segue
     var plant : Plant!
     var currentVariety: Variety!
     
