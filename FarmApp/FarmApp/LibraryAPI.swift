@@ -92,6 +92,10 @@ class LibraryAPI: NSObject {
     func getCurrentPlants() -> [Plant]{
         return persistencyManager.getCurrentPlants()
     }
-
+    
+    //Ask to update variety notes
+    func updateNotesForVariety(plant : String, variety : String, notes: String){
+        persistencyManager.updateNotesForVariety(plant, variety: variety, notes: notes)
+    }
 
 }

@@ -24,18 +24,18 @@ class PersistencyManager: NSObject {
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
         //Make temp plants
-        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: [],varieties: [])
-        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: [],varieties: [])
-        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: [],varieties: [])
-        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: [],varieties: [])
+        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [])
+        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: "",varieties: [])
+        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: "",varieties: [])
+        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: "",varieties: [])
         
         plant1.plant_weight = 50
         plant3.plant_weight = 60
 
-        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: [], bedHistory: BedHistory(), plant: plant1)
-        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: [], bedHistory: BedHistory(), plant: plant2)
-        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: [], bedHistory: BedHistory(), plant: plant3)
-        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: [], bedHistory: BedHistory(), plant: plant4)
+        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1)
+        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2)
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3)
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4)
        
         variety1.varietyWeight = 50
         variety3.varietyWeight = 60
@@ -64,6 +64,12 @@ class PersistencyManager: NSObject {
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
         sections = [sect1,sect2,sect3,sect4]
+        
+        //Set bed histories
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed1))
+        variety2.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed2))
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed3))
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed4))
     }
     
     //Return section list
@@ -141,6 +147,19 @@ class PersistencyManager: NSObject {
             }
         }
         return thePlants
+    }
+    
+    //Updates the notes of a given variety
+    func updateNotesForVariety(plant : String, variety : String, notes: String){
+        for plants in getAllPossiblePlants() {
+            if plants.name == plant{
+                for varietys in plants.varieties{
+                    if varietys.name == variety{
+                        varietys.notes = notes
+                    }
+                }
+            }
+        }
     }
     
     func getTotalWeight() -> Float{

@@ -28,6 +28,7 @@
 		E15ED59C1C6C3BBA005D3A48 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59B1C6C3BBA005D3A48 /* Section.swift */; };
 		E15ED59E1C6C3DBA005D3A48 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */; };
 		E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */; };
+		E17553791CA207C500566641 /* AddSeasonsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17553781CA207C500566641 /* AddSeasonsPicker.swift */; };
 		E1949CE31C87BF8F00157DC1 /* AddCropPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */; };
 		E1C938A01C8E846D0009E052 /* HarvestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9389F1C8E846D0009E052 /* HarvestView.xib */; };
 		E1C938A21C8E85770009E052 /* HarvestButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C938A11C8E85770009E052 /* HarvestButtonsView.swift */; };
@@ -81,6 +82,7 @@
 		E15ED59B1C6C3BBA005D3A48 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedsViewController.swift; sourceTree = "<group>"; };
+		E17553781CA207C500566641 /* AddSeasonsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSeasonsPicker.swift; sourceTree = "<group>"; };
 		E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCropPickers.swift; sourceTree = "<group>"; };
 		E1C9389F1C8E846D0009E052 /* HarvestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HarvestView.xib; sourceTree = "<group>"; };
 		E1C938A11C8E85770009E052 /* HarvestButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarvestButtonsView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				B83B6AAD1C7E72BF00EA59D9 /* VarietyViewController.swift */,
 				E15AEA531C7B94E900FB601E /* AddCropViewController.swift */,
 				E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */,
+				E17553781CA207C500566641 /* AddSeasonsPicker.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				E10DE8531C69A06D00DAC725 /* AppDelegate.swift in Sources */,
 				B8FB87911C74F6770002299F /* Variety.swift in Sources */,
 				E116D5E71C742CA30031D9BD /* CropViewController.swift in Sources */,
+				E17553791CA207C500566641 /* AddSeasonsPicker.swift in Sources */,
 				B8FB878B1C7398C50002299F /* Crop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
