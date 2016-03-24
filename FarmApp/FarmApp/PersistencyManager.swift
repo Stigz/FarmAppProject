@@ -149,6 +149,15 @@ class PersistencyManager: NSObject {
         return thePlants
     }
     
+    //Updates the notes for a given plant
+    func updateNotesForPlant(plant: String, notes : String){
+        for plants in getAllPossiblePlants() {
+            if plants.name == plant {
+                plants.notes = notes
+            }
+        }
+    }
+    
     //Updates the notes of a given variety
     func updateNotesForVariety(plant : String, variety : String, notes: String){
         for plants in getAllPossiblePlants() {

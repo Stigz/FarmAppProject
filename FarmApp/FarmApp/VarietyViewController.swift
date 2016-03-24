@@ -97,3 +97,10 @@ extension VarietyViewController: UITableViewDataSource {
     }
 }
 
+extension VarietyViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //Unhighlight the selected section, in case user goes back
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+}
+
