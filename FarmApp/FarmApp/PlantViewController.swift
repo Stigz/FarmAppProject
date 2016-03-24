@@ -20,14 +20,17 @@ import UIKit
 class PlantViewController: UIViewController {
     
     //UI Outlets
+    @IBOutlet weak var hiddenField: UITextField!
     @IBOutlet weak var seasonsLabel: UILabel!
     @IBOutlet weak var varietyTable: UITableView!
+    @IBOutlet weak var notesField: UITextView!
 
     //Controller instance variables
     var numVarieties = 0
     var varieties : [Variety] = []
     var plant : Plant!
     var currentVariety: Variety!
+    var seasonsPicker : AddSeasonsPicker!
     
    
 
@@ -36,16 +39,11 @@ class PlantViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "\(plant.name)"
         
-        //Setup seasons label
-        if plant.bestSeasons.isEmpty {
-            seasonsLabel.text = "No seasons entered"
-        }else{
-            seasonsLabel.text = ""
-            for season in plant.bestSeasons {
-                seasonsLabel.text = "\(seasonsLabel.text!)\(season), "
-            }
-        }
-        seasonsLabel.text = seasonsLabel.text!.substringToIndex(seasonsLabel.text!.endIndex.advancedBy(-2))
+        notesField.text = plant.notes
+        
+        //Initialize seasons picker
+        seasonsPicker = AddSeasonsPicker(frame: CGRect(x: 50, y: 50, width: 200, height: 200), seasonsLabel: seasonsLabel, seasonsChosen: plant.bestSeasons, hiddenField: hiddenField)
+        seasonsPicker.calculateSeasonsText()
         
         
         //Register table for cell class
@@ -79,6 +77,16 @@ class PlantViewController: UIViewController {
         
     }
     
+    //Dismisses notes keyboard, and saves the new notes
+    @IBAction func dismissKeyboard() {
+        notesField.resignFirstResponder()
+        LibraryAPI.sharedInstance.updateNotesForPlant(plant.name, notes: notesField.text)
+    }
+    //Called when add season button is pressed
+    //Show the picke
+    @IBAction func addSeasons() {
+        seasonsPicker.showPicker()
+    }
 }
 //Table View Extensions -- for section table
 extension PlantViewController: UITableViewDataSource {
