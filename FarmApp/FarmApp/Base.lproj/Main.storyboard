@@ -385,7 +385,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sections" id="BCB-74-H09">
-                        <barButtonItem key="leftBarButtonItem" title="Show crop list" id="J47-Hh-7je">
+                        <barButtonItem key="rightBarButtonItem" title="Show crop list" id="J47-Hh-7je">
                             <connections>
                                 <action selector="toCropList" destination="BYZ-38-t0r" id="YQU-yX-QyV"/>
                             </connections>
@@ -501,13 +501,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIw-FJ-6AC">
-                                <rect key="frame" x="285" y="529" width="32" height="30"/>
-                                <state key="normal" title="Add!"/>
-                                <connections>
-                                    <action selector="addCrop" destination="LyK-qA-WyN" eventType="touchUpInside" id="ePq-Rz-aAu"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO8-gG-4uF">
                                 <rect key="frame" x="54" y="369" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -515,7 +508,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pgs-qq-TzR">
-                                <rect key="frame" x="54" y="397" width="492" height="129"/>
+                                <rect key="frame" x="54" y="397" width="492" height="183"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -525,7 +518,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="EIw-FJ-6AC" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" constant="1" id="1Jj-SE-DtV"/>
                             <constraint firstItem="bpK-Bi-YRw" firstAttribute="top" secondItem="6T3-B4-tmH" secondAttribute="bottom" constant="15" id="2Fk-fc-cmP"/>
                             <constraint firstItem="nf0-qp-RbH" firstAttribute="leading" secondItem="NAh-hc-zK4" secondAttribute="leading" id="3GM-Je-HEo"/>
                             <constraint firstItem="hO8-gG-4uF" firstAttribute="leading" secondItem="Ke3-5Z-fSb" secondAttribute="leading" id="4dw-0C-DZc"/>
@@ -535,14 +527,13 @@
                             <constraint firstItem="B31-bS-cen" firstAttribute="height" secondItem="Ke3-5Z-fSb" secondAttribute="height" id="BJg-Ah-eLM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="v0M-8c-Xfb" secondAttribute="trailing" constant="34" id="CGn-Ip-kqs"/>
                             <constraint firstItem="B31-bS-cen" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="D8u-6s-YGS"/>
-                            <constraint firstItem="EIw-FJ-6AC" firstAttribute="top" secondItem="Pgs-qq-TzR" secondAttribute="bottom" constant="3" id="E3i-eK-lQS"/>
                             <constraint firstItem="Pgs-qq-TzR" firstAttribute="leading" secondItem="0Gn-4q-eTg" secondAttribute="leadingMargin" constant="34" id="Fce-SS-tXN"/>
                             <constraint firstItem="Pgs-qq-TzR" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="GQ4-Q2-z8c"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Pgs-qq-TzR" secondAttribute="trailing" constant="34" id="K5C-Ey-5BE"/>
                             <constraint firstItem="ekT-uS-fNL" firstAttribute="trailing" secondItem="v0M-8c-Xfb" secondAttribute="trailing" id="LKi-zi-uDt"/>
-                            <constraint firstItem="aCo-6z-epj" firstAttribute="top" secondItem="EIw-FJ-6AC" secondAttribute="bottom" constant="41" id="Lwn-Ad-aQg"/>
                             <constraint firstItem="Ke3-5Z-fSb" firstAttribute="leading" secondItem="v0M-8c-Xfb" secondAttribute="leading" id="OEV-q1-MYf"/>
                             <constraint firstItem="ekT-uS-fNL" firstAttribute="leading" secondItem="B31-bS-cen" secondAttribute="trailing" constant="9" id="TeV-3I-9Sk"/>
+                            <constraint firstItem="aCo-6z-epj" firstAttribute="top" secondItem="Pgs-qq-TzR" secondAttribute="bottom" constant="20" id="UKk-vk-D8V"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="top" secondItem="bpK-Bi-YRw" secondAttribute="bottom" constant="39" id="VG5-lk-1CF"/>
                             <constraint firstItem="Pgs-qq-TzR" firstAttribute="top" secondItem="hO8-gG-4uF" secondAttribute="bottom" constant="8" id="VIk-fd-Lxc"/>
                             <constraint firstItem="B31-bS-cen" firstAttribute="width" secondItem="Ke3-5Z-fSb" secondAttribute="width" id="Vpf-SN-ZY5"/>
