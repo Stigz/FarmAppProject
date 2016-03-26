@@ -26,6 +26,9 @@ class CropViewController: UIViewController {
     @IBOutlet weak var finalHarvestButton: UIButton!
     
     
+    //DatabaseStuff
+    private let databaseManager = DatabaseManager()
+    
     //Controller Instance Variables
     var crop : Crop!
     var bedNum : Int = 0
@@ -40,8 +43,11 @@ class CropViewController: UIViewController {
         plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
         varietyLabel.text = "Variety: \(crop.variety.name)"
         
-        //Setup notes
+        //Setup note
         notesField.text = crop.notes
+        
+       // databaseManager.setNotesForCrop(notesField.text)
+        
         
         //update harvest button
         updateHarvestButtonView()

@@ -41,6 +41,10 @@ class LibraryAPI: NSObject {
     func getSects() -> [Section]{
         return persistencyManager.getSects()
     }
+    func getSection(sectNum: Int)->Section{
+        return persistencyManager.getSection(sectNum)
+    }
+    
     
     //Ask persistency manager for a crop
     func getCurrentCropForBed(sectNum : Int, bedNum : Int) -> Crop?{
