@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     //NOTE: Only for the prepare for segue
     var currentSect : Section!
     
+    private let databaseManager = DatabaseManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,9 @@ class ViewController: UIViewController {
         // This will remove extra separators from tableview
         self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
         
-        LibraryAPI.sharedInstance.commitToDatabase()
+        //LibraryAPI.sharedInstance.commitToDatabase()
+        
+        databaseManager.createSects(sections)
         
     }
 

@@ -46,7 +46,9 @@ class CropViewController: UIViewController {
         //Setup note
         notesField.text = crop.notes
         
-       // databaseManager.setNotesForCrop(notesField.text)
+        //databaseManager.setNotesForCrop(notesField.text)
+        
+        //databaseManager.updateNotesForCrop(sectNum, bedNum: bedNum, notes: notesField.text)
         
         
         //update harvest button
