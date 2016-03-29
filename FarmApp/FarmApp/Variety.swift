@@ -16,13 +16,14 @@ class Variety: NSObject, NSCoding{
     var varietyWeight : Int!
     
     //Default init method
-    init(name: String, bestSeasons : [String], notes : String, bedHistory: [BedHistory], plant: Plant){
+    init(name: String, bestSeasons : [String], notes : String, bedHistory: [BedHistory], plant: Plant, varietyWeight: Int){
         super.init()
         self.name = name
         self.bestSeasons = bestSeasons
         self.notes = notes
         self.bedHistory = bedHistory
         self.plant = plant
+        self.varietyWeight = varietyWeight
     }
     
     //Decode object from memory -- for archiving (saving) albums

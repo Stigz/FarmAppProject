@@ -86,6 +86,20 @@ import UIKit
         return weightInputField.text
     }
     
+    //Checkis if the user has input all necessary fields
+    func fieldsFilled() -> Bool{
+        if weightInputField.text != ""{
+            if dayInputField.text != ""{
+                if monthInputField.text != ""{
+                    if yearInputField.text != ""{
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+    
     //Clears user input from the fields
     func clearInputs(){
         dayInputField.text = ""
@@ -99,13 +113,11 @@ import UIKit
         if let delegate = delegate{
             delegate.harvestButtonClicked(self)
         }
-        clearInputs()
     }
     @IBAction func finalHarvestButtonClicked() {
         if let delegate = delegate{
             delegate.finalHarvestButtonClicked(self)
         }
-        clearInputs()
     }
 
 }
