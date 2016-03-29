@@ -24,18 +24,15 @@ class PersistencyManager: NSObject {
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
         //Make temp plants
-        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [])
-        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: "",varieties: [])
-        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: "",varieties: [])
-        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: "",varieties: [])
-        
-        plant1.plant_weight = 50
-        plant3.plant_weight = 60
+        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
+        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: "",varieties: [], weight: 0)
+        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: "",varieties: [], weight: 60)
+        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: "",varieties: [], weight: 0)
 
-        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1)
-        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2)
-        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3)
-        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4)
+        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
+        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2, varietyWeight: 0)
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3, varietyWeight: 60)
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4, varietyWeight: 0)
        
         variety1.varietyWeight = 50
         variety3.varietyWeight = 60
@@ -47,11 +44,11 @@ class PersistencyManager: NSObject {
         plant4.varieties.append(variety4)
         allPossiblePlants = [plant1,plant2,plant3,plant4]
         //Make temp crops
-        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
         //Make temp beds
         let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]))
@@ -89,18 +86,26 @@ class PersistencyManager: NSObject {
     }
     
     //Harvest a crop for the final time
-    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.finalHarvest = dateHarvested
+        harvestBed.currentCrop!.totalWeight=harvestBed.currentCrop!.totalWeight+harvestWeight
+        harvestBed.currentCrop!.variety.varietyWeight=harvestBed.currentCrop!.variety.varietyWeight+harvestWeight
+        harvestBed.currentCrop!.variety.plant.plant_weight=harvestBed.currentCrop!.variety.plant.plant_weight+harvestWeight
         harvestBed.cropHistory.crops.insert(harvestBed.currentCrop!, atIndex: 0)
         harvestBed.cropHistory.numCrops!++
         harvestBed.currentCrop = nil
     }
 
     //Harvest a crop in a given bed
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.datesHarvested.append(dateHarvested)
+        harvestBed.currentCrop!.harvestWeights.append(harvestWeight)
+        harvestBed.currentCrop!.totalWeight=harvestBed.currentCrop!.totalWeight+harvestWeight
+        harvestBed.currentCrop!.variety.varietyWeight=harvestBed.currentCrop!.variety.varietyWeight+harvestWeight
+        harvestBed.currentCrop!.variety.plant.plant_weight=harvestBed.currentCrop!.variety.plant.plant_weight+harvestWeight
+        
     }
     
     //Return list of beds for a section

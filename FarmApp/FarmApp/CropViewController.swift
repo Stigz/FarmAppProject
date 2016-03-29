@@ -107,6 +107,21 @@ class CropViewController: UIViewController {
         return nil
     }
     
+    //Gathers the weight from the input fields
+    //Called when crop is harvested
+    func gatherWeightFromFields() -> Int?{
+        if let weight = Int(harvestButtonView.getWeightInput()!){
+            return weight
+        }else{
+            //If unsuccessful in gathering weight, inform user
+            let alertController = UIAlertController(title: "Error!", message: "You have entered an invalid weight! Please make sure you have entered a number.", preferredStyle: UIAlertControllerStyle.Alert)
+            //Allow dismissing the alert
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return nil
+        }
+    }
+    
     //If the user wants to add a new crop, transition to 
     //add crop screen, and harvest crop on this screen
     func addNewCrop(action: UIAlertAction){
@@ -147,6 +162,42 @@ class CropViewController: UIViewController {
             harvestedButton.setTitle("Harvested: \(crop.finalHarvest!.printSlash())", forState: .Normal)
             //to disallow clicking on the date
             harvestedButton.userInteractionEnabled = false
+        }
+    }
+    
+    func commonHarvestButtonClicked(final : Bool){
+        if harvestButtonView.fieldsFilled(){
+            if let harvestWeight = gatherWeightFromFields(){
+                //Grab harvest date from fields
+                if let newHarvest = gatherDatesFromFields() {
+                    harvestButtonView.clearInputs()
+                    if (final){
+                        //Harvest crop (final harvest)
+                        LibraryAPI.sharedInstance.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest, harvestWeight: harvestWeight)
+                        //Update crop for harvest
+                        self.crop = LibraryAPI.sharedInstance.getCropFromHistory(sectNum, bedNum: bedNum, index: 0)
+                        //Ask user if they would like to add a new crop
+                        let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
+                        //If so, go to new add crop screen
+                        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: addNewCrop))
+                        //otherwise, update view
+                        alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: cropHarvested))
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }else{
+                        //Harvest crop
+                        LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest, harvestWeight: harvestWeight)
+                        //Update current crop for new harvest date
+                        self.crop = LibraryAPI.sharedInstance.getCurrentCropForBed(sectNum, bedNum: bedNum)
+                        //update view to show "harvest now" button
+                        updateViewForHarvest(true)
+                    }
+                }
+            }
+        }else{
+            //ALert user that they are missing information
+            let alertController = UIAlertController(title: "Missing Information", message: "Please fill out all information before harvesting a crop.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -213,31 +264,10 @@ extension CropViewController: UITableViewDelegate {
 
 extension CropViewController: HarvestViewDelegate{
     func harvestButtonClicked(view : HarvestButtonsView){
-        //Grab harvest date from fields
-        if let newHarvest = gatherDatesFromFields() {
-            //Harvest crop
-            LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
-            //Update current crop for new harvest date
-            self.crop = LibraryAPI.sharedInstance.getCurrentCropForBed(sectNum, bedNum: bedNum)
-            //update view to show "harvest now" button
-            updateViewForHarvest(true)
-        }
+        commonHarvestButtonClicked(false)
     }
     
     func finalHarvestButtonClicked(view : HarvestButtonsView){
-        //Grab harvest date from fields
-        if let newHarvest = gatherDatesFromFields() {
-            //Harvest crop (final harvest)
-            LibraryAPI.sharedInstance.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
-            //Update crop for harvest
-            self.crop = LibraryAPI.sharedInstance.getCropFromHistory(sectNum, bedNum: bedNum, index: 0)
-            //Ask user if they would like to add a new crop
-            let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
-            //If so, go to new add crop screen
-            alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: addNewCrop))
-            //otherwise, update view
-            alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: cropHarvested))
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
+        commonHarvestButtonClicked(true)
     }
 }

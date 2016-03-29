@@ -18,12 +18,13 @@ class Plant: NSObject, NSCoding{
     var plant_weight : Int!
     
     //Default init method
-    init(name: String, bestSeasons : [String], notes : String, varieties: [Variety]){
+    init(name: String, bestSeasons : [String], notes : String, varieties: [Variety], weight: Int){
         super.init()
         self.name = name
         self.bestSeasons = bestSeasons
         self.notes = notes
         self.varieties = varieties
+        self.plant_weight = weight
     }
     
     //Decode object from memory -- for archiving (saving) albums
