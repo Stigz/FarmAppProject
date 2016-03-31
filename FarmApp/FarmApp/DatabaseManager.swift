@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 class DatabaseManager: NSObject {
     
+    private var sectionArray = [Section]()
+    
+    private var allPossiblePlants = [Plant]()
+    
     override init() {
         super.init()
     }
@@ -27,47 +31,225 @@ class DatabaseManager: NSObject {
         let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
         
         ref.observeEventType(.Value, withBlock: { snapshot in
+            //var cropArray = 
             print(snapshot.value.objectForKey("Crop"))
             }, withCancelBlock: { error in
                 print(error.description)
         })
         
+       // let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1))
         
         var cropForDatabase = ["SectNum": sectNum, "BedNum": bedNum, "Notes": notes]
         let postRef = ref.childByAppendingPath("Crop")
         let post1Ref = postRef.childByAutoId()
         var cropID = post1Ref.key
         post1Ref.setValue(cropForDatabase)
+        //var cropForDatabase = ["SectNum": sectNum, "BedNum": bedNum, "Notes": notes]
+       // let postRef = ref.childByAppendingPath("Sections")
+        //let post1Ref = postRef.childByAutoId()
+        //var cropID = post1Ref.key
+        //post1Ref.setValue(cropForDatabase)
     }
     
-    func getSects(){
-        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+    func getSects() -> [Section]{
+        var sectionsRef: Firebase!
+        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
         
-        ref.observeEventType(.Value, withBlock: { snapshot in
-            print(snapshot.value.objectForKey("Sections"))
-            var Sects = snapshot.value.objectForKey("Sections")
-            }, withCancelBlock: { error in
-                print(error.description)
+        //Make temp plants
+        let plant1 = Plant(name: "Wheat",bestSeasons: [],notes: [],varieties: [])
+        let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
+        let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
+        let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
+        
+        plant1.plant_weight = 50
+        plant3.plant_weight = 60
+        
+        let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
+        let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+        
+        variety1.varietyWeight = 50
+        variety1.varietyWeight = 40
+        //Setup plant varieties
+        
+        plant1.varieties.append(variety1)
+        plant2.varieties.append(variety2)
+        plant3.varieties.append(variety3)
+        plant4.varieties.append(variety4)
+        allPossiblePlants = [plant1,plant2,plant3,plant4]
+        //Make temp crops
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "Hello World",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]))
+        
+        
+        var section: [Int]
+        var sections: AnyObject
+        var sectionFor: [Section]
+        sectionFor = []
+        
+        sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            
+            //var beds = snapshot.value["Beds"] as! NSDictionary
+            var id = snapshot.value["id"] as? String
+            var numBeds = snapshot.value["numBeds"] as! String
+            snapshot.value
+            var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
+            var numBedsInt =  NSNumberFormatter().numberFromString(numBeds)?.integerValue
+            sectionFor = [Section(id: idAsInt!, beds: [bed2], numBeds: numBedsInt!)]
+            //sections.append(sectionTest)
+            
+            
+            
+            
+            // let section = Section(id: id,beds,numBeds)
+            
+            //self.sectionArray.append(section)
         })
         
-        //var cropForDatabase = ["SectNum": sectNum, "BedNum": bedNum, "Notes": notes]
-        let postRef = ref.childByAppendingPath("Sections")
-        let post1Ref = postRef.childByAutoId()
-        var cropID = post1Ref.key
-        //post1Ref.setValue(cropForDatabase)
+        
+        //sectionFor = [Section(id: , beds: [bed2], numBeds: 1)]
+        print(sectionArray)
+        
+        
+        return sectionArray
+        /*
+        // *** STEP 2: SETUP FIREBASE
+        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
+        
+        sectionsRef.observeEventType(.Value, withBlock: { (snapshot) in
+            
+            var sectionTest = snapshot.value
+            
+            //sections.append(sectionTest)
+            
+            
+            
+            
+            // let section = Section(id: id,beds,numBeds)
+            
+            //self.sectionArray.append(section)
+        })
+        
+        //print(sections)
+        // *** STEP 4: RECEIVE MESSAGES FROM FIREBASE (limited to latest 25 messages)
+        sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            
+            
+            var sectionArray: [Section]
+            var beds = snapshot.value["Beds"] as! NSDictionary
+            var id = snapshot.value["id"] as? String
+            var numBeds = snapshot.value["numBeds"] as! String
+            print("Beds: "+String(beds)+"  SectionID: "+String(id)+"  Numbeds"+numBeds+"  SectionKey"+snapshot.key)
+            var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
+            var numBedsInt =  NSNumberFormatter().numberFromString(numBeds)?.integerValue
+            section.append(idAsInt!)
+            section.append(numBedsInt!)
+
+            
+            
+           // let section = Section(id: id,beds,numBeds)
+            
+            //self.sectionArray.append(section)
+        })
+            //let ID = Int(section[0].value)
+            //let numBedz = Int(section[1].value)
+            //let bedTest = [sectionArray[2].beds[1]]
+            sectionFor = Section(id: ID, beds: bedTest, numBeds: numBedz)
+         //var sects = snapshot.value.objectForKey("Sections")
+*/
     }
     func createSects(sections: [Section]) {
         let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
         let postRef = ref.childByAppendingPath("Sections")
         var i : Int
         for i in 0...(sections.count-1){
-            postRef.childByAutoId().setValue(String(sections[i].id))
+            var beds = [NSDictionary]()
+           // let sectionRef = postRef.childByAppendingPath("\(sections[i])")
+            //sectionRef.setValue(
+            for j in (0...sections[i].beds.count-1){
+                beds.append(["id": String(sections[i].beds[j].id), "bedWeight": String(sections[i].beds[j].bedWeight)])
+             //   postRefX = postRef+ "\(j)"
+            //    postRefX.childByAutoId().setValue(beds)
+            }
+            var sect = ["id":String(sections[i].id), "numBeds" : String(sections[i].numBeds), "sectionWeight" : String(sections[i].sectionWeight), "beds": beds]
+            postRef.childByAutoId().setValue(sect)
+        }
+    }
+
+    func createSectWithBeds(sections: [Section]) {
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+        let sectionRef = ref.childByAppendingPath("Sections")
+        var i : Int
+        for i in 2...(sections.count-1){
+            let sectionKey = sectionRef.childByAutoId()
+            var sect = ["id":String(sections[i].id), "numBeds" : String(sections[i].numBeds)]
+            sectionKey.setValue(sect)
+            let bedRef = sectionKey.childByAppendingPath("Beds")
+            for j in (0...sections[i].beds.count-1){
+                let bedKey = bedRef.childByAutoId()
+                bedKey.setValue(["id": String(sections[i].beds[j].id)])
+            }
+            
+            
         }
     }
     
+    func createBedsWithCrops(sections: [Section]) {
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+        let bedsRef = ref.childByAppendingPath("Beds")
+        var i : Int
+        for i in 0...(sections.count-1){
+            let bedKey = bedsRef.childByAutoId()
+            var bed = ["id":String(sections[i].id), "numBeds" : String(sections[i].numBeds)]
+            bedKey.setValue(bed)
+            let bedRef = bedKey.childByAppendingPath("Beds")
+            for j in (0...sections[i].beds.count-1){
+                let bedKey = bedRef.childByAutoId()
+                bedKey.setValue(["id": String(sections[i].beds[j].id)])
+            }
+            
+            
+        }
+    }
+    
+    func createBed(sections: [Section]/*,sectionKey: Section.self*/) {
+        var bed = sections[2].beds[1]
+        var bedID = bed.id
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+        let bedRef = ref.childByAppendingPath("Beds")
+        var bedForDb = ["Id": String(bedID)]
+        bedRef.childByAutoId().setValue(bedForDb)
+    }
+    func createCrop(sections: [Section]) {
+        var crop = sections[2].beds[1].currentCrop
+        var variety = crop?.variety.name
+        var date = crop?.datePlanted
+        let cropRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Crops")
+        var cropForDb = ["Variety": String(variety), "DatePlanted": (String(date?.day)+String(date?.month)+String(date?.year))]
+        cropRef.childByAutoId().setValue(cropForDb)
+    }
+    
+    /*
+    func createCrop(newCrop, bedKey: bedKey,sectKey: sectNum) {
+        var newCrop = newCrop
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com/")
+        let cropRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Crops")
+        var cropForDb = ["Crop": newCrop, "bedKey": bedKey, "secNum": sectKey]
+        var cropKey = cropRef.childByAutoId()
+        cropKey.setValue(cropForDb)
+        let bedRef = ref.childByAppendingPath("Beds")
+        bedRef.queryOrderedByChild(bedKey.key)
+        bedkey.key.cropKey
+    }
+    */
+    
+    
     func saveToDatabase () {
-        //let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
-      /*
+        /*let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+      
         var beds = LibraryAPI.sharedInstance.getBed(1, bedNum: 1)
         var sects = LibraryAPI.sharedInstance.getSects()
         var section1 = LibraryAPI.sharedInstance.getSection(1)
@@ -78,16 +260,17 @@ class DatabaseManager: NSObject {
         var crop = LibraryAPI.sharedInstance.getCurrentCropForBed(3, bedNum:3)
         var cropForDatabase = ["DatePlanted": String(crop?.notes)]
         print(cropForDatabase)
-         "CurrentCrop": beds.cropHistory.crops.
+        
         
         print(sectsForDatabase)
-        ref.setValue(bedsForDatabase)
+        
        
         let postRef = ref.childByAppendingPath("Sections")
         
+        
         let post1Ref = postRef.childByAutoId()
         let post2Ref = postRef.childByAutoId()
-       
+        post1Ref.setValue(bedsForDatabase)
        
 
         
@@ -99,8 +282,17 @@ class DatabaseManager: NSObject {
             }, withCancelBlock: { error in
                 print(error.description)
         }) */
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+        
+        ref.observeEventType(.Value, withBlock: { snapshot in
+            //var cropArray =
+            print(snapshot.value.objectForKey("Crop"))
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+        
     }
-    
+
     
 
 }

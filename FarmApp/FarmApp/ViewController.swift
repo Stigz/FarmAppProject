@@ -20,13 +20,19 @@ class ViewController: UIViewController {
     var currentSect : Section!
     
     private let databaseManager = DatabaseManager()
+    
+    func getSectsFromDatabase(section: [Section]) ->[Section]{
+        return section
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Set default bed number
-        sections = LibraryAPI.sharedInstance.getSects()
+        //sections = LibraryAPI.sharedInstance.getSects()
+        sections = 
         numSects = sections.count
+        
         
         //Register table for cell class
         self.sectionTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -36,7 +42,10 @@ class ViewController: UIViewController {
         
         //LibraryAPI.sharedInstance.commitToDatabase()
         
-        databaseManager.createSects(sections)
+        //databaseManager.createCrop(sections)
+        //databaseManager.createSectWithBeds(sections)
+        //databaseManager.createBed(sections)
+        databaseManager.getSects()
         
     }
 
@@ -51,6 +60,7 @@ class ViewController: UIViewController {
         
     }
     
+   
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
