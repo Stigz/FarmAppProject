@@ -17,6 +17,7 @@ class DatabaseManager: NSObject {
     override init() {
         super.init()
         getSects()
+        mergeFlatDataSectBeds()
     }
     
     func addCropToDatabase(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?){
@@ -246,6 +247,19 @@ class DatabaseManager: NSObject {
     }
     */
     
+    
+    func mergeFlatDataSectBeds () {
+        let ref = Firebase(url: "https://docs-examples.firebaseio.com/web/org")
+        
+        // fetch a list of Mary's groups
+        ref.childByAppendingPath("users/mchen/groups").observeEventType(.ChildAdded, withBlock: {snapshot in
+            // for each group, fetch the name and print it
+            let groupKey = snapshot.key
+            ref.childByAppendingPath("groups/\(groupKey)/name").observeSingleEventOfType(.Value, withBlock: {snapshot in
+                print("Mary is a member of this group: \(snapshot.value)")
+            })
+        })
+    }
     
     func saveToDatabase () {
         /*let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
