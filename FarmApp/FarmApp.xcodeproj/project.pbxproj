@@ -230,9 +230,9 @@
 		E1D5BD251C6AF086009E575A /* API */ = {
 			isa = PBXGroup;
 			children = (
-				E1D5BD261C6B0785009E575A /* LibraryAPI.swift */,
 				E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */,
 				F509E1E51C9C57250013D97D /* DatabaseManager.swift */,
+				E1D5BD261C6B0785009E575A /* LibraryAPI.swift */,
 				E1D5BD241C6AEFEC009E575A /* Controllers */,
 			);
 			name = API;

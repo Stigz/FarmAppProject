@@ -19,6 +19,7 @@ class LibraryAPI: NSObject {
         super.init()
     }
     
+    
     //Create class variable as computed type
     // This is so you don't have to instantiate
     // LibraryAPI to call it
@@ -33,14 +34,20 @@ class LibraryAPI: NSObject {
         return Singleton.instance
     }
     
+    func setSections(section: [Section]){
+        persistencyManager.setSections(section)
+    }
+    
+   /*
    func commitToDatabase(){
       return persistencyManager.commitToDatabase()
-    }
+    }*/
     
     //Ask persistency manager for sections
     func getSects() -> [Section]{
-        //return persistencyManager.getSects()
-        return databaseManager.getSects()
+        databaseManager.getSects()
+        return persistencyManager.getSects()
+        //return databaseManager.getSects()
     }
     func getSection(sectNum: Int)->Section{
         return persistencyManager.getSection(sectNum)

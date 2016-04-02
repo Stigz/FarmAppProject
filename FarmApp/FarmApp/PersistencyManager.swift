@@ -12,16 +12,17 @@ class PersistencyManager: NSObject {
     
     private var sections = [Section]()
     
-    private var database = DatabaseManager()
-
-    
 
     private var allPossiblePlants = [Plant]()
     
     override init() {
         super.init()
         //TO-DO: Make it so we don't have to hard code these
-        hardCodeSections()
+       // hardCodeSections()
+    }
+    func setSections(section: [Section]){
+        print("Section \(section)")
+        sections = section
     }
     
     //TO-DO: Make it so we don't have to hard code these
@@ -69,13 +70,14 @@ class PersistencyManager: NSObject {
         sections = [sect1,sect2,sect3,sect4]
     }
 
-    //Commits data to Database
+    /*Commits data to Database
     func commitToDatabase() {
        return database.saveToDatabase()
-    }
+    }*/
     
     //Return section list
     func getSects() -> [Section]{
+        print("Sections \(sections)")
         return sections
         
     }

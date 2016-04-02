@@ -16,6 +16,7 @@ class DatabaseManager: NSObject {
     
     override init() {
         super.init()
+        getSects()
     }
     
     func addCropToDatabase(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?){
@@ -51,7 +52,7 @@ class DatabaseManager: NSObject {
         //post1Ref.setValue(cropForDatabase)
     }
     
-    func getSects() -> [Section]{
+    func getSects(){
         var sectionsRef: Firebase!
         sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
         
@@ -90,16 +91,19 @@ class DatabaseManager: NSObject {
         var sectionFor: [Section]
         sectionFor = []
         
+        
         sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
             
             //var beds = snapshot.value["Beds"] as! NSDictionary
             var id = snapshot.value["id"] as? String
             var numBeds = snapshot.value["numBeds"] as! String
-            snapshot.value
+            
+            sectionsRef.childByAppendingPath("Beds")
             var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
             var numBedsInt =  NSNumberFormatter().numberFromString(numBeds)?.integerValue
             sectionFor = [Section(id: idAsInt!, beds: [bed2], numBeds: numBedsInt!)]
             //sections.append(sectionTest)
+            LibraryAPI.sharedInstance.setSections(sectionFor)
             
             
             
@@ -111,10 +115,6 @@ class DatabaseManager: NSObject {
         
         
         //sectionFor = [Section(id: , beds: [bed2], numBeds: 1)]
-        print(sectionArray)
-        
-        
-        return sectionArray
         /*
         // *** STEP 2: SETUP FIREBASE
         sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
