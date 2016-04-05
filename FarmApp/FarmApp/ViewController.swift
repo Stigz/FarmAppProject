@@ -54,10 +54,6 @@ class ViewController: UIViewController {
             let bvc = segue.destinationViewController as! BedsViewController
             bvc.setInfo(currentSect.id)
         }
-        if(segue.identifier == "toCropList"){
-            segue.destinationViewController as! CropListViewController
-            
-        }
 
     }
 

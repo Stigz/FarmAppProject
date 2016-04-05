@@ -28,7 +28,10 @@
 		E15ED59C1C6C3BBA005D3A48 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59B1C6C3BBA005D3A48 /* Section.swift */; };
 		E15ED59E1C6C3DBA005D3A48 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */; };
 		E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */; };
+		E17553791CA207C500566641 /* AddSeasonsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17553781CA207C500566641 /* AddSeasonsPicker.swift */; };
 		E1949CE31C87BF8F00157DC1 /* AddCropPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */; };
+		E1C938A01C8E846D0009E052 /* HarvestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9389F1C8E846D0009E052 /* HarvestView.xib */; };
+		E1C938A21C8E85770009E052 /* HarvestButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C938A11C8E85770009E052 /* HarvestButtonsView.swift */; };
 		E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5BD261C6B0785009E575A /* LibraryAPI.swift */; };
 		E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */; };
 		E1E5BEBD1C72AC7D007B8E82 /* BedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5BEBC1C72AC7D007B8E82 /* BedViewController.swift */; };
@@ -79,7 +82,10 @@
 		E15ED59B1C6C3BBA005D3A48 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		E15ED59F1C6C42AC005D3A48 /* BedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedsViewController.swift; sourceTree = "<group>"; };
+		E17553781CA207C500566641 /* AddSeasonsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSeasonsPicker.swift; sourceTree = "<group>"; };
 		E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCropPickers.swift; sourceTree = "<group>"; };
+		E1C9389F1C8E846D0009E052 /* HarvestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HarvestView.xib; sourceTree = "<group>"; };
+		E1C938A11C8E85770009E052 /* HarvestButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarvestButtonsView.swift; sourceTree = "<group>"; };
 		E1D5BD261C6B0785009E575A /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
 		E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bed.swift; sourceTree = "<group>"; };
 		E1E5BEBC1C72AC7D007B8E82 /* BedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +173,8 @@
 		E1D5BD221C6AEFC4009E575A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E1C9389F1C8E846D0009E052 /* HarvestView.xib */,
+				E1C938A11C8E85770009E052 /* HarvestButtonsView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -200,6 +208,7 @@
 				E15AEA531C7B94E900FB601E /* AddCropViewController.swift */,
 
 				E1949CE21C87BF8F00157DC1 /* AddCropPickers.swift */,
+				E17553781CA207C500566641 /* AddSeasonsPicker.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -317,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1C938A01C8E846D0009E052 /* HarvestView.xib in Resources */,
 				E10DE85D1C69A06D00DAC725 /* LaunchScreen.storyboard in Resources */,
 				E10DE85A1C69A06D00DAC725 /* Assets.xcassets in Resources */,
 				E10DE8581C69A06D00DAC725 /* Main.storyboard in Resources */,
@@ -353,6 +363,7 @@
 				E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */,
 				E1949CE31C87BF8F00157DC1 /* AddCropPickers.swift in Sources */,
 				E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */,
+				E1C938A21C8E85770009E052 /* HarvestButtonsView.swift in Sources */,
 				B8FB87931C74F7880002299F /* BedHistory.swift in Sources */,
 				B8FB878D1C739AC40002299F /* CropHistory.swift in Sources */,
 				B83B6AAE1C7E72BF00EA59D9 /* VarietyViewController.swift in Sources */,
@@ -365,6 +376,7 @@
 				E10DE8531C69A06D00DAC725 /* AppDelegate.swift in Sources */,
 				B8FB87911C74F6770002299F /* Variety.swift in Sources */,
 				E116D5E71C742CA30031D9BD /* CropViewController.swift in Sources */,
+				E17553791CA207C500566641 /* AddSeasonsPicker.swift in Sources */,
 				B8FB878B1C7398C50002299F /* Crop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

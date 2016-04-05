@@ -27,21 +27,20 @@ class PersistencyManager: NSObject {
     //TO-DO: Make it so we don't have to hard code these
     func hardCodeSections(){
         //Make temp plants
-        let plant1 = Plant(name: "Wheat",bestSeasons: [],notes: [],varieties: [])
-        let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
-        let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
-        let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
-        
-        plant1.plant_weight = 50
-        plant3.plant_weight = 60
-   
-        let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
-        let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
-        let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
-        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+
+        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
+        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: "",varieties: [], weight: 0)
+        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: "",varieties: [], weight: 60)
+        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: "",varieties: [], weight: 0)
+
+        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
+        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2, varietyWeight: 0)
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3, varietyWeight: 60)
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4, varietyWeight: 0)
+
        
         variety1.varietyWeight = 50
-        variety1.varietyWeight = 40
+        variety3.varietyWeight = 60
         //Setup plant varieties
 
         plant1.varieties.append(variety1)
@@ -50,22 +49,29 @@ class PersistencyManager: NSObject {
         plant4.varieties.append(variety4)
         allPossiblePlants = [plant1,plant2,plant3,plant4]
         //Make temp crops
-        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1))
-        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
         //Make temp beds
         let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
         let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]))
         let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]))
         let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]))
         //Make temp sects
-        let sect1 = Section(id: 1,beds: [bed1],numBeds: 1)
-        let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2)
-        let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3)
-        let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4)
+        let sect1 = Section(id: 1,beds: [bed1],numBeds: 1, sectionWeight: 0)
+        
+        let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2, sectionWeight: 0)
+        let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
+        let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
         sections = [sect1,sect2,sect3,sect4]
+        
+        //Set bed histories
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed1))
+        variety2.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed2))
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed3))
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed4))
     }
     
     //Return section list
@@ -85,18 +91,26 @@ class PersistencyManager: NSObject {
     }
     
     //Harvest a crop for the final time
-    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.finalHarvest = dateHarvested
+        harvestBed.currentCrop!.totalWeight=harvestBed.currentCrop!.totalWeight+harvestWeight
+        harvestBed.currentCrop!.variety.varietyWeight=harvestBed.currentCrop!.variety.varietyWeight+harvestWeight
+        harvestBed.currentCrop!.variety.plant.plant_weight=harvestBed.currentCrop!.variety.plant.plant_weight+harvestWeight
         harvestBed.cropHistory.crops.insert(harvestBed.currentCrop!, atIndex: 0)
         harvestBed.cropHistory.numCrops!++
         harvestBed.currentCrop = nil
     }
 
     //Harvest a crop in a given bed
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.datesHarvested.append(dateHarvested)
+        harvestBed.currentCrop!.harvestWeights.append(harvestWeight)
+        harvestBed.currentCrop!.totalWeight=harvestBed.currentCrop!.totalWeight+harvestWeight
+        harvestBed.currentCrop!.variety.varietyWeight=harvestBed.currentCrop!.variety.varietyWeight+harvestWeight
+        harvestBed.currentCrop!.variety.plant.plant_weight=harvestBed.currentCrop!.variety.plant.plant_weight+harvestWeight
+        
     }
     
     //Return list of beds for a section
@@ -140,8 +154,45 @@ class PersistencyManager: NSObject {
         getCropFromHistory(sectNum, bedNum: bedNum, index: index).notes=notes
     }
     
-    func getTotalWeight() -> Int{
-        var totalWeight = 0
+    //Return list of all plants currently planted in the farm
+    func getCurrentPlants() -> [Plant]{
+        var thePlants : [Plant] = []
+        for sect in getSects() {
+            for bed in sect.beds {
+                if let theCrop = bed.currentCrop{
+                    if !thePlants.contains(theCrop.variety.plant) {
+                        thePlants.append(theCrop.variety.plant)
+                    }
+                }
+            }
+        }
+        return thePlants
+    }
+    
+    //Updates the notes for a given plant
+    func updateNotesForPlant(plant: String, notes : String){
+        for plants in getAllPossiblePlants() {
+            if plants.name == plant {
+                plants.notes = notes
+            }
+        }
+    }
+    
+    //Updates the notes of a given variety
+    func updateNotesForVariety(plant : String, variety : String, notes: String){
+        for plants in getAllPossiblePlants() {
+            if plants.name == plant{
+                for varietys in plants.varieties{
+                    if varietys.name == variety{
+                        varietys.notes = notes
+                    }
+                }
+            }
+        }
+    }
+    
+    func getTotalWeight() -> Float{
+        var totalWeight : Float = 0
         for i in 1...sections.count{
             if(sections[i].sectionWeight != nil){
             totalWeight +=  sections[i].sectionWeight

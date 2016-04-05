@@ -10,40 +10,29 @@ import Foundation
 import UIKit
 
 class BedHistory: NSObject, NSCoding {
-    var dates : [Date]!
-    var beds : [Bed]!
+    var data : (Date, Bed)!
     
     
     init(date: Date, bed: Bed){
         super.init()
-       dates = [date]
-       beds = [bed]
+        data = (date,bed)
         
     }
-    override init(){
-        super.init()
-        dates = []
-        beds = []
-    }
+    
     required init(coder decoder: NSCoder) {
         super.init()
-        self.dates = decoder.decodeObjectForKey("BH_dates") as! [Date]
-        self.beds = decoder.decodeObjectForKey("BH_beds") as! [Bed]
+        let date = decoder.decodeObjectForKey("BH_date") as! Date
+        let bed = decoder.decodeObjectForKey("BH_bed") as! Bed
+        data = (date,bed)
         
     }
     
     //Encode object to memory -- for archiving
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(dates, forKey: "BH_dates")
-        aCoder.encodeObject(beds, forKey: "BH_beds")
-    }
-    
-    func print() -> String{
-        var retStr = ""
-        for i in 0...(dates.count - 1) {
-            retStr += "\(dates[i].printSlash())" + " Bed: " + beds[i].getID() + "\n"
-        }
-        return retStr
+        let date = data.0
+        let bed = data.1
+        aCoder.encodeObject(date, forKey: "BH_dates")
+        aCoder.encodeObject(bed, forKey: "BH_beds")
     }
 
 }

@@ -23,13 +23,15 @@ class Crop: NSObject, NSCoding{
     var totalWeight : Int!
     
     //do we want a crop to have to be initialized with an image?
-    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?){
+    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?, harvestWeights: [Int], totalWeight: Int){
         super.init()
         self.datePlanted = datePlanted
         self.datesHarvested = datesHarvested
         self.notes = notes
         self.variety = variety
         self.finalHarvest = finalHarvest
+        self.harvestWeights = harvestWeights
+        self.totalWeight = totalWeight
     }
     
     required init(coder decoder: NSCoder) {
