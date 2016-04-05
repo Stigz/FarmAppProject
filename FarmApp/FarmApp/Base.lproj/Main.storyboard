@@ -137,7 +137,6 @@
                     <connections>
                         <outlet property="hiddenField" destination="vwa-0L-Ycu" id="afl-A7-jVQ"/>
                         <outlet property="notesField" destination="339-QO-IGa" id="Rob-YE-eGo"/>
-                        <outlet property="notesLabel" destination="F1V-fX-rXG" id="StH-09-kxW"/>
                         <outlet property="plantLabel" destination="Sbs-Zf-9SQ" id="NsO-YY-ICR"/>
                         <outlet property="seasonsLabel" destination="cib-qj-2Hn" id="1x5-R3-5r2"/>
                         <outlet property="varietyTable" destination="Q8c-7B-bx6" id="sGb-3H-cep"/>
@@ -172,7 +171,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Src-Zh-CA2">
-                                <rect key="frame" x="15" y="164" width="571" height="378"/>
+                                <rect key="frame" x="15" y="361" width="571" height="181"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="260" id="Pye-8x-WfW"/>
@@ -257,6 +256,12 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nac-Ah-4tE">
+                                <rect key="frame" x="126" y="292" width="22" height="22"/>
+                                <connections>
+                                    <action selector="addVariety" destination="dkh-L5-GVZ" eventType="touchUpInside" id="8Nz-pC-lC2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -265,6 +270,7 @@
                             <constraint firstItem="zhZ-FV-tKB" firstAttribute="top" secondItem="weS-7O-sBv" secondAttribute="bottom" constant="30" id="2Sh-PW-VsW"/>
                             <constraint firstItem="4oD-fR-yMX" firstAttribute="leading" secondItem="iaK-Hx-KwE" secondAttribute="leadingMargin" constant="34" id="2Uv-XS-bl3"/>
                             <constraint firstItem="Src-Zh-CA2" firstAttribute="centerX" secondItem="iaK-Hx-KwE" secondAttribute="centerX" id="Mg1-hU-7vg"/>
+                            <constraint firstItem="nac-Ah-4tE" firstAttribute="top" secondItem="4oD-fR-yMX" secondAttribute="bottom" constant="15" id="MoX-aA-L8N"/>
                             <constraint firstItem="w4z-Zt-RN4" firstAttribute="top" secondItem="Src-Zh-CA2" secondAttribute="bottom" constant="20" id="PSw-BB-3Z4"/>
                             <constraint firstItem="uKG-d5-LRd" firstAttribute="leading" secondItem="zhZ-FV-tKB" secondAttribute="leading" constant="12" id="RvT-1l-ThQ"/>
                             <constraint firstItem="uKG-d5-LRd" firstAttribute="top" secondItem="zhZ-FV-tKB" secondAttribute="bottom" id="RyU-iA-qkh"/>
@@ -276,6 +282,7 @@
                             <constraint firstItem="4oD-fR-yMX" firstAttribute="top" secondItem="ex3-2Z-r8Y" secondAttribute="bottom" constant="8" id="bhb-X4-pt0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4oD-fR-yMX" secondAttribute="trailing" constant="34" id="bpR-Iq-brp"/>
                             <constraint firstItem="Src-Zh-CA2" firstAttribute="leading" secondItem="iaK-Hx-KwE" secondAttribute="leadingMargin" constant="34" id="dkt-YA-9me"/>
+                            <constraint firstItem="nac-Ah-4tE" firstAttribute="leading" secondItem="ROg-rV-3ow" secondAttribute="trailing" constant="8" id="fyy-6s-ySz"/>
                             <constraint firstItem="Gpp-kg-meK" firstAttribute="leading" secondItem="zhZ-FV-tKB" secondAttribute="trailing" constant="1" id="jXt-Jt-I9D"/>
                             <constraint firstItem="ROg-rV-3ow" firstAttribute="top" secondItem="4oD-fR-yMX" secondAttribute="bottom" constant="15" id="scq-nH-Ign"/>
                             <constraint firstItem="4oD-fR-yMX" firstAttribute="centerX" secondItem="iaK-Hx-KwE" secondAttribute="centerX" id="w7Y-cf-k6o"/>
@@ -331,6 +338,12 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmO-bN-puc">
                                 <rect key="frame" x="54" y="550" width="492" height="30"/>
                                 <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kOY-SE-WeZ">
+                                <rect key="frame" x="8" y="72" width="22" height="22"/>
+                                <connections>
+                                    <action selector="addPlant" destination="96I-1v-SuK" eventType="touchUpInside" id="2Mk-2R-q5C"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

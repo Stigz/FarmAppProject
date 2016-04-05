@@ -32,7 +32,9 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
 
     @IBOutlet weak var varietyTable: UITableView!
     @IBOutlet weak var notesField: UITextView!
-
+    
+    //for adding a new variety
+    var varietyNameField = UITextField!()
 
     //Controller instance variables
     var numVarieties = 0
@@ -125,6 +127,29 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
         }
         
         
+    }
+    
+    @IBAction func addVariety(){
+        let alertController = UIAlertController(title: "Add a new variety", message: "", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+        let add = UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler: newVariety)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        alertController.addTextFieldWithConfigurationHandler(addTextField)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func addTextField(textField: UITextField!){
+        // add the text field and make the result global
+        textField.placeholder = "Variety Name"
+        varietyNameField = textField
+    }
+    
+    func newVariety(alert: UIAlertAction!){
+        let nVariety = Variety(name: varietyNameField.text!, bestSeasons: [], notes: "", bedHistory: [], plant: plant, varietyWeight: 0)
+        varieties.append(nVariety)
+        varietyTable.reloadData()
+        //also refilter the plants?
     }
     
     //Dismisses notes keyboard, and saves the new notes

@@ -29,6 +29,8 @@ class VarietyViewController: UIViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var varietyTable: UITableView!
     
+  
+    
     //Controller instance variables
     var variety: Variety!
     var seasonsPicker : AddSeasonsPicker!
@@ -67,6 +69,9 @@ class VarietyViewController: UIViewController {
     func setInfo(variety: Variety){
         self.variety = variety
     }
+    
+ 
+
     
 
     //Dismisses notes keyboard, and saves the new notes

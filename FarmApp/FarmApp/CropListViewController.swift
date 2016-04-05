@@ -25,7 +25,8 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     let searchController = UISearchController(searchResultsController: nil)
 
     var showingCurrent : Bool = false
-
+    var plantNameField = UITextField!()
+   
     
     var filteredPlants = [Plant]()
     
@@ -48,6 +49,8 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
         
         //lets class know when things are typed
        configureSearchController()
+        
+       
 
         
     }
@@ -113,6 +116,29 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
             currentlyPlantedButton.setTitle("Show all crops", forState: .Normal)
         }
 
+    }
+    
+    @IBAction func addPlant(){
+        let alertController = UIAlertController(title: "Add a new plant", message: "", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+        let add = UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler: newPlant)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        alertController.addTextFieldWithConfigurationHandler(addTextField)
+        presentViewController(alertController, animated: true, completion: nil)
+        }
+    
+    func addTextField(textField: UITextField!){
+        // add the text field and make the result global
+        textField.placeholder = "Plant Name"
+        plantNameField = textField
+    }
+    
+    func newPlant(alert: UIAlertAction!){
+        let nPlant = Plant(name: plantNameField.text!, bestSeasons: [], notes: "", varieties: [], weight: 0)
+        plants.append(nPlant)
+        plantTable.reloadData()
+        //also refilter the plants?
     }
 
 
