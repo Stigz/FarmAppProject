@@ -148,6 +148,7 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
     func newVariety(alert: UIAlertAction!){
         let nVariety = Variety(name: varietyNameField.text!, bestSeasons: [], notes: "", bedHistory: [], plant: plant, varietyWeight: 0)
         varieties.append(nVariety)
+        plant.varieties.append(nVariety)
         varietyTable.reloadData()
         //also refilter the plants?
     }
