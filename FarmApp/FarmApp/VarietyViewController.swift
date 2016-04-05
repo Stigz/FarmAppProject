@@ -29,6 +29,8 @@ class VarietyViewController: UIViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var varietyTable: UITableView!
     
+  
+    
     //Controller instance variables
     var variety: Variety!
     var seasonsPicker : AddSeasonsPicker!
@@ -44,13 +46,13 @@ class VarietyViewController: UIViewController {
         self.varietyTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "bedCell")
         // This will remove extra separators from tableview
         self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
-        
-        
+
         //Initialize labels
         weightLabel.text = "(Total harvested: \(variety.varietyWeight)lbs)"
         plantLabel.text = "Variety of \(variety.plant.name)"
         notesField.text = variety.notes
         
+
 
         
         //Initialize seasons picker
@@ -67,6 +69,9 @@ class VarietyViewController: UIViewController {
     func setInfo(variety: Variety){
         self.variety = variety
     }
+    
+ 
+
     
 
     //Dismisses notes keyboard, and saves the new notes
