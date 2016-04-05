@@ -11,25 +11,33 @@ import UIKit
 
 class CropListViewController: UIViewController,  UISearchResultsUpdating {
     
-    //Table of sections
+    //UI Outlets
     @IBOutlet weak var plantTable: UITableView!
+    @IBOutlet weak var currentlyPlantedButton: UIButton!
   
-    //Number of sections in garden
+    //Instance variables
     var numPlants = 0
-    //Section list
     var plants : [Plant] = []
+
     //NOTE: Only for the prepare for segue
     var currentPlant : Plant!
     //creating the search controller
     let searchController = UISearchController(searchResultsController: nil)
+
+    var showingCurrent : Bool = false
+
     
     var filteredPlants = [Plant]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Grab plants
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         numPlants = plants.count
         self.navigationItem.title = "Crop List" 
+        
+        //Setup text views
+        updateCurrentlyPlantedText()
         
         //Register table for cell class
         self.plantTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
@@ -73,9 +81,38 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
        
         
     }
+
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
+    }
+
+    //Fires when "currently planted button" is pressed
+    //toggles showing all crops vs only planted crops
+    @IBAction func currentlyPlantedButtonPressed() {
+        //If showing only current, grab all possible
+        if showingCurrent{
+            plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
+        }else{//If showing all possible, grab only current
+            plants = LibraryAPI.sharedInstance.getCurrentPlants()
+        }
+        //Update views and boolean
+        showingCurrent = !showingCurrent
+        updateCurrentlyPlantedText()
+        plantTable.reloadData()
+    }
+    
+    //Update all text relating to whether all crops are shown
+    //or just planted ones
+    func updateCurrentlyPlantedText(){
+        if !showingCurrent {
+            self.navigationItem.title = "All crops"
+            currentlyPlantedButton.setTitle("Only show currently planted crops", forState: .Normal)
+        }else{
+            self.navigationItem.title = "Current Crops"
+            currentlyPlantedButton.setTitle("Show all crops", forState: .Normal)
+        }
+
     }
 
 
@@ -117,6 +154,12 @@ extension CropListViewController: UITableViewDataSource {
             cell.textLabel?.text = "\(plants[indexPath.row].name)"
             }
         }
+
+        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
+
         return cell
     }
 }

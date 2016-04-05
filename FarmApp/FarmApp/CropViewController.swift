@@ -9,22 +9,19 @@
 import UIKit
 
 class CropViewController: UIViewController {
+    
+ /* ----------------------------
+  * Saved variables
+  * ----------------------------
+  */
 
     //UI Outlets
-    @IBOutlet weak var cropBedLabel: UILabel!
+    @IBOutlet weak var harvestButtonView: HarvestButtonsView!
     @IBOutlet weak var varietyLabel: UILabel!
     @IBOutlet weak var plantedLabel: UILabel!
     @IBOutlet weak var harvestedButton: UIButton!
     @IBOutlet weak var notesField: UITextView!
     @IBOutlet weak var cropHistoryTable: UITableView!
-    
-    //Initially hidden labels
-    @IBOutlet weak var enterDateLabel: UILabel!
-    @IBOutlet weak var dayInput: UITextField!
-    @IBOutlet weak var monthInput: UITextField!
-    @IBOutlet weak var yearInput: UITextField!
-    @IBOutlet weak var harvestButton: UIButton!
-    @IBOutlet weak var finalHarvestButton: UIButton!
     
     
     //Controller Instance Variables
@@ -34,11 +31,15 @@ class CropViewController: UIViewController {
     var isPlanted : Bool = false
     var historyIndex : Int = 0
     
+ /* ---------------------------------------------
+  * Initialization and de-initialization
+  * ---------------------------------------------
+  */
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set up labels
         self.navigationItem.title = crop.variety.plant.name
-        cropBedLabel.text = "Planted in section \(sectNum), bed \(bedNum)."
         plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
         varietyLabel.text = "Variety: \(crop.variety.name)"
         
@@ -46,7 +47,8 @@ class CropViewController: UIViewController {
         notesField.text = crop.notes
         
         //update harvest button
-        updateHarvestButtonView()
+        harvestButtonView.delegate = self
+        updateHarvestButtonText()
         
         //Register table for cell class
         self.cropHistoryTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "harvestCell")
@@ -74,17 +76,22 @@ class CropViewController: UIViewController {
         }
     }
     
-    //Update view if user wants to "harvest now!"
-    @IBAction func harvest() {
+ /* ---------------------------------------------
+  * Harvesting functions
+  * ---------------------------------------------
+  */
+    
+    //Shows the input fields, when user wants to harvest
+    @IBAction func harvestNowButtonClicked() {
         updateViewForHarvest(false)
     }
     
     //Gathers and checks the dates from the input fields
     //Called when a crop is harvested (and dates are input)
     func gatherDatesFromFields() -> Date?{
-        if let day = Int(dayInput.text!){
-            if let month = Int(monthInput.text!){
-                if let year = Int(yearInput.text!){
+        if let day = Int(harvestButtonView.getDayInput()!){
+            if let month = Int(harvestButtonView.getMonthInput()!){
+                if let year = Int(harvestButtonView.getYearInput()!){
                     let theDate = Date(year: year, month: month, day: day)
                     if theDate.isValid(){
                         return theDate
@@ -100,34 +107,18 @@ class CropViewController: UIViewController {
         return nil
     }
     
-    //TO enter the harvest date -- called when "harvest once" is clicked
-    @IBAction func addHarvestDate() {
-        //Grab harvest date from fields
-        if let newHarvest = gatherDatesFromFields() {
-            //Harvest crop
-            LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
-            //Update current crop for new harvest date
-            self.crop = LibraryAPI.sharedInstance.getCurrentCropForBed(sectNum, bedNum: bedNum)
-            //update view to show "harvest now" button
-            updateViewForHarvest(true)
-        }
-    }
-    
-    //Called when final harvest button is clicked
-    @IBAction func finalHarvest(){
-        //Grab harvest date from fields
-        if let newHarvest = gatherDatesFromFields() {
-            //Harvest crop (final harvest)
-            LibraryAPI.sharedInstance.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest)
-            //Update crop for harvest
-            self.crop = LibraryAPI.sharedInstance.getCropFromHistory(sectNum, bedNum: bedNum, index: 0)
-            //Ask user if they would like to add a new crop
-            let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
-            //If so, go to new add crop screen
-            alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: addNewCrop))
-            //otherwise, update view
-            alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: cropHarvested))
+    //Gathers the weight from the input fields
+    //Called when crop is harvested
+    func gatherWeightFromFields() -> Int?{
+        if let weight = Int(harvestButtonView.getWeightInput()!){
+            return weight
+        }else{
+            //If unsuccessful in gathering weight, inform user
+            let alertController = UIAlertController(title: "Error!", message: "You have entered an invalid weight! Please make sure you have entered a number.", preferredStyle: UIAlertControllerStyle.Alert)
+            //Allow dismissing the alert
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
+            return nil
         }
     }
     
@@ -140,8 +131,28 @@ class CropViewController: UIViewController {
 
     }
     
-    //Updates the view for the harvest button
-    func updateHarvestButtonView(){
+    //If the user harvests, then show the reflected change
+    func cropHarvested(action: UIAlertAction){
+        isPlanted = false
+        updateViewForHarvest(true)
+    }
+    
+    //Updates the vuiew when a crop is harvested
+    func updateViewForHarvest(initialView : Bool){
+        updateHarvestButtonText()
+        if (initialView){
+            //Reload table, in case crop has been harvested
+            cropHistoryTable.reloadData()
+        }
+        //Harvest button is initially not hidden
+        //Buttons view is initially hidden
+        harvestedButton.hidden = !initialView
+        harvestButtonView.hidden = initialView
+    }
+    
+    
+    //Updates text of the harvest button
+    func updateHarvestButtonText(){
         //If planted, allow for user to harvest
         if (isPlanted){
             harvestedButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
@@ -154,34 +165,46 @@ class CropViewController: UIViewController {
         }
     }
     
-    //Updates the vuiew when a crop is harvested
-    func updateViewForHarvest(initialView : Bool){
-        updateHarvestButtonView()
-        //Initially, clear all input fields
-        if (initialView){
-            dayInput.text = ""
-            monthInput.text = ""
-            yearInput.text = ""
-            //Reload table, in case crop has been harvested
-            cropHistoryTable.reloadData()
+    func commonHarvestButtonClicked(final : Bool){
+        if harvestButtonView.fieldsFilled(){
+            if let harvestWeight = gatherWeightFromFields(){
+                //Grab harvest date from fields
+                if let newHarvest = gatherDatesFromFields() {
+                    harvestButtonView.clearInputs()
+                    if (final){
+                        //Harvest crop (final harvest)
+                        LibraryAPI.sharedInstance.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest, harvestWeight: harvestWeight)
+                        //Update crop for harvest
+                        self.crop = LibraryAPI.sharedInstance.getCropFromHistory(sectNum, bedNum: bedNum, index: 0)
+                        //Ask user if they would like to add a new crop
+                        let alertController = UIAlertController(title: "Crop harvested!", message: "Would you like to add another crop to this bed now?", preferredStyle: UIAlertControllerStyle.Alert)
+                        //If so, go to new add crop screen
+                        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: addNewCrop))
+                        //otherwise, update view
+                        alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: cropHarvested))
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }else{
+                        //Harvest crop
+                        LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest, harvestWeight: harvestWeight)
+                        //Update current crop for new harvest date
+                        self.crop = LibraryAPI.sharedInstance.getCurrentCropForBed(sectNum, bedNum: bedNum)
+                        //update view to show "harvest now" button
+                        updateViewForHarvest(true)
+                    }
+                }
+            }
+        }else{
+            //ALert user that they are missing information
+            let alertController = UIAlertController(title: "Missing Information", message: "Please fill out all information before harvesting a crop.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
-        //Harvest button is initially noy hidden
-        //Everything else is
-        harvestedButton.hidden = !initialView
-        enterDateLabel.hidden = initialView
-        dayInput.hidden = initialView
-        monthInput.hidden = initialView
-        yearInput.hidden = initialView
-        harvestButton.hidden = initialView
-        finalHarvestButton.hidden = initialView
     }
     
-    //If the user harvests, but does not add a new crop
-    //notify bed of harvest, and then show the reflected change
-    func cropHarvested(action: UIAlertAction){
-        isPlanted = false
-        updateViewForHarvest(true)
-    }
+ /* ---------------------------------------------
+  * Miscellaneous Functions
+  * ---------------------------------------------
+  */
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -205,8 +228,10 @@ class CropViewController: UIViewController {
     }
 
 }
-
-//Table View Extensions -- for harvest history table
+ /* ---------------------------------------------
+  * Table View Extensions -- for harvest history table
+  * ---------------------------------------------
+  */
 extension CropViewController: UITableViewDataSource {
     //Number of harvest dates
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -229,5 +254,20 @@ extension CropViewController: UITableViewDataSource {
 extension CropViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+}
+
+ /*------------------------------------------------------------
+  * Harvest Buttons View Extension -- for harvest input view
+  *------------------------------------------------------------
+  */
+
+extension CropViewController: HarvestViewDelegate{
+    func harvestButtonClicked(view : HarvestButtonsView){
+        commonHarvestButtonClicked(false)
+    }
+    
+    func finalHarvestButtonClicked(view : HarvestButtonsView){
+        commonHarvestButtonClicked(true)
     }
 }

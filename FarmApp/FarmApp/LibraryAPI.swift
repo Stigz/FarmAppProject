@@ -15,6 +15,7 @@ class LibraryAPI: NSObject {
     override init() {
         persistencyManager = PersistencyManager()
         super.init()
+        
     }
     
     //Create class variable as computed type
@@ -69,13 +70,13 @@ class LibraryAPI: NSObject {
     }
     
     //Ask persistency manager to do final harvest
-    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
-        persistencyManager.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested)
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+        persistencyManager.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested, harvestWeight: harvestWeight)
     }
     
     //Ask persistency manager to harvest crop
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date){
-        persistencyManager.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested)
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+        persistencyManager.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested, harvestWeight: harvestWeight)
     }
 
     
@@ -94,7 +95,21 @@ class LibraryAPI: NSObject {
     func updateNotesForCropInHistory(sectNum: Int, bedNum : Int, index: Int, notes: String){
         persistencyManager.updateNotesForCropInHistory(sectNum, bedNum: bedNum, index: index, notes: notes)
     }
-
+    
+    //Ask manager for list of all currently planted plants
+    func getCurrentPlants() -> [Plant]{
+        return persistencyManager.getCurrentPlants()
+    }
+    
+    //Ask to update variety notes
+    func updateNotesForVariety(plant : String, variety : String, notes: String){
+        persistencyManager.updateNotesForVariety(plant, variety: variety, notes: notes)
+    }
+    
+    //Ask to update plant notes
+    func updateNotesForPlant(plant: String, notes : String){
+        persistencyManager.updateNotesForPlant(plant, notes: notes)
+    }
 
 
 }

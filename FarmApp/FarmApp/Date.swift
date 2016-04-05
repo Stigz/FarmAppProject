@@ -49,13 +49,6 @@ class Date: NSObject, NSCoding{
         }
         return false
     }
-    
-    //Description of section
-     func print() -> String{
-        return "Year: \(year)" +
-        "Month: \(month)" + "Day: \(day)"
-        
-    }
     func printSlash() -> String{
     return "\(month)/" + "\(day)/" + "\(year)"
     }

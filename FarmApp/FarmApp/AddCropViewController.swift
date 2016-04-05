@@ -33,6 +33,7 @@ class AddCropViewController: UIViewController {
         super.viewDidLoad()
         //Setup title
         self.navigationItem.title = "Add Crop"
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("addCrop")), animated: false)
         titleLabel.text = "Add crop to section \(sectNum), bed \(bedNum)"
         //Default notes are blank
         notesField.text = ""
@@ -102,7 +103,7 @@ class AddCropViewController: UIViewController {
             }
         }
         //If unsuccessful in gathering date, inform user
-        let alertController = UIAlertController(title: "Error!", message: "You have entered an invalid date! Please enter it in the form DD-MM-YYYY.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Error!", message: "You have entered an invalid date! Please enter it in the form DD-MM-YYYY, and make sure that you have entered a valid date.", preferredStyle: UIAlertControllerStyle.Alert)
         //Allow dismissing the alert
         alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -115,7 +116,7 @@ class AddCropViewController: UIViewController {
             //Get date from fields
             if let addDate = gatherDatesFromFields(){
                 //Get crop from fields
-                let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil)
+                let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil, harvestWeights: [], totalWeight: 0)
                 //Add crop to API
                 LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
                 self.navigationController?.popViewControllerAnimated(true)

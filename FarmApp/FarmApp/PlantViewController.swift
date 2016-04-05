@@ -16,43 +16,57 @@ import UIKit
 //  Copyright © 2016 Patrick Little. All rights reserved.
 //
 
-import UIKit
-
 
 class PlantViewController: UIViewController, UISearchResultsUpdating {
     
-    //Table of sections
-    @IBOutlet weak var varietyTable: UITableView!
-    //Title label
- 
-    //seasons label
+
+    
+    //UI Outlets
+    @IBOutlet weak var hiddenField: UITextField!
+
     @IBOutlet weak var seasonsLabel: UILabel!
+
     
     //creating the search controller
     let searchController = UISearchController(searchResultsController: nil)
 
-    //Number of varieties in garden
+    @IBOutlet weak var varietyTable: UITableView!
+    @IBOutlet weak var notesField: UITextView!
+
+
+    //Controller instance variables
     var numVarieties = 0
-    //variety list
     var varieties : [Variety] = []
     var filteredVarieties = [Variety]()
     //NOTE: Only for the prepare for segue
+
     var plant : Plant!
     var currentVariety: Variety!
+    var seasonsPicker : AddSeasonsPicker!
     
    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = plant.name
+        self.navigationItem.title = "\(plant.name)"
+        
+        notesField.text = plant.notes
+        
+        //Initialize seasons picker
+        seasonsPicker = AddSeasonsPicker(frame: CGRect(x: 50, y: 50, width: 200, height: 200), seasonsLabel: seasonsLabel, seasonsChosen: plant.bestSeasons, hiddenField: hiddenField)
+        seasonsPicker.calculateSeasonsText()
+        
+
         
         //Register table for cell class
        self.varietyTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
         
         // This will remove extra separators from tableview
        self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
+
         // Do any additional setup after loading the view.
+
         
         configureSearchController()
         
@@ -73,6 +87,7 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
         searchController.searchBar.sizeToFit()
         searchController.hidesNavigationBarDuringPresentation = false
         
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -112,11 +127,16 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
         
     }
     
-    //Close the current screen -- back button clicked
-    @IBAction func close() {
-        dismissViewControllerAnimated(true, completion: nil)
+    //Dismisses notes keyboard, and saves the new notes
+    @IBAction func dismissKeyboard() {
+        notesField.resignFirstResponder()
+        LibraryAPI.sharedInstance.updateNotesForPlant(plant.name, notes: notesField.text)
     }
-    
+    //Called when add season button is pressed
+    //Show the picke
+    @IBAction func addSeasons() {
+        seasonsPicker.showPicker()
+    }
 }
 //Table View Extensions -- for section table
 extension PlantViewController: UITableViewDataSource {
@@ -147,7 +167,8 @@ extension PlantViewController: UITableViewDataSource {
                 cell.textLabel?.text = "\(varieties[indexPath.row].name)"
             }
         }
-        
+        //Set arrow accessory
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell
     }
