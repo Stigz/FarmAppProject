@@ -55,6 +55,20 @@ class BedsViewController: UIViewController {
         }
     
     }
+    
+  
+    
+    @IBAction func addBed(){
+        LibraryAPI.sharedInstance.addBed((numBeds + 1) , sectID: (sectNum - 1))
+        let sections = LibraryAPI.sharedInstance.getSects()
+        print("pre \(beds)")
+        beds = sections[sectNum - 1].beds
+        print("after \(beds)")
+        numBeds = beds.count
+        bedTable.reloadData()
+        
+    
+    }
 
 }
 

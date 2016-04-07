@@ -309,7 +309,7 @@
             </objects>
             <point key="canvasLocation" x="-1602" y="344"/>
         </scene>
-        <!--Crop List View Controller-->
+        <!--Crop View Controller-->
         <scene sceneID="lU1-s9-cRP">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="96I-1v-SuK" customClass="CropListViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -329,33 +329,34 @@
                                     <outlet property="delegate" destination="96I-1v-SuK" id="pDC-2a-PWM"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Crop List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M9-z4-f8X">
-                                <rect key="frame" x="266" y="37" width="69" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmO-bN-puc">
                                 <rect key="frame" x="54" y="550" width="492" height="30"/>
                                 <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kOY-SE-WeZ">
-                                <rect key="frame" x="8" y="72" width="22" height="22"/>
-                                <connections>
-                                    <action selector="addPlant" destination="96I-1v-SuK" eventType="touchUpInside" id="2Mk-2R-q5C"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="top" secondItem="oga-pS-ffp" secondAttribute="bottom" constant="30" id="4nb-1q-AVZ"/>
-                            <constraint firstItem="0i0-oA-pHv" firstAttribute="centerX" secondItem="5M9-z4-f8X" secondAttribute="centerX" id="EbG-kL-brO"/>
-                            <constraint firstItem="5M9-z4-f8X" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="LdJ-dN-bZz"/>
                             <constraint firstItem="BmO-bN-puc" firstAttribute="centerX" secondItem="0zT-H4-V7b" secondAttribute="centerX" id="XPf-S9-Q1y"/>
                             <constraint firstItem="0i0-oA-pHv" firstAttribute="leading" secondItem="0zT-H4-V7b" secondAttribute="leadingMargin" id="cAF-UX-8hU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0i0-oA-pHv" secondAttribute="trailing" constant="34" id="iLz-Bu-kyT"/>
                             <constraint firstItem="4oa-Nq-fdG" firstAttribute="top" secondItem="0i0-oA-pHv" secondAttribute="bottom" constant="91" id="tuG-Pa-Ode"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Crop View Controller" id="2cq-iF-tBD">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Ld8-tI-JcU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="mkC-OW-z9G">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="addPlant" destination="96I-1v-SuK" eventType="touchUpInside" id="KuN-84-92Y"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="addPlant" destination="96I-1v-SuK" id="lms-Qy-dtG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="currentlyPlantedButton" destination="BmO-bN-puc" id="TmT-xL-2Jc"/>
                         <outlet property="plantTable" destination="0i0-oA-pHv" id="w3K-h3-KW5"/>
@@ -406,10 +407,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sections" id="BCB-74-H09">
-                        <barButtonItem key="rightBarButtonItem" title="Show crop list" id="J47-Hh-7je">
+                        <barButtonItem key="leftBarButtonItem" title="Show crop list" id="J47-Hh-7je">
                             <connections>
                                 <action selector="toCropList" destination="BYZ-38-t0r" id="YQU-yX-QyV"/>
                             </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="2wP-Fh-Ffw">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="ZEf-I8-BaQ">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="addSection" destination="BYZ-38-t0r" eventType="touchUpInside" id="FeP-6D-NvH"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -422,7 +432,7 @@
             </objects>
             <point key="canvasLocation" x="697" y="333"/>
         </scene>
-        <!--Beds View Controller-->
+        <!--Beds-->
         <scene sceneID="LkE-Mv-Cha">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Pjn-00-Q4F" customClass="BedsViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -442,6 +452,14 @@
                                     <outlet property="delegate" destination="Pjn-00-Q4F" id="dem-Vm-tVL"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpZ-xt-uDn">
+                                <rect key="frame" x="44" y="19" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uO-li-39i">
+                                <rect key="frame" x="10" y="29" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -452,6 +470,20 @@
                             <constraint firstAttribute="trailingMargin" secondItem="OCc-sj-9np" secondAttribute="trailing" constant="34" id="shh-xW-pgJ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Beds" id="uNM-v9-jcN">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Ncx-fd-8gw">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="OYU-Cl-ya7">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="addBed" destination="Pjn-00-Q4F" eventType="touchUpInside" id="DvV-Vc-u8Q"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="addBed" destination="Pjn-00-Q4F" id="ktq-yW-qBk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bedTable" destination="OCc-sj-9np" id="udF-r8-o0S"/>
                         <segue destination="se7-i0-ZrY" kind="show" identifier="bedClicked" id="TjS-TX-GId"/>
@@ -459,7 +491,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Q0-SC-6gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447" y="443"/>
+            <point key="canvasLocation" x="1397" y="519"/>
         </scene>
         <!--Add Crop View Controller-->
         <scene sceneID="1h2-JQ-71I">
@@ -884,7 +916,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="saH-eY-ZmP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-115" y="333"/>
+            <point key="canvasLocation" x="75" y="-235"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

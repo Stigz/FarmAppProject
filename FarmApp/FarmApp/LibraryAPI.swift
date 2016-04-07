@@ -110,6 +110,22 @@ class LibraryAPI: NSObject {
     func updateNotesForPlant(plant: String, notes : String){
         persistencyManager.updateNotesForPlant(plant, notes: notes)
     }
+    
+    func addPlant(name: String){
+        persistencyManager.addPlant(name)
+    }
+    
+    func addVariety(name: String, plant: Plant){
+        persistencyManager.addVariety(name, plant: plant)
+    }
+    
+    func addSection(){
+        persistencyManager.addSection()
+    }
+    
+    func addBed(bedID: Int, sectID: Int){
+        persistencyManager.addBed(bedID, sectID: sectID)
+    }
 
 
 }

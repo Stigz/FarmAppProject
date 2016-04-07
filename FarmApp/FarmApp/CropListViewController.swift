@@ -18,56 +18,38 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     //Instance variables
     var numPlants = 0
     var plants : [Plant] = []
+    var filteredPlants = [Plant]()
+    var showingCurrent : Bool = false
+    var plantNameField = UITextField!()
 
     //NOTE: Only for the prepare for segue
     var currentPlant : Plant!
-    //creating the search controller
-    let searchController = UISearchController(searchResultsController: nil)
-
-    var showingCurrent : Bool = false
-    var plantNameField = UITextField!()
-   
     
-    var filteredPlants = [Plant]()
+    //creating the search controller
+    var searchController: UISearchController!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Grab plants
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         numPlants = plants.count
-        self.navigationItem.title = "Crop List" 
-        
-        //Setup text views
+                //Setup text views
         updateCurrentlyPlantedText()
+        self.navigationItem.title = "Crop List"
         
         //Register table for cell class
         self.plantTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
-        
         // This will remove extra separators from tableview
        self.plantTable.tableFooterView = UIView(frame: CGRectZero)
-        // Do any additional setup after loading the view.
         
-        //lets class know when things are typed
+        
+        //lets class know when things are typed in the search bar
+       searchController = UISearchController(searchResultsController: nil)
        configureSearchController()
         
-       
-
-        
-    }
-    
-    func configureSearchController(){
-        //notify the class when someone types
-        searchController.searchResultsUpdater = self
-        
-        //get rid of annoying backgroud when searching
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-       
-        //adds search controller to the top of the table
-        plantTable.tableHeaderView = searchController.searchBar
-        
-        searchController.searchBar.sizeToFit()
-        searchController.hidesNavigationBarDuringPresentation = false
+                
 
     }
     
@@ -75,13 +57,33 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         //IF the user segues to a bed list, pass section info
         if (segue.identifier == "plantClicked"){
             let pvc = segue.destinationViewController as! PlantViewController
             pvc.setInfo(currentPlant)
         }
-       
+    }
+    
+    
+    /* ----------------------------------
+    *  Search controller methods
+    * ---------------------------------
+    */
+    
+    func configureSearchController(){
+        //notify the class when someone types
+        searchController.searchResultsUpdater = self
+        //get rid of annoying backgroud when searching
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        //adds search controller to the top of the table
+        plantTable.tableHeaderView = searchController.searchBar
+        searchController.searchBar.sizeToFit()
+        searchController.hidesNavigationBarDuringPresentation = false
         
     }
 
@@ -89,6 +91,26 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredPlants = plants.filter { plant in
+            return plant.name.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        plantTable.reloadData()
+    }
+    
+    //to solve search controller deallocation problems
+    deinit {
+        self.searchController.loadViewIfNeeded()    // iOS 9
+        
+    }
+    
+    
+    /* ----------------------------------
+    *  Currently planted button methods
+    * ---------------------------------
+    */
 
     //Fires when "currently planted button" is pressed
     //toggles showing all crops vs only planted crops
@@ -118,6 +140,11 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
 
     }
     
+    
+    /* ----------------------------------
+    *  Add a new plant methods
+    * ---------------------------------
+    */
     @IBAction func addPlant(){
         let alertController = UIAlertController(title: "Add a new plant", message: "", preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
@@ -135,29 +162,45 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     }
     
     func newPlant(alert: UIAlertAction!){
-        let nPlant = Plant(name: plantNameField.text!, bestSeasons: [], notes: "", varieties: [], weight: 0)
-        plants.append(nPlant)
+        LibraryAPI.sharedInstance.addPlant(plantNameField.text!)
+        plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
+        //print(plants)
         plantTable.reloadData()
         //also refilter the plants?
+ 
+    
     }
 
 
-func filterContentForSearchText(searchText: String, scope: String = "All") {
-    filteredPlants = plants.filter { plant in
-        return plant.name.lowercaseString.containsString(searchText.lowercaseString)
+    /* ----------------------------------
+    *  Deleting a plant methods
+    * ---------------------------------
+    */
+    
+    //the handler for the delete alert
+    func deletePlant(alert: UIAlertAction){
+        let removeIndex = plants.indexOf(currentPlant)
+        plants.removeAtIndex(removeIndex!)
+        if searchController.active && searchController.searchBar.text != ""{
+            filterContentForSearchText(searchController.searchBar.text!)
+        }
+        plantTable.reloadData()
+        //this will need to talk to the database to actually delete something
     }
-
-    plantTable.reloadData()
-}
+  
 
 }
 
+/* ----------------------------------
+*  Table methods
+* ---------------------------------
+*/
 
 //Table View Extensions -- for section table
 extension CropListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController != nil && searchController.active && searchController.searchBar.text != "" {
             return filteredPlants.count
         }
         return plants.count
@@ -165,7 +208,7 @@ extension CropListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.plantTable.dequeueReusableCellWithIdentifier("plantCell")! as UITableViewCell
-        if(searchController.active && searchController.searchBar.text != "" ){
+        if(searchController != nil && searchController.active && searchController.searchBar.text != "" ){
             if(filteredPlants[indexPath.row].plant_weight != nil){
             cell.textLabel?.text = "\(filteredPlants[indexPath.row].name):    \(filteredPlants[indexPath.row].plant_weight)Lbs "
             }else{
@@ -188,6 +231,40 @@ extension CropListViewController: UITableViewDataSource {
 
         return cell
     }
+    
+    // Override to support conditional editing of the table view.
+    //This can return true or false based on whether its the farm manager using the app
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+            //maybe have it only ask twice if you want to delete plants
+        if editingStyle == .Delete {
+            let alertController = UIAlertController(title: "Are you sure you want to delete this plant and all of its varieties", message: "This cannot be undone", preferredStyle: .Alert)
+            let delete = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default, handler: deletePlant)
+            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(delete)
+            //is it safe to reuse currentPlant here
+            if searchController.active && searchController.searchBar.text != "" {
+                currentPlant = filteredPlants[indexPath.row]
+            }
+            else{
+                currentPlant = plants[indexPath.row]
+            }
+            alertController.addAction(cancel)
+            presentViewController(alertController, animated: true, completion: nil)
+            
+           //sort through plants until I find the one with the right name, delete it, refilter, redisplay
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+   
+
+    
 }
 
 //Upon section click, show the bed list
@@ -205,6 +282,9 @@ extension CropListViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }
+
+
+
 
 
 
