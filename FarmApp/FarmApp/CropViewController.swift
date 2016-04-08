@@ -135,6 +135,8 @@ class CropViewController: UIViewController {
     func cropHarvested(action: UIAlertAction){
         isPlanted = false
         updateViewForHarvest(true)
+        
+        
     }
     
     //Updates the vuiew when a crop is harvested
@@ -148,6 +150,10 @@ class CropViewController: UIViewController {
         //Buttons view is initially hidden
         harvestedButton.hidden = !initialView
         harvestButtonView.hidden = initialView
+    }
+    
+    func updateVarietyBedHistory(date: Date){
+        LibraryAPI.sharedInstance.updateVarietyBedHistory(crop.variety, bedNum: bedNum, sectNum: sectNum, date: date)
     }
     
     
@@ -183,6 +189,7 @@ class CropViewController: UIViewController {
                         //otherwise, update view
                         alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: cropHarvested))
                         self.presentViewController(alertController, animated: true, completion: nil)
+                        updateVarietyBedHistory(newHarvest)
                     }else{
                         //Harvest crop
                         LibraryAPI.sharedInstance.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: newHarvest, harvestWeight: harvestWeight)

@@ -126,6 +126,10 @@ class LibraryAPI: NSObject {
     func addBed(bedID: Int, sectID: Int){
         persistencyManager.addBed(bedID, sectID: sectID)
     }
+    
+    func updateVarietyBedHistory(variety :Variety, bedNum: Int, sectNum: Int, date: Date){
+        persistencyManager.updateVarietyBedHistory(variety, bedNum: bedNum, sectNum: sectNum, date: date)
+    }
 
 
 }

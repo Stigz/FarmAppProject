@@ -37,6 +37,8 @@ class Variety: NSObject, NSCoding{
         self.varietyWeight = decoder.decodeObjectForKey("variety_weight") as! Int
     }
     
+    
+    
     //Encode object to memory -- for archiving
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(name, forKey: "variety_name")
