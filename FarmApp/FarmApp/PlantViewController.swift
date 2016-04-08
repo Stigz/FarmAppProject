@@ -28,7 +28,7 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
 
     
     //creating the search controller
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchController : UISearchController!
 
     @IBOutlet weak var varietyTable: UITableView!
     @IBOutlet weak var notesField: UITextView!
@@ -68,12 +68,16 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
        self.varietyTable.tableFooterView = UIView(frame: CGRectZero)
 
         // Do any additional setup after loading the view.
-
-        
+        searchController = UISearchController(searchResultsController: nil)
         configureSearchController()
         
     }
     
+    //to solve search controller deallocation problems
+    deinit {
+        self.searchController.loadViewIfNeeded()    // iOS 9
+       
+    }
     
     func configureSearchController(){
         //notify the class when someone types
@@ -118,6 +122,16 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
         numVarieties = varieties.count
         
     }
+    
+    func resetInfo(){
+        let plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
+        //not quite sure how this works, since the plant in plants and plants aren't equal
+        let newPlant = plants[plants.indexOf(plant)!]
+        plant = newPlant
+        varieties = plant.varieties
+        numVarieties = varieties.count
+        varietyTable.reloadData()
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         //IF the user segues to a bed list, pass section info
@@ -146,10 +160,8 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
     }
     
     func newVariety(alert: UIAlertAction!){
-        let nVariety = Variety(name: varietyNameField.text!, bestSeasons: [], notes: "", bedHistory: [], plant: plant, varietyWeight: 0)
-        varieties.append(nVariety)
-        plant.varieties.append(nVariety)
-        varietyTable.reloadData()
+        LibraryAPI.sharedInstance.addVariety(varietyNameField.text!, plant: plant)
+        resetInfo()
         //also refilter the plants?
     }
     
@@ -168,7 +180,7 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
 extension PlantViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(searchController.active && searchController.searchBar.text != "" ){
+        if(searchController != nil && searchController.active && searchController.searchBar.text != "" ){
             return filteredVarieties.count
         }else{
         return varieties.count
@@ -177,7 +189,7 @@ extension PlantViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.varietyTable.dequeueReusableCellWithIdentifier("plantCell")! as UITableViewCell
-        if(searchController.active && searchController.searchBar.text != "" ){
+        if(searchController != nil && searchController.active && searchController.searchBar.text != "" ){
             if(filteredVarieties[indexPath.row].varietyWeight != nil){
             cell.textLabel?.text = "\(filteredVarieties[indexPath.row].name):    \(filteredVarieties[indexPath.row].varietyWeight)Lbs "
            

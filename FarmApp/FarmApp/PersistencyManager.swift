@@ -191,6 +191,48 @@ class PersistencyManager: NSObject {
         }
     }
     
+    func addPlant(newName: String){
+        let newPlant = Plant(name: newName, bestSeasons: [], notes: "", varieties: [], weight: 0)
+        allPossiblePlants.append(newPlant)
+        
+        
+    }
+    
+    func addVariety(vName: String, plant: Plant){
+          let nVariety = Variety(name: vName, bestSeasons: [], notes: "", bedHistory: [], plant: plant, varietyWeight: 0)
+        //do i need the persistent plant
+        
+        let persistentPlant = allPossiblePlants[allPossiblePlants.indexOf(plant)!]
+        persistentPlant.varieties.append(nVariety)
+        
+        
+    }
+    
+    func addSection(){
+        let newSect = Section(id: sections.count, beds: [], numBeds: 0, sectionWeight: 0)
+        sections.append(newSect)
+        
+    }
+    
+    func addBed(bedID: Int, sectID: Int){
+        let newBed = Bed(id: bedID, currentCrop: nil, cropHistory: CropHistory(numCrops: 0,crops: []))
+        sections[sectID].beds.append(newBed)
+    }
+    
+    func updateVarietyBedHistory(variety :Variety, bedNum: Int, sectNum: Int, date: Date){
+        let bed = sections[sectNum - 1].beds[bedNum - 1]
+        let bedHistory = BedHistory(date: date, bed: bed)
+        var persistentVariety = variety
+        for plant in plants{
+            if(plant.varieties.indexOf(variety) != 0){
+                persistentVariety = plant.varieties[plant.varieties.indexOf(variety)!]
+            }
+        }
+        persistentVariety.bedHistory.append(bedHistory)
+        
+        
+    }
+    
     func getTotalWeight() -> Float{
         var totalWeight : Float = 0
         for i in 1...sections.count{

@@ -46,6 +46,14 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func addSection(){
+        LibraryAPI.sharedInstance.addSection()
+        sections = LibraryAPI.sharedInstance.getSects()
+        numSects = sections.count
+        print(sections)
+        sectionTable.reloadData()
+    }
+    
     
     //For different segues away from this screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
