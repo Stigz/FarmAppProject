@@ -45,7 +45,7 @@ class LibraryAPI: NSObject {
     
     //Ask persistency manager for sections
     func getSects() -> [Section]{
-        databaseManager.getSects()
+        //databaseManager.getSects()
         return persistencyManager.getSects()
         //return databaseManager.getSects()
     }

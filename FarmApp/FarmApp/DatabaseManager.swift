@@ -14,10 +14,14 @@ class DatabaseManager: NSObject {
     
     private var allPossiblePlants = [Plant]()
     
+    var sectionFor: [Section] = [Section]()
+    
     override init() {
         super.init()
-        getSects()
-        mergeFlatDataSectBeds()
+        
+        //getSects()
+        //mergeFlatDataSectBeds()
+        getUsingQuery()
     }
     
     func addCropToDatabase(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?){
@@ -57,6 +61,7 @@ class DatabaseManager: NSObject {
         var sectionsRef: Firebase!
         sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
         
+        
         //Make temp plants
         let plant1 = Plant(name: "Wheat",bestSeasons: [],notes: [],varieties: [])
         let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
@@ -89,12 +94,12 @@ class DatabaseManager: NSObject {
         
         var section: [Int]
         var sections: AnyObject
-        var sectionFor: [Section]
+        
         sectionFor = []
         
         
         sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
-            
+            print("Snaphots:\(snapshot.value)")
             //var beds = snapshot.value["Beds"] as! NSDictionary
             var id = snapshot.value["id"] as? String
             var numBeds = snapshot.value["numBeds"] as! String
@@ -102,18 +107,20 @@ class DatabaseManager: NSObject {
             sectionsRef.childByAppendingPath("Beds")
             var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
             var numBedsInt =  NSNumberFormatter().numberFromString(numBeds)?.integerValue
-            sectionFor = [Section(id: idAsInt!, beds: [bed2], numBeds: numBedsInt!)]
+            self.sectionFor = [Section(id: idAsInt!, beds: [bed2], numBeds: numBedsInt!)]
             //sections.append(sectionTest)
-            LibraryAPI.sharedInstance.setSections(sectionFor)
+            
+            //LibraryAPI.sharedInstance.setSections(sectionFor)
             
             
-            
+            print("Section for : \(self.sectionFor)")
             
             // let section = Section(id: id,beds,numBeds)
             
             //self.sectionArray.append(section)
         })
         
+        print("setion for : \(sectionFor)")
         
         //sectionFor = [Section(id: , beds: [bed2], numBeds: 1)]
         /*
@@ -162,6 +169,65 @@ class DatabaseManager: NSObject {
          //var sects = snapshot.value.objectForKey("Sections")
 */
     }
+    
+    func getUsingQuery() {
+        var ref: Firebase!
+        ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
+        
+        //Make temp plants
+        let plant1 = Plant(name: "Wheat",bestSeasons: [],notes: [],varieties: [])
+        let plant2 = Plant(name: "Corn",bestSeasons: [],notes: [],varieties: [])
+        let plant3 = Plant(name: "Barley",bestSeasons: [],notes: [],varieties: [])
+        let plant4 = Plant(name: "Garlic",bestSeasons: [],notes: [],varieties: [])
+        
+        plant1.plant_weight = 50
+        plant3.plant_weight = 60
+        
+        let variety1 = Variety(name: "Golden", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant1)
+        let variety2 = Variety(name: "Red", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant2)
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant3)
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: [], notes: [], bedHistory: BedHistory(), plant: plant4)
+        
+        variety1.varietyWeight = 50
+        variety1.varietyWeight = 40
+        //Setup plant varieties
+        
+        plant1.varieties.append(variety1)
+        plant2.varieties.append(variety2)
+        plant3.varieties.append(variety3)
+        plant4.varieties.append(variety4)
+        allPossiblePlants = [plant1,plant2,plant3,plant4]
+        //Make temp crops
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "Hello World",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1))
+        let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]))
+        
+        
+        ref.queryOrderedByKey().observeEventType(.Value, withBlock: { snapshot in
+                var sect = snapshot.value
+                //print("\(snapshot.key) was \(sect) meters tall")
+                var id = snapshot.value["id"] as? Int
+                var numBeds = snapshot.value["numBeds"] as? Int
+                //var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
+                //print(idAsInt)
+                //var numBedsInt =  NSNumberFormatter().numberFromString(numBeds!)?.integerValue
+                self.sectionFor = [Section(id: 1, beds: [bed2], numBeds: 2)]
+                self.getSectFromFunction(self.sectionFor)
+                //print("inside:\(self.sectionFor)")
+        
+            
+        
+            
+        })
+        print("outside:\(self.sectionFor)")
+    }
+    
+    func getSectFromFunction(section: [Section]){
+        print("OMG\(section)")
+        LibraryAPI.sharedInstance.setSections(section)
+    }
+    
     func createSects(sections: [Section]) {
         let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
         let postRef = ref.childByAppendingPath("Sections")
@@ -247,16 +313,44 @@ class DatabaseManager: NSObject {
     }
     */
     
+    func makeSimpleSect(sections: [Section]) {
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+        for i in 1...(sections.count){
+            let sectRef = ref.childByAppendingPath("Section\(i)")
+            sectRef
+            for j in 1...(sections[i].numBeds){
+                var cropForDb = ["Variety": "wheat", "DatePlanted":"today", "sectId": "\(i)", "bedId": "\(j)"]
+                let bedRef = sectRef.childByAppendingPath("Bed\(j)")
+                bedRef.setValue(["id": "\(j)", "sectNum": "\(i)"])
+                let crops = bedRef.childByAppendingPath("Crops")
+                let cropKey = crops.childByAutoId()
+                cropKey.setValue("true")
+                let cropRef = ref.childByAppendingPath("Crops")
+                cropRef.childByAppendingPath(cropKey.key).setValue(cropForDb)
+            }
+        }
+    }
     
     func mergeFlatDataSectBeds () {
-        let ref = Firebase(url: "https://docs-examples.firebaseio.com/web/org")
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
         
         // fetch a list of Mary's groups
-        ref.childByAppendingPath("users/mchen/groups").observeEventType(.ChildAdded, withBlock: {snapshot in
+        ref.childByAppendingPath("Section2").observeEventType(.ChildAdded, withBlock: {snapshot in
             // for each group, fetch the name and print it
-            let groupKey = snapshot.key
-            ref.childByAppendingPath("groups/\(groupKey)/name").observeSingleEventOfType(.Value, withBlock: {snapshot in
-                print("Mary is a member of this group: \(snapshot.value)")
+            let group = snapshot.childSnapshotForPath("Crops").value
+            var anyKey = group.allKeys as! NSObject
+            var stringKey = String(anyKey)
+            var groupKey = stringKey.stringByReplacingOccurrencesOfString("(", withString: "")
+            groupKey = groupKey.stringByReplacingOccurrencesOfString(")", withString: "")
+            groupKey = groupKey.stringByReplacingOccurrencesOfString("\"", withString: "")
+            groupKey = groupKey.stringByTrimmingCharactersInSet(
+                NSCharacterSet.whitespaceAndNewlineCharacterSet()
+            )
+            let stringGroupKey = "Crops/\(groupKey)"
+            print(stringGroupKey)
+            ref.childByAppendingPath(stringGroupKey).observeSingleEventOfType(.Value, withBlock: {snapshot in
+                print(snapshot.value)
+                print("This crop is in Section \(snapshot.value["sectId"]) and Bed \(snapshot.value["bedId"])")
             })
         })
     }
