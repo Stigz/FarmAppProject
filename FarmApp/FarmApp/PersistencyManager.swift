@@ -11,8 +11,6 @@ import UIKit
 class PersistencyManager: NSObject {
     
     private var sections = [Section]()
-
-    private var plants = [Plant]()
     private var allPossiblePlants = [Plant]()
 
 
@@ -125,12 +123,8 @@ class PersistencyManager: NSObject {
     
     //Return list of all plants
     func getAllPossiblePlants() -> [Plant]{
+        allPossiblePlants.sortInPlace({ $0.name.localizedCaseInsensitiveCompare($1.name) == .OrderedAscending})
         return allPossiblePlants
-    }
-
-
-    func getPlants() -> [Plant]{
-        return plants
     }
  
 
@@ -191,10 +185,9 @@ class PersistencyManager: NSObject {
         }
     }
     
-    func addPlant(newName: String){
-        let newPlant = Plant(name: newName, bestSeasons: [], notes: "", varieties: [], weight: 0)
+    func addPlant(plantName: String){
+        let newPlant = Plant(name: plantName, bestSeasons: [], notes: "", varieties: [], weight: 0)
         allPossiblePlants.append(newPlant)
-        
         
     }
     
@@ -223,7 +216,7 @@ class PersistencyManager: NSObject {
         let bed = sections[sectNum - 1].beds[bedNum - 1]
         let bedHistory = BedHistory(date: date, bed: bed)
         var persistentVariety = variety
-        for plant in plants{
+        for plant in allPossiblePlants{
             if(plant.varieties.indexOf(variety) != 0){
                 persistentVariety = plant.varieties[plant.varieties.indexOf(variety)!]
             }

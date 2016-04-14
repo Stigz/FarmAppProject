@@ -24,7 +24,15 @@ class AddCropPickers: UIView, UIPickerViewDataSource, UIPickerViewDelegate{
     let varietyPickerView = UIPickerView()
     
     //Static Variables
-    let defaultVariety : String = "No variety selected"
+    var defaultVariety : String {
+        get {
+            if currentPlant!.varieties == [] {
+                return "Please add a variety."
+            }else{
+                return "No variety selected."
+            }
+        }
+    }
 
     //REquired coder init
     required init?(coder aDecoder: NSCoder) {
@@ -42,8 +50,7 @@ class AddCropPickers: UIView, UIPickerViewDataSource, UIPickerViewDelegate{
     
     //Common init method, setup plants and pickers
     func commonInit(){
-        //Get options of crops to add
-        cropOptions = LibraryAPI.sharedInstance.getAllPossiblePlants()
+        setupCropOptions()
         //Setup plants and pickers
         currentPlant = nil
         currentVariety = nil
@@ -64,6 +71,51 @@ class AddCropPickers: UIView, UIPickerViewDataSource, UIPickerViewDelegate{
         return currentVariety
     }
     
+    func getCurrentPlant() -> Plant?{
+        return currentPlant
+    }
+    
+    //Get options of crops to add
+    func setupCropOptions(){
+        cropOptions = LibraryAPI.sharedInstance.getAllPossiblePlants()
+    }
+    
+    func getPlantFromOptions(plantName: String){
+        for plant in cropOptions{
+            if plant.name == plantName {
+                currentPlant = plant
+            }
+        }
+    }
+    
+    func addPlant(plantName: String){
+        setupCropOptions()
+        getPlantFromOptions(plantName)
+        reloadPickers()
+        cropInputField.text = plantName
+        varietyInputField.text = defaultVariety
+    }
+    
+    func reloadPickers(){
+        cropPickerView.reloadAllComponents()
+        varietyPickerView.reloadAllComponents()
+    }
+    
+    func addVariety(varietyName: String){
+        LibraryAPI.sharedInstance.addVariety(varietyName, plant: currentPlant!)
+        setupCropOptions()
+        getPlantFromOptions(currentPlant!.name)
+        for variety in currentPlant!.varieties{
+            if variety.name == varietyName{
+                currentVariety = variety
+            }
+        }
+        varietyInputField.text = varietyName
+        reloadPickers()
+    }
+    
+    
+    
     /* ----------------------------------
      *  PICKERVIEW DATASOURCE METHODS
      * ---------------------------------
@@ -82,7 +134,11 @@ class AddCropPickers: UIView, UIPickerViewDataSource, UIPickerViewDelegate{
             //if variety picker is being used
             if((currentPlant) != nil){
                 //if a plant is selected, return number of varieties
-                return currentPlant!.varieties.count
+                if (currentPlant!.varieties.count==0){
+                    return 1
+                }else{
+                    return currentPlant!.varieties.count
+                }
             }else{
                 //If no plant is selected, just sho "no crop selected"
                 return 1
@@ -105,7 +161,11 @@ class AddCropPickers: UIView, UIPickerViewDataSource, UIPickerViewDelegate{
             //if variety picker is being used
             if((currentPlant) != nil){
                 //if a plant is selected, return variety name
-                return currentPlant!.varieties[row].name
+                if (currentPlant!.varieties == []){
+                    return defaultVariety
+                }else{
+                    return currentPlant!.varieties[row].name
+                }
             }else{
                 //If no plant is selected, just sho "no crop selected"
                 return "No crop selected"
@@ -126,9 +186,11 @@ class AddCropPickers: UIView, UIPickerViewDataSource, UIPickerViewDelegate{
             //if variety picker is being used
             if((currentPlant) != nil){
                 //if a plant is selected, set selected variety
-                varietyInputField.text = currentPlant!.varieties[row].name
-                currentVariety = currentPlant!.varieties[row]
-                return
+                if currentPlant!.varieties != [] {
+                    varietyInputField.text = currentPlant!.varieties[row].name
+                    currentVariety = currentPlant!.varieties[row]
+                    return
+                }
             }else{
                 //If no plant is selected, do nothing
                 return

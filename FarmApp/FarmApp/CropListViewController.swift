@@ -161,6 +161,7 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     }
     
     func newPlant(alert: UIAlertAction!){
+        
         LibraryAPI.sharedInstance.addPlant(plantNameField.text!)
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         //print(plants)
