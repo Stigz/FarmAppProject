@@ -34,7 +34,7 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
     @IBOutlet weak var notesField: UITextView!
     
     //for adding a new variety
-    var varietyNameField = UITextField!()
+    var textField = UITextField!()
 
     //Controller instance variables
     var numVarieties = 0
@@ -70,7 +70,6 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
         // Do any additional setup after loading the view.
         searchController = UISearchController(searchResultsController: nil)
         configureSearchController()
-        
     }
     
     //to solve search controller deallocation problems
@@ -126,11 +125,15 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
     func resetInfo(){
         let plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         //not quite sure how this works, since the plant in plants and plants aren't equal
+        //this is reseting the plant
         let newPlant = plants[plants.indexOf(plant)!]
+        print(newPlant.name)
         plant = newPlant
         varieties = plant.varieties
         numVarieties = varieties.count
         varietyTable.reloadData()
+        self.navigationItem.title = "\(plant.name)"
+        
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -138,10 +141,28 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
         if (segue.identifier == "varietyClicked"){
             let vvc = segue.destinationViewController as! VarietyViewController
             vvc.setInfo(currentVariety)
+
         }
         
         
     }
+    
+    @IBAction func editNameAlert(){
+        let alertController = UIAlertController(title: "Edit the name \(plant.name)", message: "", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Edit", style: UIAlertActionStyle.Default, handler: editName)
+        let add = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        alertController.addTextFieldWithConfigurationHandler(addTextField)
+        presentViewController(alertController, animated: true, completion: nil)
+        }
+    
+    func editName(alert : UIAlertAction!){
+        let newName = textField.text!
+        LibraryAPI.sharedInstance.editPlantName(plant, newName: newName)
+        resetInfo()
+    }
+
     
     @IBAction func addVariety(){
         let alertController = UIAlertController(title: "Add a new variety", message: "", preferredStyle: .Alert)
@@ -155,12 +176,12 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
     
     func addTextField(textField: UITextField!){
         // add the text field and make the result global
-        textField.placeholder = "Variety Name"
-        varietyNameField = textField
+        textField.placeholder = ""
+        self.textField = textField
     }
     
     func newVariety(alert: UIAlertAction!){
-        LibraryAPI.sharedInstance.addVariety(varietyNameField.text!, plant: plant)
+        LibraryAPI.sharedInstance.addVariety(textField.text!, plant: plant)
         resetInfo()
         //also refilter the plants?
     }

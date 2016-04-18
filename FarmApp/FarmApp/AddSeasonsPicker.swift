@@ -14,7 +14,7 @@ class AddSeasonsPicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var hiddenField : UITextField!
     
     var seasonsChosen : [String]!
-    var seasonsToChoose : [String] = ["Summer","Winter", "Spring", "Fall"]
+    var seasonsToChoose : [String] = ["Fall", "Spring"]
     let seasonPickerView = UIPickerView()
     
     //REquired coder init
@@ -92,7 +92,7 @@ class AddSeasonsPicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     }
     //The number of rows to pick from is the number of crop options
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
+        return 2
     }
     
     /* ----------------------------------

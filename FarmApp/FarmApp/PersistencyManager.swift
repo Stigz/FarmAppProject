@@ -209,7 +209,7 @@ class PersistencyManager: NSObject {
     }
     
     func addSection(){
-        let newSect = Section(id: sections.count, beds: [], numBeds: 0, sectionWeight: 0)
+        let newSect = Section(id: sections.count + 1, beds: [], numBeds: 0, sectionWeight: 0)
         sections.append(newSect)
         
     }
@@ -242,4 +242,33 @@ class PersistencyManager: NSObject {
         }
         return totalWeight
     }
+    
+    func deleteSection(id : Int){
+        for i in id...sections.count - 1 {
+            sections[i].id = i
+            for bed in sections[i].beds{
+                bed.id = i
+            }
+        }
+        sections.removeAtIndex(id)
+    }
+    
+    func deleteBed(sectNum :Int, bedNum :Int){
+        for i in bedNum...sections[sectNum - 1].beds.count - 1 {
+            sections[sectNum - 1].beds[i].id = i
+        }
+        sections[sectNum - 1].beds.removeAtIndex(bedNum)
+    }
+    
+    func editPlantName(plant : Plant, newName :String){
+        let editIndex = allPossiblePlants.indexOf(plant)
+        allPossiblePlants[editIndex!].name = newName
+    }
+    
+    func editVarietyName(variety : Variety, newName: String){
+        let plantIndex = allPossiblePlants.indexOf(variety.plant)
+        let varietyIndex = allPossiblePlants[plantIndex!].varieties.indexOf(variety)
+        allPossiblePlants[plantIndex!].varieties[varietyIndex!].name = newName
+    }
+    
 }

@@ -171,24 +171,6 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     
     }
 
-
-    /* ----------------------------------
-    *  Deleting a plant methods
-    * ---------------------------------
-    */
-    
-    //the handler for the delete alert
-    func deletePlant(alert: UIAlertAction){
-        let removeIndex = plants.indexOf(currentPlant)
-        plants.removeAtIndex(removeIndex!)
-        if searchController.active && searchController.searchBar.text != ""{
-            filterContentForSearchText(searchController.searchBar.text!)
-        }
-        plantTable.reloadData()
-        //this will need to talk to the database to actually delete something
-    }
-  
-
 }
 
 /* ----------------------------------
@@ -239,30 +221,35 @@ extension CropListViewController: UITableViewDataSource {
         return true
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-            //maybe have it only ask twice if you want to delete plants
-        if editingStyle == .Delete {
-            let alertController = UIAlertController(title: "Are you sure you want to delete this plant and all of its varieties", message: "This cannot be undone", preferredStyle: .Alert)
-            let delete = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default, handler: deletePlant)
-            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
-            alertController.addAction(delete)
-            //is it safe to reuse currentPlant here
-            if searchController.active && searchController.searchBar.text != "" {
-                currentPlant = filteredPlants[indexPath.row]
-            }
-            else{
-                currentPlant = plants[indexPath.row]
-            }
-            alertController.addAction(cancel)
-            presentViewController(alertController, animated: true, completion: nil)
-            
-           //sort through plants until I find the one with the right name, delete it, refilter, redisplay
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        //maybe have it only ask twice if you want to delete plants
+//        if editingStyle == .Delete {
+//            let alertController = UIAlertController(title: "Are you sure you want to delete this plant and all of its varieties", message: "This cannot be undone", preferredStyle: .Alert)
+//            let delete = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default, handler: deletePlant)
+//            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+//            alertController.addAction(delete)
+//            //is it safe to reuse currentPlant here
+//            if searchController.active && searchController.searchBar.text != "" {
+//                currentPlant = filteredPlants[indexPath.row]
+//            }
+//            else{
+//                currentPlant = plants[indexPath.row]
+//            }
+//            alertController.addAction(cancel)
+//            presentViewController(alertController, animated: true, completion: nil)
+//            
+//            //sort through plants until I find the one with the right name, delete it, refilter, redisplay
+//        } else if editingStyle == .Insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
+//    
+//    
+//    
+//    
+//}
+
     
-   
 
     
 }

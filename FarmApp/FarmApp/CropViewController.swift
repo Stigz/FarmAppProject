@@ -22,6 +22,7 @@ class CropViewController: UIViewController {
     @IBOutlet weak var harvestedButton: UIButton!
     @IBOutlet weak var notesField: UITextView!
     @IBOutlet weak var cropHistoryTable: UITableView!
+    @IBOutlet weak var weightLabel :UILabel!
     
     
     //Controller Instance Variables
@@ -42,6 +43,7 @@ class CropViewController: UIViewController {
         self.navigationItem.title = crop.variety.plant.name
         plantedLabel.text = "Planted: \(crop.datePlanted.printSlash())"
         varietyLabel.text = "Variety: \(crop.variety.name)"
+        weightLabel.text = "\(crop.totalWeight) LBS"
         
         //Setup notes
         notesField.text = crop.notes

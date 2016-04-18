@@ -130,6 +130,23 @@ class LibraryAPI: NSObject {
     func updateVarietyBedHistory(variety :Variety, bedNum: Int, sectNum: Int, date: Date){
         persistencyManager.updateVarietyBedHistory(variety, bedNum: bedNum, sectNum: sectNum, date: date)
     }
+    
+    func deleteSection(id: Int){
+        persistencyManager.deleteSection(id)
+    }
+    
+    func deleteBed(SectNum: Int, BedNum: Int){
+        persistencyManager.deleteBed(SectNum, bedNum: BedNum)
+    }
+    
+    func editPlantName(plant :Plant, newName :String){
+        persistencyManager.editPlantName(plant, newName: newName)
+    }
+    
+    func editVarietyName(variety: Variety, newName: String){
+        persistencyManager.editVarietyName(variety, newName: newName)
+    }
 
+    
 
 }
