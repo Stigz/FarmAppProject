@@ -247,7 +247,7 @@ class PersistencyManager: NSObject {
         for i in id...sections.count - 1 {
             sections[i].id = i
             for bed in sections[i].beds{
-                bed.id = i
+                bed.sectID = i
             }
         }
         sections.removeAtIndex(id)
