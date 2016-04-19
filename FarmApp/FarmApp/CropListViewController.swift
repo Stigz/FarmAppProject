@@ -37,7 +37,6 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
         numPlants = plants.count
                 //Setup text views
         updateCurrentlyPlantedText()
-        self.navigationItem.title = "Crop List"
         
         //Register table for cell class
         self.plantTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "plantCell")
@@ -162,6 +161,7 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
     }
     
     func newPlant(alert: UIAlertAction!){
+        
         LibraryAPI.sharedInstance.addPlant(plantNameField.text!)
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
         //print(plants)
@@ -209,6 +209,8 @@ extension CropListViewController: UITableViewDataSource {
         
         //Set arrow accessory
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.indentationLevel = 2
+        cell.indentationWidth = 20
         
 
         return cell

@@ -339,7 +339,7 @@
             </objects>
             <point key="canvasLocation" x="-1727" y="274"/>
         </scene>
-        <!--Crop View Controller-->
+        <!--Crop List View Controller-->
         <scene sceneID="lU1-s9-cRP">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="96I-1v-SuK" customClass="CropListViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -381,8 +381,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="0i0-oA-pHv" secondAttribute="trailing" constant="34" id="iLz-Bu-kyT"/>
                             <constraint firstItem="4oa-Nq-fdG" firstAttribute="top" secondItem="0i0-oA-pHv" secondAttribute="bottom" constant="91" id="tuG-Pa-Ode"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4P4-af-V1c"/>
+                                <exclude reference="PWT-FT-6dX"/>
+                                <exclude reference="dIA-WQ-FZp"/>
+                                <exclude reference="3Wu-Os-KMr"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Crop View Controller" id="2cq-iF-tBD">
+                    <navigationItem key="navigationItem" id="2cq-iF-tBD">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Ld8-tI-JcU">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="mkC-OW-z9G">
                                 <rect key="frame" x="558" y="11" width="22" height="22"/>
@@ -451,7 +459,7 @@
                                 <action selector="toCropList" destination="BYZ-38-t0r" id="YQU-yX-QyV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="2wP-Fh-Ffw">
+                        <barButtonItem key="rightBarButtonItem" id="2wP-Fh-Ffw">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="ZEf-I8-BaQ">
                                 <rect key="frame" x="558" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -471,7 +479,7 @@
             </objects>
             <point key="canvasLocation" x="697" y="333"/>
         </scene>
-        <!--Beds-->
+        <!--Beds View Controller-->
         <scene sceneID="LkE-Mv-Cha">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Pjn-00-Q4F" customClass="BedsViewController" customModule="FarmApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -509,7 +517,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="OCc-sj-9np" secondAttribute="trailing" constant="34" id="shh-xW-pgJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Beds" id="uNM-v9-jcN">
+                    <navigationItem key="navigationItem" id="uNM-v9-jcN">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Ncx-fd-8gw">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="OYU-Cl-ya7">
                                 <rect key="frame" x="558" y="11" width="22" height="22"/>
@@ -530,7 +538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Q0-SC-6gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1397" y="519"/>
+            <point key="canvasLocation" x="1373" y="517"/>
         </scene>
         <!--Add Crop View Controller-->
         <scene sceneID="1h2-JQ-71I">
@@ -606,6 +614,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8p-it-Bf4">
+                                <rect key="frame" x="174" y="113" width="22" height="22"/>
+                                <connections>
+                                    <action selector="addPlant" destination="LyK-qA-WyN" eventType="touchUpInside" id="yDB-4N-rLD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIl-pe-N13">
+                                <rect key="frame" x="190" y="196" width="22" height="22"/>
+                                <connections>
+                                    <action selector="addVariety" destination="LyK-qA-WyN" eventType="touchUpInside" id="3zn-X0-IDv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -618,12 +638,14 @@
                             <constraint firstItem="Ke3-5Z-fSb" firstAttribute="leading" secondItem="v0M-8c-Xfb" secondAttribute="leading" id="9DR-jn-P19"/>
                             <constraint firstItem="B31-bS-cen" firstAttribute="height" secondItem="Ke3-5Z-fSb" secondAttribute="height" id="BJg-Ah-eLM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="v0M-8c-Xfb" secondAttribute="trailing" constant="34" id="CGn-Ip-kqs"/>
+                            <constraint firstItem="g8p-it-Bf4" firstAttribute="centerY" secondItem="jOY-yX-vkk" secondAttribute="centerY" id="CJd-KQ-8ni"/>
                             <constraint firstItem="B31-bS-cen" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="D8u-6s-YGS"/>
                             <constraint firstItem="Pgs-qq-TzR" firstAttribute="leading" secondItem="0Gn-4q-eTg" secondAttribute="leadingMargin" constant="34" id="Fce-SS-tXN"/>
                             <constraint firstItem="Pgs-qq-TzR" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="GQ4-Q2-z8c"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Pgs-qq-TzR" secondAttribute="trailing" constant="34" id="K5C-Ey-5BE"/>
                             <constraint firstItem="ekT-uS-fNL" firstAttribute="trailing" secondItem="v0M-8c-Xfb" secondAttribute="trailing" id="LKi-zi-uDt"/>
                             <constraint firstItem="Ke3-5Z-fSb" firstAttribute="leading" secondItem="v0M-8c-Xfb" secondAttribute="leading" id="OEV-q1-MYf"/>
+                            <constraint firstItem="wIl-pe-N13" firstAttribute="leading" secondItem="nf0-qp-RbH" secondAttribute="trailing" constant="6" id="PDB-rA-IaS"/>
                             <constraint firstItem="ekT-uS-fNL" firstAttribute="leading" secondItem="B31-bS-cen" secondAttribute="trailing" constant="9" id="TeV-3I-9Sk"/>
                             <constraint firstItem="aCo-6z-epj" firstAttribute="top" secondItem="Pgs-qq-TzR" secondAttribute="bottom" constant="20" id="UKk-vk-D8V"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="top" secondItem="bpK-Bi-YRw" secondAttribute="bottom" constant="39" id="VG5-lk-1CF"/>
@@ -631,6 +653,7 @@
                             <constraint firstItem="B31-bS-cen" firstAttribute="width" secondItem="Ke3-5Z-fSb" secondAttribute="width" id="Vpf-SN-ZY5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NAh-hc-zK4" secondAttribute="trailing" constant="34" id="WcP-vx-e7o"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="leading" secondItem="0Gn-4q-eTg" secondAttribute="leadingMargin" constant="34" id="a12-iL-9lG"/>
+                            <constraint firstItem="wIl-pe-N13" firstAttribute="centerY" secondItem="nf0-qp-RbH" secondAttribute="centerY" id="c8v-jq-2SV"/>
                             <constraint firstItem="B31-bS-cen" firstAttribute="leading" secondItem="Ke3-5Z-fSb" secondAttribute="trailing" constant="9" id="cp4-Rr-VOE"/>
                             <constraint firstItem="Ke3-5Z-fSb" firstAttribute="leading" secondItem="0Gn-4q-eTg" secondAttribute="leadingMargin" constant="34" id="giW-BN-tNW"/>
                             <constraint firstItem="ekT-uS-fNL" firstAttribute="top" secondItem="v0M-8c-Xfb" secondAttribute="bottom" constant="59" id="h12-vv-VW7"/>
@@ -640,6 +663,7 @@
                             <constraint firstItem="ekT-uS-fNL" firstAttribute="height" secondItem="Ke3-5Z-fSb" secondAttribute="height" id="lHS-Jz-3Q1"/>
                             <constraint firstItem="RJT-ey-eIq" firstAttribute="top" secondItem="v0M-8c-Xfb" secondAttribute="bottom" constant="25" id="lK8-mA-sA8"/>
                             <constraint firstItem="bpK-Bi-YRw" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="lfl-8o-gd8"/>
+                            <constraint firstItem="g8p-it-Bf4" firstAttribute="leading" secondItem="jOY-yX-vkk" secondAttribute="trailing" constant="6" id="maj-Ke-awM"/>
                             <constraint firstItem="ekT-uS-fNL" firstAttribute="trailing" secondItem="v0M-8c-Xfb" secondAttribute="trailing" id="nNW-wZ-mFi"/>
                             <constraint firstItem="NAh-hc-zK4" firstAttribute="centerX" secondItem="0Gn-4q-eTg" secondAttribute="centerX" id="ngC-cg-4XI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ekT-uS-fNL" secondAttribute="trailing" constant="34" id="pHo-QR-Vs5"/>

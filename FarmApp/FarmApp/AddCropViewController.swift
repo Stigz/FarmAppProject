@@ -24,6 +24,8 @@ class AddCropViewController: UIViewController {
     var bedNum : Int = 0
     var requiredFields : [UITextField] = []
     var PickerViews : AddCropPickers!
+    var plantNameField = UITextField!()
+    var varietyNameField = UITextField!()
     
     //Static Variables
     let defaultVariety : String = "No variety selected"
@@ -122,5 +124,52 @@ class AddCropViewController: UIViewController {
                 self.navigationController?.popViewControllerAnimated(true)
             }
         }
+    }
+    
+    /* ----------------------------------
+    *  Add a new plant methods
+    * ---------------------------------
+    */
+    @IBAction func addPlant(){
+        let alertController = UIAlertController(title: "Add a new plant", message: "", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+        let add = UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler: newPlant)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        alertController.addTextFieldWithConfigurationHandler(addTextField)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func addTextField(textField: UITextField!){
+        // add the text field and make the result global
+        textField.placeholder = "Plant Name"
+        plantNameField = textField
+    }
+    
+    func newPlant(alert: UIAlertAction!){
+        
+        LibraryAPI.sharedInstance.addPlant(plantNameField.text!)
+        PickerViews.addPlant(plantNameField.text!)
+        
+    }
+    
+    @IBAction func addVariety(){
+        let alertController = UIAlertController(title: "Add a new variety", message: "", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+        let add = UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler: newVariety)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        alertController.addTextFieldWithConfigurationHandler(addTextFieldV)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func addTextFieldV(textField: UITextField!){
+        // add the text field and make the result global
+        textField.placeholder = "Variety Name"
+        varietyNameField = textField
+    }
+    
+    func newVariety(alert: UIAlertAction!){
+        PickerViews.addVariety(varietyNameField.text!)
     }
 }
