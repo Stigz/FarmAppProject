@@ -14,7 +14,9 @@ class Bed: NSObject, NSCoding{
     var currentCrop : Crop?
     var cropHistory : CropHistory!
     var bedWeight : Int!
+    var sectID : Int!
     
+    //need to add bed id into the constructor
     //Default init method
     init(id: Int, currentCrop : Crop?, cropHistory : CropHistory){
         super.init()

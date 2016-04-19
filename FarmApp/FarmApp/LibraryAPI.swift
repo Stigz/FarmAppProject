@@ -38,11 +38,6 @@ class LibraryAPI: NSObject {
         return persistencyManager.getSects()
     }
 
-
-    func getPlants() -> [Plant]{
-        return persistencyManager.getPlants()
-    }
-
     //Ask persistency manager for a crop
     func getCurrentCropForBed(sectNum : Int, bedNum : Int) -> Crop?{
         return persistencyManager.getCurrentCropForBed(sectNum, bedNum: bedNum)
@@ -110,6 +105,43 @@ class LibraryAPI: NSObject {
     func updateNotesForPlant(plant: String, notes : String){
         persistencyManager.updateNotesForPlant(plant, notes: notes)
     }
+    
+    func addPlant(plantName: String){
+        persistencyManager.addPlant(plantName)
+    }
+    
+    func addVariety(name: String, plant: Plant){
+        persistencyManager.addVariety(name, plant: plant)
+    }
+    
+    func addSection(){
+        persistencyManager.addSection()
+    }
+    
+    func addBed(bedID: Int, sectID: Int){
+        persistencyManager.addBed(bedID, sectID: sectID)
+    }
+    
+    func updateVarietyBedHistory(variety :Variety, bedNum: Int, sectNum: Int, date: Date){
+        persistencyManager.updateVarietyBedHistory(variety, bedNum: bedNum, sectNum: sectNum, date: date)
+    }
+    
+    func deleteSection(id: Int){
+        persistencyManager.deleteSection(id)
+    }
+    
+    func deleteBed(SectNum: Int, BedNum: Int){
+        persistencyManager.deleteBed(SectNum, bedNum: BedNum)
+    }
+    
+    func editPlantName(plant :Plant, newName :String){
+        persistencyManager.editPlantName(plant, newName: newName)
+    }
+    
+    func editVarietyName(variety: Variety, newName: String){
+        persistencyManager.editVarietyName(variety, newName: newName)
+    }
 
+    
 
 }

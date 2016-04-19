@@ -29,6 +29,9 @@ class VarietyViewController: UIViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var varietyTable: UITableView!
     
+    //for adding a new variety
+    var textField = UITextField!()
+    
   
     
     //Controller instance variables
@@ -39,8 +42,7 @@ class VarietyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //Initialize title
-        self.navigationItem.title = "\(variety.name)"
+       
 
         //Register table for cell class
         self.varietyTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "bedCell")
@@ -68,6 +70,8 @@ class VarietyViewController: UIViewController {
     //Sets info passed from plant controller
     func setInfo(variety: Variety){
         self.variety = variety
+        //Initialize title
+        self.navigationItem.title = "\(variety.name)"
     }
     
  
@@ -85,6 +89,32 @@ class VarietyViewController: UIViewController {
     @IBAction func addSeason() {
         seasonsPicker.showPicker()
     }
+    
+    @IBAction func editNameAlert(){
+        let alertController = UIAlertController(title: "Edit the name \(variety.name)", message: "", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Edit", style: UIAlertActionStyle.Default, handler: editName)
+        let add = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        alertController.addTextFieldWithConfigurationHandler(addTextField)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func editName(alert : UIAlertAction!){
+        let newName = textField.text!
+        LibraryAPI.sharedInstance.editVarietyName(variety, newName: newName)
+        //Initialize title
+        //NOTE: plant view controller doesn't update variety name for a sec
+        self.navigationItem.title = "\(variety.name)"
+    }
+    
+    func addTextField(textField: UITextField!){
+        // add the text field and make the result global
+        textField.placeholder = ""
+        self.textField = textField
+    }
+    
+   
     
 }
 //Table View Extensions -- for bedhistory table

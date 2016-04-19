@@ -11,8 +11,6 @@ import UIKit
 class PersistencyManager: NSObject {
     
     private var sections = [Section]()
-
-    private var plants = [Plant]()
     private var allPossiblePlants = [Plant]()
 
 
@@ -125,12 +123,8 @@ class PersistencyManager: NSObject {
     
     //Return list of all plants
     func getAllPossiblePlants() -> [Plant]{
+        allPossiblePlants.sortInPlace({ $0.name.localizedCaseInsensitiveCompare($1.name) == .OrderedAscending})
         return allPossiblePlants
-    }
-
-
-    func getPlants() -> [Plant]{
-        return plants
     }
  
 
@@ -191,6 +185,47 @@ class PersistencyManager: NSObject {
         }
     }
     
+    func addPlant(plantName: String){
+        let newPlant = Plant(name: plantName, bestSeasons: [], notes: "", varieties: [], weight: 0)
+        allPossiblePlants.append(newPlant)
+        
+    }
+    
+    func addVariety(vName: String, plant: Plant){
+          let nVariety = Variety(name: vName, bestSeasons: [], notes: "", bedHistory: [], plant: plant, varietyWeight: 0)
+        //do i need the persistent plant
+        
+        let persistentPlant = allPossiblePlants[allPossiblePlants.indexOf(plant)!]
+        persistentPlant.varieties.append(nVariety)
+        
+        
+    }
+    
+    func addSection(){
+        let newSect = Section(id: sections.count + 1, beds: [], numBeds: 0, sectionWeight: 0)
+        sections.append(newSect)
+        
+    }
+    
+    func addBed(bedID: Int, sectID: Int){
+        let newBed = Bed(id: bedID, currentCrop: nil, cropHistory: CropHistory(numCrops: 0,crops: []))
+        sections[sectID].beds.append(newBed)
+    }
+    
+    func updateVarietyBedHistory(variety :Variety, bedNum: Int, sectNum: Int, date: Date){
+        let bed = sections[sectNum - 1].beds[bedNum - 1]
+        let bedHistory = BedHistory(date: date, bed: bed)
+        var persistentVariety = variety
+        for plant in allPossiblePlants{
+            if(plant.varieties.indexOf(variety) != 0){
+                persistentVariety = plant.varieties[plant.varieties.indexOf(variety)!]
+            }
+        }
+        persistentVariety.bedHistory.append(bedHistory)
+        
+        
+    }
+    
     func getTotalWeight() -> Float{
         var totalWeight : Float = 0
         for i in 1...sections.count{
@@ -200,4 +235,33 @@ class PersistencyManager: NSObject {
         }
         return totalWeight
     }
+    
+    func deleteSection(id : Int){
+        for i in id...sections.count - 1 {
+            sections[i].id = i
+            for bed in sections[i].beds{
+                bed.sectID = i
+            }
+        }
+        sections.removeAtIndex(id)
+    }
+    
+    func deleteBed(sectNum :Int, bedNum :Int){
+        for i in bedNum...sections[sectNum - 1].beds.count - 1 {
+            sections[sectNum - 1].beds[i].id = i
+        }
+        sections[sectNum - 1].beds.removeAtIndex(bedNum)
+    }
+    
+    func editPlantName(plant : Plant, newName :String){
+        let editIndex = allPossiblePlants.indexOf(plant)
+        allPossiblePlants[editIndex!].name = newName
+    }
+    
+    func editVarietyName(variety : Variety, newName: String){
+        let plantIndex = allPossiblePlants.indexOf(variety.plant)
+        let varietyIndex = allPossiblePlants[plantIndex!].varieties.indexOf(variety)
+        allPossiblePlants[plantIndex!].varieties[varietyIndex!].name = newName
+    }
+    
 }
