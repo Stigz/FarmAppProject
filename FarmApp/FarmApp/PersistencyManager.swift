@@ -63,7 +63,7 @@ class PersistencyManager: NSObject {
         let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2, sectionWeight: 0)
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
-        sections = [sect1,sect2,sect3,sect4]
+       // sections = [sect1,sect2,sect3,sect4]
         
         //Set bed histories
         variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed1))
@@ -76,6 +76,10 @@ class PersistencyManager: NSObject {
     func getSects() -> [Section]{
         return sections
         
+    }
+    
+    func setSections(sections : [Section]){
+        self.sections = sections
     }
     
     //Returns current crop for a bed

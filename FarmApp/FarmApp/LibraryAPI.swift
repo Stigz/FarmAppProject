@@ -141,6 +141,10 @@ class LibraryAPI: NSObject {
     func editVarietyName(variety: Variety, newName: String){
         persistencyManager.editVarietyName(variety, newName: newName)
     }
+    
+    func setSections(sections : [Section]){
+        persistencyManager.setSections(sections)
+    }
 
     
 

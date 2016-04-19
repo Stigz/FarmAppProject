@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
     
@@ -32,7 +33,27 @@ class ViewController: UIViewController {
         // This will remove extra separators from tableview
         self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
         
+        readFromDatabase()
+        
     }
+    
+    func readFromDatabase(){
+        var sectionsRef: Firebase!
+        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
+        sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            //var beds = snapshot.value["Beds"] as! NSDictionary
+            var id = snapshot.value["id"] as? String
+            var numBeds = snapshot.value["numBeds"] as! String
+            
+            var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
+            var numBedsInt =  NSNumberFormatter().numberFromString(numBeds)?.integerValue
+            self.sections.append(Section(id: idAsInt!, beds: [], numBeds: numBedsInt!, sectionWeight: 0))
+            print("Sections in observeEventType \(self.sections)")
+            LibraryAPI.sharedInstance.setSections(self.sections)
+            self.sectionTable.reloadData()
+        })
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
