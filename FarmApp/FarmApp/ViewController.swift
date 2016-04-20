@@ -59,6 +59,7 @@ class ViewController: UIViewController {
                 let cropH = bed.value["Crop_History"] as! NSDictionary
                 let cropsVal = cropH.valueForKey("Crops")
                 var cropsForHistory = [Crop]()
+                let bedKey = bed.key as! String
                 if let crops = cropsVal as? NSDictionary{
                 for crop in crops{
                     let datePlanted = crop.value["Date_Planted"] as! NSDictionary
@@ -74,7 +75,6 @@ class ViewController: UIViewController {
                     let notes = crop.value["Notes"] as! String
                     let totalWeight = crop.value["Total_Weight"] as! Int
                     //let varietyKey = crop.value["Variety_Key"] as! String
-                    
                     let datesHarvestedVals = crop.value["Dates_Harvested"]
                     let weightsHarvestedVals = crop.value["Weights_Harvested"]
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
                 }
                 
                 
-                let newBed = Bed(id: bed_ID, currentCrop: currentCropToAdd, cropHistory:  cropHistory, sectID: Sect_ID, bedKey : "Key")
+                let newBed = Bed(id: bed_ID, currentCrop: currentCropToAdd, cropHistory:  cropHistory, sectID: Sect_ID, bedKey : bedKey)
                 bedsToAdd.append(newBed)
                 }}
             bedsToAdd.sortInPlace({ $0.id < ($1.id)})
@@ -147,14 +147,13 @@ class ViewController: UIViewController {
                     if let bedHistoryDict = bedHistoryVals as? NSDictionary{
                         for bedHistory in bedHistoryDict{
                             let bedKey = bedHistory.value["BH_Bed_Key"] as! String
-                            print(bedKey)
                             let date = bedHistory.value["BH_Date"] as! NSDictionary
                             let year = date.valueForKey("year") as! Int
                             let month = date.valueForKey("month") as! Int
                             let day = date.valueForKey("day") as! Int
                             let newDate = Date(year: year, month: month, day: day)
-                            let newBedHistory = BedHistory(date: newDate, bed: <#T##Bed#>)
-                            bedHistoryToAdd.append(newBedHistory)
+                            //let newBedHistory = BedHistory(date: newDate, bed: <#T##Bed#>)
+                            //bedHistoryToAdd.append(newBedHistory)
                         }
                     }
                     
