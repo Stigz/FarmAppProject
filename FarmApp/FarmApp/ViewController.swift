@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //Set default bed number
-        sections = LibraryAPI.sharedInstance.getSects()
+       // sections = LibraryAPI.sharedInstance.getSects()
 
         
         //Register table for cell class
@@ -74,13 +74,11 @@ class ViewController: UIViewController {
                     let notes = crop.value["Notes"] as! String
                     let totalWeight = crop.value["Total_Weight"] as! Int
                     //let varietyKey = crop.value["Variety_Key"] as! String
+                    
                     let datesHarvestedVals = crop.value["Dates_Harvested"]
                     let weightsHarvestedVals = crop.value["Weights_Harvested"]
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
                     let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
-                    
-                   
-                    
                     let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight)
                     cropsForHistory.append(newCrop)
                     }}
@@ -144,18 +142,19 @@ class ViewController: UIViewController {
                     let varietyName = variety.value["Variety_Name"] as! String
                     let varietyNotes = variety.value["Variety_Notes"] as! String
                     let varietyKey = variety.key as! String
-                    var datesToAdd = [Date]()
-                    var BedsToAdd = [Bed]()
+                    var bedHistoryToAdd = [BedHistory]()
                     var bedHistoryVals = variety.value["Bed_History"]
                     if let bedHistoryDict = bedHistoryVals as? NSDictionary{
                         for bedHistory in bedHistoryDict{
                             let bedKey = bedHistory.value["BH_Bed_Key"] as! String
+                            print(bedKey)
                             let date = bedHistory.value["BH_Date"] as! NSDictionary
                             let year = date.valueForKey("year") as! Int
                             let month = date.valueForKey("month") as! Int
                             let day = date.valueForKey("day") as! Int
                             let newDate = Date(year: year, month: month, day: day)
-                            datesToAdd.append(newDate)
+                            let newBedHistory = BedHistory(date: newDate, bed: <#T##Bed#>)
+                            bedHistoryToAdd.append(newBedHistory)
                         }
                     }
                     
