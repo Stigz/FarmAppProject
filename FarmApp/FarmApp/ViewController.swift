@@ -50,7 +50,7 @@ class ViewController: UIViewController {
             var bedsToAdd = [Bed]()
             
             let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
-            let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
+            let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50, varietyKey: "")
             
             
             
@@ -142,7 +142,7 @@ class ViewController: UIViewController {
                     //let plantName = variety.value["Plant_Name"] as! String
                     let varietyName = variety.value["Variety_Name"] as! String
                     let varietyNotes = variety.value["Variety_Notes"] as! String
-                    let newVariety = Variety(name: varietyName, bestSeasons: seasonsToAdd, notes: varietyNotes, bedHistory: [], plant: nil, varietyWeight: totalWeight)
+                    let newVariety = Variety(name: varietyName, bestSeasons: seasonsToAdd, notes: varietyNotes, bedHistory: [], plant: nil, varietyWeight: totalWeight, varietyKey: "")
                     varietiesToAdd.append(newVariety)
                 }
             }
@@ -154,7 +154,7 @@ class ViewController: UIViewController {
        
         
             
-     self.plants.append(newPlant)
+        self.plants.append(newPlant)
         LibraryAPI.sharedInstance.setPlants(self.plants)
 
 
