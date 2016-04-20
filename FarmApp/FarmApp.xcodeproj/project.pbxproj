@@ -34,6 +34,7 @@
 		E1C938A01C8E846D0009E052 /* HarvestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9389F1C8E846D0009E052 /* HarvestView.xib */; };
 		E1C938A21C8E85770009E052 /* HarvestButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C938A11C8E85770009E052 /* HarvestButtonsView.swift */; };
 		E1D5BD271C6B0785009E575A /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5BD261C6B0785009E575A /* LibraryAPI.swift */; };
+		E1E411FE1CC7283E00A625F2 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E411FD1CC7283E00A625F2 /* DatabaseManager.swift */; };
 		E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */; };
 		E1E5BEBD1C72AC7D007B8E82 /* BedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5BEBC1C72AC7D007B8E82 /* BedViewController.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		E1C9389F1C8E846D0009E052 /* HarvestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HarvestView.xib; sourceTree = "<group>"; };
 		E1C938A11C8E85770009E052 /* HarvestButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarvestButtonsView.swift; sourceTree = "<group>"; };
 		E1D5BD261C6B0785009E575A /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
+		E1E411FD1CC7283E00A625F2 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		E1E5BEBA1C72A9A5007B8E82 /* Bed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bed.swift; sourceTree = "<group>"; };
 		E1E5BEBC1C72AC7D007B8E82 /* BedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,6 +234,7 @@
 			children = (
 				E1D5BD261C6B0785009E575A /* LibraryAPI.swift */,
 				E15ED59D1C6C3DBA005D3A48 /* PersistencyManager.swift */,
+				E1E411FD1CC7283E00A625F2 /* DatabaseManager.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				B88E06E61C78EA6A0026CF69 /* PlantViewController.swift in Sources */,
 				E15AEA541C7B94E900FB601E /* AddCropViewController.swift in Sources */,
 				E15ED5A01C6C42AC005D3A48 /* BedsViewController.swift in Sources */,
+				E1E411FE1CC7283E00A625F2 /* DatabaseManager.swift in Sources */,
 				E1949CE31C87BF8F00157DC1 /* AddCropPickers.swift in Sources */,
 				E1E5BEBB1C72A9A5007B8E82 /* Bed.swift in Sources */,
 				E1C938A21C8E85770009E052 /* HarvestButtonsView.swift in Sources */,

@@ -31,8 +31,15 @@ class BedHistory: NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         let date = data.0
         let bed = data.1
-        aCoder.encodeObject(date, forKey: "BH_dates")
-        aCoder.encodeObject(bed, forKey: "BH_beds")
+        aCoder.encodeObject(date, forKey: "BH_date")
+        aCoder.encodeObject(bed, forKey: "BH_bed")
+    }
+    
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(data.0.encodeForDB(), forKey: "BH_Date")
+        theDict.setValue(data.1.bedKey, forKey: "BH_Bed_Key")
+        return theDict
     }
 
 }
