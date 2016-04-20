@@ -48,7 +48,7 @@ class PersistencyManager: NSObject {
         plant4.varieties.append(variety4)
         allPossiblePlants = [plant1,plant2,plant3,plant4]
         //Make temp crops
-        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [Date(year: 2016,month: 1,day: 1),Date(year: 2016,month: 1,day: 1)],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [10,10], totalWeight: 20)
         let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
         let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
         let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
@@ -70,8 +70,8 @@ class PersistencyManager: NSObject {
         let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
         let sectionsRef = ref.childByAppendingPath("Sections_Test")
         for section in sections {
-            sectionsRef.setValue(section.encodeForDB(), forKey: "Section_\(section.id)")
             let sectionRef = sectionsRef.childByAppendingPath("Section_\(section.id)")
+            sectionRef.setValue(section.encodeForDB())
             let bedsRef = sectionRef.childByAppendingPath("Beds")
             for bed in section.beds {
                 let bedRef = bedsRef.childByAutoId()

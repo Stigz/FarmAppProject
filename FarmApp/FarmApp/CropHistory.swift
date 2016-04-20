@@ -38,12 +38,14 @@ class CropHistory: NSObject, NSCoding {
         let theDict = NSMutableDictionary()
         theDict.setValue(numCrops, forKey: "Num_Crops")
         let cropsDict = NSMutableDictionary()
-        var count = 0
-        while count <= crops.count{
-            cropsDict.setValue(crops[count].encodeForDB(), forKey: "Crop_\(count)")
-            count++
+        if crops != []{
+            var count = 0
+            while count < crops.count{
+                cropsDict.setValue(crops[count].encodeForDB(), forKey: "Crop_\(count)")
+                count++
+            }
+            theDict.setValue(cropsDict, forKey: "Crops")
         }
-        theDict.setValue(cropsDict, forKey: "Crops")
         return theDict
     }
 
