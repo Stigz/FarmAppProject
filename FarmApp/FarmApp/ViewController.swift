@@ -41,18 +41,39 @@ class ViewController: UIViewController {
         var sectionsRef: Firebase!
         sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
         sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
-            //var beds = snapshot.value["Beds"] as! NSDictionary
+            var beds = snapshot.value["Beds"] as! NSDictionary
             var id = snapshot.value["id"] as? String
             var numBeds = snapshot.value["numBeds"] as! String
             
             var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
             var numBedsInt =  NSNumberFormatter().numberFromString(numBeds)?.integerValue
-            self.sections.append(Section(id: idAsInt!, beds: [], numBeds: numBedsInt!, sectionWeight: 0))
-            print("Sections in observeEventType \(self.sections)")
+            var bedsToAdd = [Bed]()
+            
+            let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
+            let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
+            let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
+            let cropHistory = CropHistory(numCrops: 1,crops:[crop1])
+            
+            for bed in beds{
+                var crops = bed.value["Crops"] as? NSDictionary
+                for crop in crops!{
+                    let cropName = crop.value
+                }
+                var bedID = NSNumberFormatter().numberFromString((bed.value["id"] as? String)!)?.integerValue
+                let newBed = Bed(id: bedID!, currentCrop: nil, cropHistory:  cropHistory, sectID: idAsInt!, bedKey : "Key")
+                bedsToAdd.append(newBed)
+            }
+            bedsToAdd.sortInPlace({ $0.id < ($1.id)})
+            self.sections.append(Section(id: idAsInt!, beds: bedsToAdd, numBeds: numBedsInt!, sectionWeight: 0))
+            
+            //print("Sections in observeEventType \(self.sections)")
             LibraryAPI.sharedInstance.setSections(self.sections)
             self.sectionTable.reloadData()
+
         })
     }
+    
+
     
 
     override func didReceiveMemoryWarning() {
