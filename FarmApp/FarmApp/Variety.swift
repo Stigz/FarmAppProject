@@ -17,7 +17,7 @@ class Variety: NSObject, NSCoding{
     var varietyKey : String!
     
     //Default init method
-    init(name: String, bestSeasons : [String], notes : String, bedHistory: [BedHistory], plant: Plant, varietyWeight: Int){
+    init(name: String, bestSeasons : [String], notes : String, bedHistory: [BedHistory], plant: Plant?, varietyWeight: Int){
         super.init()
         self.name = name
         self.bestSeasons = bestSeasons

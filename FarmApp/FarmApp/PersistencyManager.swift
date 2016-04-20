@@ -65,19 +65,19 @@ class PersistencyManager: NSObject {
         let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2, sectionWeight: 0)
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
-        sections = [sect1,sect2,sect3,sect4]
-        
-        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
-        let sectionsRef = ref.childByAppendingPath("Sections_Test")
-        for section in sections {
-            let sectionRef = sectionsRef.childByAppendingPath("Section_\(section.id)")
-            sectionRef.setValue(section.encodeForDB())
-            let bedsRef = sectionRef.childByAppendingPath("Beds")
-            for bed in section.beds {
-                let bedRef = bedsRef.childByAutoId()
-                bedRef.setValue(bed.encodeForDB())
-            }
-        }
+//        sections = [sect1,sect2,sect3,sect4]
+//        
+//        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+//        let sectionsRef = ref.childByAppendingPath("SectionsTest")
+//        for section in sections {
+//            let sectionRef = sectionsRef.childByAppendingPath("Section_\(section.id)")
+//            sectionRef.setValue(section.encodeForDB())
+//            let bedsRef = sectionRef.childByAppendingPath("Beds")
+//            for bed in section.beds {
+//                let bedRef = bedsRef.childByAutoId()
+//                bedRef.setValue(bed.encodeForDB())
+//            }
+//        }
         
         //Set bed histories
         variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed1))
@@ -94,6 +94,10 @@ class PersistencyManager: NSObject {
     
     func setSections(sections : [Section]){
         self.sections = sections
+    }
+    
+    func setPlants(plants : [Plant]){
+        self.allPossiblePlants = plants
     }
     
     //Returns current crop for a bed
@@ -249,7 +253,7 @@ class PersistencyManager: NSObject {
         var totalWeight : Float = 0
         for i in 1...sections.count{
             if(sections[i].sectionWeight != nil){
-            totalWeight +=  sections[i].sectionWeight
+            totalWeight +=  sections[i].sectionWeight as! Float
             }
         }
         return totalWeight

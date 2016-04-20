@@ -60,6 +60,7 @@ class Bed: NSObject, NSCoding{
     func encodeForDB() -> NSMutableDictionary{
         let theDict = NSMutableDictionary()
         theDict.setValue(id, forKey: "Bed_Id")
+
         if let theCrop = currentCrop {
             theDict.setValue(theCrop.encodeForDB(), forKey: "Current_Crop")
         }

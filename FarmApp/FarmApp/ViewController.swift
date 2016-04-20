@@ -16,6 +16,7 @@ class ViewController: UIViewController {
  
     //Section list
     var sections : [Section] = []
+    var plants : [Plant] = []
     //NOTE: Only for the prepare for segue
     var currentSect : Section!
     
@@ -33,48 +34,176 @@ class ViewController: UIViewController {
         // This will remove extra separators from tableview
         self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
         
-       // readFromDatabase()
-        
+       readSectionsFromDatabase()
+        readPlantsFromDataBase()
     }
     
-    /*func readFromDatabase(){
+    func readSectionsFromDatabase(){
         var sectionsRef: Firebase!
-        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections")
+        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/SectionsTest")
         sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
-            var beds = snapshot.value["Beds"] as! NSDictionary
-            var id = snapshot.value["id"] as? String
-            var numBeds = snapshot.value["numBeds"] as! String
             
-            var idAsInt =  NSNumberFormatter().numberFromString(id!)?.integerValue
-            var numBedsInt =  NSNumberFormatter().numberFromString(numBeds)?.integerValue
+            let beds = snapshot.value["Beds"] as! NSDictionary
+            let Sect_Weight = snapshot.value["Sect_Weight"] as! Int
+            let Sect_ID =  snapshot.value["Sect_ID"] as! Int
+            
             var bedsToAdd = [Bed]()
             
             let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
             let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
-            let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
-            let cropHistory = CropHistory(numCrops: 1,crops:[crop1])
+            
+            
             
             for bed in beds{
-                var crops = bed.value["Crops"] as? NSDictionary
-                for crop in crops!{
-                    let cropName = crop.value
+                let bed_ID = bed.value["Bed_Id"] as! Int
+                let cropH = bed.value["Crop_History"] as! NSDictionary
+                let crops = cropH.valueForKey("Crops") as! NSDictionary
+                var cropsForHistory = [Crop]()
+                for crop in crops{
+                    let datePlanted = crop.value["Date_Planted"] as! NSDictionary
+                    let year = datePlanted.valueForKey("year") as! Int
+                    let month = datePlanted.valueForKey("month") as! Int
+                    let day = datePlanted.valueForKey("day") as! Int
+                    let pDate = Date(year: year, month: month, day: day)
+                    let harvestDate = crop.value["Final_Harvest"] as! NSDictionary
+                    let hYear = harvestDate.valueForKey("year") as! Int
+                    let hMonth = harvestDate.valueForKey("month") as! Int
+                    let hDay = harvestDate.valueForKey("day") as! Int
+                    let hDate = Date(year: hYear, month: hMonth, day: hDay)
+                    let notes = crop.value["Notes"] as! String
+                    let totalWeight = crop.value["Total_Weight"] as! Int
+                    let varietyKey = crop.value["Variety_Key"] as! String
+                    let datesHarvestedVals = crop.value["Dates_Harvested"]
+                    let weightsHarvestedVals = crop.value["Weights_Harvested"]
+                    let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
+                    let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
+                    
+                   
+                    
+                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight)
+                    cropsForHistory.append(newCrop)
                 }
-                var bedID = NSNumberFormatter().numberFromString((bed.value["id"] as? String)!)?.integerValue
-                let newBed = Bed(id: bedID!, currentCrop: nil, cropHistory:  cropHistory, sectID: idAsInt!, bedKey : "Key")
+                let cropHistory = CropHistory(numCrops: cropsForHistory.count, crops: cropsForHistory)
+                
+                //dealing with the current crop
+                let currentCropVal = bed.value["Current_Crop"]
+                var currentCropToAdd : Crop?
+                if let currentCropDict = currentCropVal as? NSDictionary{
+                    let notes = currentCropDict.valueForKey("Notes") as! String
+                    let totalWeight = currentCropDict.valueForKey("Total_Weight") as! Int
+                    let datePlanted = currentCropDict.valueForKey("Date_Planted") as! NSDictionary
+                    let pday = datePlanted.valueForKey("day") as! Int
+                    let pmonth = datePlanted.valueForKey("month") as! Int
+                    let pyear = datePlanted.valueForKey("year") as! Int
+                    let pDate = Date(year: pyear, month: pmonth, day: pday)
+                    let datesHarvestedVals = currentCropDict.valueForKey("Dates_Harvested")
+                    let weightsHarvestedVals = currentCropDict.valueForKey("Weights_Harvested")
+                    let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
+                    let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
+                    
+
+                    //current crop has final harvest?
+                    
+                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight)
+                }
+                
+                
+                let newBed = Bed(id: bed_ID, currentCrop: currentCropToAdd, cropHistory:  cropHistory, sectID: Sect_ID, bedKey : "Key")
                 bedsToAdd.append(newBed)
             }
             bedsToAdd.sortInPlace({ $0.id < ($1.id)})
-            self.sections.append(Section(id: idAsInt!, beds: bedsToAdd, numBeds: numBedsInt!, sectionWeight: 0))
+            self.sections.append(Section(id: Sect_ID, beds: bedsToAdd, numBeds: bedsToAdd.count, sectionWeight: Sect_Weight))
             
-            //print("Sections in observeEventType \(self.sections)")
+           //runs 4x
             LibraryAPI.sharedInstance.setSections(self.sections)
             self.sectionTable.reloadData()
+            
+        })
+        
+
+    }
+    
+    func readPlantsFromDataBase(){
+        var plantsRef: Firebase!
+        plantsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Plants_Test")
+        plantsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+        let seasons = snapshot.value["Best_Seasons"]
+        let seasonsToAdd = self.readBestSeasons(seasons)
+        let totalWeight = snapshot.value["Total_Weight"] as! Int
+        let name = snapshot.value["Plant_Name"] as! String
+        let notes = snapshot.value["Variety_Notes"] as! String
+        let varietiesVal = snapshot.value["Varieties"]
+        var varietiesToAdd = [Variety]()
+            if let varietiesDict = varietiesVal as? NSDictionary {
+                for variety in varietiesDict{
+                    let seasons = variety.value["Best_Seasons"]
+                    let seasonsToAdd = self.readBestSeasons(seasons)
+                    let totalWeight = variety.value["Total_Weight"] as! Int
+                    //let plantName = variety.value["Plant_Name"] as! String
+                    let varietyName = variety.value["Variety_Name"] as! String
+                    let varietyNotes = variety.value["Variety_Notes"] as! String
+                    let newVariety = Variety(name: varietyName, bestSeasons: seasonsToAdd, notes: varietyNotes, bedHistory: [], plant: nil, varietyWeight: totalWeight)
+                    varietiesToAdd.append(newVariety)
+                }
+            }
+        let newPlant = Plant(name: name, bestSeasons: seasonsToAdd, notes: notes, varieties: varietiesToAdd, weight: totalWeight)
+            for variety in newPlant.varieties{
+                variety.plant = newPlant
+            }
+        
+       
+        
+            
+     self.plants.append(newPlant)
+        LibraryAPI.sharedInstance.setPlants(self.plants)
+
 
         })
-    }*/
+    }
     
+    func readBestSeasons(seasons: AnyObject?!) -> [String]{
+        var seasonsToAdd = [String]()
+        if let seasonsDict = seasons as? NSDictionary{
+            for season in seasonsDict {
+                seasonsToAdd.append(season.value as! String)
+            }
+        }
+        return seasonsToAdd
 
+    }
     
+    func readHarvestDates(datesHarvestedVals: AnyObject?!) -> [Date]{
+        var datesHarvestedToAdd = [Date]()
+
+            if let datesHarvestedDict = datesHarvestedVals as? NSDictionary{
+    
+                for date in datesHarvestedDict {
+                    let info = date.value
+                    let year = info.valueForKey("year") as! Int
+                    let month = info.valueForKey("month") as! Int
+                    let day = info.valueForKey("day") as! Int
+                    let newDate = Date(year: year, month: month, day: day)
+                    datesHarvestedToAdd.append(newDate)
+    
+                    }
+            }
+        return datesHarvestedToAdd
+    }
+    
+    func readWeights(weightsHarvestedVals : AnyObject?!) -> [Int]{
+        var weightsHarvestedToAdd = [Int]()
+        if let weightsHarvestedDict = weightsHarvestedVals as? NSDictionary{
+            for weight in weightsHarvestedDict {
+                let newWeight = weight.value as! Int
+                weightsHarvestedToAdd.append(newWeight)
+            }
+        }
+        return weightsHarvestedToAdd
+    }
+
+
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
