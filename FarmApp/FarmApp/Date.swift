@@ -53,4 +53,12 @@ class Date: NSObject, NSCoding{
     return "\(month)/" + "\(day)/" + "\(year)"
     }
     
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(year, forKey: "year")
+        theDict.setValue(month, forKey: "month")
+        theDict.setValue(day, forKey: "day")
+        return theDict
+    }
+    
 }

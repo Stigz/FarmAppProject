@@ -14,6 +14,7 @@ class Variety: NSObject, NSCoding{
     var notes : String!
     var bedHistory : [BedHistory]!
     var varietyWeight : Int!
+    var varietyKey : String!
     
     //Default init method
     init(name: String, bestSeasons : [String], notes : String, bedHistory: [BedHistory], plant: Plant, varietyWeight: Int){
@@ -47,6 +48,10 @@ class Variety: NSObject, NSCoding{
         aCoder.encodeObject(bedHistory, forKey: "variety_bedHistory")
         aCoder.encodeObject(plant, forKey: "variety_plant")
         aCoder.encodeObject(varietyWeight, forKey: "variety_weight")
+    }
+    
+    func getKey() -> String{
+        return ""
     }
     
     
