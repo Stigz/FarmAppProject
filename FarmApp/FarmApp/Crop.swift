@@ -62,7 +62,29 @@ class Crop: NSObject, NSCoding{
         "Variety: \(variety.name)"
     }
 
-    
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(datePlanted.encodeForDB(), forKey: "Date_Planted")
+        let datesHarvestedDict = NSMutableDictionary()
+        var count = 0
+        while count <= datesHarvested.count {
+            datesHarvestedDict.setValue(datesHarvested[count].encodeForDB(), forKey: "Harvest_Date_\(count)")
+            count++
+        }
+        theDict.setValue(datesHarvestedDict, forKey: "Dates_Harvested")
+        theDict.setValue(finalHarvest?.encodeForDB(), forKey: "Final_Harvest")
+        theDict.setValue(notes, forKey: "Notes")
+        theDict.setValue(variety.getKey(), forKey: "Variety_Key")
+        let weightsHarvestedDict = NSMutableDictionary()
+        count = 0
+        while count <= harvestWeights.count {
+            weightsHarvestedDict.setValue(harvestWeights[count], forKey: "Harvest_Weight_\(count)")
+            count++
+        }
+        theDict.setValue(weightsHarvestedDict, forKey: "Weights_Harvested")
+        theDict.setValue(totalWeight, forKey: "Total_Weight")
+        return theDict
+    }
     
 
     

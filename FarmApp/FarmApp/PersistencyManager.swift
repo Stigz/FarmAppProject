@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PersistencyManager: NSObject {
     
@@ -53,17 +54,33 @@ class PersistencyManager: NSObject {
         let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
         let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0)
         //Make temp beds
-        let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]))
-        let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]))
-        let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]))
-        let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]))
+        let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]), sectID: 0, bedKey: "")
+        let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]), sectID: 0, bedKey: "")
+        let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]), sectID: 0, bedKey: "")
+        let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]), sectID: 0, bedKey: "")
         //Make temp sects
         let sect1 = Section(id: 1,beds: [bed1],numBeds: 1, sectionWeight: 0)
         
         let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2, sectionWeight: 0)
         let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
-       // sections = [sect1,sect2,sect3,sect4]
+        sections = [sect1,sect2,sect3,sect4]
+        
+        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
+        let sectionsRef = ref.childByAppendingPath("Sections_Test")
+        for section in sections {
+            sectionsRef.setValue(section.encodeForDB(), forKey: "Section_\(section.id)")
+            let sectionRef = sectionsRef.childByAppendingPath("Section_\(section.id)")
+            let bedsRef = sectionRef.childByAppendingPath("Beds")
+            for bed in section.beds {
+                let bedRef = bedsRef.childByAutoId()
+                bedRef.setValue(bed.id, forKey: "Bed_Id")
+                bedRef.setValue(bed.currentCrop!.encodeForDB(), forKey: "Current_Crop")
+                bedRef.setValue(bed.cropHistory.encodeForDB(), forKey: "Crop_History")
+                bedRef.setValue(bed.bedWeight, forKey: "Bed_Weight")
+                bedRef.setValue(bed.sectID, forKey: "Sect_ID")
+            }
+        }
         
         //Set bed histories
         variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed1))
@@ -212,7 +229,7 @@ class PersistencyManager: NSObject {
     }
     
     func addBed(bedID: Int, sectID: Int){
-        let newBed = Bed(id: bedID, currentCrop: nil, cropHistory: CropHistory(numCrops: 0,crops: []))
+        let newBed = Bed(id: bedID, currentCrop: nil, cropHistory: CropHistory(numCrops: 0,crops: []), sectID: sectID, bedKey: "")
         sections[sectID].beds.append(newBed)
     }
     

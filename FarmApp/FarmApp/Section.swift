@@ -46,5 +46,13 @@ class Section: NSObject, NSCoding {
         return "Section: \(id)" +
         "# Beds \(numBeds)"
     }
+    
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(id, forKey: "Sect_ID")
+        theDict.setValue(sectionWeight, forKey: "Sect_Weight")
+        return theDict
+    }
+    
 
 }
