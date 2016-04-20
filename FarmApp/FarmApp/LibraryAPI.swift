@@ -11,11 +11,12 @@ import Foundation
 class LibraryAPI: NSObject {
     
     private let persistencyManager : PersistencyManager
+    private let databaseManager : DatabaseManager
     
     override init() {
         persistencyManager = PersistencyManager()
+        databaseManager = DatabaseManager()
         super.init()
-        
     }
     
     //Create class variable as computed type
@@ -146,6 +147,10 @@ class LibraryAPI: NSObject {
         persistencyManager.setSections(sections)
     }
 
+    func saveAllDataToDB(){
+        databaseManager.saveSectionsToDB()
+        databaseManager.savePlantsToDB()
+    }
     
 
 }

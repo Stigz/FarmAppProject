@@ -32,10 +32,10 @@ class PersistencyManager: NSObject {
         let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: "",varieties: [], weight: 60)
         let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: "",varieties: [], weight: 0)
 
-        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
-        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2, varietyWeight: 0)
-        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3, varietyWeight: 60)
-        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4, varietyWeight: 0)
+        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50, varietyKey: "")
+        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2, varietyWeight: 0, varietyKey: "")
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3, varietyWeight: 60, varietyKey: "")
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4, varietyWeight: 0, varietyKey: "")
 
        
         variety1.varietyWeight = 50
@@ -67,17 +67,7 @@ class PersistencyManager: NSObject {
         let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
         sections = [sect1,sect2,sect3,sect4]
         
-        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
-        let sectionsRef = ref.childByAppendingPath("Sections_Test")
-        for section in sections {
-            let sectionRef = sectionsRef.childByAppendingPath("Section_\(section.id)")
-            sectionRef.setValue(section.encodeForDB())
-            let bedsRef = sectionRef.childByAppendingPath("Beds")
-            for bed in section.beds {
-                let bedRef = bedsRef.childByAutoId()
-                bedRef.setValue(bed.encodeForDB())
-            }
-        }
+        
         
         //Set bed histories
         variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed1))
@@ -210,7 +200,7 @@ class PersistencyManager: NSObject {
     }
     
     func addVariety(vName: String, plant: Plant){
-          let nVariety = Variety(name: vName, bestSeasons: [], notes: "", bedHistory: [], plant: plant, varietyWeight: 0)
+          let nVariety = Variety(name: vName, bestSeasons: [], notes: "", bedHistory: [], plant: plant, varietyWeight: 0, varietyKey: "")
         //do i need the persistent plant
         
         let persistentPlant = allPossiblePlants[allPossiblePlants.indexOf(plant)!]
