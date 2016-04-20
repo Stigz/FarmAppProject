@@ -74,11 +74,7 @@ class PersistencyManager: NSObject {
             let bedsRef = sectionRef.childByAppendingPath("Beds")
             for bed in section.beds {
                 let bedRef = bedsRef.childByAutoId()
-                bedRef.setValue(bed.id, forKey: "Bed_Id")
-                bedRef.setValue(bed.currentCrop!.encodeForDB(), forKey: "Current_Crop")
-                bedRef.setValue(bed.cropHistory.encodeForDB(), forKey: "Crop_History")
-                bedRef.setValue(bed.bedWeight, forKey: "Bed_Weight")
-                bedRef.setValue(bed.sectID, forKey: "Sect_ID")
+                bedRef.setValue(bed.encodeForDB())
             }
         }
         
