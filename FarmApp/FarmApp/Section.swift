@@ -51,6 +51,16 @@ class Section: NSObject, NSCoding {
         let theDict = NSMutableDictionary()
         theDict.setValue(id, forKey: "Sect_ID")
         theDict.setValue(sectionWeight, forKey: "Sect_Weight")
+        theDict.setValue(numBeds, forKey: "Num_Beds")
+        if beds != []{
+            let bedsDict = NSMutableDictionary()
+            var count = 0
+            while count < beds.count {
+                bedsDict.setValue(beds[count].encodeForDB(), forKey: "Bed_\(count)")
+                count++
+            }
+            theDict.setValue(bedsDict, forKey: "Beds")
+        }
         return theDict
     }
     

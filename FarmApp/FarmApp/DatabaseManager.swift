@@ -18,11 +18,6 @@ class DatabaseManager: NSObject {
         for section in LibraryAPI.sharedInstance.getSects() {
             let sectionRef = sectionsRef.childByAppendingPath("Section_\(section.id)")
             sectionRef.setValue(section.encodeForDB())
-            let bedsRef = sectionRef.childByAppendingPath("Beds")
-            for bed in section.beds {
-                let bedRef = bedsRef.childByAutoId()
-                bedRef.setValue(bed.encodeForDB())
-            }
         }
     }
     
@@ -31,11 +26,6 @@ class DatabaseManager: NSObject {
         for plant in LibraryAPI.sharedInstance.getAllPossiblePlants(){
             let plantRef = plantsRef.childByAppendingPath("\(plant.name)")
             plantRef.setValue(plant.encodeForDB())
-            let varietiesRef = plantRef.childByAppendingPath("Varieties")
-            for variety in plant.varieties{
-                let varietyRef = varietiesRef.childByAutoId()
-                varietyRef.setValue(variety.encodeForDB())
-            }
         }
     }
 

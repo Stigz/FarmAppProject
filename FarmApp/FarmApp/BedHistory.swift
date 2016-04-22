@@ -43,7 +43,8 @@ class BedHistory: NSObject, NSCoding {
     func encodeForDB() -> NSMutableDictionary{
         let theDict = NSMutableDictionary()
         theDict.setValue(data.0.encodeForDB(), forKey: "BH_Date")
-        theDict.setValue(data.1.bedKey, forKey: "BH_Bed_Key")
+        theDict.setValue(data.1, forKey: "BH_Sect_ID")
+        theDict.setValue(data.2, forKey: "BH_Bed_ID")
         return theDict
     }
 

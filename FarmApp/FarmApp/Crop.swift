@@ -84,7 +84,7 @@ class Crop: NSObject, NSCoding{
         }
         theDict.setValue(finalHarvest?.encodeForDB(), forKey: "Final_Harvest")
         theDict.setValue(notes, forKey: "Notes")
-        theDict.setValue(variety.varietyKey, forKey: "Variety_Key")
+        theDict.setValue(varietyName, forKey: "Variety_Name")
         theDict.setValue(totalWeight, forKey: "Total_Weight")
         return theDict
     }

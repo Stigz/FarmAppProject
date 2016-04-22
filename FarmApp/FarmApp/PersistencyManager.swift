@@ -24,51 +24,51 @@ class PersistencyManager: NSObject {
     }
     
     //TO-DO: Make it so we don't have to hard code these
-   // func hardCodeSections(){
-        //Make temp plants
+   
+    func hardCodeSections(){
+    
+        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
+        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: "",varieties: [], weight: 0)
+        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: "",varieties: [], weight: 60)
+        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: "",varieties: [], weight: 0)
 
-//        let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
-//        let plant2 = Plant(name: "Corn",bestSeasons: ["Fall"],notes: "",varieties: [], weight: 0)
-//        let plant3 = Plant(name: "Barley",bestSeasons: ["Summer"],notes: "",varieties: [], weight: 60)
-//        let plant4 = Plant(name: "Garlic",bestSeasons: ["Spring"],notes: "",varieties: [], weight: 0)
-//
-//        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50, varietyN)
-//        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2, varietyWeight: 0, varietyKey: "")
-//        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3, varietyWeight: 60, varietyKey: "")
-//        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4, varietyWeight: 0, varietyKey: "")
-//      
-//
-//       
-//        variety1.varietyWeight = 50
-//        variety3.varietyWeight = 60
-//        //Setup plant varieties
-//
-//        plant1.varieties.append(variety1)
-//        plant2.varieties.append(variety2)
-//        plant3.varieties.append(variety3)
-//        plant4.varieties.append(variety4)
-//        allPossiblePlants = [plant1,plant2,plant3,plant4]
-//        //Make temp crops
-//        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [Date(year: 2016,month: 1,day: 1),Date(year: 2016,month: 1,day: 1)],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [10,10], totalWeight: 20, varietyKey : "Key")
-//        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyKey : "Key")
-//        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyKey : "Key")
-//        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyKey : "Key")
-//        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyKey : "Key")
-//        //Make temp beds
-//        let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]), sectID : 0, bedKey : "key" )
-//        let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]), sectID :0, bedKey : "key")
-//        let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]), sectID : 0, bedKey : "key")
-//        let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]), sectID : 0, bedKey : "key")
-//
-//        //Make temp sects
-//        let sect1 = Section(id: 1,beds: [bed1],numBeds: 1, sectionWeight: 0)
-//        
-//        let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2, sectionWeight: 0)
-//        let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
-//        let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
-//
-//        
-        //sections = [sect1,sect2,sect3,sect4]
+        let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
+        let variety2 = Variety(name: "Red", bestSeasons: ["Fall"], notes: "", bedHistory: [], plant: plant2, varietyWeight: 0)
+        let variety3 = Variety(name: "Extra Spicy", bestSeasons: ["Spring"], notes: "", bedHistory: [], plant: plant3, varietyWeight: 60)
+        let variety4 = Variety(name: "Vampire Repellant", bestSeasons: ["Summer"], notes: "", bedHistory: [], plant: plant4, varietyWeight: 0)
+      
+
+       
+        variety1.varietyWeight = 50
+        variety3.varietyWeight = 60
+        //Setup plant varieties
+
+        plant1.varieties.append(variety1)
+        plant2.varieties.append(variety2)
+        plant3.varieties.append(variety3)
+        plant4.varieties.append(variety4)
+        allPossiblePlants = [plant1,plant2,plant3,plant4]
+        //Make temp crops
+        let crop1 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [Date(year: 2016,month: 1,day: 1),Date(year: 2016,month: 1,day: 1)],notes: "test",variety: variety1, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [10,10], totalWeight: 20, varietyName: variety1.name)
+        let crop2 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test2",variety: variety2, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyName : variety2.name)
+        let crop3 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test3",variety: variety3, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyName : variety3.name)
+        let crop4 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test4",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyName : variety4.name)
+        let crop5 = Crop(datePlanted: Date(year: 2016,month: 1,day: 1),datesHarvested: [],notes: "test5",variety: variety4, finalHarvest: Date(year: 2016,month: 1,day: 1), harvestWeights: [], totalWeight: 0, varietyName : variety4.name)
+        //Make temp beds
+        let bed1 = Bed(id: 1, currentCrop: nil, cropHistory: CropHistory(numCrops: 1,crops: [crop1]), sectID : 0)
+        let bed2 = Bed(id: 2, currentCrop: crop1, cropHistory: CropHistory(numCrops: 2,crops: [crop3,crop2]), sectID :0)
+        let bed3 = Bed(id: 3, currentCrop: crop4, cropHistory: CropHistory(numCrops: 3,crops: [crop3,crop1,crop2]), sectID : 0)
+        let bed4 = Bed(id: 4, currentCrop: crop3, cropHistory: CropHistory(numCrops: 4,crops: [crop1,crop4,crop2,crop5]), sectID : 0)
+
+        //Make temp sects
+        let sect1 = Section(id: 1,beds: [bed1],numBeds: 1, sectionWeight: 0)
+        
+        let sect2 = Section(id: 2,beds: [bed1,bed2],numBeds: 2, sectionWeight: 0)
+        let sect3 = Section(id: 3,beds: [bed1,bed2,bed3],numBeds: 3, sectionWeight: 0)
+        let sect4 = Section(id: 4,beds: [bed1,bed2,bed3,bed4],numBeds: 4, sectionWeight: 0)
+
+        
+        sections = [sect1,sect2,sect3,sect4]
 //        
 //        let ref = Firebase(url: "https://glowing-torch-4644.firebaseio.com")
 //        let sectionsRef = ref.childByAppendingPath("SectionsTest")
@@ -84,13 +84,14 @@ class PersistencyManager: NSObject {
 
         
 
-//        
-//        //Set bed histories
-//        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed1))
-//        variety2.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed2))
-//        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed3))
-//        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),bed: bed4))
-//    }
+        
+        //Set bed histories
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),sectID: bed1.sectID, bedID: bed1.id))
+        variety2.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),sectID: bed2.sectID, bedID: bed2.id))
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),sectID: bed3.sectID, bedID: bed3.id))
+        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),sectID: bed4.sectID, bedID: bed4.id))
+    }
+
     
     //Return section list
     func getSects() -> [Section]{
@@ -242,8 +243,8 @@ class PersistencyManager: NSObject {
     }
     
     func updateVarietyBedHistory(variety :Variety, bedNum: Int, sectNum: Int, date: Date){
-        
-        let bedHistory = BedHistory(date: date, sectID: sectNum, bedID: bedNum)
+        let bed = sections[sectNum - 1].beds[bedNum - 1]
+        let bedHistory = BedHistory(date: date, sectID: bed.sectID, bedID: bed.id)
         var persistentVariety = variety
         for plant in allPossiblePlants{
             if(plant.varieties.indexOf(variety) != 0){

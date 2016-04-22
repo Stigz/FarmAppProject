@@ -34,10 +34,10 @@ class ViewController: UIViewController {
         // This will remove extra separators from tableview
         self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
         
-       readSectionsFromDatabase()
-        readPlantsFromDataBase()
+       //readSectionsFromDatabase()
+        //readPlantsFromDataBase()
     }
-    
+    /*
     func readSectionsFromDatabase(){
         var sectionsRef: Firebase!
         sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/SectionsTest")
@@ -169,6 +169,7 @@ class ViewController: UIViewController {
 
         })
     }
+    */
     
     func readBestSeasons(seasons: AnyObject?!) -> [String]{
         var seasonsToAdd = [String]()
