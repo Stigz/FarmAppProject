@@ -291,7 +291,7 @@ class PersistencyManager: NSObject {
         }
         return totalWeight
     }
-    
+    //data = (date, sectID, bedID)
     func deleteSection(id : Int){
         for i in id...sections.count - 1 {
             sections[i].id = i
@@ -300,14 +300,49 @@ class PersistencyManager: NSObject {
             }
         }
         sections.removeAtIndex(id)
+        for plant in allPossiblePlants{
+            for variety in plant.varieties{
+                for bedHistory in variety.bedHistory{
+                    if bedHistory.data.1 == id + 1{
+                        variety.bedHistory = variety.bedHistory.filter() {$0 != bedHistory}
+                        print(variety.bedHistory)
+
+                    }
+                    else if bedHistory.data.1 > id{
+                        bedHistory.data.1 -= 1
+                    }
+                }
+            }
+        }
     }
+
     
     func deleteBed(sectNum :Int, bedNum :Int){
         for i in bedNum...sections[sectNum - 1].beds.count - 1 {
             sections[sectNum - 1].beds[i].id = i
         }
         sections[sectNum - 1].beds.removeAtIndex(bedNum)
+        for plant in allPossiblePlants{
+            for variety in plant.varieties{
+                for bedHistory in variety.bedHistory{
+                    if bedHistory.data.1 == sectNum{
+                        if bedHistory.data.2 == bedNum + 1{
+                          
+                            variety.bedHistory = variety.bedHistory.filter() {$0 != bedHistory}
+                            print(variety.bedHistory)
+                        }
+                        else if bedHistory.data.2 > bedNum + 1{
+                        bedHistory.data.2 -= 1
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
+
+
+
     
     func editPlantName(plant : Plant, newName :String){
         let editIndex = allPossiblePlants.indexOf(plant)

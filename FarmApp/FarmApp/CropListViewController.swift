@@ -34,6 +34,8 @@ class CropListViewController: UIViewController,  UISearchResultsUpdating {
         super.viewDidLoad()
         //Grab plants
         plants = LibraryAPI.sharedInstance.getAllPossiblePlants()
+       
+        print(plants[4].varieties[0].bedHistory)
         numPlants = plants.count
                 //Setup text views
         updateCurrentlyPlantedText()
