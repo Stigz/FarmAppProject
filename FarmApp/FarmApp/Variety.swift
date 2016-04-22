@@ -14,10 +14,9 @@ class Variety: NSObject, NSCoding{
     var notes : String!
     var bedHistory : [BedHistory]!
     var varietyWeight : Int!
-    var varietyKey : String!
     
     //Default init method
-    init(name: String, bestSeasons : [String], notes : String, bedHistory: [BedHistory], plant: Plant?, varietyWeight: Int, varietyKey : String){
+    init(name: String, bestSeasons : [String], notes : String, bedHistory: [BedHistory], plant: Plant?, varietyWeight: Int){
         super.init()
         self.name = name
         self.bestSeasons = bestSeasons
@@ -25,7 +24,6 @@ class Variety: NSObject, NSCoding{
         self.bedHistory = bedHistory
         self.plant = plant
         self.varietyWeight = varietyWeight
-        self.varietyKey = varietyKey
     }
     
     //Decode object from memory -- for archiving (saving) albums

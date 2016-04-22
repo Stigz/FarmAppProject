@@ -15,19 +15,18 @@ class Bed: NSObject, NSCoding{
     var cropHistory : CropHistory!
     var bedWeight : Int!
     var sectID : Int!
-    var bedKey : String!
     
     //need to add bed id into the constructor
     //Default init method
 
-    init(id: Int, currentCrop : Crop?, cropHistory : CropHistory, sectID : Int, bedKey : String){
+    init(id: Int, currentCrop : Crop?, cropHistory : CropHistory, sectID : Int){
 
         super.init()
         self.id = id
         self.currentCrop = currentCrop
         self.cropHistory = cropHistory
         self.sectID = sectID
-        self.bedKey = bedKey
+       
     }
     
     //Decode object from memory -- for archiving (saving) albums
