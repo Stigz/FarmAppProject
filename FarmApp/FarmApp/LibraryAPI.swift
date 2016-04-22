@@ -34,6 +34,10 @@ class LibraryAPI: NSObject {
     }
     
     
+    func linkCropsToVarieties(){
+        persistencyManager.linkCropsToVarieties()
+    }
+    
     //Ask persistency manager for sections
     func getSects() -> [Section]{
         return persistencyManager.getSects()

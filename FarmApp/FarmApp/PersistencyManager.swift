@@ -92,6 +92,32 @@ class PersistencyManager: NSObject {
 //        variety1.bedHistory.append(BedHistory(date: Date(year: 2016,month: 1,day: 1),sectID: bed4.sectID, bedID: bed4.id))
 //    }
 
+    func linkCropsToVarieties(){
+        for section in sections{
+            for bed in section.beds{
+                for crop in bed.cropHistory.crops{
+                    let vName = crop.varietyName
+                    for plant in allPossiblePlants{
+                        for variety in plant.varieties{
+                            if variety.name == vName{
+                                crop.variety = variety
+                            }
+                        }
+                    }
+                }
+                if let cCrop = bed.currentCrop{
+                    let vName = cCrop.varietyName
+                    for plant in allPossiblePlants{
+                        for variety in plant.varieties{
+                            if variety.name == vName{
+                                cCrop.variety = variety
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     //Return section list
     func getSects() -> [Section]{
