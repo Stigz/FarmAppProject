@@ -13,10 +13,10 @@ class Section: NSObject, NSCoding {
     var id : Int!
     var beds : [Bed]!
     var numBeds : Int!
-    var sectionWeight : Int!
+    var sectionWeight : Float!
     
     //Default init method 
-    init(id: Int, beds : [Bed], numBeds : Int, sectionWeight : Int){
+    init(id: Int, beds : [Bed], numBeds : Int, sectionWeight : Float){
         super.init()
         self.id = id
         self.beds = beds
@@ -30,7 +30,7 @@ class Section: NSObject, NSCoding {
         self.id = decoder.decodeObjectForKey("sect_id") as! Int
         self.beds = decoder.decodeObjectForKey("sect_bedList") as! [Bed]
         self.numBeds = decoder.decodeObjectForKey("sect_numBeds") as! Int
-        self.sectionWeight = decoder.decodeObjectForKey("sect_weight") as! Int
+        self.sectionWeight = decoder.decodeObjectForKey("sect_weight") as! Float
     }
     
     //Encode object to memory -- for archiving

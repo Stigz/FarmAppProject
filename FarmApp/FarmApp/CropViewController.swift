@@ -112,8 +112,8 @@ class CropViewController: UIViewController {
     
     //Gathers the weight from the input fields
     //Called when crop is harvested
-    func gatherWeightFromFields() -> Int?{
-        if let weight = Int(harvestButtonView.getWeightInput()!){
+    func gatherWeightFromFields() -> Float?{
+        if let weight = Float(harvestButtonView.getWeightInput()!){
             return weight
         }else{
             //If unsuccessful in gathering weight, inform user
@@ -254,7 +254,7 @@ extension CropViewController: UITableViewDataSource {
         let harvestList = crop.datesHarvested
         let cell:UITableViewCell = self.cropHistoryTable.dequeueReusableCellWithIdentifier("harvestCell")! as UITableViewCell
         //The list ordering makes it go in reverse order (recent first)
-        cell.textLabel?.text = harvestList[harvestList.count-1-indexPath.row].printSlash()
+        cell.textLabel?.text = ("\(harvestList[harvestList.count-1-indexPath.row].printSlash())")
         
         return cell
     }

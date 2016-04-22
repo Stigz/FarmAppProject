@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
             
             let bedsVal = snapshot.value["Beds"]
-            let Sect_Weight = snapshot.value["Sect_Weight"] as! Int
+            let Sect_Weight = snapshot.value["Sect_Weight"] as! Float
             let Sect_ID =  snapshot.value["Sect_ID"] as! Int
             
             var bedsToAdd = [Bed]()
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
                     let hDay = harvestDate.valueForKey("day") as! Int
                     let hDate = Date(year: hYear, month: hMonth, day: hDay)
                     let notes = crop.value["Notes"] as! String
-                    let totalWeight = crop.value["Total_Weight"] as! Int
+                    let totalWeight = crop.value["Total_Weight"] as! Float
                     let varietyName = crop.value["Variety_Name"] as! String
                     let datesHarvestedVals = crop.value["Dates_Harvested"]
                     let weightsHarvestedVals = crop.value["Weights_Harvested"]
@@ -88,7 +88,7 @@ class ViewController: UIViewController {
                 if let currentCropDict = currentCropVal as? NSDictionary{
                     let varietyName = currentCropDict.valueForKey("Variety_Name") as! String
                     let notes = currentCropDict.valueForKey("Notes") as! String
-                    let totalWeight = currentCropDict.valueForKey("Total_Weight") as! Int
+                    let totalWeight = currentCropDict.valueForKey("Total_Weight") as! Float
                     let datePlanted = currentCropDict.valueForKey("Date_Planted") as! NSDictionary
                     let pday = datePlanted.valueForKey("day") as! Int
                     let pmonth = datePlanted.valueForKey("month") as! Int
@@ -137,11 +137,11 @@ class ViewController: UIViewController {
         return datesHarvestedToAdd
     }
     
-    func readWeights(weightsHarvestedVals : AnyObject?!) -> [Int]{
-        var weightsHarvestedToAdd = [Int]()
+    func readWeights(weightsHarvestedVals : AnyObject?!) -> [Float]{
+        var weightsHarvestedToAdd = [Float]()
         if let weightsHarvestedDict = weightsHarvestedVals as? NSDictionary{
             for weight in weightsHarvestedDict {
-                let newWeight = weight.value as! Int
+                let newWeight = weight.value as! Float
                 weightsHarvestedToAdd.append(newWeight)
             }
         }
