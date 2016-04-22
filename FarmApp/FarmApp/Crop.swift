@@ -15,7 +15,7 @@ class Crop: NSObject, NSCoding{
     var datePlanted: Date!
     var datesHarvested: [Date]!
     var finalHarvest : Date?
-    
+    var varietyKey : String!
     var notes : String?
     var variety: Variety!
     
@@ -23,7 +23,7 @@ class Crop: NSObject, NSCoding{
     var totalWeight : Int!
     
     //do we want a crop to have to be initialized with an image?
-    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?, harvestWeights: [Int], totalWeight: Int){
+    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?, harvestWeights: [Int], totalWeight: Int, varietyKey : String){
         super.init()
         self.datePlanted = datePlanted
         self.datesHarvested = datesHarvested
@@ -32,6 +32,7 @@ class Crop: NSObject, NSCoding{
         self.finalHarvest = finalHarvest
         self.harvestWeights = harvestWeights
         self.totalWeight = totalWeight
+        self.varietyKey = varietyKey
     }
     
     required init(coder decoder: NSCoder) {

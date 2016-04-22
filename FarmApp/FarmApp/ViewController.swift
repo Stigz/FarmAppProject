@@ -74,12 +74,12 @@ class ViewController: UIViewController {
                     let hDate = Date(year: hYear, month: hMonth, day: hDay)
                     let notes = crop.value["Notes"] as! String
                     let totalWeight = crop.value["Total_Weight"] as! Int
-                    //let varietyKey = crop.value["Variety_Key"] as! String
+                    let varietyKey = crop.value["Variety_Key"] as! String
                     let datesHarvestedVals = crop.value["Dates_Harvested"]
                     let weightsHarvestedVals = crop.value["Weights_Harvested"]
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
                     let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
-                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight)
+                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyKey: varietyKey)
                     cropsForHistory.append(newCrop)
                     }}
                 let cropHistory = CropHistory(numCrops: cropsForHistory.count, crops: cropsForHistory)
@@ -100,11 +100,7 @@ class ViewController: UIViewController {
                     let weightsHarvestedVals = currentCropDict.valueForKey("Weights_Harvested")
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
                     let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
-                    
-
-                    //current crop has final harvest?
-                    
-                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight)
+                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyKey: varietyKey)
                 }
                 
                 
