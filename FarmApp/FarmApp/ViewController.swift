@@ -88,6 +88,7 @@ class ViewController: UIViewController {
                 let currentCropVal = bed.value["Current_Crop"]
                 var currentCropToAdd : Crop?
                 if let currentCropDict = currentCropVal as? NSDictionary{
+                    let varietyKey = currentCropDict.valueForKey("Variety_Key") as! String
                     let notes = currentCropDict.valueForKey("Notes") as! String
                     let totalWeight = currentCropDict.valueForKey("Total_Weight") as! Int
                     let datePlanted = currentCropDict.valueForKey("Date_Planted") as! NSDictionary
@@ -168,6 +169,7 @@ class ViewController: UIViewController {
             }
         self.plants.append(newPlant)
         LibraryAPI.sharedInstance.setPlants(self.plants)
+       
 
 
         })
