@@ -118,7 +118,7 @@ class AddCropViewController: UIViewController {
             //Get date from fields
             if let addDate = gatherDatesFromFields(){
                 //Get crop from fields
-                let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil, harvestWeights: [], totalWeight: 0, varietyKey: "")
+                let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil, harvestWeights: [], totalWeight: 0, varietyName: PickerViews.getCurrentVariety()!.name)
                 //Add crop to API
                 LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
                 self.navigationController?.popViewControllerAnimated(true)

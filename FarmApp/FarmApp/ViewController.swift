@@ -50,7 +50,7 @@ class ViewController: UIViewController {
             var bedsToAdd = [Bed]()
             
             let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
-            let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50, varietyKey: "")
+            let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
             
             
             if let beds = bedsVal as? NSDictionary{
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
                     let weightsHarvestedVals = crop.value["Weights_Harvested"]
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
                     let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
-                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyKey: varietyKey)
+                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyKey)
                     cropsForHistory.append(newCrop)
                     }}
                 let cropHistory = CropHistory(numCrops: cropsForHistory.count, crops: cropsForHistory)
@@ -100,11 +100,11 @@ class ViewController: UIViewController {
                     let weightsHarvestedVals = currentCropDict.valueForKey("Weights_Harvested")
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
                     let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
-                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyKey: varietyKey)
+                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyKey)
                 }
                 
                 
-                let newBed = Bed(id: bed_ID, currentCrop: currentCropToAdd, cropHistory:  cropHistory, sectID: Sect_ID, bedKey : bedKey)
+                let newBed = Bed(id: bed_ID, currentCrop: currentCropToAdd, cropHistory:  cropHistory, sectID: Sect_ID)
                 bedsToAdd.append(newBed)
                 }}
             bedsToAdd.sortInPlace({ $0.id < ($1.id)})
