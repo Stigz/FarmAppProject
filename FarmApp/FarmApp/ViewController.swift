@@ -34,13 +34,13 @@ class ViewController: UIViewController {
         // This will remove extra separators from tableview
         self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
         
-       //readSectionsFromDatabase()
-        //readPlantsFromDataBase()
+       readSectionsFromDatabase()
+        readPlantsFromDataBase()
     }
-    /*
+    
     func readSectionsFromDatabase(){
         var sectionsRef: Firebase!
-        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/SectionsTest")
+        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections_Test")
         sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
             
             let bedsVal = snapshot.value["Beds"]
@@ -126,7 +126,12 @@ class ViewController: UIViewController {
         let seasonsToAdd = self.readBestSeasons(seasons)
         let totalWeight = snapshot.value["Total_Weight"] as! Int
         let name = snapshot.value["Plant_Name"] as! String
-        let notes = snapshot.value["Variety_Notes"] as! String
+        let notesVal = snapshot.value["Plant_Notes"]
+        var notes = ""
+            if let notesTemp = notesVal as? String{
+                notes = notesTemp
+            }
+           
         let varietiesVal = snapshot.value["Varieties"]
         var varietiesToAdd = [Variety]()
             if let varietiesDict = varietiesVal as? NSDictionary {
@@ -169,7 +174,7 @@ class ViewController: UIViewController {
 
         })
     }
-    */
+    
     
     func readBestSeasons(seasons: AnyObject?!) -> [String]{
         var seasonsToAdd = [String]()
