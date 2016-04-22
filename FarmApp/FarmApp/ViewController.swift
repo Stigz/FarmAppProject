@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
     
@@ -23,7 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //Set default bed number
-        sections = LibraryAPI.sharedInstance.getSects()
+        //sections = LibraryAPI.sharedInstance.getSects()
 
         
         //Register table for cell class
@@ -32,7 +33,124 @@ class ViewController: UIViewController {
         // This will remove extra separators from tableview
         self.sectionTable.tableFooterView = UIView(frame: CGRectZero)
         
+       readSectionsFromDatabase()
+       
     }
+    
+    func readSectionsFromDatabase(){
+        var sectionsRef: Firebase!
+        sectionsRef = Firebase(url: "https://glowing-torch-4644.firebaseio.com/Sections_Test")
+        sectionsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            
+            let bedsVal = snapshot.value["Beds"]
+            let Sect_Weight = snapshot.value["Sect_Weight"] as! Int
+            let Sect_ID =  snapshot.value["Sect_ID"] as! Int
+            
+            var bedsToAdd = [Bed]()
+            
+            let plant1 = Plant(name: "Wheat",bestSeasons: ["Winter"],notes: "",varieties: [], weight: 50)
+            let variety1 = Variety(name: "Golden", bestSeasons: ["Winter"], notes: "", bedHistory: [], plant: plant1, varietyWeight: 50)
+            
+            
+            if let beds = bedsVal as? NSDictionary{
+            for bed in beds{
+                let bed_ID = bed.value["Bed_Id"] as! Int
+                let cropH = bed.value["Crop_History"] as! NSDictionary
+                let cropsVal = cropH.valueForKey("Crops")
+                var cropsForHistory = [Crop]()
+                if let crops = cropsVal as? NSDictionary{
+                for crop in crops{
+                    let datePlanted = crop.value["Date_Planted"] as! NSDictionary
+                    let year = datePlanted.valueForKey("year") as! Int
+                    let month = datePlanted.valueForKey("month") as! Int
+                    let day = datePlanted.valueForKey("day") as! Int
+                    let pDate = Date(year: year, month: month, day: day)
+                    let harvestDate = crop.value["Final_Harvest"] as! NSDictionary
+                    let hYear = harvestDate.valueForKey("year") as! Int
+                    let hMonth = harvestDate.valueForKey("month") as! Int
+                    let hDay = harvestDate.valueForKey("day") as! Int
+                    let hDate = Date(year: hYear, month: hMonth, day: hDay)
+                    let notes = crop.value["Notes"] as! String
+                    let totalWeight = crop.value["Total_Weight"] as! Int
+                    let varietyName = crop.value["Variety_Name"] as! String
+                    let datesHarvestedVals = crop.value["Dates_Harvested"]
+                    let weightsHarvestedVals = crop.value["Weights_Harvested"]
+                    let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
+                    let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
+                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyName)
+                    cropsForHistory.append(newCrop)
+                    }}
+                let cropHistory = CropHistory(numCrops: cropsForHistory.count, crops: cropsForHistory)
+                
+                //dealing with the current crop
+                let currentCropVal = bed.value["Current_Crop"]
+                var currentCropToAdd : Crop?
+                if let currentCropDict = currentCropVal as? NSDictionary{
+                    let varietyName = currentCropDict.valueForKey("Variety_Name") as! String
+                    let notes = currentCropDict.valueForKey("Notes") as! String
+                    let totalWeight = currentCropDict.valueForKey("Total_Weight") as! Int
+                    let datePlanted = currentCropDict.valueForKey("Date_Planted") as! NSDictionary
+                    let pday = datePlanted.valueForKey("day") as! Int
+                    let pmonth = datePlanted.valueForKey("month") as! Int
+                    let pyear = datePlanted.valueForKey("year") as! Int
+                    let pDate = Date(year: pyear, month: pmonth, day: pday)
+                    let datesHarvestedVals = currentCropDict.valueForKey("Dates_Harvested")
+                    let weightsHarvestedVals = currentCropDict.valueForKey("Weights_Harvested")
+                    let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
+                    let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
+                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyName)
+                }
+                
+                
+                let newBed = Bed(id: bed_ID, currentCrop: currentCropToAdd, cropHistory:  cropHistory, sectID: Sect_ID)
+                bedsToAdd.append(newBed)
+                }}
+            bedsToAdd.sortInPlace({ $0.id < ($1.id)})
+            self.sections.append(Section(id: Sect_ID, beds: bedsToAdd, numBeds: bedsToAdd.count, sectionWeight: Sect_Weight))
+            
+           //runs 4x
+            LibraryAPI.sharedInstance.setSections(self.sections)
+            LibraryAPI.sharedInstance.linkCropsToVarieties()
+            self.sectionTable.reloadData()
+            
+        })
+        
+
+    }
+    
+    
+    func readHarvestDates(datesHarvestedVals: AnyObject?!) -> [Date]{
+        var datesHarvestedToAdd = [Date]()
+
+            if let datesHarvestedDict = datesHarvestedVals as? NSDictionary{
+    
+                for date in datesHarvestedDict {
+                    let info = date.value
+                    let year = info.valueForKey("year") as! Int
+                    let month = info.valueForKey("month") as! Int
+                    let day = info.valueForKey("day") as! Int
+                    let newDate = Date(year: year, month: month, day: day)
+                    datesHarvestedToAdd.append(newDate)
+    
+                    }
+            }
+        return datesHarvestedToAdd
+    }
+    
+    func readWeights(weightsHarvestedVals : AnyObject?!) -> [Int]{
+        var weightsHarvestedToAdd = [Int]()
+        if let weightsHarvestedDict = weightsHarvestedVals as? NSDictionary{
+            for weight in weightsHarvestedDict {
+                let newWeight = weight.value as! Int
+                weightsHarvestedToAdd.append(newWeight)
+            }
+        }
+        return weightsHarvestedToAdd
+    }
+
+
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

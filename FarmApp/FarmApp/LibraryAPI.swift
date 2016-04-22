@@ -11,11 +11,12 @@ import Foundation
 class LibraryAPI: NSObject {
     
     private let persistencyManager : PersistencyManager
+    private let databaseManager : DatabaseManager
     
     override init() {
         persistencyManager = PersistencyManager()
+        databaseManager = DatabaseManager()
         super.init()
-        
     }
     
     //Create class variable as computed type
@@ -33,9 +34,17 @@ class LibraryAPI: NSObject {
     }
     
     
+    func linkCropsToVarieties(){
+        persistencyManager.linkCropsToVarieties()
+    }
+    
     //Ask persistency manager for sections
     func getSects() -> [Section]{
         return persistencyManager.getSects()
+    }
+    
+    func setPlants(plants: [Plant]){
+        persistencyManager.setPlants(plants)
     }
 
     //Ask persistency manager for a crop
@@ -141,7 +150,15 @@ class LibraryAPI: NSObject {
     func editVarietyName(variety: Variety, newName: String){
         persistencyManager.editVarietyName(variety, newName: newName)
     }
+    
+    func setSections(sections : [Section]){
+        persistencyManager.setSections(sections)
+    }
 
+    func saveAllDataToDB(){
+        databaseManager.saveSectionsToDB()
+        databaseManager.savePlantsToDB()
+    }
     
 
 }
