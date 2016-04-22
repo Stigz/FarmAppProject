@@ -59,7 +59,6 @@ class ViewController: UIViewController {
                 let cropH = bed.value["Crop_History"] as! NSDictionary
                 let cropsVal = cropH.valueForKey("Crops")
                 var cropsForHistory = [Crop]()
-                let bedKey = bed.key as! String
                 if let crops = cropsVal as? NSDictionary{
                 for crop in crops{
                     let datePlanted = crop.value["Date_Planted"] as! NSDictionary
@@ -74,12 +73,12 @@ class ViewController: UIViewController {
                     let hDate = Date(year: hYear, month: hMonth, day: hDay)
                     let notes = crop.value["Notes"] as! String
                     let totalWeight = crop.value["Total_Weight"] as! Int
-                    let varietyKey = crop.value["Variety_Key"] as! String
+                    let varietyName = crop.value["Variety_Name"] as! String
                     let datesHarvestedVals = crop.value["Dates_Harvested"]
                     let weightsHarvestedVals = crop.value["Weights_Harvested"]
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
                     let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
-                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyKey)
+                    let newCrop = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: hDate, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyName)
                     cropsForHistory.append(newCrop)
                     }}
                 let cropHistory = CropHistory(numCrops: cropsForHistory.count, crops: cropsForHistory)
@@ -88,7 +87,7 @@ class ViewController: UIViewController {
                 let currentCropVal = bed.value["Current_Crop"]
                 var currentCropToAdd : Crop?
                 if let currentCropDict = currentCropVal as? NSDictionary{
-                    let varietyKey = currentCropDict.valueForKey("Variety_Key") as! String
+                    let varietyName = currentCropDict.valueForKey("Variety_Name") as! String
                     let notes = currentCropDict.valueForKey("Notes") as! String
                     let totalWeight = currentCropDict.valueForKey("Total_Weight") as! Int
                     let datePlanted = currentCropDict.valueForKey("Date_Planted") as! NSDictionary
@@ -100,7 +99,7 @@ class ViewController: UIViewController {
                     let weightsHarvestedVals = currentCropDict.valueForKey("Weights_Harvested")
                     let weightsHarvestedToAdd = self.readWeights(weightsHarvestedVals)
                     let datesHarvestedToAdd = self.readHarvestDates(datesHarvestedVals)
-                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyKey)
+                    currentCropToAdd = Crop(datePlanted: pDate, datesHarvested: datesHarvestedToAdd, notes: notes, variety: variety1, finalHarvest: nil, harvestWeights: weightsHarvestedToAdd, totalWeight: totalWeight, varietyName: varietyName)
                 }
                 
                 
@@ -138,23 +137,23 @@ class ViewController: UIViewController {
                     //let plantName = variety.value["Plant_Name"] as! String
                     let varietyName = variety.value["Variety_Name"] as! String
                     let varietyNotes = variety.value["Variety_Notes"] as! String
-                    let varietyKey = variety.key as! String
                     var bedHistoryToAdd = [BedHistory]()
                     var bedHistoryVals = variety.value["Bed_History"]
                     if let bedHistoryDict = bedHistoryVals as? NSDictionary{
                         for bedHistory in bedHistoryDict{
-                            let bedKey = bedHistory.value["BH_Bed_Key"] as! String
+                            let bedID = bedHistory.value["BH_Bed_ID"] as! Int
+                            let sectID = bedHistory.value["BH_Sect_ID"] as! Int
                             let date = bedHistory.value["BH_Date"] as! NSDictionary
                             let year = date.valueForKey("year") as! Int
                             let month = date.valueForKey("month") as! Int
                             let day = date.valueForKey("day") as! Int
                             let newDate = Date(year: year, month: month, day: day)
-                            //let newBedHistory = BedHistory(date: newDate, bed: <#T##Bed#>)
-                            //bedHistoryToAdd.append(newBedHistory)
+                            let newBedHistory = BedHistory(date: newDate, sectID: sectID, bedID: bedID)
+                            bedHistoryToAdd.append(newBedHistory)
                         }
                     }
                     
-                    let newVariety = Variety(name: varietyName, bestSeasons: seasonsToAdd, notes: varietyNotes, bedHistory: [], plant: nil, varietyWeight: totalWeight, varietyKey: varietyKey)
+                    let newVariety = Variety(name: varietyName, bestSeasons: seasonsToAdd, notes: varietyNotes, bedHistory: bedHistoryToAdd, plant: nil, varietyWeight: totalWeight)
                     varietiesToAdd.append(newVariety)
                 }
             }
