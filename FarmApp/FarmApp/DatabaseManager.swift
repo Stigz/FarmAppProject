@@ -15,6 +15,7 @@ class DatabaseManager: NSObject {
     
     func saveSectionsToDB(){
         let sectionsRef = ref.childByAppendingPath("Sections_Test")
+        sectionsRef.setValue(nil)
         for section in LibraryAPI.sharedInstance.getSects() {
             let sectionRef = sectionsRef.childByAppendingPath("Section_\(section.id)")
             sectionRef.setValue(section.encodeForDB())
@@ -23,6 +24,7 @@ class DatabaseManager: NSObject {
     
     func savePlantsToDB(){
         let plantsRef = ref.childByAppendingPath("Plants_Test")
+        plantsRef.setValue(nil)
         for plant in LibraryAPI.sharedInstance.getAllPossiblePlants(){
             let plantRef = plantsRef.childByAppendingPath("\(plant.name)")
             plantRef.setValue(plant.encodeForDB())

@@ -20,7 +20,7 @@ class PersistencyManager: NSObject {
     override init() {
         super.init()
         //TO-DO: Make it so we don't have to hard code these
-        //hardCodeSections()
+        hardCodeSections()
     }
     
     //TO-DO: Make it so we don't have to hard code these

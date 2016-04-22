@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //Set default bed number
-       // sections = LibraryAPI.sharedInstance.getSects()
+        sections = LibraryAPI.sharedInstance.getSects()
 
         
         //Register table for cell class
