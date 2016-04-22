@@ -76,6 +76,7 @@ class CropViewController: UIViewController {
         }else{
             self.crop = LibraryAPI.sharedInstance.getCropFromHistory(sectNum, bedNum: bedNum, index: index)
         }
+        print(self.crop.variety.name)
     }
     
  /* ---------------------------------------------

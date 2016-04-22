@@ -18,11 +18,15 @@ class Bed: NSObject, NSCoding{
     
     //need to add bed id into the constructor
     //Default init method
-    init(id: Int, currentCrop : Crop?, cropHistory : CropHistory){
+
+    init(id: Int, currentCrop : Crop?, cropHistory : CropHistory, sectID : Int){
+
         super.init()
         self.id = id
         self.currentCrop = currentCrop
         self.cropHistory = cropHistory
+        self.sectID = sectID
+       
     }
     
     //Decode object from memory -- for archiving (saving) albums
@@ -50,6 +54,19 @@ class Bed: NSObject, NSCoding{
     
     func getID() -> String{
         return "\(id)"
+    }
+    
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(id, forKey: "Bed_Id")
+
+        if let theCrop = currentCrop {
+            theDict.setValue(theCrop.encodeForDB(), forKey: "Current_Crop")
+        }
+        theDict.setValue(cropHistory.encodeForDB(), forKey: "Crop_History")
+        theDict.setValue(bedWeight, forKey: "Bed_Weight")
+        theDict.setValue(sectID, forKey: "Sect_ID")
+        return theDict
     }
 
 }

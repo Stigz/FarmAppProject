@@ -47,6 +47,32 @@ class Plant: NSObject, NSCoding{
 
     }
     
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(name, forKey: "Plant_Name")
+        if bestSeasons != []{
+            let bestSeasonsDict = NSMutableDictionary()
+            var count = 0
+            while count < bestSeasons.count {
+                bestSeasonsDict.setValue(bestSeasons[count], forKey: "Best_Season_\(count)")
+                count++
+            }
+            theDict.setValue(bestSeasonsDict, forKey: "Best_Seasons")
+        }
+        theDict.setValue(notes, forKey: "Plant_Notes")
+        theDict.setValue(plant_weight, forKey: "Total_Weight")
+        if varieties != []{
+            let varietiesDict = NSMutableDictionary()
+            var count = 0
+            while count < varieties.count {
+                varietiesDict.setValue(varieties[count].encodeForDB(), forKey: "Variety_\(count)")
+                count++
+            }
+            theDict.setValue(varietiesDict, forKey: "Varieties")
+        }
+        return theDict
+    }
+    
  
     
 }

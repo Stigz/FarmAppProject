@@ -10,29 +10,42 @@ import Foundation
 import UIKit
 
 class BedHistory: NSObject, NSCoding {
-    var data : (Date, Bed)!
+    var data : (Date, Int, Int)!
     
     
-    init(date: Date, bed: Bed){
+    init(date: Date, sectID : Int, bedID: Int){
         super.init()
-        data = (date,bed)
+        data = (date,sectID, bedID)
         
     }
     
     required init(coder decoder: NSCoder) {
         super.init()
         let date = decoder.decodeObjectForKey("BH_date") as! Date
-        let bed = decoder.decodeObjectForKey("BH_bed") as! Bed
-        data = (date,bed)
+        let sectID = decoder.decodeObjectForKey("sectID") as! Int
+        let bedID = decoder.decodeObjectForKey("bedID") as! Int
+
+        data = (date, sectID, bedID)
         
     }
     
     //Encode object to memory -- for archiving
     func encodeWithCoder(aCoder: NSCoder) {
         let date = data.0
-        let bed = data.1
-        aCoder.encodeObject(date, forKey: "BH_dates")
-        aCoder.encodeObject(bed, forKey: "BH_beds")
+        let bedID = data.1
+        let sectID = data.2
+        aCoder.encodeObject(date, forKey: "BH_date")
+        aCoder.encodeObject(bedID, forKey: "bedID")
+        aCoder.encodeObject(sectID, forKey: "sectID")
+
+    }
+    
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(data.0.encodeForDB(), forKey: "BH_Date")
+        theDict.setValue(data.1, forKey: "BH_Sect_ID")
+        theDict.setValue(data.2, forKey: "BH_Bed_ID")
+        return theDict
     }
 
 }

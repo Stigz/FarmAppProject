@@ -15,7 +15,7 @@ class Crop: NSObject, NSCoding{
     var datePlanted: Date!
     var datesHarvested: [Date]!
     var finalHarvest : Date?
-    
+    var varietyName : String!
     var notes : String?
     var variety: Variety!
     
@@ -23,7 +23,7 @@ class Crop: NSObject, NSCoding{
     var totalWeight : Int!
     
     //do we want a crop to have to be initialized with an image?
-    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?, harvestWeights: [Int], totalWeight: Int){
+    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?, harvestWeights: [Int], totalWeight: Int, varietyName: String){
         super.init()
         self.datePlanted = datePlanted
         self.datesHarvested = datesHarvested
@@ -32,6 +32,7 @@ class Crop: NSObject, NSCoding{
         self.finalHarvest = finalHarvest
         self.harvestWeights = harvestWeights
         self.totalWeight = totalWeight
+        self.varietyName = varietyName
     }
     
     required init(coder decoder: NSCoder) {
@@ -62,7 +63,31 @@ class Crop: NSObject, NSCoding{
         "Variety: \(variety.name)"
     }
 
-    
+    func encodeForDB() -> NSMutableDictionary{
+        let theDict = NSMutableDictionary()
+        theDict.setValue(datePlanted.encodeForDB(), forKey: "Date_Planted")
+        if datesHarvested != []{
+            let datesHarvestedDict = NSMutableDictionary()
+            var count = 0
+            while count < datesHarvested.count {
+                datesHarvestedDict.setValue(datesHarvested[count].encodeForDB(), forKey: "Harvest_Date_\(count)")
+                count++
+            }
+            theDict.setValue(datesHarvestedDict, forKey: "Dates_Harvested")
+            let weightsHarvestedDict = NSMutableDictionary()
+            count = 0
+            while count < harvestWeights.count {
+                weightsHarvestedDict.setValue(harvestWeights[count], forKey: "Harvest_Weight_\(count)")
+                count++
+            }
+            theDict.setValue(weightsHarvestedDict, forKey: "Weights_Harvested")
+        }
+        theDict.setValue(finalHarvest?.encodeForDB(), forKey: "Final_Harvest")
+        theDict.setValue(notes, forKey: "Notes")
+        theDict.setValue(varietyName, forKey: "Variety_Name")
+        theDict.setValue(totalWeight, forKey: "Total_Weight")
+        return theDict
+    }
     
 
     
