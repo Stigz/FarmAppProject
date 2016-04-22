@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         plantsRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
             let seasons = snapshot.value["Best_Seasons"]
             let seasonsToAdd = self.readBestSeasons(seasons)
-            let totalWeight = snapshot.value["Total_Weight"] as! Int
+            let totalWeight = snapshot.value["Total_Weight"] as! Float
             let name = snapshot.value["Plant_Name"] as! String
             let notesVal = snapshot.value["Plant_Notes"]
             var notes = ""
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 for variety in varietiesDict{
                     let seasons = variety.value["Best_Seasons"]
                     let seasonsToAdd = self.readBestSeasons(seasons)
-                    let totalWeight = variety.value["Total_Weight"] as! Int
+                    let totalWeight = variety.value["Total_Weight"] as! Float
                     //let plantName = variety.value["Plant_Name"] as! String
                     let varietyName = variety.value["Variety_Name"] as! String
                     let varietyNotes = variety.value["Variety_Notes"] as! String

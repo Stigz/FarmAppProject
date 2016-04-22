@@ -144,7 +144,7 @@ class PersistencyManager: NSObject {
     }
     
     //Harvest a crop for the final time
-    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.finalHarvest = dateHarvested
         harvestBed.currentCrop!.totalWeight=harvestBed.currentCrop!.totalWeight+harvestWeight
@@ -156,7 +156,7 @@ class PersistencyManager: NSObject {
     }
 
     //Harvest a crop in a given bed
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.datesHarvested.append(dateHarvested)
         harvestBed.currentCrop!.harvestWeights.append(harvestWeight)
@@ -286,7 +286,7 @@ class PersistencyManager: NSObject {
         var totalWeight : Float = 0
         for i in 1...sections.count{
             if(sections[i].sectionWeight != nil){
-            totalWeight +=  sections[i].sectionWeight as! Float
+            totalWeight +=  sections[i].sectionWeight
             }
         }
         return totalWeight

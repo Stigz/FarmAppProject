@@ -74,12 +74,12 @@ class LibraryAPI: NSObject {
     }
     
     //Ask persistency manager to do final harvest
-    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         persistencyManager.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested, harvestWeight: harvestWeight)
     }
     
     //Ask persistency manager to harvest crop
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         persistencyManager.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested, harvestWeight: harvestWeight)
     }
 

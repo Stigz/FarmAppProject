@@ -15,10 +15,10 @@ class Plant: NSObject, NSCoding{
     var bestSeasons : [String]!
     var notes : String!
     var varieties : [Variety]!
-    var plant_weight : Int!
+    var plant_weight : Float!
     
     //Default init method
-    init(name: String, bestSeasons : [String], notes : String, varieties: [Variety], weight: Int){
+    init(name: String, bestSeasons : [String], notes : String, varieties: [Variety], weight: Float){
         super.init()
         self.name = name
         self.bestSeasons = bestSeasons
@@ -34,7 +34,7 @@ class Plant: NSObject, NSCoding{
         self.bestSeasons = decoder.decodeObjectForKey("plant_seasons") as! [String]
         self.notes = decoder.decodeObjectForKey("plant_notes") as! String
         self.varieties = decoder.decodeObjectForKey("plant_varieties") as! [Variety]
-        self.plant_weight = decoder.decodeObjectForKey("plant_weight") as! Int
+        self.plant_weight = decoder.decodeObjectForKey("plant_weight") as! Float
     }
     
     //Encode object to memory -- for archiving
