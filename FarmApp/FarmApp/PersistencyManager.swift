@@ -183,6 +183,16 @@ class PersistencyManager: NSObject {
     }
  
 
+    func editCropHistoryWeight(sectNum: Int, bedNum : Int, crop: Crop, historyIndex: Int, weight: Float){
+        if let index = sections[sectNum - 1].beds[bedNum - 1].cropHistory.crops.indexOf(crop){
+        let weightIndex = sections[sectNum - 1].beds[bedNum - 1].cropHistory.crops[index].harvestWeights.count
+        sections[sectNum - 1].beds[bedNum - 1].cropHistory.crops[index].harvestWeights[weightIndex-1-historyIndex] = weight
+        }
+        else{
+            let weightIndex = sections[sectNum - 1].beds[bedNum - 1].currentCrop?.harvestWeights.count
+            sections[sectNum - 1].beds[bedNum - 1].currentCrop?.harvestWeights[weightIndex!-1-historyIndex] = weight
+        }
+    }
     
  
 
