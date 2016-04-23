@@ -25,12 +25,14 @@ class CropViewController: UIViewController {
     @IBOutlet weak var weightLabel :UILabel!
     
     
+    
     //Controller Instance Variables
     var crop : Crop!
     var bedNum : Int = 0
     var sectNum : Int = 0
     var isPlanted : Bool = false
     var historyIndex : Int = 0
+    var textField = UITextField!()
     
  /* ---------------------------------------------
   * Initialization and de-initialization
@@ -113,7 +115,7 @@ class CropViewController: UIViewController {
     //Gathers the weight from the input fields
     //Called when crop is harvested
     func gatherWeightFromFields() -> Float?{
-        if let weight = Float(harvestButtonView.getWeightInput()!){
+        if let weight = harvestButtonView.getWeightInput()?.floatValue{
             return weight
         }else{
             //If unsuccessful in gathering weight, inform user
@@ -236,6 +238,39 @@ class CropViewController: UIViewController {
             LibraryAPI.sharedInstance.updateNotesForCropInHistory(sectNum, bedNum: bedNum, index: historyIndex, notes: notesField.text)
         }
     }
+    
+    
+    func changeWeightAlert(){
+        let alertController = UIAlertController(title: "Change the weight of this harvest", message: "Input the new weight:", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+        let add = UIAlertAction(title: "Change", style: UIAlertActionStyle.Default, handler: weightChanged)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        alertController.addTextFieldWithConfigurationHandler(addTextField)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func weightChanged(alert : UIAlertAction){
+        if let weight = textField.text?.floatValue{
+            crop.harvestWeights[crop.harvestWeights.count-1-historyIndex] = weight
+            cropHistoryTable.reloadData()
+            LibraryAPI.sharedInstance.editCropHistoryWeight(sectNum, bedNum: bedNum,crop: crop, historyIndex: historyIndex, weight: weight)
+            
+        //never seems to be getting here
+        }else{
+            //If unsuccessful in gathering weight, inform user
+            let alertController = UIAlertController(title: "Error!", message: "You have entered an invalid weight! Please make sure you have entered a number.", preferredStyle: UIAlertControllerStyle.Alert)
+            //Allow dismissing the alert
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func addTextField(textField: UITextField!){
+        // add the text field and make the result global
+        textField.placeholder = "New Weight"
+        self.textField = textField
+    }
 
 }
  /* ---------------------------------------------
@@ -254,7 +289,7 @@ extension CropViewController: UITableViewDataSource {
         let harvestList = crop.datesHarvested
         let cell:UITableViewCell = self.cropHistoryTable.dequeueReusableCellWithIdentifier("harvestCell")! as UITableViewCell
         //The list ordering makes it go in reverse order (recent first)
-        cell.textLabel?.text = ("\(harvestList[harvestList.count-1-indexPath.row].printSlash())")
+        cell.textLabel?.text = ("\(harvestList[harvestList.count-1-indexPath.row].printSlash()), \(crop.harvestWeights[harvestList.count-1-indexPath.row]) LBs")
         
         return cell
     }
@@ -264,6 +299,9 @@ extension CropViewController: UITableViewDataSource {
 extension CropViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        changeWeightAlert()
+        historyIndex = indexPath.row
+        
     }
 }
 
@@ -279,5 +317,11 @@ extension CropViewController: HarvestViewDelegate{
     
     func finalHarvestButtonClicked(view : HarvestButtonsView){
         commonHarvestButtonClicked(true)
+    }
+}
+
+extension String {
+    var floatValue: Float {
+        return (self as NSString).floatValue
     }
 }
