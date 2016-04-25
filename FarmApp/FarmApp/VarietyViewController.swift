@@ -130,7 +130,7 @@ extension VarietyViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.varietyTable.dequeueReusableCellWithIdentifier("bedCell")! as UITableViewCell
 
-        cell.textLabel?.text = "Planted in Bed \(variety.bedHistory[indexPath.row].data.2) on \(variety.bedHistory[indexPath.row].data.0.printSlash())"
+        cell.textLabel?.text = "Bed \(variety.bedHistory[indexPath.row].data.2), Section \(variety.bedHistory[indexPath.row].data.1) on \(variety.bedHistory[indexPath.row].data.0.printSlash())"
         
         
         return cell

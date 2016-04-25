@@ -144,7 +144,7 @@ class PersistencyManager: NSObject {
     }
     
     //Harvest a crop for the final time
-    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.finalHarvest = dateHarvested
         harvestBed.currentCrop!.totalWeight=harvestBed.currentCrop!.totalWeight+harvestWeight
@@ -156,7 +156,7 @@ class PersistencyManager: NSObject {
     }
 
     //Harvest a crop in a given bed
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         let harvestBed = getBed(sectNum, bedNum: bedNum)
         harvestBed.currentCrop!.datesHarvested.append(dateHarvested)
         harvestBed.currentCrop!.harvestWeights.append(harvestWeight)
@@ -183,6 +183,16 @@ class PersistencyManager: NSObject {
     }
  
 
+    func editCropHistoryWeight(sectNum: Int, bedNum : Int, crop: Crop, historyIndex: Int, weight: Float){
+        if let index = sections[sectNum - 1].beds[bedNum - 1].cropHistory.crops.indexOf(crop){
+        let weightIndex = sections[sectNum - 1].beds[bedNum - 1].cropHistory.crops[index].harvestWeights.count
+        sections[sectNum - 1].beds[bedNum - 1].cropHistory.crops[index].harvestWeights[weightIndex-1-historyIndex] = weight
+        }
+        else{
+            let weightIndex = sections[sectNum - 1].beds[bedNum - 1].currentCrop?.harvestWeights.count
+            sections[sectNum - 1].beds[bedNum - 1].currentCrop?.harvestWeights[weightIndex!-1-historyIndex] = weight
+        }
+    }
     
  
 
@@ -286,12 +296,12 @@ class PersistencyManager: NSObject {
         var totalWeight : Float = 0
         for i in 1...sections.count{
             if(sections[i].sectionWeight != nil){
-            totalWeight +=  sections[i].sectionWeight as! Float
+            totalWeight +=  sections[i].sectionWeight
             }
         }
         return totalWeight
     }
-    
+    //data = (date, sectID, bedID)
     func deleteSection(id : Int){
         for i in id...sections.count - 1 {
             sections[i].id = i
@@ -300,14 +310,49 @@ class PersistencyManager: NSObject {
             }
         }
         sections.removeAtIndex(id)
+        for plant in allPossiblePlants{
+            for variety in plant.varieties{
+                for bedHistory in variety.bedHistory{
+                    if bedHistory.data.1 == id + 1{
+                        variety.bedHistory = variety.bedHistory.filter() {$0 != bedHistory}
+                        print(variety.bedHistory)
+
+                    }
+                    else if bedHistory.data.1 > id{
+                        bedHistory.data.1 -= 1
+                    }
+                }
+            }
+        }
     }
+
     
     func deleteBed(sectNum :Int, bedNum :Int){
         for i in bedNum...sections[sectNum - 1].beds.count - 1 {
             sections[sectNum - 1].beds[i].id = i
         }
         sections[sectNum - 1].beds.removeAtIndex(bedNum)
+        for plant in allPossiblePlants{
+            for variety in plant.varieties{
+                for bedHistory in variety.bedHistory{
+                    if bedHistory.data.1 == sectNum{
+                        if bedHistory.data.2 == bedNum + 1{
+                          
+                            variety.bedHistory = variety.bedHistory.filter() {$0 != bedHistory}
+                            print(variety.bedHistory)
+                        }
+                        else if bedHistory.data.2 > bedNum + 1{
+                        bedHistory.data.2 -= 1
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
+
+
+
     
     func editPlantName(plant : Plant, newName :String){
         let editIndex = allPossiblePlants.indexOf(plant)

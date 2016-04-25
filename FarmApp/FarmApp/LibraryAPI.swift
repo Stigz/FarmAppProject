@@ -74,12 +74,12 @@ class LibraryAPI: NSObject {
     }
     
     //Ask persistency manager to do final harvest
-    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func finalHarvestForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         persistencyManager.finalHarvestForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested, harvestWeight: harvestWeight)
     }
     
     //Ask persistency manager to harvest crop
-    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Int){
+    func harvestCropForBed(sectNum: Int, bedNum: Int, dateHarvested: Date, harvestWeight: Float){
         persistencyManager.harvestCropForBed(sectNum, bedNum: bedNum, dateHarvested: dateHarvested, harvestWeight: harvestWeight)
     }
 
@@ -158,6 +158,10 @@ class LibraryAPI: NSObject {
     func saveAllDataToDB(){
         databaseManager.saveSectionsToDB()
         databaseManager.savePlantsToDB()
+    }
+
+    func editCropHistoryWeight(sectNum: Int, bedNum : Int, crop: Crop, historyIndex: Int, weight: Float){
+        persistencyManager.editCropHistoryWeight(sectNum, bedNum: bedNum, crop: crop, historyIndex: historyIndex, weight: weight)
     }
     
 

@@ -19,11 +19,11 @@ class Crop: NSObject, NSCoding{
     var notes : String?
     var variety: Variety!
     
-    var harvestWeights : [Int]!
-    var totalWeight : Int!
+    var harvestWeights : [Float]!
+    var totalWeight : Float!
     
     //do we want a crop to have to be initialized with an image?
-    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?, harvestWeights: [Int], totalWeight: Int, varietyName: String){
+    init(datePlanted: Date, datesHarvested: [Date], notes : String?, variety: Variety, finalHarvest : Date?, harvestWeights: [Float], totalWeight: Float, varietyName: String){
         super.init()
         self.datePlanted = datePlanted
         self.datesHarvested = datesHarvested
@@ -42,8 +42,8 @@ class Crop: NSObject, NSCoding{
         self.notes = decoder.decodeObjectForKey("crop_notes") as? String
         self.variety = decoder.decodeObjectForKey("crop_Variety") as! Variety
         self.finalHarvest = decoder.decodeObjectForKey("crop_fHarvest") as? Date
-        self.harvestWeights = decoder.decodeObjectForKey("crop_harvestWeights") as! [Int]
-        self.totalWeight = decoder.decodeObjectForKey("crop_totalWeight") as! Int
+        self.harvestWeights = decoder.decodeObjectForKey("crop_harvestWeights") as! [Float]
+        self.totalWeight = decoder.decodeObjectForKey("crop_totalWeight") as! Float
     }
     
     //Encode object to memory -- for archiving

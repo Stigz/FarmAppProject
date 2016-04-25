@@ -13,7 +13,7 @@ class Bed: NSObject, NSCoding{
     var id : Int!
     var currentCrop : Crop?
     var cropHistory : CropHistory!
-    var bedWeight : Int!
+    var bedWeight : Float!
     var sectID : Int!
     
     //need to add bed id into the constructor
@@ -35,7 +35,7 @@ class Bed: NSObject, NSCoding{
         self.id = decoder.decodeObjectForKey("bed_id") as! Int
         self.currentCrop = decoder.decodeObjectForKey("bed_currCrop") as? Crop
         self.cropHistory = decoder.decodeObjectForKey("bed_cropHist") as! CropHistory
-        self.bedWeight = decoder.decodeObjectForKey("bed_weight") as! Int
+        self.bedWeight = decoder.decodeObjectForKey("bed_weight") as! Float
     }
     
     //Encode object to memory -- for archiving
