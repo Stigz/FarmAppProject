@@ -281,12 +281,14 @@ extension CropViewController: UITableViewDataSource {
     //Number of harvest dates
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let harvestList = crop.datesHarvested
+      
         return harvestList.count
     }
     
     //What to display for harvest dates
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let harvestList = crop.datesHarvested
+        var harvestList = crop.datesHarvested
+      
         let cell:UITableViewCell = self.cropHistoryTable.dequeueReusableCellWithIdentifier("harvestCell")! as UITableViewCell
         //The list ordering makes it go in reverse order (recent first)
         cell.textLabel?.text = ("\(harvestList[harvestList.count-1-indexPath.row].printSlash()), \(crop.harvestWeights[harvestList.count-1-indexPath.row]) LBs")
