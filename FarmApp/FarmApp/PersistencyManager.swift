@@ -288,10 +288,9 @@ class PersistencyManager: NSObject {
             if let index = plant.varieties.indexOf(variety){
                 persistentVariety = plant.varieties[index]
 
-        }
         persistentVariety.bedHistory.append(bedHistory)
         }
-        
+    }
     }
     
     func getTotalWeight() -> Float{
