@@ -160,8 +160,8 @@ class LibraryAPI: NSObject {
         databaseManager.savePlantsToDB()
     }
 
-    func editCropHistoryWeight(sectNum: Int, bedNum : Int, crop: Crop, historyIndex: Int, weight: Float){
-        persistencyManager.editCropHistoryWeight(sectNum, bedNum: bedNum, crop: crop, historyIndex: historyIndex, weight: weight)
+    func editCropHistoryWeight(sectNum: Int, bedNum : Int, crop: Crop, historyIndex: Int, weight: Float, oldWeight: Float){
+        persistencyManager.editCropHistoryWeight(sectNum, bedNum: bedNum, crop: crop, historyIndex: historyIndex, newWeight: weight, oldWeight: oldWeight)
     }
     
 

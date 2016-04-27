@@ -183,7 +183,6 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
     func newVariety(alert: UIAlertAction!){
         LibraryAPI.sharedInstance.addVariety(textField.text!, plant: plant)
         resetInfo()
-        //also refilter the plants?
     }
     
     //Dismisses notes keyboard, and saves the new notes
@@ -192,7 +191,7 @@ class PlantViewController: UIViewController, UISearchResultsUpdating {
         LibraryAPI.sharedInstance.updateNotesForPlant(plant.name, notes: notesField.text)
     }
     //Called when add season button is pressed
-    //Show the picke
+    //Show the picker
     @IBAction func addSeasons() {
         seasonsPicker.showPicker()
     }
