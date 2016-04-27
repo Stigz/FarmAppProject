@@ -263,9 +263,9 @@ class CropViewController: UIViewController {
     
     func weightChanged(alert : UIAlertAction){
         if let weight = textField.text?.floatValue{
-            crop.harvestWeights[crop.harvestWeights.count-1-historyIndex] = weight
             cropHistoryTable.reloadData()
-            LibraryAPI.sharedInstance.editCropHistoryWeight(sectNum, bedNum: bedNum,crop: crop, historyIndex: historyIndex, weight: weight)
+            LibraryAPI.sharedInstance.editCropHistoryWeight(sectNum, bedNum: bedNum,crop: crop, historyIndex: historyIndex, weight: weight, oldWeight: crop.harvestWeights[crop.harvestWeights.count - 1 - historyIndex])
+            crop.harvestWeights[crop.harvestWeights.count-1-historyIndex] = weight
             
         //never seems to be getting here
         }else{
