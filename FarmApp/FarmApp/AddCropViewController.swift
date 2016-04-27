@@ -26,6 +26,7 @@ class AddCropViewController: UIViewController {
     var PickerViews : AddCropPickers!
     var plantNameField = UITextField!()
     var varietyNameField = UITextField!()
+    var dateToAdd : Date?
     
     //Static Variables
     let defaultVariety : String = "No variety selected"
@@ -117,13 +118,23 @@ class AddCropViewController: UIViewController {
         if checkFieldsFull(){
             //Get date from fields
             if let addDate = gatherDatesFromFields(){
-                //Get crop from fields
-                let newCrop = Crop(datePlanted: addDate, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil, harvestWeights: [], totalWeight: 0, varietyName: PickerViews.getCurrentVariety()!.name)
-                //Add crop to API
-                LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
-                self.navigationController?.popViewControllerAnimated(true)
+                dateToAdd = addDate
+                let alertController = UIAlertController(title: "Are you sure?", message: "This data cannot be changed once you have entered it. Please confirm that there are no mistakes.", preferredStyle: .Alert)
+                let cancel = UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: nil)
+                let add = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: finishAdding)
+                alertController.addAction(cancel)
+                alertController.addAction(add)
+                presentViewController(alertController, animated: true, completion: nil)
             }
         }
+    }
+    
+    func finishAdding(alert: UIAlertAction!){
+        //Get crop from fields
+        let newCrop = Crop(datePlanted: dateToAdd!, datesHarvested: [], notes: notesField.text, variety: PickerViews.getCurrentVariety()!, finalHarvest: nil, harvestWeights: [], totalWeight: 0, varietyName: PickerViews.getCurrentVariety()!.name)
+        //Add crop to API
+        LibraryAPI.sharedInstance.addCrop(newCrop,bedNum: bedNum,sectNum: sectNum)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     /* ----------------------------------
@@ -172,4 +183,5 @@ class AddCropViewController: UIViewController {
     func newVariety(alert: UIAlertAction!){
         PickerViews.addVariety(varietyNameField.text!)
     }
+    
 }
