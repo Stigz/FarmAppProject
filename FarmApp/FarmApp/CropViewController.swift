@@ -33,6 +33,7 @@ class CropViewController: UIViewController {
     var isPlanted : Bool = false
     var historyIndex : Int = 0
     var textField = UITextField!()
+    var final : Bool = false
     
  /* ---------------------------------------------
   * Initialization and de-initialization
@@ -176,7 +177,16 @@ class CropViewController: UIViewController {
         }
     }
     
-    func commonHarvestButtonClicked(final : Bool){
+    func commonHarvestButtonClicked(){
+        let alertController = UIAlertController(title: "Are you sure?", message: "This data cannot be changed once you have entered it. Please confirm that there are no mistakes.", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: nil)
+        let add = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: finishHarvest)
+        alertController.addAction(cancel)
+        alertController.addAction(add)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func finishHarvest(alert: UIAlertAction!){
         if harvestButtonView.fieldsFilled(){
             if let harvestWeight = gatherWeightFromFields(){
                 //Grab harvest date from fields
@@ -224,6 +234,7 @@ class CropViewController: UIViewController {
         if (segue.identifier == "addCropFromCrop"){ //If user wants to add new crop
             let acvc = segue.destinationViewController as! AddCropViewController
             acvc.setInfo(sectNum, bedNum: bedNum)
+            harvestedButton.userInteractionEnabled = true
         }
     }
     
@@ -314,11 +325,13 @@ extension CropViewController: UITableViewDelegate {
 
 extension CropViewController: HarvestViewDelegate{
     func harvestButtonClicked(view : HarvestButtonsView){
-        commonHarvestButtonClicked(false)
+        final = false
+        commonHarvestButtonClicked()
     }
     
     func finalHarvestButtonClicked(view : HarvestButtonsView){
-        commonHarvestButtonClicked(true)
+        final = true
+        commonHarvestButtonClicked()
     }
 }
 

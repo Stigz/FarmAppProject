@@ -288,8 +288,13 @@ class PersistencyManager: NSObject {
         let bedHistory = BedHistory(date: date, sectID: bed.sectID, bedID: bed.id)
         var persistentVariety = variety
         for plant in allPossiblePlants{
+<<<<<<< HEAD
             if let index = plant.varieties.indexOf(variety){
                 persistentVariety = plant.varieties[index]
+=======
+            if(plant.varieties.indexOf(variety) != nil){
+                persistentVariety = plant.varieties[plant.varieties.indexOf(variety)!]
+>>>>>>> master
             }
         }
         persistentVariety.bedHistory.append(bedHistory)

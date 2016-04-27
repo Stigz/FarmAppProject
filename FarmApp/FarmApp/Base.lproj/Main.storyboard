@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sbs-Zf-9SQ">
-                                <rect key="frame" x="281" y="90" width="39" height="20.5"/>
+                                <rect key="frame" x="281" y="90" width="39" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iY2-GU-8Za">
-                                <rect key="frame" x="54" y="153" width="70.5" height="20"/>
+                                <rect key="frame" x="54" y="153" width="71" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Seasons">
                                         <attributes>
@@ -44,7 +44,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cib-qj-2Hn">
-                                <rect key="frame" x="66" y="173" width="37.5" height="18"/>
+                                <rect key="frame" x="66" y="173" width="38" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -92,13 +92,13 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QY-kZ-45d">
-                                <rect key="frame" x="273" y="117" width="54" height="20.5"/>
+                                <rect key="frame" x="273" y="117" width="54" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hw-bZ-X6W">
-                                <rect key="frame" x="54" y="278" width="94.5" height="20"/>
+                                <rect key="frame" x="54" y="278" width="95" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Bed History:">
                                         <attributes>
@@ -187,7 +187,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhZ-FV-tKB">
-                                <rect key="frame" x="54" y="87" width="177.5" height="20"/>
+                                <rect key="frame" x="54" y="87" width="178" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Best planting seasons: ">
                                         <attributes>
@@ -226,7 +226,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ex3-2Z-r8Y">
-                                <rect key="frame" x="54" y="145" width="45.5" height="20"/>
+                                <rect key="frame" x="54" y="145" width="46" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="eFv-O5-saI"/>
                                 </constraints>
@@ -360,7 +360,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crop List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M9-z4-f8X">
-                                <rect key="frame" x="0.0" y="0.0" width="69" height="20.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="69" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -862,6 +862,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWb-My-7e4">
+                                <rect key="frame" x="508" y="78" width="54" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skv-UQ-XLK" customClass="HarvestButtonsView" customModule="FarmApp" customModuleProvider="target">
                                 <rect key="frame" x="146" y="107" width="309" height="96"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -869,12 +875,6 @@
                                     <constraint firstAttribute="width" constant="309" id="x18-jI-UVw"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWb-My-7e4">
-                                <rect key="frame" x="508" y="78" width="54" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -892,6 +892,7 @@
                             <constraint firstAttribute="bottom" secondItem="xH2-6U-4rk" secondAttribute="bottom" constant="20" symbolic="YES" id="WiM-Ey-gor"/>
                             <constraint firstItem="1LJ-Bv-fbj" firstAttribute="top" secondItem="skv-UQ-XLK" secondAttribute="bottom" constant="18" id="X42-vR-lk7"/>
                             <constraint firstItem="oLl-ZP-Vu1" firstAttribute="top" secondItem="rmT-Wk-PEi" secondAttribute="bottom" constant="24" id="Y8h-hV-wX6"/>
+                            <constraint firstItem="wWb-My-7e4" firstAttribute="top" secondItem="XAn-ci-vRv" secondAttribute="bottom" constant="14" id="Yxu-6b-nZj"/>
                             <constraint firstItem="Fwr-vD-KfJ" firstAttribute="leading" secondItem="EOY-fH-SW7" secondAttribute="leadingMargin" constant="34" id="a7i-as-EPM"/>
                             <constraint firstItem="1LJ-Bv-fbj" firstAttribute="top" secondItem="jrv-c1-kkr" secondAttribute="bottom" constant="40" id="bja-8w-W94"/>
                             <constraint firstItem="1LJ-Bv-fbj" firstAttribute="leading" secondItem="Fwr-vD-KfJ" secondAttribute="leading" id="dDM-Pr-Obu"/>
@@ -902,6 +903,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="skv-UQ-XLK" secondAttribute="trailing" constant="116" id="okc-k1-rtO"/>
                             <constraint firstItem="eE9-Mo-EhS" firstAttribute="leading" secondItem="Fwr-vD-KfJ" secondAttribute="leading" id="pHx-Pj-xgU"/>
                             <constraint firstItem="xH2-6U-4rk" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="rxf-ge-HNh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wWb-My-7e4" secondAttribute="trailing" constant="18" id="tK5-Fw-Gv7"/>
                             <constraint firstItem="xH2-6U-4rk" firstAttribute="top" secondItem="eE9-Mo-EhS" secondAttribute="bottom" constant="8" symbolic="YES" id="uC1-S9-32n"/>
                             <constraint firstItem="jrv-c1-kkr" firstAttribute="centerX" secondItem="EOY-fH-SW7" secondAttribute="centerX" id="yuy-qI-IbG"/>
                         </constraints>

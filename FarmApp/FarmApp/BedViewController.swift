@@ -105,6 +105,7 @@ class BedViewController: UIViewController {
             newCropButton.hidden = true
         }else{
             currentCropLabel.setTitle("No Crop Planted", forState: .Normal)
+            currentCropLabel.userInteractionEnabled = false
             newCropButton.hidden = false
         }
     }
